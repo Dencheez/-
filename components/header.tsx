@@ -6,187 +6,10 @@ import {
   Menu,
   X,
   Phone,
-  Loader2,
-  SendHorizonal,
 } from "lucide-react"
 import Image from "next/image"
-import { PsychologyLogo } from "@/components/icons"
 import Link from "next/link"
-
-type ChatRole = "user" | "assistant"
-
-type ChatMessage = {
-  id: number
-  role: ChatRole
-  content: string
-}
-
-let nextChatId = 1
-
-function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: nextChatId++,
-      role: "assistant",
-      content:
-        "Здравствуйте! Я ИИ‑ассистент клиники. Задайте ваш вопрос — помогу с информацией и подскажу, когда лучше позвонить в клинику.",
-    },
-  ])
-  const [input, setInput] = useState("")
-  const [isSending, setIsSending] = useState(false)
-
-  async function handleSend(e?: FormEvent) {
-    e?.preventDefault()
-    const text = input.trim()
-    if (!text || isSending) return
-
-    const userMsg: ChatMessage = {
-      id: nextChatId++,
-      role: "user",
-      content: text,
-    }
-    setMessages((prev) => [...prev, userMsg])
-    setInput("")
-    setIsSending(true)
-
-    try {
-      const bodyMessages = [
-        ...messages.map((m) => ({ role: m.role, content: m.content })),
-        { role: "user" as ChatRole, content: text },
-      ]
-
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: bodyMessages }),
-      })
-
-      if (!res.ok) {
-        throw new Error("Request failed")
-      }
-
-      const data: { reply?: string } = await res.json()
-
-      const assistantMsg: ChatMessage = {
-        id: nextChatId++,
-        role: "assistant",
-        content:
-          data.reply ??
-          "Не удалось получить ответ от сервера. Попробуйте ещё раз чуть позже.",
-      }
-      setMessages((prev) => [...prev, assistantMsg])
-    } catch {
-      const assistantMsg: ChatMessage = {
-        id: nextChatId++,
-        role: "assistant",
-        content:
-          "Произошла ошибка при обращении к серверу. Пожалуйста, попробуйте задать вопрос ещё раз чуть позже.",
-      }
-      setMessages((prev) => [...prev, assistantMsg])
-    } finally {
-      setIsSending(false)
-    }
-  }
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white shadow-md transition hover:bg-primary/90"
-      >
-        <Image
-          src="/clinic-logo.png"
-          alt="Открыть ИИ‑чат клиники"
-          width={36}
-          height={36}
-          className="h-9 w-9 object-contain"
-        />
-        <span className="sr-only">Задать вопрос ИИ</span>
-      </button>
-
-      {isOpen && (
-        <div className="fixed bottom-20 right-0 left-0 z-50 flex h-[80vh] w-full flex-col rounded-t-2xl border border-border bg-card/95 shadow-2xl backdrop-blur sm:bottom-4 sm:right-4 sm:left-auto sm:h-auto sm:max-w-sm sm:rounded-2xl sm:border">
-          <div className="flex items-center justify-between border-b border-border px-4 py-3">
-            <div>
-              <p className="text-sm font-semibold">ИИ‑чат клиники</p>
-              <p className="text-[11px] text-muted-foreground">
-                Не для экстренной помощи. В экстренных случаях звоните по
-                телефону клиники.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              className="rounded-full p-1 text-muted-foreground hover:bg-muted"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-
-          <div className="flex max-h-80 flex-1 flex-col gap-2 overflow-y-auto px-3 py-3 text-sm">
-            {messages.map((m) => (
-              <div
-                key={m.id}
-                className={`flex ${m.role === "user" ? "justify-end" : "justify-start"
-                  }`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs leading-relaxed ${m.role === "user"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-foreground"
-                    }`}
-                >
-                  {m.content}
-                </div>
-              </div>
-            ))}
-
-            {isSending && (
-              <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-2xl bg-muted px-3 py-2 text-[11px] text-muted-foreground">
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  Ассистент думает…
-                </div>
-              </div>
-            )}
-          </div>
-
-          <form
-            onSubmit={handleSend}
-            className="flex items-center gap-2 border-t border-border px-3 py-2"
-          >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Напишите ваш вопрос…"
-              className="flex-1 rounded-full border border-input bg-background px-3 py-2 text-xs shadow-sm outline-none ring-offset-background placeholder:text-[11px] placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/40"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim() || isSending}
-              className="inline-flex items-center justify-center gap-1 rounded-full bg-primary px-3 py-2 text-[11px] font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {isSending ? (
-                <>
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  Отправка
-                </>
-              ) : (
-                <>
-                  <SendHorizonal className="h-3 w-3" />
-                  Спросить
-                </>
-              )}
-            </button>
-          </form>
-        </div>
-      )}
-    </>
-  )
-}
+import { ChatWidget } from "./chat-widget"
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -225,7 +48,7 @@ export function Header() {
           <ChatWidget />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="rounded-lg p-1.5 text-foreground hover:bg-secondary"
+            className="rounded-full p-2 text-foreground hover:bg-secondary transition-colors"
             aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
           >
             {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -244,17 +67,17 @@ export function Header() {
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setSearchOpen(true)}
             onBlur={() => setTimeout(() => setSearchOpen(false), 200)}
-            className="w-full rounded-xl border border-border bg-secondary py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+            className="w-full rounded-full border border-border bg-secondary py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
-        <div className="flex rounded-xl border border-border bg-secondary">
+        <div className="flex rounded-full border border-border bg-secondary overflow-hidden">
           {(["RU", "KZ"] as const).map((lang, index) => (
             <button
               key={lang}
               onClick={() => setLanguage(lang)}
               className={`px-3 py-2.5 text-xs font-semibold transition-colors ${language === lang
-                ? "text-primary"
-                : "text-muted-foreground hover:text-foreground"
+                ? "text-primary bg-primary/5"
+                : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
                 } ${index > 0 ? "border-l border-border" : ""}`}
             >
               {lang}
