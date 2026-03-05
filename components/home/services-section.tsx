@@ -4,7 +4,7 @@ import { ChevronRight, Brain, Stethoscope, Heart, Pill, Users, Activity } from "
 const services = [
   {
     icon: Brain,
-    label: "Консультация психолога",
+    label: "Приём психолога",
     color: "text-primary",
     bg: "bg-[#E3F0FF]",
   },
@@ -22,7 +22,7 @@ const services = [
   },
   {
     icon: Pill,
-    label: "Медикаментозное лечение",
+    label: "Медикаменты",
     color: "text-[#F57C00]",
     bg: "bg-[#FFF3E0]",
   },
@@ -62,7 +62,7 @@ export function ServicesSection() {
               <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${service.bg}`}>
                 <Icon className={`h-5 w-5 ${service.color}`} />
               </div>
-              <p className="text-xs font-semibold text-foreground leading-relaxed">{service.label}</p>
+              <p className="text-xs font-semibold text-foreground leading-tight line-clamp-2">{service.label}</p>
             </Link>
           )
         })}

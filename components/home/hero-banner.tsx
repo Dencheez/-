@@ -13,11 +13,11 @@ type Slide = {
 const defaultSlides: Slide[] = [
   {
     title: "ФСМС/ОСМС",
-    description: "Обязательное социальное медицинское страхование",
+    description: "Обязательное мед. страхование (ОСМС)",
   },
   {
     title: "Психологическая помощь",
-    description: "Консультации квалифицированных специалистов",
+    description: "Консультации опытных специалистов",
   },
   {
     title: "Онлайн запись",
@@ -90,8 +90,8 @@ export function HeroBanner() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-2 rounded-full transition-all ${i === current
-                    ? "w-6 bg-primary"
-                    : "w-2 bg-primary/30"
+                  ? "w-6 bg-primary"
+                  : "w-2 bg-primary/30"
                   }`}
                 aria-label={`Slide ${i + 1}`}
               />
