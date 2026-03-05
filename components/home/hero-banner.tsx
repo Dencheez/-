@@ -2,9 +2,15 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Loader2 } from "lucide-react"
+import { supabase } from "@/app/lib/supabase"
 
-const slides = [
+type Slide = {
+  title: string
+  description: string
+}
+
+const defaultSlides: Slide[] = [
   {
     title: "ФСМС/ОСМС",
     description: "Обязательное социальное медицинское страхование",
@@ -21,15 +27,54 @@ const slides = [
 
 export function HeroBanner() {
   const [current, setCurrent] = useState(0)
+  const [slides, setSlides] = useState<Slide[]>(defaultSlides)
+  const [loading, setLoading] = useState(true)
 
   const nextSlide = useCallback(() => {
+    if (slides.length === 0) return
     setCurrent((prev) => (prev + 1) % slides.length)
+  }, [slides.length])
+
+  useEffect(() => {
+    async function fetchSlides() {
+      try {
+        const { data, error } = await supabase
+          .from('site_content')
+          .select('section_name, content')
+          .like('section_name', 'hero_%')
+
+        if (data && data.length > 0 && !error) {
+          const newSlides: Slide[] = []
+          const map = new Map<string, string>()
+          data.forEach(item => map.set(item.section_name, item.content))
+
+          for (let i = 1; i <= 5; i++) {
+            const title = map.get(`hero_title_${i}`)
+            const desc = map.get(`hero_desc_${i}`)
+            if (title && desc) {
+              newSlides.push({ title, description: desc })
+            }
+          }
+
+          if (newSlides.length > 0) {
+            setSlides(newSlides)
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching hero slides:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSlides()
   }, [])
 
   useEffect(() => {
+    if (slides.length <= 1) return
     const timer = setInterval(nextSlide, 5000)
     return () => clearInterval(timer)
-  }, [nextSlide])
+  }, [nextSlide, slides.length])
 
   return (
     <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E3F0FF] to-[#B3D9FF]">
@@ -44,11 +89,10 @@ export function HeroBanner() {
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current
+                className={`h-2 rounded-full transition-all ${i === current
                     ? "w-6 bg-primary"
                     : "w-2 bg-primary/30"
-                }`}
+                  }`}
                 aria-label={`Slide ${i + 1}`}
               />
             ))}

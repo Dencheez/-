@@ -94,7 +94,7 @@ function ChatWidget() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="hidden sm:inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white shadow-md transition hover:bg-primary/90"
+        className="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white shadow-md transition hover:bg-primary/90"
       >
         <Image
           src="/clinic-logo.png"
@@ -107,7 +107,7 @@ function ChatWidget() {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-4 right-4 z-50 flex w-full max-w-sm flex-col rounded-2xl border border-border bg-card/95 shadow-2xl backdrop-blur">
+        <div className="fixed bottom-0 right-0 left-0 z-50 flex h-[80vh] w-full flex-col rounded-t-2xl border-t border-x border-border bg-card/95 shadow-2xl backdrop-blur sm:bottom-4 sm:right-4 sm:left-auto sm:h-auto sm:max-w-sm sm:rounded-2xl sm:border">
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
             <div>
               <p className="text-sm font-semibold">ИИ‑чат клиники</p>
