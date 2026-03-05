@@ -11,7 +11,8 @@ import {
     FileText,
     Settings,
     ChevronRight,
-    Plus
+    Plus,
+    Link
 } from "lucide-react"
 
 type SiteContentRow = {
