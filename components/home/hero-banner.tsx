@@ -86,9 +86,9 @@ export function HeroBanner() {
   return (
     <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E3F0FF] to-[#B3D9FF]">
       <div className="flex items-stretch h-44">
-        <div className="flex-1 p-5">
+        <div className="flex-1 p-5 h-full">
           <h2 className="text-xl font-bold text-foreground">{slides[current].title}</h2>
-          <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
             {slides[current].description}
           </p>
           <div className="mt-4 flex items-center gap-1.5">
