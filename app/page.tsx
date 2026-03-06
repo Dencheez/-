@@ -4,7 +4,6 @@ import { CallBanner } from "../components/home/call-banner"
 import { QuickActions } from "../components/home/quick-actions"
 import { ServicesSection } from "../components/home/services-section"
 import { NewsSection } from "../components/home/news-section"
-import AppointmentForm from "../components/appointment-form"
 
 export default function HomePage() {
   return (
@@ -13,7 +12,6 @@ export default function HomePage() {
       <div className="space-y-4 md:hidden">
         <HeroBanner />
         <CallBanner />
-        <AppointmentForm />
         <QuickActions />
         <ServicesSection />
         <NewsSection />
@@ -28,7 +26,6 @@ export default function HomePage() {
         </div>
         <div className="flex flex-col gap-4">
           <CallBanner />
-          <AppointmentForm />
           <NewsSection />
         </div>
       </div>

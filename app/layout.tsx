@@ -3,9 +3,10 @@ import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import ClientLayout from '@/components/client-layout'
 import { ClerkProvider } from '@clerk/nextjs'
+import { LanguageProvider } from '@/hooks/use-language'
 import './globals.css'
 
-const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: 'Центр Психического Здоровья - Алматы',
@@ -28,9 +29,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="ru">
         <body className={`${inter.variable} font-sans antialiased`}>
-          <ClientLayout>
-            {children}
-          </ClientLayout>
+          <LanguageProvider>
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          </LanguageProvider>
           <Analytics />
         </body>
       </html>
