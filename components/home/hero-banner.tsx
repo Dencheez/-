@@ -105,7 +105,7 @@ export function HeroBanner() {
             ))}
           </div>
         </div>
-        <div className="relative h-40 w-40 shrink-0">
+        <div className="relative h-full w-full shrink-0">
           <Image
             src={slides[current].img}
             alt={slides[current].title}
