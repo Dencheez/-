@@ -9,13 +9,13 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChatWidget } from "./chat-widget"
+import { useLanguage } from "@/hooks/use-language"
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [language, setLanguage] = useState<"RU" | "KZ">("RU")
+  const { language, setLanguage, t } = useLanguage()
 
   return (
     <header className="sticky top-0 z-40 bg-card shadow-sm">
@@ -33,19 +33,18 @@ export function Header() {
             />
           </div>
           <div className="leading-tight">
-            <p className="text-sm font-bold text-foreground">Центр психического здоровья</p>
-            <p className="text-xs text-muted-foreground">Алматы</p>
+            <p className="text-sm font-bold text-foreground">{t("title")}</p>
+            <p className="text-xs text-muted-foreground">{t("city")}</p>
           </div>
         </Link>
         <div className="flex items-center gap-3">
           <a href="tel:3000103" className="flex items-center gap-1 text-right">
             <Phone className="h-4 w-4 text-primary" />
             <div className="leading-tight">
-              <p className="text-[10px] text-muted-foreground">Call-центр:</p>
+              <p className="text-[10px] text-muted-foreground">{t("call_center")}</p>
               <p className="text-sm font-bold text-primary">3000-103</p>
             </div>
           </a>
-          <ChatWidget />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="rounded-full p-2 text-foreground hover:bg-secondary transition-colors"
@@ -62,7 +61,7 @@ export function Header() {
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Поиск по сайту"
+            placeholder={t("search_placeholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setSearchOpen(true)}
@@ -91,10 +90,10 @@ export function Header() {
         <div className="absolute left-0 right-0 top-full border-t border-border bg-card shadow-lg">
           <nav className="flex flex-col p-4">
             {[
-              { href: "/", label: "Главная" },
-              { href: "/appointment", label: "Записаться на приём" },
-              { href: "/profile", label: "Личный кабинет" },
-              { href: "/contacts", label: "Контакты и адреса" },
+              { href: "/", label: t("home") },
+              { href: "/appointment", label: t("appointment") },
+              { href: "/profile", label: t("profile") },
+              { href: "/contacts", label: t("contacts_addresses") },
             ].map((item) => (
               <Link
                 key={item.href}

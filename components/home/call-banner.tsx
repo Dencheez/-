@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react"
 import { Phone, ChevronRight } from "lucide-react"
 import { supabase } from "@/app/lib/supabase"
+import { useLanguage } from "@/hooks/use-language"
 
 export function CallBanner() {
   const [phone, setPhone] = useState("3000-103") // Начальное значение
+  const { t } = useLanguage()
 
   useEffect(() => {
     async function fetchPhone() {
@@ -13,7 +15,7 @@ export function CallBanner() {
         .select('content')
         .eq('section_name', 'main_phone')
         .single()
-      
+
       if (data && !error) {
         setPhone(data.content)
       }
@@ -29,7 +31,7 @@ export function CallBanner() {
       <div className="flex items-center gap-3">
         <Phone className="h-6 w-6" />
         <div>
-          <p className="text-lg font-bold">Позвонить: {phone}</p>
+          <p className="text-lg font-bold">{t("call_center")} {phone}</p>
           <p className="text-xs opacity-90">Круглосуточная поддержка</p>
         </div>
       </div>

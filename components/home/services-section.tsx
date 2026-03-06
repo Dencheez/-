@@ -1,52 +1,57 @@
+"use client"
+
 import Link from "next/link"
 import { ChevronRight, Brain, Stethoscope, Heart, Pill, Users, Activity } from "lucide-react"
-
-const services = [
-  {
-    icon: Brain,
-    label: "Приём психолога",
-    color: "text-primary",
-    bg: "bg-[#E3F0FF]",
-  },
-  {
-    icon: Stethoscope,
-    label: "Амбулаторная помощь",
-    color: "text-[#0D9488]",
-    bg: "bg-[#E6FAF5]",
-  },
-  {
-    icon: Heart,
-    label: "Психотерапия",
-    color: "text-[#E91E63]",
-    bg: "bg-[#FDE8EF]",
-  },
-  {
-    icon: Pill,
-    label: "Медикаменты",
-    color: "text-[#F57C00]",
-    bg: "bg-[#FFF3E0]",
-  },
-  {
-    icon: Users,
-    label: "Групповая терапия",
-    color: "text-primary",
-    bg: "bg-[#E3F0FF]",
-  },
-  {
-    icon: Activity,
-    label: "Диагностика",
-    color: "text-[#7B1FA2]",
-    bg: "bg-[#F3E5F5]",
-  },
-]
+import { useLanguage } from "@/hooks/use-language"
 
 export function ServicesSection() {
+  const { t } = useLanguage()
+
+  const services = [
+    {
+      icon: Brain,
+      label: t("psychologist"),
+      color: "text-primary",
+      bg: "bg-[#E3F0FF]",
+    },
+    {
+      icon: Stethoscope,
+      label: t("outpatient"),
+      color: "text-[#0D9488]",
+      bg: "bg-[#E6FAF5]",
+    },
+    {
+      icon: Heart,
+      label: t("psychotherapy"),
+      color: "text-[#E91E63]",
+      bg: "bg-[#FDE8EF]",
+    },
+    {
+      icon: Pill,
+      label: t("medications"),
+      color: "text-[#F57C00]",
+      bg: "bg-[#FFF3E0]",
+    },
+    {
+      icon: Users,
+      label: t("group_therapy"),
+      color: "text-primary",
+      bg: "bg-[#E3F0FF]",
+    },
+    {
+      icon: Activity,
+      label: t("diagnostics"),
+      color: "text-[#7B1FA2]",
+      bg: "bg-[#F3E5F5]",
+    },
+  ]
+
   return (
     <section className="mt-6 px-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-foreground">Услуги центра</h2>
+        <h2 className="text-lg font-bold text-foreground">{t("services_title")}</h2>
         <Link href="/services" className="flex items-center gap-1 text-sm font-medium text-primary">
-          Все услуги
+          {t("all_services")}
           <ChevronRight className="h-4 w-4" />
         </Link>
       </div>

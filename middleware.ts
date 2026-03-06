@@ -1,6 +1,15 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)']);
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/profile(.*)',
+  '/appointment(.*)',
+  '/contacts(.*)',
+  '/services(.*)',
+  '/api(.*)'
+]);
 
 // ВОТ ЗДЕСЬ (6-я строка) добавлено слово async
 export default clerkMiddleware(async (auth, request) => {

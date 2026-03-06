@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link"
 import { Clock, MapPin, ArrowRight } from "lucide-react"
+import { useLanguage } from "@/hooks/use-language"
 
 const news = [
   {
@@ -23,12 +26,14 @@ const news = [
 ]
 
 export function NewsSection() {
+  const { t } = useLanguage()
+
   return (
     <section className="mt-6 px-4 pb-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-foreground">Новости</h2>
+        <h2 className="text-lg font-bold text-foreground">{t("news")}</h2>
         <Link href="#" className="flex items-center gap-1 text-sm font-medium text-primary">
-          Все новости
+          {t("read_more")}
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -62,7 +67,7 @@ export function NewsSection() {
         <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <MapPin className="h-5 w-5 text-primary" />
-            <p className="text-xs font-bold text-foreground">Адрес</p>
+            <p className="text-xs font-bold text-foreground">{t("contacts")}</p>
           </div>
           <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
             г. Алматы, ул. Карасай Батыра, 44
