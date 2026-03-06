@@ -26,9 +26,9 @@ export function BottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1 text-xs transition-colors ${isActive
-                  ? "text-primary font-semibold"
-                  : "text-muted-foreground"
+              className={`flex flex-col items-center gap-0.5 py-1 text-xs transition-colors ${isActive
+                ? "text-primary font-semibold"
+                : "text-muted-foreground"
                 }`}
               aria-current={isActive ? "page" : undefined}
             >

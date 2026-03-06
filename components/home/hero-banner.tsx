@@ -105,7 +105,7 @@ export function HeroBanner() {
             ))}
           </div>
         </div>
-        <div className="relative h-full w-44 shrink-0 overflow-hidden">
+        <div className="relative h-full w-40 shrink-0 overflow-hidden bg-origin-content p-4 object-none">
           <Image
             src={slides[current].img}
             alt={slides[current].title}
