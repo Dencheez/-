@@ -23,9 +23,26 @@ type SiteContentRow = {
 
 export default function AdminDashboard() {
     const { user, isLoaded } = useUser()
+
     const [rows, setRows] = useState<SiteContentRow[]>([])
     const [loading, setLoading] = useState(true)
     const [savingId, setSavingId] = useState<number | null>(null)
+
+    const isAdmin = user?.publicMetadata?.role === "admin";
+
+    if (!isLoaded) return null;
+
+    if (!isAdmin) {
+        return (
+            <AppShell>
+                <div className="flex items-center justify-center h-[60vh]">
+                    <p className="text-destructive font-bold text-xl">
+                        Доступ запрещен. У вас нет прав администратора.
+                    </p>
+                </div>
+            </AppShell>
+        );
+    }
 
     useEffect(() => {
         async function load() {
