@@ -20,7 +20,7 @@ const defaultSlides: Slide[] = [
   {
     title: "Психологическая помощь",
     description: "Консультации опытных специалистов",
-    img: "/images/Doctor.png",
+    img: "/images/Doctor-hero.png",
   },
   {
     title: "Онлайн запись",
@@ -110,7 +110,7 @@ export function HeroBanner() {
             src={slides[current].img}
             alt={slides[current].title}
             fill
-            className="object-cover"
+            className="object-cover w-full"
           />
         </div>
       </div>
