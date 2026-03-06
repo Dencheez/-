@@ -85,7 +85,7 @@ export function HeroBanner() {
 
   return (
     <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E3F0FF] to-[#B3D9FF]">
-      <div className="flex items-center">
+      <div className="flex items-stretch h-44">
         <div className="flex-1 p-5">
           <h2 className="text-xl font-bold text-foreground">{slides[current].title}</h2>
           <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
@@ -105,7 +105,7 @@ export function HeroBanner() {
             ))}
           </div>
         </div>
-        <div className="relative h-full w-full shrink-0">
+        <div className="relative h-full w-44 shrink-0 overflow-hidden">
           <Image
             src={slides[current].img}
             alt={slides[current].title}
