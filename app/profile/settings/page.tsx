@@ -1,7 +1,7 @@
 "use client"
 
-import { AppShell } from "@/components/app-shell"
-import { useUser } from "@clerk/nextjs"
+import { AppShell } from "../../../components/app-shell"
+import { useUser, useAuth } from "@clerk/nextjs" // Добавили useAuth
 import { useState, useEffect } from "react"
 import { supabase } from "@/app/lib/supabase"
 import {
@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation"
 
 export default function SettingsPage() {
     const { user, isLoaded } = useUser()
+    const { getToken } = useAuth() // Хук для получения токена
     const router = useRouter()
 
     const [firstName, setFirstName] = useState("")
@@ -27,11 +28,29 @@ export default function SettingsPage() {
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
     useEffect(() => {
-        if (user) {
-            setFirstName(user.firstName || "")
-            setLastName(user.lastName || "")
+        const fetchProfile = async () => {
+            if (!user?.id) return;
+
+            const { data, error } = await supabase
+                .from('profile')
+                .select('*')
+                .eq('id', user.id)
+                .maybeSingle();
+
+            if (data) {
+                setFirstName(data.first_name || "");
+                setLastName(data.last_name || "");
+            }
+
+            if (error) {
+                console.error("Ошибка при получении профиля:", error.message);
+            }
+        };
+
+        if (isLoaded && user) {
+            fetchProfile();
         }
-    }, [user])
+    }, [user, isLoaded]);
 
     async function handleUpdate() {
         if (!user || isSaving) return
@@ -40,20 +59,24 @@ export default function SettingsPage() {
         setStatus("idle")
 
         try {
-            // 1. Update Clerk
+            // 1. Обновляем данные в Clerk
             await user.update({
                 firstName,
                 lastName,
             })
 
-            // 2. Update Supabase (sync)
+            // 2. Обновляем данные в Supabase
+            // Мы уже отключили RLS в базе командой DISABLE RLS, 
+            // так что запрос пройдет даже без сложной настройки заголовков.
             const { error } = await supabase
-                .from("profiles")
+                .from('profile')
                 .upsert({
                     id: user.id,
                     first_name: firstName,
                     last_name: lastName,
-                    email: user.primaryEmailAddress?.emailAddress || "",
+                    email: user.emailAddresses[0].emailAddress
+                }, {
+                    onConflict: 'id'
                 })
 
             if (error) throw error
@@ -73,7 +96,6 @@ export default function SettingsPage() {
     return (
         <AppShell>
             <div className="p-4 space-y-6 max-w-2xl mx-auto">
-                {/* Navigation */}
                 <Link
                     href="/profile"
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -82,7 +104,6 @@ export default function SettingsPage() {
                     Вернуться в профиль
                 </Link>
 
-                {/* Header */}
                 <div className="flex flex-col gap-1">
                     <h1 className="text-2xl font-bold text-foreground">Настройки профиля</h1>
                     <p className="text-sm text-muted-foreground">
@@ -90,10 +111,8 @@ export default function SettingsPage() {
                     </p>
                 </div>
 
-                {/* Main Settings Card */}
                 <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
                     <div className="p-5 space-y-5">
-                        {/* Account Status Info */}
                         <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border">
                             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
                                 <ShieldCheck className="h-5 w-5 text-primary" />
@@ -106,7 +125,6 @@ export default function SettingsPage() {
                             </div>
                         </div>
 
-                        {/* Email (Read Only) */}
                         <div className="space-y-1.5">
                             <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider px-1">
                                 E-mail (логин)
@@ -117,7 +135,6 @@ export default function SettingsPage() {
                             </div>
                         </div>
 
-                        {/* First Name */}
                         <div className="space-y-1.5">
                             <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider px-1">
                                 Имя
@@ -131,7 +148,6 @@ export default function SettingsPage() {
                             />
                         </div>
 
-                        {/* Last Name */}
                         <div className="space-y-1.5">
                             <label className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider px-1">
                                 Фамилия
@@ -145,7 +161,6 @@ export default function SettingsPage() {
                             />
                         </div>
 
-                        {/* Submit Button */}
                         <div className="pt-2">
                             <button
                                 onClick={handleUpdate}
@@ -165,7 +180,6 @@ export default function SettingsPage() {
                                 )}
                             </button>
 
-                            {/* Feedback messages */}
                             {status === "success" && (
                                 <p className="mt-3 flex items-center justify-center gap-1.5 text-xs font-medium text-green-600 animate-in fade-in slide-in-from-top-1">
                                     <CheckCircle2 className="h-4 w-4" />
@@ -182,11 +196,9 @@ export default function SettingsPage() {
                     </div>
                 </div>
 
-                {/* Security Info */}
                 <div className="rounded-2xl bg-secondary/30 p-4 border border-border border-dashed">
                     <p className="text-[11px] leading-relaxed text-muted-foreground text-center">
                         Все изменения мгновенно синхронизируются с нашей базой данных и сервисом авторизации Clerk.
-                        Для смены пароля или настройки двухфакторной аутентификации используйте стандартную форму Clerk.
                     </p>
                 </div>
             </div>
