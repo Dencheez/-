@@ -40,7 +40,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <a href="tel:3000103" className="flex items-center gap-1 text-right">
             <Phone className="h-4 w-4 text-primary" />
-            <div className="leading-tight">
+            <div className="leading-tight hidden md:block">
               <p className="text-[10px] text-muted-foreground">{t("call_center")}</p>
               <p className="text-sm font-bold text-primary">3000-103</p>
             </div>
