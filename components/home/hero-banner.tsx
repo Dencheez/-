@@ -8,20 +8,24 @@ import { supabase } from "@/app/lib/supabase"
 type Slide = {
   title: string
   description: string
+  img: string
 }
 
 const defaultSlides: Slide[] = [
   {
     title: "ФСМС/ОСМС",
     description: "Обязательное мед. страхование (ОСМС)",
+    img: "/images/FCMC.jpg",
   },
   {
     title: "Психологическая помощь",
     description: "Консультации опытных специалистов",
+    img: "/images/Doctor.png",
   },
   {
     title: "Онлайн запись",
     description: "Удобная запись на приём через личный кабинет",
+    img: "/images/Online.jpg",
   },
 ]
 
@@ -51,8 +55,11 @@ export function HeroBanner() {
           for (let i = 1; i <= 5; i++) {
             const title = map.get(`hero_title_${i}`)
             const desc = map.get(`hero_desc_${i}`)
-            if (title && desc) {
-              newSlides.push({ title, description: desc })
+            const img = map.get(`hero_img_${i}`)
+            if (title && desc && img) {
+              newSlides.push({ title, description: desc, img })
+            } else {
+              newSlides.push(defaultSlides[i - 1])
             }
           }
 
@@ -100,8 +107,8 @@ export function HeroBanner() {
         </div>
         <div className="relative h-40 w-40 shrink-0">
           <Image
-            src="/images/banner-health.jpg"
-            alt="Медицинский центр"
+            src={slides[current].img}
+            alt={slides[current].title}
             fill
             className="object-cover"
           />

@@ -61,7 +61,7 @@ export function Header() {
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
-            placeholder={t("search_placeholder")}
+            placeholder="Поиск по сайту"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setSearchOpen(true)}
@@ -90,10 +90,10 @@ export function Header() {
         <div className="absolute left-0 right-0 top-full border-t border-border bg-card shadow-lg">
           <nav className="flex flex-col p-4">
             {[
-              { href: "/", label: t("home") },
-              { href: "/appointment", label: t("appointment") },
-              { href: "/profile", label: t("profile") },
-              { href: "/contacts", label: t("contacts_addresses") },
+              { href: "/", label: "Главная" },
+              { href: "/appointment", label: "Записаться на приём" },
+              { href: "/profile", label: "Личный кабинет" },
+              { href: "/contacts", label: "Контакты и адреса" },
             ].map((item) => (
               <Link
                 key={item.href}
