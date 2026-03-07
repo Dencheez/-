@@ -15,7 +15,7 @@ const defaultSlides: Slide[] = [
   {
     title: "ФСМС/ОСМС",
     description: "Обязательное мед. страхование (ОСМС)",
-    img: "/images/FCMC.jpg",
+    img: "/images/FCMC.png",
   },
   {
     title: "Психологическая помощь",
@@ -25,7 +25,7 @@ const defaultSlides: Slide[] = [
   {
     title: "Онлайн запись",
     description: "Удобная запись на приём через личный кабинет",
-    img: "/images/Online.jpg",
+    img: "/images/Online.png",
   },
 ]
 
