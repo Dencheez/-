@@ -21,7 +21,6 @@ export default function AppointmentPage() {
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
 
-  // Получаем данные текущего пользователя
   const { user } = useUser()
   const { addAppointment } = useAppointments()
 
@@ -36,21 +35,19 @@ export default function AppointmentPage() {
     setStep("confirm")
   }
 
-  // Обновленная функция подтверждения с сохранением в Supabase
   const handleConfirm = async (patientName: string) => {
     if (!selectedDoctor || !user) {
       console.error("Ошибка: Врач не выбран или пользователь не авторизован")
       return
     }
 
-    // 1. Сохраняем в Supabase
     const { error } = await supabase.from("appointments").insert({
-      user_id: user.id,           // Привязка к аккаунту
+      user_id: user.id,
       patient_name: patientName,
       service_type: selectedDoctor.specialty,
       date: selectedDate,
       time: selectedTime,
-      status: "upcoming",         // Устанавливаем статус «АКТИВНА»
+      status: "upcoming",
       reason: `Запись к врачу: ${selectedDoctor.name}`
     })
 
