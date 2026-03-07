@@ -1,3 +1,4 @@
+import { useSearchParams } from "next/navigation"
 import { AppShell } from "../components/app-shell"
 import { HeroBanner } from "../components/home/hero-banner"
 import { CallBanner } from "../components/home/call-banner"
@@ -6,6 +7,8 @@ import { ServicesSection } from "../components/home/services-section"
 import { NewsSection } from "../components/home/news-section"
 
 export default function HomePage() {
+  const searchParams = useSearchParams()
+  const searchQuery = searchParams.get("search")
   return (
     <AppShell>
       {/* Мобильная версия — прежний порядок блоков */}

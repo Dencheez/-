@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useState, useEffect, Suspense } from "react"
 import {
   Search,
   Menu,
@@ -9,13 +9,39 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useLanguage } from "@/hooks/use-language"
 
-export function Header() {
+function HeaderContent() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
+
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
   const { language, setLanguage, t } = useLanguage()
+
+  // Инициализируем стейт значением из URL (если оно там есть)
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "")
+
+  // Синхронизируем инпут, если URL изменился (например, при переходе назад)
+  useEffect(() => {
+    setSearchQuery(searchParams.get("search") || "")
+  }, [searchParams])
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value)
+
+    const params = new URLSearchParams(searchParams.toString())
+    if (value) {
+      params.set("search", value)
+    } else {
+      params.delete("search")
+    }
+
+    // Обновляем URL без перезагрузки страницы
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   return (
     <header className="sticky top-0 z-40 bg-card shadow-sm">
@@ -63,7 +89,7 @@ export function Header() {
             type="text"
             placeholder="Поиск по сайту"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
             onFocus={() => setSearchOpen(true)}
             onBlur={() => setTimeout(() => setSearchOpen(false), 200)}
             className="w-full rounded-full border border-border bg-secondary py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
@@ -108,5 +134,14 @@ export function Header() {
         </div>
       )}
     </header>
+  )
+}
+
+// Экспортируем Header с оберткой Suspense для корректной работы useSearchParams
+export function Header() {
+  return (
+    <Suspense fallback={<div className="h-20 bg-card animate-pulse" />}>
+      <HeaderContent />
+    </Suspense>
   )
 }

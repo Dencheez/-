@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import { useSearchParams } from "next/navigation"
 import { Star, ChevronRight } from "lucide-react"
 import { doctors, specialties, type Doctor } from "@/lib/appointment-data"
 
@@ -11,10 +12,22 @@ interface DoctorSelectProps {
 export function DoctorSelect({ onSelect }: DoctorSelectProps) {
   const [selectedSpecialty, setSelectedSpecialty] = useState("Все специальности")
 
+  // 2. Достаем значение поиска из URL
+  const searchParams = useSearchParams()
+  const searchQuery = searchParams.get("search") || "" // <-- Теперь searchQuery определена!
+
   const filtered = useMemo(() => {
-    if (selectedSpecialty === "Все специальности") return doctors
-    return doctors.filter((d) => d.specialty === selectedSpecialty)
-  }, [selectedSpecialty])
+    // 3. Обновляем фильтрацию, чтобы она учитывала и категории, и поиск
+    return doctors.filter((d) => {
+      const matchesSpecialty = selectedSpecialty === "Все специальности" || d.specialty === selectedSpecialty
+
+      const matchesSearch =
+        d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        d.specialty.toLowerCase().includes(searchQuery.toLowerCase())
+
+      return matchesSpecialty && matchesSearch
+    })
+  }, [selectedSpecialty, searchQuery]) // Добавляем searchQuery в зависимости
 
   return (
     <div>
@@ -27,11 +40,10 @@ export function DoctorSelect({ onSelect }: DoctorSelectProps) {
           <button
             key={s}
             onClick={() => setSelectedSpecialty(s)}
-            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-medium transition-colors ${
-              selectedSpecialty === s
-                ? "bg-primary text-primary-foreground"
-                : "bg-card text-foreground border border-border"
-            }`}
+            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-medium transition-colors ${selectedSpecialty === s
+              ? "bg-primary text-primary-foreground"
+              : "bg-card text-foreground border border-border"
+              }`}
           >
             {s}
           </button>
@@ -63,6 +75,15 @@ export function DoctorSelect({ onSelect }: DoctorSelectProps) {
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
           </button>
         ))}
+
+        {/* Теперь эта часть не будет выдавать ошибку! */}
+        {filtered.length === 0 && (
+          <div className="mt-8 text-center p-6 bg-secondary/50 rounded-2xl border border-dashed border-border">
+            <p className="text-sm text-muted-foreground">
+              К сожалению, врачей по запросу <span className="font-semibold">"{searchQuery}"</span> не найдено.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )
