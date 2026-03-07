@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react" // Добавили useState
 import { ArrowLeft, CalendarDays, Clock, User, CheckCircle2 } from "lucide-react"
 import { type Doctor } from "@/lib/appointment-data"
 
@@ -18,6 +19,10 @@ export function ConfirmationStep({
   onBack,
   onConfirm,
 }: ConfirmationStepProps) {
+  // 1. Создаем переменные для хранения того, что ты вводишь
+  const [patientName, setPatientName] = useState("Нурлан Ахметов")
+  const [phone, setPhone] = useState("+7 (777) 123-45-67")
+
   return (
     <div>
       <button
@@ -54,7 +59,8 @@ export function ConfirmationStep({
           </div>
           <div className="flex items-center gap-3">
             <User className="h-4 w-4 text-primary" />
-            <span className="text-sm text-foreground">Нурлан Ахметов</span>
+            {/* 2. Теперь здесь будет отображаться то, что ты вводишь */}
+            <span className="text-sm text-foreground">{patientName}</span>
           </div>
         </div>
       </div>
@@ -66,7 +72,8 @@ export function ConfirmationStep({
           <input
             id="patient-name"
             type="text"
-            defaultValue="Нурлан Ахметов"
+            value={patientName} // 3. Привязываем значение к стейту
+            onChange={(e) => setPatientName(e.target.value)} // Обновляем при вводе
             className="mt-1 w-full rounded-xl border border-border bg-card py-2.5 px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
@@ -75,7 +82,8 @@ export function ConfirmationStep({
           <input
             id="patient-phone"
             type="tel"
-            defaultValue="+7 (777) 123-45-67"
+            value={phone} // 4. Привязываем телефон
+            onChange={(e) => setPhone(e.target.value)}
             className="mt-1 w-full rounded-xl border border-border bg-card py-2.5 px-4 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
           />
         </div>
@@ -91,7 +99,8 @@ export function ConfirmationStep({
       </div>
 
       <button
-        onClick={() => onConfirm("Нурлан Ахметов", "+7 (777) 123-45-67")}
+        // 5. САМОЕ ВАЖНОЕ: передаем реальные переменные в функцию
+        onClick={() => onConfirm(patientName, phone)}
         className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition-transform active:scale-[0.98]"
       >
         <CheckCircle2 className="h-4 w-4" />

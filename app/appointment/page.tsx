@@ -29,6 +29,8 @@ export default function AppointmentPage() {
     setStep("datetime")
   }
 
+
+
   const handleDateTimeSelect = (date: string, time: string) => {
     setSelectedDate(date)
     setSelectedTime(time)
@@ -57,7 +59,6 @@ export default function AppointmentPage() {
       return
     }
 
-    // 2. Дублируем в локальный контекст (если нужно для работы других компонентов)
     addAppointment({
       doctorId: selectedDoctor.id,
       doctorName: selectedDoctor.name,
@@ -68,7 +69,6 @@ export default function AppointmentPage() {
       patientName,
     })
 
-    // 3. Переходим к экрану успеха
     setStep("success")
   }
 
@@ -82,7 +82,6 @@ export default function AppointmentPage() {
   return (
     <AppShell>
       <div className="p-4">
-        {/* Progress Bar */}
         {step !== "success" && (
           <div className="mb-4 flex gap-1.5">
             {["doctor", "datetime", "confirm"].map((s, i) => (
@@ -126,6 +125,7 @@ export default function AppointmentPage() {
             onNewAppointment={resetFlow}
           />
         )}
+
       </div>
     </AppShell>
   )
