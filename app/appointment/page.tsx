@@ -1,6 +1,5 @@
 "use client"
-
-import { useState } from "react"
+import { Suspense, useState } from 'react'
 import { AppShell } from "@/components/app-shell"
 import { DoctorSelect } from "@/components/appointment/doctor-select"
 import { DateTimeSelect } from "@/components/appointment/datetime-select"
@@ -8,14 +7,13 @@ import { ConfirmationStep } from "@/components/appointment/confirmation-step"
 import { SuccessScreen } from "@/components/appointment/success-screen"
 import { useAppointments } from "@/components/appointment-context"
 import type { Doctor } from "@/lib/appointment-data"
-
-// Добавляем импорты для работы с базой и пользователем
 import { supabase } from "@/app/lib/supabase"
 import { useUser } from "@clerk/nextjs"
 
 type Step = "doctor" | "datetime" | "confirm" | "success"
 
-export default function AppointmentPage() {
+// 1. Основная логика вынесена в отдельный внутренний компонент
+function AppointmentForm() {
   const [step, setStep] = useState<Step>("doctor")
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null)
   const [selectedDate, setSelectedDate] = useState("")
@@ -28,8 +26,6 @@ export default function AppointmentPage() {
     setSelectedDoctor(doctor)
     setStep("datetime")
   }
-
-
 
   const handleDateTimeSelect = (date: string, time: string) => {
     setSelectedDate(date)
@@ -82,53 +78,61 @@ export default function AppointmentPage() {
   }
 
   return (
+    <div className="p-4">
+      {step !== "success" && (
+        <div className="mb-4 flex gap-1.5">
+          {["doctor", "datetime", "confirm"].map((s, i) => (
+            <div
+              key={s}
+              className={`h-1 flex-1 rounded-full transition-colors ${i <= ["doctor", "datetime", "confirm"].indexOf(step)
+                ? "bg-primary"
+                : "bg-border"
+                }`}
+            />
+          ))}
+        </div>
+      )}
+
+      {step === "doctor" && <DoctorSelect onSelect={handleDoctorSelect} />}
+
+      {step === "datetime" && selectedDoctor && (
+        <DateTimeSelect
+          doctor={selectedDoctor}
+          onBack={() => setStep("doctor")}
+          onSelect={handleDateTimeSelect}
+        />
+      )}
+
+      {step === "confirm" && selectedDoctor && (
+        <ConfirmationStep
+          doctor={selectedDoctor}
+          date={selectedDate}
+          time={selectedTime}
+          onBack={() => setStep("datetime")}
+          onConfirm={handleConfirm}
+        />
+      )}
+
+      {step === "success" && selectedDoctor && (
+        <SuccessScreen
+          doctorName={selectedDoctor.name}
+          specialty={selectedDoctor.specialty}
+          date={selectedDate}
+          time={selectedTime}
+          onNewAppointment={resetFlow}
+        />
+      )}
+    </div>
+  )
+}
+
+// 2. Главный экспорт страницы, обернутый в Suspense
+export default function AppointmentPage() {
+  return (
     <AppShell>
-      <div className="p-4">
-        {step !== "success" && (
-          <div className="mb-4 flex gap-1.5">
-            {["doctor", "datetime", "confirm"].map((s, i) => (
-              <div
-                key={s}
-                className={`h-1 flex-1 rounded-full transition-colors ${i <= ["doctor", "datetime", "confirm"].indexOf(step)
-                  ? "bg-primary"
-                  : "bg-border"
-                  }`}
-              />
-            ))}
-          </div>
-        )}
-
-        {step === "doctor" && <DoctorSelect onSelect={handleDoctorSelect} />}
-
-        {step === "datetime" && selectedDoctor && (
-          <DateTimeSelect
-            doctor={selectedDoctor}
-            onBack={() => setStep("doctor")}
-            onSelect={handleDateTimeSelect}
-          />
-        )}
-
-        {step === "confirm" && selectedDoctor && (
-          <ConfirmationStep
-            doctor={selectedDoctor}
-            date={selectedDate}
-            time={selectedTime}
-            onBack={() => setStep("datetime")}
-            onConfirm={handleConfirm}
-          />
-        )}
-
-        {step === "success" && selectedDoctor && (
-          <SuccessScreen
-            doctorName={selectedDoctor.name}
-            specialty={selectedDoctor.specialty}
-            date={selectedDate}
-            time={selectedTime}
-            onNewAppointment={resetFlow}
-          />
-        )}
-
-      </div>
+      <Suspense fallback={<div className="p-10 text-center">Загрузка формы...</div>}>
+        <AppointmentForm />
+      </Suspense>
     </AppShell>
   )
 }

@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import ClientLayout from '@/components/client-layout'
 import { ClerkProvider } from '@clerk/nextjs'
 import { LanguageProvider } from '@/hooks/use-language'
+import { Suspense } from 'react' // Добавлен критический импорт
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"], variable: "--font-inter" });
@@ -31,7 +32,12 @@ export default function RootLayout({
         <body className={`${inter.variable} font-sans antialiased`}>
           <LanguageProvider>
             <ClientLayout>
-              {children}
+              {/* ВАЖНО: Suspense здесь "лечит" ошибку useSearchParams, 
+                  которая рушила твой билд и не давала кнопке появиться 
+              */}
+              <Suspense fallback={null}>
+                {children}
+              </Suspense>
             </ClientLayout>
           </LanguageProvider>
           <Analytics />
