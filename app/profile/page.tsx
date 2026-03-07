@@ -1,7 +1,6 @@
 "use client"
 
 import { AppShell } from "@/components/app-shell"
-import { useAppointments } from "@/components/appointment-context"
 import { supabase } from "@/app/lib/supabase"
 import {
   User,
@@ -29,13 +28,31 @@ type SiteContentRow = {
   content: string
 }
 
+// --- ПРОФИЛЬ КЛИЕНТА ---
 function ClientProfile() {
   const [activeTab, setActiveTab] = useState<Tab>("appointments")
-  const { appointments, cancelAppointment } = useAppointments()
+  const [myAppointments, setMyAppointments] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const { user } = useUser()
 
-  const upcoming = appointments.filter((a) => a.status === "upcoming")
   const fullName = user?.fullName || `${user?.firstName || "Пациент"} ${user?.lastName || ""}`.trim()
+
+  useEffect(() => {
+    async function fetchMyData() {
+      if (!user?.id) return
+      setLoading(true)
+      // Загружаем только те записи, где user_id совпадает с ID текущего пользователя
+      const { data } = await supabase
+        .from("appointments")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+
+      setMyAppointments(data || [])
+      setLoading(false)
+    }
+    fetchMyData()
+  }, [user?.id])
 
   return (
     <div className="p-4">
@@ -61,9 +78,8 @@ function ClientProfile() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2.5 text-xs font-semibold transition-all ${
-              activeTab === tab.key ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
-            }`}
+            className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2.5 text-xs font-semibold transition-all ${activeTab === tab.key ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
+              }`}
           >
             <tab.icon className="h-3.5 w-3.5" />
             {tab.label}
@@ -75,27 +91,36 @@ function ClientProfile() {
       <div className="mt-4">
         {activeTab === "appointments" && (
           <div className="space-y-4">
-            <Link href="/appointment" className="flex items-center justify-between rounded-2xl bg-primary p-4 text-primary-foreground">
+            <Link href="/appointment" className="flex items-center justify-between rounded-2xl bg-primary p-4 text-primary-foreground shadow-lg shadow-primary/20">
               <div className="flex items-center gap-3">
                 <CalendarDays className="h-5 w-5" />
                 <span className="text-sm font-bold">Записаться на приём</span>
               </div>
               <ChevronRight className="h-5 w-5" />
             </Link>
-            {upcoming.map((appt) => (
-              <div key={appt.id} className="rounded-2xl border border-border bg-card p-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <p className="text-sm font-bold">{appt.doctorName}</p>
-                    <p className="text-xs text-primary">{appt.specialty}</p>
-                  </div>
-                  <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-1 rounded-md font-bold">Активна</span>
-                </div>
-                <button onClick={() => cancelAppointment(appt.id)} className="mt-3 text-xs text-destructive flex items-center gap-1">
-                  <XCircle className="h-3.5 w-3.5" /> Отменить запись
-                </button>
+
+            {loading ? (
+              <div className="flex justify-center py-10"><Loader2 className="animate-spin text-primary" /></div>
+            ) : myAppointments.length === 0 ? (
+              <div className="p-8 text-center border-2 border-dashed rounded-2xl text-muted-foreground text-sm">
+                У вас пока нет активных записей
               </div>
-            ))}
+            ) : (
+              myAppointments.map((appt) => (
+                <div key={appt.id} className="rounded-2xl border border-border bg-card p-4 shadow-sm">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-sm font-bold">{appt.service_type || "Консультация"}</p>
+                      <p className="text-[10px] text-primary font-bold uppercase tracking-tight">{appt.date} в {appt.time}</p>
+                    </div>
+                    <span className={`text-[9px] px-2 py-1 rounded-lg font-black ${appt.status === 'upcoming' ? 'bg-emerald-100 text-emerald-700' : 'bg-secondary text-muted-foreground'
+                      }`}>
+                      {appt.status === 'upcoming' ? 'АКТИВНА' : 'ЗАВЕРШЕНА'}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -104,8 +129,15 @@ function ClientProfile() {
             <div className="flex items-center gap-3">
               <User className="h-4 w-4 text-primary" />
               <div>
-                <p className="text-[10px] text-muted-foreground">ФИО</p>
-                <p className="text-sm">{fullName}</p>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold">ФИО</p>
+                <p className="text-sm font-medium">{fullName}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail className="h-4 w-4 text-primary" />
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold">Email</p>
+                <p className="text-sm font-medium">{user?.primaryEmailAddress?.emailAddress}</p>
               </div>
             </div>
           </div>
@@ -127,21 +159,30 @@ function ClientProfile() {
   )
 }
 
+// --- АДМИН-ПАНЕЛЬ ---
 function AdminDashboard() {
-  const [rows, setRows] = useState<SiteContentRow[]>([])
+  const [activeTab, setActiveTab] = useState<"content" | "appointments" | "users">("appointments")
+  const [contentRows, setContentRows] = useState<SiteContentRow[]>([])
+  const [allAppointments, setAllAppointments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [savingId, setSavingId] = useState<number | null>(null)
 
   useEffect(() => {
-    async function load() {
-      const { data } = await supabase.from("site_content").select("*").order("section_name")
-      setRows((data as SiteContentRow[]) || [])
+    async function loadAdminData() {
+      setLoading(true)
+      const [contentRes, apptsRes] = await Promise.all([
+        supabase.from("site_content").select("*").order("section_name"),
+        supabase.from("appointments").select("*").order("created_at", { ascending: false })
+      ])
+
+      setContentRows(contentRes.data || [])
+      setAllAppointments(apptsRes.data || [])
       setLoading(false)
     }
-    load()
+    loadAdminData()
   }, [])
 
-  const handleSave = async (row: SiteContentRow) => {
+  const handleSaveContent = async (row: SiteContentRow) => {
     setSavingId(row.id)
     await supabase.from("site_content").update({ content: row.content }).eq("id", row.id)
     setSavingId(null)
@@ -149,51 +190,126 @@ function AdminDashboard() {
 
   return (
     <div className="p-4 space-y-4">
-      <h1 className="font-bold text-lg px-2">Панель администратора</h1>
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h1 className="text-base font-bold text-foreground">Панель управления</h1>
+        <p className="text-[10px] text-primary font-medium uppercase tracking-wider">Режим администратора</p>
+      </div>
+
+      <div className="flex rounded-xl bg-secondary p-1">
+        <button
+          onClick={() => setActiveTab("appointments")}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "appointments" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
+            }`}
+        >
+          Все записи
+        </button>
+        <button
+          onClick={() => setActiveTab("content")}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "content" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
+            }`}
+        >
+          Контент
+        </button>
+      </div>
+
       {loading ? (
         <div className="flex justify-center py-10"><Loader2 className="animate-spin text-primary" /></div>
       ) : (
-        rows.map((row) => (
-          <div key={row.id} className="p-3 border rounded-xl bg-card space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-xs font-bold text-primary uppercase">{row.section_name}</span>
-              <button 
-                onClick={() => handleSave(row)} 
-                className="p-1.5 bg-primary text-white rounded-lg"
-              >
-                {savingId === row.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
-              </button>
+        <div className="space-y-4">
+          {activeTab === "appointments" && (
+            <div className="space-y-3">
+              {allAppointments.length === 0 ? (
+                <p className="text-center text-xs text-muted-foreground py-10">Записей пока нет</p>
+              ) : (
+                allAppointments.map((appt) => (
+                  <div key={appt.id} className="rounded-2xl border border-border bg-card p-4 shadow-sm">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="text-sm font-bold">{appt.patient_name || "Имя не указано"}</p>
+                        <p className="text-[10px] text-primary font-bold uppercase tracking-tight">{appt.service_type}</p>
+                      </div>
+                      <span className={`text-[9px] px-2 py-1 rounded-lg font-black ${appt.status === 'upcoming' ? 'bg-emerald-100 text-emerald-700' : 'bg-secondary text-muted-foreground'
+                        }`}>
+                        {appt.status === 'upcoming' ? 'АКТИВНА' : 'ЗАВЕРШЕНА'}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 mt-3 p-3 bg-secondary/50 rounded-xl border border-border/50">
+                      <div className="flex items-center gap-2 text-[11px] font-medium">
+                        <CalendarDays className="h-3.5 w-3.5 text-primary" />
+                        <span>{appt.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-[11px] font-medium">
+                        <Clock className="h-3.5 w-3.5 text-primary" />
+                        <span>{appt.time}</span>
+                      </div>
+                      {appt.phone && (
+                        <div className="flex items-center gap-2 text-[11px] font-medium col-span-2 mt-1 pt-1 border-t border-border/20">
+                          <Phone className="h-3.5 w-3.5 text-primary" />
+                          <span>{appt.phone}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-3 pt-3 border-t border-border">
+                      <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1 flex items-center gap-1">
+                        <FileText className="h-3 w-3" /> Причина обращения:
+                      </p>
+                      <p className="text-xs text-foreground leading-relaxed italic">
+                        {appt.reason || "Причина не указана"}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
-            <textarea 
-              className="w-full text-xs p-2 border rounded-lg bg-background" 
-              value={row.content} 
-              onChange={(e) => setRows(prev => prev.map(r => r.id === row.id ? {...r, content: e.target.value} : r))}
-            />
-          </div>
-        ))
+          )}
+
+          {activeTab === "content" && contentRows.map((row) => (
+            <div key={row.id} className="p-3 border rounded-xl bg-card space-y-2 shadow-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-bold text-primary uppercase">{row.section_name}</span>
+                <button onClick={() => handleSaveContent(row)} className="p-1.5 bg-primary text-white rounded-lg">
+                  {savingId === row.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
+                </button>
+              </div>
+              <textarea
+                className="w-full text-xs p-2 border rounded-lg bg-background min-h-[80px]"
+                value={row.content}
+                onChange={(e) => setContentRows(prev => prev.map(r => r.id === row.id ? { ...r, content: e.target.value } : r))}
+              />
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )
 }
 
+// --- ГЛАВНАЯ СТРАНИЦА ---
 export default function ProfilePage() {
-  const { user } = useUser()
+  const { user, isLoaded } = useUser()
   const adminEmails = ["admin@example.com", "doctor@example.com", "foxden482@gmail.com"]
   const isAdmin = adminEmails.includes(user?.primaryEmailAddress?.emailAddress || "")
 
+  if (!isLoaded) return null
+
   return (
     <AppShell>
-      <Show when="signed-in">
-        {isAdmin ? <AdminDashboard /> : <ClientProfile />}
-      </Show>
-      <Show when="signed-out">
+      {/* Вместо <Show when={!!user}> используй проверку напрямую */}
+      {user ? (
+        isAdmin ? <AdminDashboard /> : <ClientProfile />
+      ) : (
+        /* Этот блок заменит <Show when={!user}> */
         <div className="flex flex-col items-center justify-center min-h-[50vh] p-4 text-center">
           <p className="text-sm text-muted-foreground mb-4">Войдите, чтобы увидеть профиль</p>
           <SignInButton mode="modal">
-            <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold">Войти</button>
+            <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold transition-transform active:scale-95">
+              Войти
+            </button>
           </SignInButton>
         </div>
-      </Show>
+      )}
     </AppShell>
   )
 }
