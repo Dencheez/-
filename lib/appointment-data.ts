@@ -22,6 +22,7 @@ export interface Appointment {
   time: string
   status: "upcoming" | "completed" | "cancelled"
   patientName: string
+  phone: string
 }
 
 export const doctors: Doctor[] = [

@@ -37,7 +37,7 @@ export default function AppointmentPage() {
     setStep("confirm")
   }
 
-  const handleConfirm = async (patientName: string) => {
+  const handleConfirm = async (patientName: string, phone: string) => {
     if (!selectedDoctor || !user) {
       console.error("Ошибка: Врач не выбран или пользователь не авторизован")
       return
@@ -46,6 +46,7 @@ export default function AppointmentPage() {
     const { error } = await supabase.from("appointments").insert({
       user_id: user.id,
       patient_name: patientName,
+      phone: phone,
       service_type: selectedDoctor.specialty,
       date: selectedDate,
       time: selectedTime,
@@ -67,7 +68,8 @@ export default function AppointmentPage() {
       time: selectedTime,
       status: "upcoming",
       patientName,
-    })
+      phone: phone,
+    } as any)
 
     setStep("success")
   }
