@@ -1,196 +1,160 @@
 "use client"
 
-import { AppShell } from "@/components/app-shell"
+import { useState, useMemo, useEffect, Suspense } from "react"
+import { useSearchParams } from "next/navigation"
 import { supabase } from "@/app/lib/supabase"
-import { useUser } from "@clerk/nextjs"
-import { useEffect, useState } from "react"
+import { AppShell } from "@/components/app-shell"
 import {
-    Save,
-    Loader2,
-    LayoutDashboard,
+    User,
+    Calendar,
+    Phone,
     FileText,
-    Settings,
-    ChevronRight,
-    Plus,
-    Link
+    Loader2,
+    XCircle,
+    Users,
+    Clock,
+    RotateCcw,
+    Check
 } from "lucide-react"
 
-type SiteContentRow = {
-    id: number
-    section_name: string
-    content: string
-}
-
-export default function AdminDashboard() {
-    const { user, isLoaded } = useUser()
-
-    const [rows, setRows] = useState<SiteContentRow[]>([])
+function AdminDashboard() {
+    const searchParams = useSearchParams()
+    const [appointments, setAppointments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
-    const [savingId, setSavingId] = useState<number | null>(null)
 
-    const isAdmin = user?.publicMetadata?.role === "admin";
-
-    if (!isLoaded) return null;
-
-    if (!isAdmin) {
-        return (
-            <AppShell>
-                <div className="flex items-center justify-center h-[60vh]">
-                    <p className="text-destructive font-bold text-xl">
-                        Доступ запрещен. У вас нет прав администратора.
-                    </p>
-                </div>
-            </AppShell>
-        );
-    }
+    const searchQuery = searchParams.get("search")?.toLowerCase() || ""
 
     useEffect(() => {
-        async function load() {
+        async function fetchAppointments() {
             setLoading(true)
-            const { data } = await supabase
-                .from("site_content")
-                .select("id, section_name, content")
-                .order("section_name", { ascending: true })
-            setRows((data as SiteContentRow[]) || [])
+            const { data, error } = await supabase
+                .from("appointments")
+                .select("*")
+                .order("created_at", { ascending: false })
+
+            if (!error) setAppointments(data || [])
             setLoading(false)
         }
-        load()
+        fetchAppointments()
     }, [])
 
-    async function handleSave(row: SiteContentRow) {
-        setSavingId(row.id)
+    const toggleStatus = async (id: number, currentStatus: string) => {
+        // Логика под твои статусы: upcoming <-> completed
+        const newStatus = currentStatus === 'completed' ? 'upcoming' : 'completed';
+
+        setAppointments(prev => prev.map(appt =>
+            appt.id === id ? { ...appt, status: newStatus } : appt
+        ));
+
         const { error } = await supabase
-            .from("site_content")
-            .update({ content: row.content })
-            .eq("id", row.id)
+            .from("appointments")
+            .update({ status: newStatus })
+            .eq("id", id);
 
         if (error) {
-            console.error("Error saving content:", error)
-            alert("Ошибка при сохранении")
+            setAppointments(prev => prev.map(appt =>
+                appt.id === id ? { ...appt, status: currentStatus } : appt
+            ));
         }
-        setSavingId(null)
-    }
+    };
 
-    if (!isLoaded) return null
+
+    const filteredClients = useMemo(() => {
+        if (!searchQuery) return appointments;
+        return appointments.filter((client) =>
+            client.patient_name?.toLowerCase().includes(searchQuery) ||
+            client.doctor_name?.toLowerCase().includes(searchQuery) ||
+            client.phone?.includes(searchQuery)
+        )
+    }, [appointments, searchQuery])
+
+    if (loading) return (
+        <div className="flex h-[60vh] items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-primary/30" />
+        </div>
+    )
 
     return (
-        <AppShell>
-            <div className="p-4 space-y-6 max-w-5xl mx-auto">
-                {/* Header */}
-                <div className="flex flex-col gap-1">
-                    <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
-                        <LayoutDashboard className="h-6 w-6 text-primary" />
-                        Панель управления
-                    </h1>
-                    <p className="text-sm text-muted-foreground">
-                        Управление контентом сайта и настройками клиники
-                    </p>
-                </div>
-
-                {/* Stats / Quick Info */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Администратор</p>
-                        <p className="mt-1 text-sm font-semibold truncate">{user?.fullName}</p>
-                    </div>
-                    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Роль</p>
-                        <p className="mt-1 text-sm font-semibold text-primary">
-                            {(user?.publicMetadata?.role as string) || "Персонал"}
-                        </p>
-                    </div>
-                    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">База данных</p>
-                        <p className="mt-1 text-sm font-semibold text-green-600">Подключено</p>
-                    </div>
-                </div>
-
-                {/* Content Editor */}
-                <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
-                    <div className="border-b border-border bg-muted/30 px-5 py-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                            <FileText className="h-5 w-5 text-primary" />
-                            <h2 className="text-sm font-bold text-foreground">Редактор содержимого сайта</h2>
-                        </div>
-                    </div>
-
-                    <div className="p-5">
-                        {loading ? (
-                            <div className="flex items-center justify-center py-12">
-                                <Loader2 className="h-8 w-8 animate-spin text-primary/40" />
-                            </div>
-                        ) : (
-                            <div className="space-y-4">
-                                {rows.length === 0 && (
-                                    <p className="text-sm text-center text-muted-foreground py-8">
-                                        Данные не найдены в таблице site_content
-                                    </p>
-                                )}
-                                {rows.map((row) => (
-                                    <div
-                                        key={row.id}
-                                        className="group rounded-xl border border-border bg-background p-4 transition-all hover:shadow-md hover:border-primary/20"
-                                    >
-                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                                            <div className="flex items-center gap-2">
-                                                <span className="inline-block w-2 h-2 rounded-full bg-primary/40" />
-                                                <span className="font-bold text-sm text-foreground">{row.section_name}</span>
-                                            </div>
-                                            <button
-                                                onClick={() => handleSave(row)}
-                                                disabled={savingId === row.id}
-                                                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-bold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 active:scale-95 disabled:opacity-60"
-                                            >
-                                                {savingId === row.id ? (
-                                                    <>
-                                                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                                                        Сохранение…
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <Save className="h-3.5 w-3.5" />
-                                                        Сохранить изменения
-                                                    </>
-                                                )}
-                                            </button>
-                                        </div>
-                                        <textarea
-                                            className="w-full rounded-xl border border-border bg-card p-3 text-sm leading-relaxed focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10 transition-all min-h-[100px]"
-                                            value={row.content}
-                                            onChange={(e) =>
-                                                setRows((prev) =>
-                                                    prev.map((r) => (r.id === row.id ? { ...r, content: e.target.value } : r))
-                                                )
-                                            }
-                                            placeholder="Введите содержимое..."
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
-
-                {/* Quick Links */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-8">
-                    <Link
-                        href="/profile"
-                        className="flex items-center justify-between rounded-2xl border border-border bg-card p-4 hover:bg-secondary transition-colors"
-                    >
-                        <div className="flex items-center gap-3">
-                            <Settings className="h-5 w-5 text-primary" />
-                            <span className="text-sm font-semibold">Настройки профиля</span>
-                        </div>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                    </Link>
-                    <button className="flex items-center justify-between rounded-2xl border border-dashed border-border p-4 hover:bg-secondary transition-colors opacity-60">
-                        <div className="flex items-center gap-3">
-                            <Plus className="h-5 w-5" />
-                            <span className="text-sm font-semibold">Добавить секцию (скоро)</span>
-                        </div>
-                    </button>
+        <div className="p-4 max-w-5xl mx-auto space-y-6">
+            <div className="flex items-center justify-between bg-card border border-border p-6 rounded-[2.5rem] shadow-sm">
+                <h1 className="text-2xl font-black text-foreground flex items-center gap-2">
+                    <Users className="h-6 w-6 text-primary" />
+                    Панель управления
+                </h1>
+                <div className="bg-primary/5 px-6 py-2 rounded-2xl border border-primary/10">
+                    <p className="text-xl font-black text-primary">{appointments.length}</p>
                 </div>
             </div>
+
+            <div className="grid gap-4">
+                {filteredClients.map((client) => {
+                    // Теперь проверяем статус 'completed' из твоей базы
+                    const isDone = client.status === 'completed';
+
+                    return (
+                        <div
+                            key={client.id}
+                            className={`relative bg-card border border-border rounded-[2.5rem] p-6 transition-all shadow-sm ${isDone ? 'bg-zinc-50 opacity-80' : 'hover:border-primary/40'
+                                }`}
+                        >
+                            {/* КНОПКА: Переключения статуса */}
+                            <div className="absolute top-6 right-6 flex flex-col items-end gap-2 z-[100]">
+                                <div className={`px-3 py-1 text-[10px] font-black rounded-full border uppercase ${isDone ? 'bg-zinc-200 text-zinc-600' : 'bg-green-100 text-green-700 border-green-200'
+                                    }`}>
+                                    {isDone ? 'Завершена' : 'Активна'}
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => toggleStatus(client.id, client.status)}
+                                    className="fixed top-10 right-10 z-[999] bg-red-600 text-white px-10 py-4 rounded-full font-black shadow-2xl hover:scale-105 transition-all"
+                                >
+                                    ТЕСТОВАЯ КНОПКА
+                                </button>
+                            </div>
+
+                            <div className="flex flex-col gap-6">
+                                <div className="flex items-center gap-4 pr-[180px]">
+                                    <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                                        <User className="h-7 w-7 text-primary" />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <h3 className="font-bold text-xl text-foreground truncate">
+                                            {client.patient_name || "Без имени"}
+                                        </h3>
+                                        <p className="text-xs font-bold text-primary uppercase mt-1">
+                                            {client.service_type || "Психотерапевт"}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div className="flex items-center gap-3 bg-white px-4 py-3 rounded-2xl text-sm border border-border shadow-sm">
+                                        <Calendar className="h-4 w-4 text-primary" />
+                                        <span className="font-bold">{client.date}</span>
+                                        <Clock className="h-4 w-4 text-primary ml-2" />
+                                        <span className="font-bold">{client.time || "12:00"}</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-white px-4 py-3 rounded-2xl text-sm border border-border shadow-sm">
+                                        <Phone className="h-4 w-4 text-primary" />
+                                        <span className="font-mono font-black">{client.phone || "+7 (777) 000-00-00"}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}
+
+export default function AdminPage() {
+    return (
+        <AppShell>
+            <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin text-primary" /></div>}>
+                <AdminDashboard />
+            </Suspense>
         </AppShell>
     )
 }

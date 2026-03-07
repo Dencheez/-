@@ -16,9 +16,10 @@ import {
   Save,
   Loader2,
 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo, Suspense } from "react"
 import Link from "next/link"
-import { useUser, Show, SignInButton } from "@clerk/nextjs"
+import { useSearchParams } from "next/navigation"
+import { useUser, SignInButton } from "@clerk/nextjs"
 
 type Tab = "appointments" | "info" | "settings"
 
@@ -28,7 +29,7 @@ type SiteContentRow = {
   content: string
 }
 
-// --- ПРОФИЛЬ КЛИЕНТА ---
+// --- ПРОФИЛЬ КЛИЕНТА (Оставляем как есть) ---
 function ClientProfile() {
   const [activeTab, setActiveTab] = useState<Tab>("appointments")
   const [myAppointments, setMyAppointments] = useState<any[]>([])
@@ -41,7 +42,6 @@ function ClientProfile() {
     async function fetchMyData() {
       if (!user?.id) return
       setLoading(true)
-      // Загружаем только те записи, где user_id совпадает с ID текущего пользователя
       const { data } = await supabase
         .from("appointments")
         .select("*")
@@ -56,7 +56,6 @@ function ClientProfile() {
 
   return (
     <div className="p-4">
-      {/* Header */}
       <div className="flex items-center gap-4 rounded-2xl bg-card border border-border p-5 shadow-sm">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground text-center">
           {fullName ? fullName[0] : "П"}
@@ -68,7 +67,6 @@ function ClientProfile() {
         </div>
       </div>
 
-      {/* Navigation */}
       <div className="mt-4 flex rounded-xl bg-secondary p-1">
         {[
           { key: "appointments" as Tab, label: "Записи", icon: CalendarDays },
@@ -87,7 +85,6 @@ function ClientProfile() {
         ))}
       </div>
 
-      {/* Content Area */}
       <div className="mt-4">
         {activeTab === "appointments" && (
           <div className="space-y-4">
@@ -159,13 +156,17 @@ function ClientProfile() {
   )
 }
 
-// --- АДМИН-ПАНЕЛЬ ---
+// --- АДМИН-ПАНЕЛЬ С РАБОЧИМ ПОИСКОМ ---
 function AdminDashboard() {
+  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<"content" | "appointments" | "users">("appointments")
   const [contentRows, setContentRows] = useState<SiteContentRow[]>([])
   const [allAppointments, setAllAppointments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [savingId, setSavingId] = useState<number | null>(null)
+
+  // Получаем запрос из URL (search=Данияр)
+  const searchQuery = searchParams.get("search")?.toLowerCase() || ""
 
   useEffect(() => {
     async function loadAdminData() {
@@ -181,6 +182,16 @@ function AdminDashboard() {
     }
     loadAdminData()
   }, [])
+
+  // Фильтруем записи по поиску
+  const filteredAppointments = useMemo(() => {
+    if (!searchQuery) return allAppointments
+    return allAppointments.filter(appt =>
+      appt.patient_name?.toLowerCase().includes(searchQuery) ||
+      appt.phone?.includes(searchQuery) ||
+      appt.service_type?.toLowerCase().includes(searchQuery)
+    )
+  }, [allAppointments, searchQuery])
 
   const handleSaveContent = async (row: SiteContentRow) => {
     setSavingId(row.id)
@@ -198,15 +209,13 @@ function AdminDashboard() {
       <div className="flex rounded-xl bg-secondary p-1">
         <button
           onClick={() => setActiveTab("appointments")}
-          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "appointments" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
-            }`}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "appointments" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
         >
           Все записи
         </button>
         <button
           onClick={() => setActiveTab("content")}
-          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "content" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
-            }`}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${activeTab === "content" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
         >
           Контент
         </button>
@@ -218,18 +227,20 @@ function AdminDashboard() {
         <div className="space-y-4">
           {activeTab === "appointments" && (
             <div className="space-y-3">
-              {allAppointments.length === 0 ? (
-                <p className="text-center text-xs text-muted-foreground py-10">Записей пока нет</p>
+              {filteredAppointments.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-muted-foreground">
+                  <XCircle className="h-8 w-8 mb-2 opacity-20" />
+                  <p className="text-xs">По запросу «{searchQuery}» ничего не найдено</p>
+                </div>
               ) : (
-                allAppointments.map((appt) => (
+                filteredAppointments.map((appt) => (
                   <div key={appt.id} className="rounded-2xl border border-border bg-card p-4 shadow-sm">
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <p className="text-sm font-bold">{appt.patient_name || "Имя не указано"}</p>
                         <p className="text-[10px] text-primary font-bold uppercase tracking-tight">{appt.service_type}</p>
                       </div>
-                      <span className={`text-[9px] px-2 py-1 rounded-lg font-black ${appt.status === 'upcoming' ? 'bg-emerald-100 text-emerald-700' : 'bg-secondary text-muted-foreground'
-                        }`}>
+                      <span className={`text-[9px] px-2 py-1 rounded-lg font-black ${appt.status === 'upcoming' ? 'bg-emerald-100 text-emerald-700' : 'bg-secondary text-muted-foreground'}`}>
                         {appt.status === 'upcoming' ? 'АКТИВНА' : 'ЗАВЕРШЕНА'}
                       </span>
                     </div>
@@ -296,20 +307,20 @@ export default function ProfilePage() {
 
   return (
     <AppShell>
-      {/* Вместо <Show when={!!user}> используй проверку напрямую */}
-      {user ? (
-        isAdmin ? <AdminDashboard /> : <ClientProfile />
-      ) : (
-        /* Этот блок заменит <Show when={!user}> */
-        <div className="flex flex-col items-center justify-center min-h-[50vh] p-4 text-center">
-          <p className="text-sm text-muted-foreground mb-4">Войдите, чтобы увидеть профиль</p>
-          <SignInButton mode="modal">
-            <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold transition-transform active:scale-95">
-              Войти
-            </button>
-          </SignInButton>
-        </div>
-      )}
+      <Suspense fallback={<div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary/20" /></div>}>
+        {user ? (
+          isAdmin ? <AdminDashboard /> : <ClientProfile />
+        ) : (
+          <div className="flex flex-col items-center justify-center min-h-[50vh] p-4 text-center">
+            <p className="text-sm text-muted-foreground mb-4">Войдите, чтобы увидеть профиль</p>
+            <SignInButton mode="modal">
+              <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold transition-transform active:scale-95">
+                Войти
+              </button>
+            </SignInButton>
+          </div>
+        )}
+      </Suspense>
     </AppShell>
   )
 }
