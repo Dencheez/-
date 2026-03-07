@@ -92,8 +92,8 @@ export default function AppointmentPage() {
               <div
                 key={s}
                 className={`h-1 flex-1 rounded-full transition-colors ${i <= ["doctor", "datetime", "confirm"].indexOf(step)
-                    ? "bg-primary"
-                    : "bg-border"
+                  ? "bg-primary"
+                  : "bg-border"
                   }`}
               />
             ))}
