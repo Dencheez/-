@@ -1,40 +1,70 @@
 "use client"
 
+import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const actionCards = [
     { title: "Государственные символы РК", img: "/images/InfoSection/1.jpg", link: "/" },
     { title: "Послание Президента РК", img: "/images/InfoSection/2.jpg", link: "/" },
     { title: "Официальный сайт Президента", img: "/images/InfoSection/3.jpg", link: "/" },
-    { title: "Казахстан 2050", img: "/images/InfoSection/4.jpg", link: "/" }, // Индекс 3
+    { title: "Казахстан 2050", img: "/images/InfoSection/4.jpg", link: "/" },
     { title: "Национальный проект", img: "/images/InfoSection/5.png", link: "/" },
 ]
 
 export function InfoFiles() {
+    const scrollRef = useRef<HTMLDivElement>(null)
+
+    const scroll = (direction: "left" | "right") => {
+        if (scrollRef.current) {
+            const { scrollLeft, clientWidth } = scrollRef.current
+            const scrollTo = direction === "left"
+                ? scrollLeft - clientWidth / 2
+                : scrollLeft + clientWidth / 2
+
+            scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" })
+        }
+    }
+
     return (
-        <div className="mx-auto max-w-6xl px-4 mt-10 mb-12">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 lg:gap-8 justify-items-center">
+        <div className="mx-auto max-w-6xl px-4 mt-8 relative group">
+            {/* Кнопки управления (скрыты на десктопе md:hidden) */}
+            <button
+                onClick={() => scroll("left")}
+                className="absolute left-1 top-1/3 z-10 bg-white/90 p-1.5 rounded-full shadow-md border border-gray-100 active:scale-90 md:hidden"
+            >
+                <ChevronLeft className="h-5 w-5 text-gray-600" />
+            </button>
+
+            <button
+                onClick={() => scroll("right")}
+                className="absolute right-1 top-1/3 z-10 bg-white/90 p-1.5 rounded-full shadow-md border border-gray-100 active:scale-90 md:hidden"
+            >
+                <ChevronRight className="h-5 w-5 text-gray-600" />
+            </button>
+
+            {/* Контейнер со скроллом */}
+            <div
+                ref={scrollRef}
+                className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x md:grid md:grid-cols-5 md:gap-6 md:overflow-visible"
+            >
                 {actionCards.map((card, index) => (
                     <Link
                         key={index}
                         href={card.link}
-                        className="group flex flex-col items-center w-full max-w-[150px] md:max-w-[180px]"
+                        className="group flex flex-col items-center shrink-0 snap-start w-[calc(33.33%-8px)] md:w-full"
                     >
-                        {/* Добавили p-1 для 4-й карточки (индекс 3), чтобы картинка сжалась внутрь */}
-                        <div className={`relative w-full aspect-[4/3] overflow-hidden rounded-xl border border-gray-100 shadow-sm transition-all group-hover:scale-105 group-hover:shadow-md bg-white flex items-center justify-center ${index === 3 ? "p-3" : "p-0"}`}>
+                        <div className={`relative w-full aspect-square overflow-hidden rounded-2xl border border-gray-100 shadow-sm transition-all group-hover:scale-105 bg-white flex items-center justify-center ${index === 3 ? "p-3" : "p-0"}`}>
                             <Image
                                 src={card.img}
                                 alt={card.title}
                                 fill
-                                // ТОЛЬКО ДЛЯ 4-Й КАРТИНКИ: object-contain и p-2 (padding)
-                                className={` ${index === 3
-                                    ? "object-contain p-2"
-                                    : "object-cover"}`}
+                                className={`${index === 3 ? "object-contain p-2" : "object-cover"}`}
                             />
                         </div>
 
-                        <h3 className="mt-3 text-[10px] md:text-[11px] font-medium text-gray-500 leading-tight text-center px-1 group-hover:text-blue-600 transition-colors">
+                        <h3 className="mt-2 text-[9px] md:text-[11px] font-medium text-gray-500 leading-[1.1] text-center px-1 group-hover:text-blue-600 transition-colors uppercase tracking-tight">
                             {card.title}
                         </h3>
                     </Link>
