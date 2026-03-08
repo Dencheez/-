@@ -16,11 +16,10 @@ const actionCards = [
 export function InfoFiles() {
     const scrollRef = useRef<HTMLDivElement>(null)
 
-    // Простой мгновенный скролл без "плавности", которая отвлекает
     const scroll = (direction: "left" | "right") => {
         if (scrollRef.current) {
             const { scrollLeft, clientWidth } = scrollRef.current
-            const offset = clientWidth / 1.5
+            const offset = clientWidth / 1.2 // Скроллим почти на весь видимый экран
             scrollRef.current.scrollLeft = direction === "left"
                 ? scrollLeft - offset
                 : scrollLeft + offset
@@ -28,51 +27,55 @@ export function InfoFiles() {
     }
 
     return (
-        <div className="mx-auto max-w-6xl px-4 mt-8 relative">
-            {/* Статичные кнопки управления для мобилки */}
+        <div className="mx-4 mt-8 relative group/container">
+            {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-1 top-[35%] z-10 bg-white p-1.5 rounded-full shadow-sm border border-gray-200 md:hidden"
+                className="absolute left-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden active:scale-90 transition-transform"
                 aria-label="Назад"
             >
-                <ChevronLeft className="h-5 w-5 text-gray-400" />
+                <ChevronLeft className="h-5 w-5 text-gray-500" />
             </button>
 
+            {/* Правая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-1 top-[35%] z-10 bg-white p-1.5 rounded-full shadow-sm border border-gray-200 md:hidden"
+                className="absolute right-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden active:scale-90 transition-transform"
                 aria-label="Вперед"
             >
-                <ChevronRight className="h-5 w-5 text-gray-400" />
+                <ChevronRight className="h-5 w-5 text-gray-500" />
             </button>
 
-            {/* Контейнер: snap-x для фиксации позиции, без лишних транзиций */}
+            {/* Контейнер карусели */}
             <div
                 ref={scrollRef}
-                className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x md:grid md:grid-cols-5 md:gap-6 md:overflow-visible"
+                className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide snap-x md:grid md:grid-cols-5 md:overflow-visible md:pb-0"
             >
-                {actionCards.map((card, index) => (
-                    <Link
-                        key={index}
-                        href={card.link}
-                        className="flex flex-col items-center shrink-0 snap-start w-[calc(33.33%-8px)] md:w-full"
-                    >
-                        {/* Убрали hover:scale и лишние тени */}
-                        <div className={`relative w-full aspect-square overflow-hidden rounded-xl border border-gray-100 bg-white flex items-center justify-center ${index === 3 ? "p-3" : "p-0"}`}>
-                            <Image
-                                src={card.img}
-                                alt={card.title}
-                                fill
-                                // Наш рабочий фикс для 4-й картинки остается
-                                className={`${index === 3 ? "object-contain p-2" : "object-cover"}`}
-                            />
-                        </div>
+                {actionCards.map((card, index) => {
+                    const isFourth = index === 3;
 
-                        <h3 className="mt-2 text-[9px] md:text-[11px] font-medium text-gray-500 leading-tight text-center px-1 uppercase">
-                            {card.title}
-                        </h3>
-                    </Link>
-                ))}
+                    return (
+                        <Link
+                            key={index}
+                            href={card.link}
+                            className="group flex flex-col space-y-2 shrink-0 snap-start w-[140px] md:w-full"
+                        >
+                            {/* Контейнер с твоим фиксом для 4-й картинки */}
+                            <div className={`relative w-full aspect-[16/9] md:aspect-[4/3] overflow-hidden rounded-sm border border-gray-100 shadow-sm transition-transform group-hover:brightness-110 bg-white flex items-center justify-center ${isFourth ? "p-3" : "p-0"}`}>
+                                <Image
+                                    src={card.img}
+                                    alt={card.title || "banner"}
+                                    fill
+                                    className={`${isFourth ? "object-contain p-2" : "object-cover"}`}
+                                />
+                            </div>
+
+                            <h3 className="text-[10px] md:text-[11px] font-medium text-gray-600 leading-tight text-center px-1 group-hover:text-blue-600 transition-colors uppercase">
+                                {card.title}
+                            </h3>
+                        </Link>
+                    )
+                })}
             </div>
         </div>
     )
