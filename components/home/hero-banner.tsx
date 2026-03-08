@@ -2,121 +2,56 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
-import { ChevronRight, Loader2 } from "lucide-react"
-import { supabase } from "@/app/lib/supabase"
+import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 
 type Slide = {
-  title: string
-  description: string
   img: string
+  link: string
 }
 
 const defaultSlides: Slide[] = [
-  {
-    title: "ФСМС/ОСМС",
-    description: "Обязательное мед. страхование (ОСМС)",
-    img: "/images/FCMC.png",
-  },
-  {
-    title: "Психологическая помощь",
-    description: "Консультации опытных специалистов",
-    img: "/images/Doctor-hero.png",
-  },
-  {
-    title: "Онлайн запись",
-    description: "Удобная запись на приём через личный кабинет",
-    img: "/images/Online.png",
-  },
+  { img: "/images/hero-banners/hero-banner--1.jpg", link: "/" },
+  { img: "/images/hero-banners/hero-banner--2.jpg", link: "/" }, // Допустим, эта слишком огромная
+  { img: "/images/hero-banners/hero-banner--3.jpg", link: "/" },
+  { img: "/images/hero-banners/hero-banner--4.jpg", link: "/" },
+  { img: "/images/hero-banners/hero-banner--5.jpg", link: "/" },
 ]
 
 export function HeroBanner() {
   const [current, setCurrent] = useState(0)
-  const [slides, setSlides] = useState<Slide[]>(defaultSlides)
-  const [loading, setLoading] = useState(true)
 
   const nextSlide = useCallback(() => {
-    if (slides.length === 0) return
-    setCurrent((prev) => (prev + 1) % slides.length)
-  }, [slides.length])
-
-  useEffect(() => {
-    async function fetchSlides() {
-      try {
-        const { data, error } = await supabase
-          .from('site_content')
-          .select('section_name, content')
-          .like('section_name', 'hero_%')
-
-        if (data && data.length > 0 && !error) {
-          const newSlides: Slide[] = []
-          const map = new Map<string, string>()
-          data.forEach(item => map.set(item.section_name, item.content))
-
-          for (let i = 1; i <= 5; i++) {
-            const title = map.get(`hero_title_${i}`)
-            const desc = map.get(`hero_desc_${i}`)
-            const img = map.get(`hero_img_${i}`)
-            if (title && desc && img) {
-              newSlides.push({ title, description: desc, img })
-            } else {
-              newSlides.push(defaultSlides[i - 1])
-            }
-          }
-
-          if (newSlides.length > 0) {
-            setSlides(newSlides)
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching hero slides:", err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchSlides()
+    setCurrent((prev) => (prev + 1) % defaultSlides.length)
   }, [])
 
   useEffect(() => {
-    if (slides.length <= 1) return
     const timer = setInterval(nextSlide, 5000)
     return () => clearInterval(timer)
-  }, [nextSlide, slides.length])
+  }, [nextSlide])
 
   return (
-    <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl bg-gradient-to-r from-[#E3F0FF] to-[#B3D9FF]">
-      <div className="flex items-stretch h-44">
-        <div className="flex-1 p-5 h-full">
-          <h2 className="text-xl font-bold text-foreground">{slides[current].title}</h2>
-          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-            {slides[current].description}
-          </p>
-          <div className="mt-4 flex items-center gap-1.5">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all ${i === current
-                  ? "w-6 bg-primary"
-                  : "w-2 bg-primary/30"
-                  }`}
-                aria-label={`Slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="relative h-full w-40 shrink-0 overflow-hidden bg-origin-content p-4 object-none">
-          <Image
-            src={slides[current].img}
-            alt={slides[current].title}
-            fill
-            className="object-cover w-full"
-          />
-        </div>
-      </div>
+    <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl h-[250px] md:h-[500px] shadow-lg bg-[#f0f7ff]">
+      <Link href={defaultSlides[current].link} className="relative block h-full w-full">
+        <Image
+          src={defaultSlides[current].img}
+          alt={`Banner ${current + 1}`}
+          fill
+          priority
+          className={` ${defaultSlides[current].img.includes('hero-banner--2.jpg')
+              ? "object-contain p-6 md:p-12"
+              : "object-cover"
+            }`}
+        />
+      </Link>
+
+      {/* Кнопка "Вперед" */}
       <button
-        onClick={nextSlide}
-        className="absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg"
+        onClick={(e) => {
+          e.preventDefault();
+          nextSlide();
+        }}
+        className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/90 text-white shadow-lg backdrop-blur-sm transition-transform active:scale-95 z-10"
         aria-label="Следующий слайд"
       >
         <ChevronRight className="h-5 w-5" />
