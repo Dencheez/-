@@ -4,7 +4,6 @@ import Link from "next/link"
 import { ChevronRight, Brain, Stethoscope, Heart, Pill, Users, Activity } from "lucide-react"
 import { useLanguage } from "@/hooks/use-language"
 
-// 1. Добавляем описание типов для пропсов
 interface ServicesSectionProps {
   searchQuery?: string;
 }
@@ -51,7 +50,6 @@ export function ServicesSection({ searchQuery = "" }: ServicesSectionProps) {
     },
   ]
 
-  // 2. Логика фильтрации: сравниваем searchQuery с названием услуги
   const filteredServices = allServices.filter((service) =>
     service.label.toLowerCase().includes(searchQuery.toLowerCase())
   )
@@ -68,7 +66,8 @@ export function ServicesSection({ searchQuery = "" }: ServicesSectionProps) {
         </Link>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-3">
+      {/* Карусель: flex + overflow-x-auto для мобилки, md:grid для десктопа */}
+      <div className="mt-3 flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x md:grid md:grid-cols-2 md:overflow-visible md:pb-0">
         {filteredServices.length > 0 ? (
           filteredServices.map((service) => {
             const Icon = service.icon
@@ -76,12 +75,15 @@ export function ServicesSection({ searchQuery = "" }: ServicesSectionProps) {
               <Link
                 key={service.label}
                 href="/appointment"
-                className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5 shadow-sm transition-all hover:shadow-md active:scale-[0.97]"
+                // Фиксированная ширина w-[150px] и snap-start для плавной прокрутки
+                className="flex min-h-[85px] w-[150px] shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border border-border bg-card p-3 shadow-sm transition-all hover:shadow-md active:scale-[0.97] md:w-full md:flex-row md:items-center md:min-h-[70px]"
               >
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${service.bg}`}>
-                  <Icon className={`h-5 w-5 ${service.color}`} />
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${service.bg}`}>
+                  <Icon className={`h-4.5 w-4.5 ${service.color}`} />
                 </div>
-                <p className="text-xs font-semibold text-foreground leading-tight line-clamp-2">
+
+                {/* Текст не режется, переносится на новые строки */}
+                <p className="text-[11px] font-semibold text-foreground leading-tight break-words">
                   {service.label}
                 </p>
               </Link>
