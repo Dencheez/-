@@ -16,55 +16,59 @@ const actionCards = [
 export function InfoFiles() {
     const scrollRef = useRef<HTMLDivElement>(null)
 
+    // Простой мгновенный скролл без "плавности", которая отвлекает
     const scroll = (direction: "left" | "right") => {
         if (scrollRef.current) {
             const { scrollLeft, clientWidth } = scrollRef.current
-            const scrollTo = direction === "left"
-                ? scrollLeft - clientWidth / 2
-                : scrollLeft + clientWidth / 2
-
-            scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" })
+            const offset = clientWidth / 1.5
+            scrollRef.current.scrollLeft = direction === "left"
+                ? scrollLeft - offset
+                : scrollLeft + offset
         }
     }
 
     return (
-        <div className="mx-auto max-w-6xl px-4 mt-8 relative group">
-            {/* Кнопки управления (скрыты на десктопе md:hidden) */}
+        <div className="mx-auto max-w-6xl px-4 mt-8 relative">
+            {/* Статичные кнопки управления для мобилки */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-1 top-1/3 z-10 bg-white/90 p-1.5 rounded-full shadow-md border border-gray-100 active:scale-90 md:hidden"
+                className="absolute left-1 top-[35%] z-10 bg-white p-1.5 rounded-full shadow-sm border border-gray-200 md:hidden"
+                aria-label="Назад"
             >
-                <ChevronLeft className="h-5 w-5 text-gray-600" />
+                <ChevronLeft className="h-5 w-5 text-gray-400" />
             </button>
 
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-1 top-1/3 z-10 bg-white/90 p-1.5 rounded-full shadow-md border border-gray-100 active:scale-90 md:hidden"
+                className="absolute right-1 top-[35%] z-10 bg-white p-1.5 rounded-full shadow-sm border border-gray-200 md:hidden"
+                aria-label="Вперед"
             >
-                <ChevronRight className="h-5 w-5 text-gray-600" />
+                <ChevronRight className="h-5 w-5 text-gray-400" />
             </button>
 
-            {/* Контейнер со скроллом */}
+            {/* Контейнер: snap-x для фиксации позиции, без лишних транзиций */}
             <div
                 ref={scrollRef}
-                className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x md:grid md:grid-cols-5 md:gap-6 md:overflow-visible"
+                className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x md:grid md:grid-cols-5 md:gap-6 md:overflow-visible"
             >
                 {actionCards.map((card, index) => (
                     <Link
                         key={index}
                         href={card.link}
-                        className="group flex flex-col items-center shrink-0 snap-start w-[calc(33.33%-8px)] md:w-full"
+                        className="flex flex-col items-center shrink-0 snap-start w-[calc(33.33%-8px)] md:w-full"
                     >
-                        <div className={`relative w-full aspect-square overflow-hidden rounded-2xl border border-gray-100 shadow-sm transition-all group-hover:scale-105 bg-white flex items-center justify-center ${index === 3 ? "p-3" : "p-0"}`}>
+                        {/* Убрали hover:scale и лишние тени */}
+                        <div className={`relative w-full aspect-square overflow-hidden rounded-xl border border-gray-100 bg-white flex items-center justify-center ${index === 3 ? "p-3" : "p-0"}`}>
                             <Image
                                 src={card.img}
                                 alt={card.title}
                                 fill
+                                // Наш рабочий фикс для 4-й картинки остается
                                 className={`${index === 3 ? "object-contain p-2" : "object-cover"}`}
                             />
                         </div>
 
-                        <h3 className="mt-2 text-[9px] md:text-[11px] font-medium text-gray-500 leading-[1.1] text-center px-1 group-hover:text-blue-600 transition-colors uppercase tracking-tight">
+                        <h3 className="mt-2 text-[9px] md:text-[11px] font-medium text-gray-500 leading-tight text-center px-1 uppercase">
                             {card.title}
                         </h3>
                     </Link>
