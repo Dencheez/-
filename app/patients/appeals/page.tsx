@@ -25,8 +25,7 @@ export default function GratitudePage() {
         "/images/Благодарность/10.jpg",
         "/images/Благодарность/11.jpg",
         "/images/Благодарность/12.jpg",
-        "/images/Благодарность/13.jpg",
-        "/images/Благодарность/14.jpg"
+        "/images/Благодарность/13.jpg"
     ]
 
     return (
@@ -59,9 +58,29 @@ export default function GratitudePage() {
                         </div>
                         <div className="space-y-4 text-slate-700 leading-relaxed italic">
                             <p className="font-bold text-slate-900 not-italic uppercase text-sm mb-4">Благодарность!!!</p>
-                            <p>Мы жители города Алматы проживаем по адресу - улица Тлендиева...</p>
+                            <p>Мы жители города Алматы проживаем по адресу  - улица Тлендиева, дома №141,143,146,147
+                                <br />
+                                В течениинекоторого времени, наша соседка не давала возможности нам нормально жить, пугала наших детей, нарушала общественное спокойствие.
+                                <br />
+                                Ей требовалась медицинская помощь, но, к сожалению, в силу своего состояния, она этого не <br />
+                                замечала.  Мы,  соседи, неоднократно обращались за помощью в различные инстанции, но <br />
+                                разрешить ситуацию никак не могли, пока не обратились в Центр Психического Здоровья улице <br />
+                                А. Кекилбайулы 117, где очень оперативно откликнулись на нашу просьбу о помощи, были <br />
+                                корректны, вежливы, и очень профессионально объяснили нашей соседке, что ей необходима <br />
+                                медицинская помощь.
+                                <br />
+                                Выражаем Благодарность администрации и врачам ЦПЗ,  в лице Худаир Жанны Рафхатовны и <br />
+                                врача Сергея Владимировича. Спасибо <br />
+                                большое, что отозвались на просьбу о помощи. Спасибо вам за нелегкий труд.
+                            </p>
                             <div className="pt-4 border-t border-slate-200 not-italic">
-                                <p className="font-bold text-slate-900">Неупокоева Наталия Василевна и др.</p>
+                                <p className="font-bold text-slate-900">
+                                    Неупокоева Наталия Василевна
+                                    <br />
+                                    Нурпеисова Ольга Николевна
+                                    <br />
+                                    Чигрена Татьяна.
+                                </p>
                             </div>
                         </div>
                     </section>
@@ -70,7 +89,11 @@ export default function GratitudePage() {
                     <section className="p-8 border border-slate-100 rounded-xl shadow-sm bg-white">
                         <p className="font-black text-slate-900 uppercase tracking-tighter text-lg mb-1">Batyr Seventy</p>
                         <p className="text-[10px] text-slate-400 font-bold uppercase mb-6">07.08.2018</p>
-                        <p className="text-slate-700 leading-relaxed mb-6">Недавно брал справку - обслужили очень быстро...</p>
+                        <p className="text-slate-700 leading-relaxed mb-6">
+                            Недавно брал справку - обслужили очень быстро. В очереди стоял всего минут 5.
+                            <br />
+                            Только лучше иметь с собой мелочь, так как справка (для работы, например) стоит 180 тг.
+                        </p>
                         <div className="grid grid-cols-2 gap-4 max-w-2xl">
                             {batyrImages.map((src, i) => (
                                 <div key={i} onClick={() => setSelectedImage(src)} className="aspect-video bg-slate-50 rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in">
@@ -84,7 +107,13 @@ export default function GratitudePage() {
                     <section className="p-8 border-l-4 border-blue-600 bg-white shadow-sm border border-slate-100 rounded-r-xl">
                         <p className="font-black text-slate-900 uppercase tracking-tighter text-lg mb-1">Римма</p>
                         <p className="text-[10px] text-slate-400 font-bold uppercase mb-6">20 июля в 17:14</p>
-                        <p className="text-slate-700 leading-relaxed mb-8">Добрый день! Сегодня муж сдавал анализы на шоферские права...</p>
+                        <p className="text-slate-700 leading-relaxed mb-8">
+                            Добрый день! Сегодня муж сдавал анализы на шоферские права. Врачи у вас очень вежливые.
+                            <br />
+                            Несмотря, что время было уже обеденное, они приняли анализы и выдали справку.
+                            <br />
+                            Мы получили удовольствие от профессионального отношения вречей, за что хочу сказать огромное спасибо!
+                        </p>
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
                             {rimmaImages.map((src, i) => (
                                 <div key={i} onClick={() => setSelectedImage(src)} className="aspect-[3/4] bg-white border border-slate-200 rounded overflow-hidden shadow-sm cursor-zoom-in">
