@@ -19,14 +19,24 @@ export default function TenderResults() {
 
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // Функция печати
+    const handlePrint = () => {
+        if (typeof window !== 'undefined') {
+            window.print();
+        }
+    };
+
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
+            {/* Скрываем хедер при печати через CSS класс или стандартные стили */}
+            <div className="print:hidden">
+                <Header />
+            </div>
 
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
 
                 {/* ПАНЕЛЬ НАВИГАЦИИ */}
-                <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6 print:hidden">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af]">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
@@ -43,14 +53,14 @@ export default function TenderResults() {
                     <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight">
                         {title}
                     </h1>
-                    <div className="h-1 w-10 bg-[#1e40af] mt-4"></div>
+                    <div className="h-1 w-10 bg-[#1e40af] mt-4 print:hidden"></div>
                 </div>
 
                 {/* СПИСОК СКАНОВ (11 СТРАНИЦ) */}
                 <div className="space-y-6">
                     {pages.map((num) => (
-                        <div key={num} className="group">
-                            <div className="flex justify-between items-center mb-2 px-1">
+                        <div key={num} className="group break-inside-avoid">
+                            <div className="flex justify-between items-center mb-2 px-1 print:hidden">
                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                                     Страница {num} из 11
                                 </span>
@@ -62,7 +72,7 @@ export default function TenderResults() {
                                 </button>
                             </div>
 
-                            <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+                            <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden print:shadow-none print:border-none">
                                 <img
                                     src={`/images/GZ/itog-${num}.jpg`}
                                     alt={`Страница ${num}`}
@@ -77,28 +87,40 @@ export default function TenderResults() {
                     ))}
                 </div>
 
-                {/* ФИНАЛЬНЫЕ ДЕЙСТВИЯ */}
-                <div className="mt-12 space-y-3">
-                    <button className="w-full bg-slate-900 text-white py-5 rounded-2xl flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.2em] active:bg-[#1e40af] shadow-xl">
-                        <Download size={18} /> Скачать весь протокол
-                    </button>
-                    <div className="flex justify-center gap-8 py-4 opacity-40">
-                        <button className="flex items-center gap-1.5 text-[9px] font-bold uppercase"><Printer size={12} /> Печать</button>
-                        <button className="flex items-center gap-1.5 text-[9px] font-bold uppercase"><Mail size={12} /> E-mail</button>
+                {/* ФИНАЛЬНЫЕ ДЕЙСТВИЯ (АКТИВНЫЕ) */}
+                <div className="mt-12 mb-8 print:hidden">
+                    <div className="flex justify-center gap-10 py-6 border-t border-slate-200">
+                        <button
+                            onClick={handlePrint}
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-[#1e40af] transition-colors"
+                        >
+                            <Printer size={16} className="text-[#1e40af]" />
+                            <span>Печать итогов</span>
+                        </button>
+
+                        <a
+                            href={`mailto:?subject=${encodeURIComponent(title)}&body=Результаты тендера (11 страниц) доступны в архиве ЦПЗ.`}
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-[#1e40af] transition-colors"
+                        >
+                            <Mail size={16} className="text-[#1e40af]" />
+                            <span>Отправить e-mail</span>
+                        </a>
                     </div>
                 </div>
             </main>
 
-            {/* КНОПКА "ВВЕРХ" ДЛЯ ДЛИННОГО СКРОЛЛА */}
+            {/* КНОПКА "ВВЕРХ" */}
             <button
                 onClick={scrollToTop}
-                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full shadow-2xl transition-all duration-300 z-50 ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
+                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full shadow-2xl transition-all duration-300 z-50 print:hidden ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
                     }`}
             >
                 <ChevronUp className="h-6 w-6 text-[#1e40af]" />
             </button>
 
-            <FooterCarousel />
+            <div className="print:hidden">
+                <FooterCarousel />
+            </div>
         </div>
     )
 }

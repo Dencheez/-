@@ -28,6 +28,7 @@ export function AppointmentProvider({ children }: { children: ReactNode }) {
       time: "10:00",
       status: "upcoming",
       patientName: "Нурлан Ахметов",
+      phone: "+7 (777) 123-45-67", // ДОБАВИЛ ЭТО
     },
     {
       id: "demo-2",
@@ -38,19 +39,23 @@ export function AppointmentProvider({ children }: { children: ReactNode }) {
       time: "14:00",
       status: "completed",
       patientName: "Нурлан Ахметов",
+      phone: "+7 (777) 987-65-43", // И ЭТО
     },
   ])
 
   const addAppointment = useCallback((appt: Omit<Appointment, "id">) => {
     setAppointments((prev) => [
       ...prev,
-      { ...appt, id: `appt-${Date.now()}` },
+      {
+        ...appt,
+        id: `appt-${Date.now()}`
+      } as Appointment, // Кастуем к типу, чтобы TS не сомневался
     ])
   }, [])
 
   const cancelAppointment = useCallback((id: string) => {
     setAppointments((prev) =>
-      prev.map((a) => (a.id === id ? { ...a, status: "cancelled" as const } : a))
+      prev.map((a) => (a.id === id ? { ...a, status: "cancelled" } : a))
     )
   }, [])
 

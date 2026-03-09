@@ -1,7 +1,7 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, Download, ChevronRight } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default function OpeningProtocol() {
@@ -11,6 +11,13 @@ export default function OpeningProtocol() {
         { id: 2, src: "/images/AdminsFile/2.jpg", alt: "Страница 2" },
         { id: 3, src: "/images/AdminsFile/3.jpg", alt: "Страница 3 - Длинная" },
     ];
+
+    // Функция для печати
+    const handlePrint = () => {
+        if (typeof window !== 'undefined') {
+            window.print();
+        }
+    };
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
@@ -45,7 +52,6 @@ export default function OpeningProtocol() {
                 <div className="flex flex-col gap-6">
                     {pages.map((page) => (
                         <div key={page.id} className="space-y-3">
-                            {/* Метка страницы */}
                             <div className="flex justify-between items-end px-1">
                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                                     Страница {page.id}
@@ -57,9 +63,8 @@ export default function OpeningProtocol() {
                                 )}
                             </div>
 
-                            {/* Изображение с тапом для просмотра */}
                             <div
-                                className="relative bg-white rounded-xl shadow-lg shadow-slate-200 border border-slate-200 overflow-hidden active:scale-[0.99] transition-transform"
+                                className="relative bg-white rounded-xl shadow-lg shadow-slate-200 border border-slate-200 overflow-hidden active:scale-[0.99] transition-transform cursor-pointer"
                                 onClick={() => window.open(page.src, '_blank')}
                             >
                                 <img
@@ -76,20 +81,23 @@ export default function OpeningProtocol() {
                     ))}
                 </div>
 
-                {/* ПАНЕЛЬ ДЕЙСТВИЙ */}
-                <div className="mt-10 grid grid-cols-1 gap-3">
-                    <button className="w-full bg-slate-900 text-white py-5 rounded-2xl flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.2em] active:bg-[#1e40af] transition-colors shadow-xl shadow-slate-200">
-                        <Download size={18} /> Скачать все (PDF)
+                {/* ПАНЕЛЬ ДЕЙСТВИЙ (КЛИКАБЕЛЬНАЯ) */}
+                <div className="mt-10 grid grid-cols-2 gap-3">
+                    <button
+                        onClick={handlePrint}
+                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase hover:bg-white hover:text-[#1e40af] hover:border-blue-200 active:scale-95 transition-all shadow-sm"
+                    >
+                        <Printer size={16} className="text-blue-600" />
+                        Печать
                     </button>
 
-                    <div className="grid grid-cols-2 gap-3">
-                        <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-white">
-                            <Printer size={14} /> Печать
-                        </button>
-                        <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-white">
-                            <Mail size={14} /> E-mail
-                        </button>
-                    </div>
+                    <a
+                        href={`mailto:?subject=${encodeURIComponent(title)}&body=Документ доступен для ознакомления в системе ЦПЗ.`}
+                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase hover:bg-white hover:text-[#1e40af] hover:border-blue-200 active:scale-95 transition-all shadow-sm"
+                    >
+                        <Mail size={16} className="text-blue-600" />
+                        E-mail
+                    </a>
                 </div>
 
                 {/* ФУТЕР КОНТЕНТА */}

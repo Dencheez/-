@@ -6,11 +6,31 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const actionCards = [
-    { title: "Государственные символы РК", img: "/images/InfoSection/1.jpg", link: "/" },
-    { title: "Послание Президента РК", img: "/images/InfoSection/2.jpg", link: "/" },
-    { title: "Официальный сайт Президента", img: "/images/InfoSection/3.jpg", link: "/" },
-    { title: "Казахстан 2050", img: "/images/InfoSection/4.jpg", link: "/" },
-    { title: "Национальный проект", img: "/images/InfoSection/5.png", link: "/" },
+    {
+        title: "Государственные символы РК",
+        img: "/images/InfoSection/1.jpg",
+        link: "https://www.akorda.kz/ru/state_symbols/about_state_symbols"
+    },
+    {
+        title: "Послание Президента РК",
+        img: "/images/InfoSection/2.jpg",
+        link: "https://www.akorda.kz/ru/addresses"
+    },
+    {
+        title: "Официальный сайт Президента",
+        img: "/images/InfoSection/3.jpg",
+        link: "https://akorda.kz/"
+    },
+    {
+        title: "Казахстан 2050",
+        img: "/images/InfoSection/4.jpg",
+        link: "https://strategy2050.kz/" // Нашел для тебя официальный сайт стратегии
+    },
+    {
+        title: "Национальный проект",
+        img: "/images/InfoSection/5.png",
+        link: "https://adilet.zan.kz/rus/docs/P2100000725"
+    },
 ]
 
 export function InfoFiles() {

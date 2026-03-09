@@ -16,69 +16,73 @@ export default function CharterPage() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex gap-4 text-slate-400">
-                        <Share2 className="h-5 w-5 active:text-blue-600" />
-                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-tighter">
-                            <Eye className="h-4 w-4" /> 2845
-                        </div>
+                    <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                        <Eye size={14} /> 2840
                     </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
-                <div className="mb-8">
-                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-none">
-                        Устав <br /> предприятия
+                <div className="mb-8 text-left">
+                    <h1 className="text-3xl font-[1000] uppercase text-slate-900 tracking-tighter leading-[0.85]">
+                        Устав <br /> <span className="text-blue-600">предприятия</span>
                     </h1>
-                    <div className="h-1 w-12 bg-blue-600 mt-3"></div>
+                    <div className="h-1.5 w-12 bg-blue-600 mt-4 rounded-full"></div>
                 </div>
 
                 {/* КАРТОЧКА ДОКУМЕНТА */}
-                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center">
+                <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100 flex flex-col items-center shadow-sm">
 
                     {/* Иконка документа */}
-                    <div className="w-16 h-16 bg-blue-600 text-white flex items-center justify-center rounded-2xl shadow-lg shadow-blue-100 mb-6">
-                        <FileText size={32} />
+                    <div className="w-20 h-20 bg-slate-900 text-white flex items-center justify-center rounded-[24px] shadow-2xl shadow-slate-200 mb-6">
+                        <FileText size={36} />
                     </div>
 
                     <div className="text-center space-y-2 mb-6">
-                        <h2 className="text-lg font-bold text-slate-800 leading-snug">
+                        <h2 className="text-xl font-black text-slate-900 leading-tight uppercase tracking-tight">
                             Устав ГКП на ПХВ «ЦПЗ»
                         </h2>
-                        <p className="text-[10px] text-blue-600 font-black uppercase tracking-widest">
-                            Основной документ
+                        <p className="text-[10px] text-blue-600 font-black uppercase tracking-[0.2em]">
+                            Утвержден в 2023 году
                         </p>
                     </div>
 
-                    <div className="w-full h-px bg-slate-200 mb-6"></div>
+                    <div className="w-full h-px bg-slate-200/60 mb-6"></div>
 
-                    <p className="text-xs text-slate-500 leading-relaxed text-center mb-8 px-2">
-                        Официальный устав «Центра психического здоровья» Управления общественного здоровья г. Алматы.
+                    <p className="text-xs text-slate-500 leading-relaxed text-center mb-8 px-2 font-medium">
+                        Официальный устав «Центра психического здоровья» Управления общественного здоровья города Алматы.
                     </p>
 
-                    {/* ГЛАВНАЯ КНОПКА (МАССИВНАЯ ДЛЯ ПАЛЬЦА) */}
+                    {/* ГЛАВНАЯ КНОПКА */}
                     <a
-                        href="/files/ustav_cpz.pdf"
-                        download
-                        className="w-full flex items-center justify-center gap-3 bg-slate-900 active:bg-blue-700 text-white py-5 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-all shadow-md active:scale-[0.97]"
+                        href="/files/ustav.pdf" // УБЕДИСЬ ЧТО ФАЙЛ ТАК НАЗЫВАЕТСЯ В public/files/
+                        download="Устав_ЦПЗ_Алматы.pdf"
+                        className="w-full flex items-center justify-center gap-3 bg-blue-600 active:bg-slate-900 text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all shadow-lg shadow-blue-100 active:scale-[0.96]"
                     >
                         <Download size={18} />
                         Скачать PDF
                     </a>
                 </div>
 
-                {/* ДОПОЛНИТЕЛЬНЫЕ ДЕЙСТВИЯ (ТАПАБЕЛЬНЫЕ) */}
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                    <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-slate-50">
+                {/* ДОПОЛНИТЕЛЬНЫЕ ДЕЙСТВИЯ */}
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                    <button
+                        onClick={() => window.print()}
+                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest active:bg-slate-50 active:scale-[0.96] transition-all"
+                    >
                         <Printer size={14} /> Печать
                     </button>
-                    <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-slate-50">
+                    <a
+                        href="mailto:cpz_almaty@med.mail.kz"
+                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest active:bg-slate-50 active:scale-[0.96] transition-all"
+                    >
                         <Mail size={14} /> E-mail
-                    </button>
+                    </a>
                 </div>
 
                 {/* ИНФО */}
-                <div className="mt-10 text-center">
-                    <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[9px] text-slate-400 font-bold uppercase tracking-widest">
+                <div className="mt-10 text-center pb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-[9px] text-slate-400 font-black uppercase tracking-widest">
+                        <span className="w-1 h-1 bg-blue-600 rounded-full animate-pulse"></span>
                         v.2023 • 2.4 MB • PDF
                     </div>
                 </div>

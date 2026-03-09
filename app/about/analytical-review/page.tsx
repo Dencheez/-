@@ -8,13 +8,13 @@ export default function AnalyticalReviewPage() {
     const reports = [
         {
             title: '«О СОСТОЯНИИ СЛУЖБЫ ОХРАНЫ ПСИХИЧЕСКОГО ЗДОРОВЬЯ» 2022 ГОД',
-            file: "/files/review_2022.pdf",
-            size: "2.4 MB"
+            file: "/files/review_2022.docx", // Ссылка на первый файл
+            size: "42.5 KB"
         },
         {
             title: '«О СОСТОЯНИИ СЛУЖБЫ ОХРАНЫ ПСИХИЧЕСКОГО ЗДОРОВЬЯ Г. АЛМАТЫ ЗА 2019-2020 ГОД»',
-            file: "/files/review_2019_2020.pdf",
-            size: "1.8 MB"
+            file: "/files/review_2020.doc", // Ссылка на второй файл
+            size: "38.0 KB"
         }
     ];
 
@@ -30,9 +30,15 @@ export default function AnalyticalReviewPage() {
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex flex-wrap gap-4 md:gap-6 text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors"><Printer className="h-3.5 w-3.5" /> Печать</span>
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors"><Mail className="h-3.5 w-3.5" /> E-mail</span>
-                        <span className="flex items-center gap-1.5 text-slate-300"><Eye className="h-3.5 w-3.5" /> 2243</span>
+                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors">
+                            <Printer className="h-3.5 w-3.5" /> Печать
+                        </span>
+                        <a href="mailto:cpz.sekr@gmail.com" className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors">
+                            <Mail className="h-3.5 w-3.5" /> E-mail
+                        </a>
+                        <span className="flex items-center gap-1.5 text-slate-300">
+                            <Eye className="h-3.5 w-3.5" /> 2243
+                        </span>
                     </div>
                 </div>
 
@@ -61,7 +67,9 @@ export default function AnalyticalReviewPage() {
                                     <span className="text-xs md:text-[13px] font-extrabold uppercase leading-snug text-slate-700 group-hover:text-[#1e40af] transition-colors max-w-2xl">
                                         {report.title}
                                     </span>
-                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">PDF • {report.size}</span>
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
+                                        DOC • {report.size}
+                                    </span>
                                 </div>
                             </div>
 

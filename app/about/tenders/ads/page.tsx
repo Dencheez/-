@@ -1,11 +1,12 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, Maximize2, Download, ExternalLink } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, Maximize2, Download } from "lucide-react"
 import Link from "next/link"
 
 export default function TenderAds() {
     const title = "Объявления госзакупок";
+    const imagePath = "/images/GZ/gos-zakup.jpg";
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
@@ -36,8 +37,8 @@ export default function TenderAds() {
                     <div className="flex items-center justify-between px-1">
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Документ JPG</span>
                         <button
-                            onClick={() => window.open("/images/GZ/gos-zakup.jpg", '_blank')}
-                            className="flex items-center gap-1 text-[10px] font-black text-[#1e40af] uppercase"
+                            onClick={() => window.open(imagePath, '_blank')}
+                            className="flex items-center gap-1 text-[10px] font-black text-[#1e40af] uppercase active:opacity-60 transition-opacity"
                         >
                             <Maximize2 size={12} /> Весь экран
                         </button>
@@ -46,42 +47,42 @@ export default function TenderAds() {
                     {/* САМ СКАН */}
                     <div className="relative bg-white rounded-xl shadow-xl shadow-blue-900/5 border border-slate-200 overflow-hidden group active:scale-[0.99] transition-transform">
                         <img
-                            src="/images/GZ/gos-zakup.jpg"
-                            alt="Объявление 1"
+                            src={imagePath}
+                            alt="Объявление по госзакупкам"
                             className="w-full h-auto block"
                             onError={(e) => {
                                 e.currentTarget.src = "https://placehold.co/600x800/white/1e40af?text=Scan+Not+Found";
                             }}
                         />
-                        {/* Информационный оверлей (виден только если картинка длинная) */}
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/20 to-transparent h-12 pointer-events-none" />
-                    </div>
-
-                    {/* КНОПКИ ДЕЙСТВИЯ ПОД СКАНОВ */}
-                    <div className="grid grid-cols-2 gap-3 mt-6">
-                        <a
-                            href="/images/GZ/gos-zakup.jpg"
-                            download
-                            className="flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest active:bg-slate-800 transition-colors"
-                        >
-                            <Download size={14} /> Скачать
-                        </a>
-                        <button
-                            className="flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-600 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest active:bg-slate-50 transition-colors"
-                        >
-                            <ExternalLink size={14} /> Источник
-                        </button>
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/10 to-transparent h-12 pointer-events-none" />
                     </div>
                 </div>
 
-                {/* ВТОРОСТЕПЕННЫЕ КНОПКИ */}
-                <div className="flex justify-center gap-8 mt-10 opacity-40">
-                    <button className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest"><Printer size={12} /> Печать</button>
-                    <button className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest"><Mail size={12} /> E-mail</button>
+                {/* КЛИКАБЕЛЬНЫЕ КНОПКИ ДЕЙСТВИЙ */}
+                <div className="flex justify-center gap-10 mt-10">
+                    <button
+                        onClick={() => window.print()}
+                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 hover:text-[#1e40af] active:scale-95 transition-all"
+                    >
+                        <Printer size={14} />
+                        <span className="border-b border-slate-200">Печать</span>
+                    </button>
+
+                    <a
+                        href={`mailto:?subject=${encodeURIComponent(title)}&body=Объявление доступно по ссылке: ${typeof window !== 'undefined' ? window.location.href : ''}`}
+                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 hover:text-[#1e40af] active:scale-95 transition-all"
+                    >
+                        <Mail size={14} />
+                        <span className="border-b border-slate-200">E-mail</span>
+                    </a>
                 </div>
 
-                <div className="mt-12 text-center pb-6">
-                    <p className="text-[9px] text-slate-300 font-bold uppercase tracking-[0.4em]">Отдел государственных закупок</p>
+                <div className="mt-12 text-center pb-8">
+                    <div className="inline-block px-4 py-1.5 bg-slate-100 rounded-full">
+                        <p className="text-[9px] text-slate-400 font-black uppercase tracking-[0.3em]">
+                            Отдел государственных закупок
+                        </p>
+                    </div>
                 </div>
             </main>
 

@@ -1,22 +1,25 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, FileText, Download, ExternalLink, Image as ImageIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function AntiCorruptionPage() {
     const documents = [
         {
             title: 'Закон РК от 18.11.2015 г. "О противодействии коррупции" (с изм. на 01.08.2019)',
-            file: "/files/law_anticorruption_2019.pdf"
+            file: "https://adilet.zan.kz/rus/docs/Z1500000410",
+            type: 'link'
         },
         {
             title: 'Указ Президента РК от 26.12.2014 г. №986 "Об антикоррупционной стратегии РК на 2015-2025г."',
-            file: "/files/strategy_2015_2025.pdf"
+            file: "https://adilet.zan.kz/rus/docs/U1400000986",
+            type: 'link'
         },
         {
             title: 'Памятка "О борьбе с коррупцией"',
-            file: "/files/memo_anticorruption.pdf"
+            file: "/images/docs/памятка_о_коорупции.jpg",
+            type: 'image'
         }
     ];
 
@@ -32,12 +35,12 @@ export default function AntiCorruptionPage() {
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex flex-wrap gap-4 md:gap-6 text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
+                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
                             <Printer className="h-3.5 w-3.5" /> Печать
                         </span>
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
+                        <a href="mailto:cpz_almaty@med.mail.kz" className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
                             <Mail className="h-3.5 w-3.5" /> E-mail
-                        </span>
+                        </a>
                         <span className="flex items-center gap-1.5 text-slate-300">
                             <Eye className="h-3.5 w-3.5" /> 3056
                         </span>
@@ -58,12 +61,13 @@ export default function AntiCorruptionPage() {
                         <a
                             key={index}
                             href={doc.file}
-                            download
+                            target={doc.type === 'link' ? "_blank" : "_self"}
+                            rel="noopener noreferrer"
                             className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 border border-slate-100 rounded-xl hover:border-blue-200 hover:bg-blue-50/40 transition-all shadow-sm hover:shadow-md"
                         >
                             <div className="flex items-start md:items-center gap-4 w-full">
                                 <div className="p-3 bg-slate-50 text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all rounded-lg shrink-0">
-                                    <FileText className="h-5 w-5 md:h-6 md:w-6" />
+                                    {doc.type === 'image' ? <ImageIcon className="h-5 w-5 md:h-6 md:w-6" /> : <FileText className="h-5 w-5 md:h-6 md:w-6" />}
                                 </div>
                                 <span className="text-sm md:text-base font-bold text-slate-700 group-hover:text-blue-900 transition-colors leading-snug">
                                     {doc.title}
@@ -71,8 +75,8 @@ export default function AntiCorruptionPage() {
                             </div>
 
                             <div className="mt-4 sm:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 sm:opacity-0 group-hover:opacity-100 transition-all self-end sm:self-center bg-blue-50 sm:bg-transparent px-3 py-1 sm:p-0 rounded-full">
-                                <Download className="h-4 w-4" />
-                                <span>Скачать</span>
+                                {doc.type === 'image' ? <ImageIcon className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
+                                <span>{doc.type === 'image' ? 'Смотреть' : 'Перейти'}</span>
                             </div>
                         </a>
                     ))}
