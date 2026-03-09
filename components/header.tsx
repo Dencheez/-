@@ -119,11 +119,9 @@ function HeaderContent() {
               { href: "/", label: "Главная" },
               { href: "/about", label: "О центре" },
               { href: "/patients", label: "Пациентам" },
-              { href: "/state_symbols", label: "Государственные символы" },
-              { href: "/state_services", label: "Государственные услуги" },
-              { href: "/Useful_links", label: "Полезные ссылки" },
+              { href: "/symbols", label: "Государственные символы" },
               { href: "/contacts", label: "Контакты и адреса" },
-              { href: "/NPA", label: "НПА" },
+              { href: "/npa", label: "НПА" },
               { href: "/profile", label: "Личный кабинет" },
             ].map((item) => (
               <Link

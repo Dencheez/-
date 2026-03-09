@@ -11,6 +11,9 @@ import { ServicesSection } from "../components/home/services-section"
 import { NewsSection } from "../components/home/news-section"
 import { Loader2 } from "lucide-react"
 
+
+
+
 function HomeContent() {
   const searchParams = useSearchParams()
   const searchQuery = searchParams.get("search") || ""
