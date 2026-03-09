@@ -1,7 +1,7 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, File as FileIcon, Download } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, FileText, Download, Share2 } from "lucide-react"
 import Link from "next/link"
 
 export default function CharterPage() {
@@ -9,54 +9,77 @@ export default function CharterPage() {
         <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
             <Header />
 
-            <main className="max-w-5xl mx-auto px-6 py-12 w-full">
+            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
 
-                {/* ВЕРХНЯЯ ПАНЕЛЬ */}
-                <div className="flex justify-between items-center border-b pb-4 mb-12">
-                    <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-xs font-bold transition-colors">
-                        <ArrowLeft className="h-4 w-4" /> НАЗАД
+                {/* МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ */}
+                <div className="flex items-center justify-between border-b pb-4 mb-8">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
+                        <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex gap-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600"><Printer className="h-3.5 w-3.5" /> Печать</span>
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600"><Mail className="h-3.5 w-3.5" /> E-mail</span>
-                        <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" /> Просмотров: 2845</span>
+                    <div className="flex gap-4 text-slate-400">
+                        <Share2 className="h-5 w-5 active:text-blue-600" />
+                        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-tighter">
+                            <Eye className="h-4 w-4" /> 2845
+                        </div>
                     </div>
                 </div>
 
-                {/* ОСНОВНОЙ БЛОК */}
-                <div className="flex flex-col items-center">
-                    <h1 className="text-4xl font-bold uppercase text-slate-800 mb-12 tracking-tight text-center">
-                        Устав предприятия
+                {/* ЗАГОЛОВОК */}
+                <div className="mb-8">
+                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-none">
+                        Устав <br /> предприятия
                     </h1>
+                    <div className="h-1 w-12 bg-blue-600 mt-3"></div>
+                </div>
 
-                    <div className="w-full max-w-2xl border border-slate-100 rounded-sm p-12 bg-slate-50/50 flex flex-col items-center text-center space-y-6">
-                        <div className="w-20 h-20 bg-blue-600 text-white flex items-center justify-center rounded-xl shadow-lg shadow-blue-100">
-                            <FileIcon size={40} />
-                        </div>
+                {/* КАРТОЧКА ДОКУМЕНТА */}
+                <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col items-center">
 
-                        <div className="space-y-2">
-                            <h2 className="text-xl font-bold text-slate-800 uppercase tracking-tight">Устав ГКП на ПХВ «ЦПЗ»</h2>
-                            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Основной учредительный документ</p>
-                        </div>
-
-                        <div className="w-full h-px bg-slate-200 my-4"></div>
-
-                        <p className="text-sm text-slate-500 leading-relaxed max-w-md">
-                            Устав государственного коммунального предприятия на праве хозяйственного ведения «Центр психического здоровья» Управления общественного здоровья города Алматы.
-                        </p>
-
-                        <a
-                            href="/files/ustav_cpz.pdf"
-                            download
-                            className="mt-6 flex items-center gap-3 bg-slate-900 hover:bg-blue-700 text-white px-10 py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all rounded-sm shadow-md active:scale-95"
-                        >
-                            <Download size={18} />
-                            Скачать документ
-                        </a>
+                    {/* Иконка документа */}
+                    <div className="w-16 h-16 bg-blue-600 text-white flex items-center justify-center rounded-2xl shadow-lg shadow-blue-100 mb-6">
+                        <FileText size={32} />
                     </div>
 
-                    <div className="mt-12 text-[10px] text-slate-300 font-bold uppercase tracking-[0.3em]">
-                        pdf • 2.4 MB • последнее обновление: 2023
+                    <div className="text-center space-y-2 mb-6">
+                        <h2 className="text-lg font-bold text-slate-800 leading-snug">
+                            Устав ГКП на ПХВ «ЦПЗ»
+                        </h2>
+                        <p className="text-[10px] text-blue-600 font-black uppercase tracking-widest">
+                            Основной документ
+                        </p>
+                    </div>
+
+                    <div className="w-full h-px bg-slate-200 mb-6"></div>
+
+                    <p className="text-xs text-slate-500 leading-relaxed text-center mb-8 px-2">
+                        Официальный устав «Центра психического здоровья» Управления общественного здоровья г. Алматы.
+                    </p>
+
+                    {/* ГЛАВНАЯ КНОПКА (МАССИВНАЯ ДЛЯ ПАЛЬЦА) */}
+                    <a
+                        href="/files/ustav_cpz.pdf"
+                        download
+                        className="w-full flex items-center justify-center gap-3 bg-slate-900 active:bg-blue-700 text-white py-5 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-all shadow-md active:scale-[0.97]"
+                    >
+                        <Download size={18} />
+                        Скачать PDF
+                    </a>
+                </div>
+
+                {/* ДОПОЛНИТЕЛЬНЫЕ ДЕЙСТВИЯ (ТАПАБЕЛЬНЫЕ) */}
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                    <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-slate-50">
+                        <Printer size={14} /> Печать
+                    </button>
+                    <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-slate-50">
+                        <Mail size={14} /> E-mail
+                    </button>
+                </div>
+
+                {/* ИНФО */}
+                <div className="mt-10 text-center">
+                    <div className="inline-block px-3 py-1 bg-slate-100 rounded-full text-[9px] text-slate-400 font-bold uppercase tracking-widest">
+                        v.2023 • 2.4 MB • PDF
                     </div>
                 </div>
 

@@ -1,45 +1,105 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail } from "lucide-react"
+import { ChevronLeft, Printer, Mail, Eye, Award } from "lucide-react"
 import Link from "next/link"
 
 export default function GerbPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
             <Header />
-            <main className="flex-grow max-w-4xl mx-auto px-6 py-12">
-                <Link href="/symbols" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-8 hover:text-primary transition-colors">
-                    <ChevronLeft className="h-4 w-4" /> Назад
-                </Link>
 
-                <div className="flex justify-between items-end border-b border-slate-200 pb-4 mb-4">
-                    <h1 className="text-3xl font-bold text-slate-900">Государственный Герб Республики Казахстан</h1>
-                    <div className="flex gap-4">
-                        <Printer className="h-5 w-5 text-slate-400 cursor-pointer" />
-                        <Mail className="h-5 w-5 text-slate-400 cursor-pointer" />
+            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
+
+                {/* НАВИГАЦИЯ */}
+                <div className="flex items-center justify-between mb-6">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                        <ChevronLeft className="h-5 w-5" /> Назад
+                    </Link>
+                    <div className="flex gap-4 text-slate-300">
+                        <Printer size={18} className="active:text-blue-600" />
+                        <Mail size={18} className="active:text-blue-600" />
                     </div>
                 </div>
-                <p className="text-slate-400 text-xs mb-8 uppercase font-medium">Просмотров: 7304</p>
 
-                <div className="space-y-6 text-[15px] leading-relaxed text-slate-800">
-                    <div className="flex justify-center py-6">
-                        <img src="/images/symbols/gerb.png" alt="Герб РК" className="h-64" />
+                {/* ЗАГОЛОВОК */}
+                <div className="mb-8">
+                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight">
+                        Государственный Герб <br /> Республики Казахстан
+                    </h1>
+                    <div className="flex items-center gap-2 mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <Eye size={12} /> Просмотров: 7304
+                    </div>
+                </div>
+
+                {/* ЦЕНТРАЛЬНЫЙ СИМВОЛ */}
+                <div className="flex justify-center py-10 relative">
+                    {/* Декоративное сияние сзади */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(234,179,8,0.1)_0%,_transparent_70%)]"></div>
+                    <img
+                        src="/images/symbols/gerb.png"
+                        alt="Герб РК"
+                        className="h-56 w-56 object-contain relative z-10 drop-shadow-2xl"
+                    />
+                </div>
+
+                {/* ТЕКСТОВЫЙ БЛОК */}
+                <div className="space-y-8 text-[15px] leading-relaxed text-slate-700">
+
+                    <p className="italic text-slate-500 border-l-2 border-yellow-500 pl-4 py-1">
+                        Герб – это наследственный отличительный знак, сочетание фигур и предметов, которым придается символическое значение.
+                    </p>
+
+                    {/* АВТОРЫ */}
+                    <div className="bg-slate-900 text-white p-6 rounded-2xl shadow-xl">
+                        <div className="flex items-start gap-3">
+                            <Award className="text-yellow-400 shrink-0" size={20} />
+                            <div>
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Авторы герба:</p>
+                                <p className="text-sm font-bold">Жандарбек Малибеков и <br /> Шот-Аман Уалиханов</p>
+                                <p className="text-[9px] text-slate-400 mt-2 uppercase">Принят официально в 1992 году</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <p>Герб – один из главных символов государства. Термин «gerbe» (наследство) и означает наследственный отличительный знак – сочетание фигур и предметов, которым придается символическое значение.</p>
+                    {/* СЕМАНТИКА (РАЗБОР ЭЛЕМЕНТОВ) */}
+                    <div className="space-y-6">
+                        <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                            <h3 className="font-black text-xs uppercase tracking-widest text-slate-900 mb-2">Шанырақ</h3>
+                            <p className="text-sm">Символ общего дома и единой Родины для всех народов, проживающих в стране.</p>
+                        </div>
 
-                    <p>История свидетельствует, что еще кочевники эпохи бронзы... идентифицировали себя с особым символом – тотемом, графическое выражение которого впоследствии получило наименование «тамга». Впервые данный термин начал употребляться в Тюркском каганате.</p>
+                        <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                            <h3 className="font-black text-xs uppercase tracking-widest text-slate-900 mb-2">Тулпары</h3>
+                            <p className="text-sm">Крылатые мифические кони олицетворяют храбрость, верность, силу и полет мысли.</p>
+                        </div>
 
-                    <p><strong>Герб суверенного Казахстана был официально принят в 1992 году. Его авторами являются известные архитекторы Жандарбек Малибеков и Шот-Аман Уалиханов.</strong></p>
+                        <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                            <h3 className="font-black text-xs uppercase tracking-widest text-slate-900 mb-2">Пятиконечная звезда</h3>
+                            <p className="text-sm">Отражает открытость Казахстана для сотрудничества со всеми пятью континентами мира.</p>
+                        </div>
 
-                    <p>Государственный герб Республики Казахстан имеет форму круга (колеса) – это символ жизни и вечности. Центральным элементом является изображение шанырака на голубом фоне, от которого во все стороны расходятся уыки. Справа и слева — изображения мифических крылатых коней. В верхней части находится пятиконечная звезда, а в нижней части надпись «Қазақстан».</p>
+                        <div className="bg-slate-50 p-5 rounded-xl border border-slate-100">
+                            <h3 className="font-black text-xs uppercase tracking-widest text-slate-900 mb-2">Цвет золота</h3>
+                            <p className="text-sm">Символ богатства, справедливости и великодушия на фоне небесно-голубого мира.</p>
+                        </div>
+                    </div>
 
-                    <p>Шанырақ — символ общего дома и единой Родины для всех народов, проживающих в стране. Крылатые мифические кони — тулпары олицетворяют храбрость, верность и силу. Пятиконечная звезда отражает желание казахстанцев созидать страну, открытую для сотрудничества со всеми пятью континентами мира.</p>
+                    {/* ИСТОРИЧЕСКАЯ СПРАВКА */}
+                    <div className="py-6 border-t border-slate-100">
+                        <p className="text-sm text-slate-500">
+                            История свидетельствует, что еще кочевники эпохи бронзы использовали графические символы — <span className="font-bold text-slate-700">тамги</span>, которые стали прообразом современного герба.
+                        </p>
+                    </div>
 
-                    <p>Основным цветом является цвет золота — символ богатства, справедливости и великодушия, а небесно-голубой символизирует чистое небо, мир и благополучие.</p>
+                    <div className="pt-4 text-center pb-8">
+                        <p className="text-[9px] text-slate-300 font-bold uppercase tracking-[0.4em]">
+                            Государственные символы РК
+                        </p>
+                    </div>
                 </div>
             </main>
+
             <FooterCarousel />
         </div>
     )

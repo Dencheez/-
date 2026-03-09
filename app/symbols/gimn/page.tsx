@@ -1,73 +1,117 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail } from "lucide-react"
+import { ChevronLeft, Printer, Mail, Eye, Music, Quote } from "lucide-react"
 import Link from "next/link"
 
 export default function GimnPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
             <Header />
-            <main className="flex-grow max-w-4xl mx-auto px-6 py-12">
-                <Link href="/symbols" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-8 hover:text-primary transition-colors">
-                    <ChevronLeft className="h-4 w-4" /> Назад
-                </Link>
 
-                <div className="flex justify-between items-end border-b border-slate-200 pb-4 mb-4">
-                    <h1 className="text-3xl font-bold text-slate-900">Государственный Гимн Республики Казахстан</h1>
-                    <div className="flex gap-4">
-                        <Printer className="h-5 w-5 text-slate-400 cursor-pointer" />
-                        <Mail className="h-5 w-5 text-slate-400 cursor-pointer" />
+            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
+
+                {/* НАВИГАЦИЯ */}
+                <div className="flex items-center justify-between mb-6">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                        <ChevronLeft className="h-5 w-5" /> Назад
+                    </Link>
+                    <div className="flex gap-4 text-slate-300">
+                        <Printer size={18} className="active:text-blue-600" />
+                        <Mail size={18} className="active:text-blue-600" />
                     </div>
                 </div>
-                <p className="text-slate-400 text-xs mb-8 uppercase font-medium">Просмотров: 5407</p>
 
-                <div className="space-y-6 text-[15px] leading-relaxed text-slate-800">
-                    <p> Гимн – это один из главных символом государства. Сам термин «гимн» происходит от греческого слова «gimneo» и означает «торжественная песня». Гимн выступает в качестве важной звуковой символики, имеющей ключевое значение для эффективной социально-политической консолидации и этнокультурной идентификации граждан страны.</p>
+                {/* ЗАГОЛОВОК */}
+                <div className="mb-8">
+                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight">
+                        Государственный Гимн <br /> Республики Казахстан
+                    </h1>
+                    <div className="flex items-center gap-2 mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <Eye size={12} /> Просмотров: 5407
+                    </div>
+                </div>
 
-                    <p>В истории независимого Казахстана государственный гимн страны утверждался дважды – в 1992 и в 2006 годах.</p>
+                {/* ИСТОРИЧЕСКАЯ СПРАВКА (КОМПАКТНО) */}
+                <div className="space-y-6 text-[14px] leading-relaxed text-slate-600 mb-10">
+                    <p className="relative pl-6 italic">
+                        <Quote className="absolute left-0 top-0 text-blue-100 h-5 w-5 -scale-x-100" />
+                        Гимн — торжественная песня, выступающая в качестве звуковой символики страны.
+                    </p>
+                    <p>В истории независимого Казахстана гимн утверждался дважды: в <span className="font-bold text-slate-800">1992</span> и <span className="font-bold text-slate-800">2006</span> годах.</p>
+                </div>
 
-                    <p>После обретения республикой государственного суверенитета в 1992 году был объявлен конкурс на музыку и текст гимна Казахстана. По итогам конкурса было принято решение сохранить музыкальную редакцию гимна Казахской ССР. Таким образом, авторами музыки первого казахстанского гимна стали Мукан Тулебаев, Евгений Брусиловский и Латиф Хамиди. В конкурсе на лучший текст также победил авторский коллектив, представленный известными поэтами: Музафаром Алимбаевым, Кадыром Мырзалиевым, Туманбаем Молдагалиевым и поэтессой Жадырой Дарибаевой.</p>
-
-                    <p>В целях популяризации звуковой символики страны в 2006 году был принят новый государственный гимн. Его основой стала популярная в народе патриотическая песня «Менiң Қазақстаным». Она была написана в 1956 году Шамши Калдаяковым на стихи Жумекена Нажимеденова. Для придания песне высокого статуса государственного гимна и более торжественного звучания Президент Казахстана Нурсултан Назарбаев доработал первоначальный текст. Парламент Казахстана на совместном заседании палат 6 января 2006 года внес соответствующие поправки в Указ «О государственных символах» и утвердил новый государственный гимн страны.</p>
-
-                    <div className="py-8 space-y-8">
+                {/* КАРТОЧКА АВТОРОВ */}
+                <div className="bg-blue-600 text-white p-6 rounded-3xl shadow-xl shadow-blue-100 mb-12">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="bg-white/20 p-2 rounded-full">
+                            <Music size={20} className="text-white" />
+                        </div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em]">Создатели гимна</span>
+                    </div>
+                    <div className="space-y-4">
                         <div>
-                            <p><strong>Авторы слов:</strong> Жумекен Нажимеденов, Нурсултан Назарбаев</p>
-                            <p><strong>Автор музыки:</strong> Шамши Калдаяков</p>
+                            <p className="text-[9px] uppercase font-bold text-blue-200 tracking-widest mb-1">Авторы слов</p>
+                            <p className="text-sm font-bold">Жумекен Нажимеденов, <br /> Нурсултан Назарбаев</p>
                         </div>
-
-                        <div className="space-y-6 text-slate-900 font-medium">
-                            <div>
-                                Алтын күн аспаны,<br />Алтын дән даласы,<br />Ерліктің дастаны,<br />Еліме қарашы!
-                            </div>
-                            <div>
-                                Ежелден ер деген,<br />Даңқымыз шықты ғой.<br />Намысын бермеген,<br />Қазағым мықты ғой!
-                            </div>
-                            <div className="font-bold">
-                                Қайырмасы:<br />
-                                Менің елім, менің елім,<br />
-                                Гүлің болып егілемін,<br />
-                                Жырың болып төгілемін, елім!<br />
-                                Туған жерім менің - Қазақстаным!
-                            </div>
-                            <div>
-                                Ұрпаққа жол ашқан,<br />Кең байтақ жерім бар.<br />Бірлігі жарасқан,<br />Тәуелсіз елім бар.
-                            </div>
-                            <div>
-                                Қарсы алған уақытты,<br />Мәңгілік досындай.<br />Біздің ел бақытты,<br />Біздің ел осындай!
-                            </div>
-                            <div className="font-bold">
-                                Қайырмасы:<br />
-                                Менің елім, менің елім,<br />
-                                Гүлің болып егілемін,<br />
-                                Жырың болып төгілемін, елім!<br />
-                                Туған жерім менің - Қазақстаным!
-                            </div>
+                        <div className="h-px bg-white/10 w-full"></div>
+                        <div>
+                            <p className="text-[9px] uppercase font-bold text-blue-200 tracking-widest mb-1">Автор музыки</p>
+                            <p className="text-sm font-bold">Шамши Калдаяков</p>
                         </div>
                     </div>
                 </div>
+
+                {/* ТЕКСТ ГИМНА */}
+                <div className="space-y-10 text-center bg-slate-50/50 py-10 rounded-[40px] border border-slate-50">
+
+                    <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
+                        <p>Алтын күн аспаны,</p>
+                        <p>Алтын дән даласы,</p>
+                        <p>Ерліктің дастаны,</p>
+                        <p>Еліме қарашы!</p>
+                    </div>
+
+                    <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
+                        <p>Ежелден ер деген,</p>
+                        <p>Даңқымыз шықты ғой.</p>
+                        <p>Намысын бермеген,</p>
+                        <p>Қазағым мықты ғой!</p>
+                    </div>
+
+                    {/* ПРИПЕВ (АКЦЕНТ) */}
+                    <div className="relative py-6 px-4">
+                        <div className="absolute inset-0 bg-blue-50 rounded-2xl -rotate-1"></div>
+                        <div className="relative space-y-1 text-lg font-black text-blue-700 leading-tight">
+                            <p className="text-[10px] uppercase tracking-[0.3em] mb-3 text-blue-400">Қайырмасы:</p>
+                            <p>Менің елім, менің елім,</p>
+                            <p>Гүлің болып егілемін,</p>
+                            <p>Жырың болып төгілемін, елім!</p>
+                            <p>Туған жерім менің — Қазақстаным!</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
+                        <p>Ұрпаққа жол ашқан,</p>
+                        <p>Кең байтақ жерім бар.</p>
+                        <p>Бірлігі жарасқан,</p>
+                        <p>Тәуелсіз елім бар.</p>
+                    </div>
+
+                    <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
+                        <p>Қарсы алған уақытты,</p>
+                        <p>Мәңгілік досындай.</p>
+                        <p>Біздің ел бақытты,</p>
+                        <p>Біздің ел осындай!</p>
+                    </div>
+                </div>
+
+                <div className="mt-16 text-center pb-10">
+                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.4em]">Мемлекеттік Гимн</p>
+                </div>
+
             </main>
+
             <FooterCarousel />
         </div>
     )

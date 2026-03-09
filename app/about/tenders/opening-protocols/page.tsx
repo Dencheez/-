@@ -1,78 +1,104 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, Download, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default function OpeningProtocol() {
     const title = "Протокол вскрытия";
+    const pages = [
+        { id: 1, src: "/images/AdminsFile/1.jpg", alt: "Страница 1" },
+        { id: 2, src: "/images/AdminsFile/2.jpg", alt: "Страница 2" },
+        { id: 3, src: "/images/AdminsFile/3.jpg", alt: "Страница 3 - Длинная" },
+    ];
 
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
+        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
             <Header />
 
-            <main className="max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
-                {/* ПАНЕЛЬ НАВИГАЦИИ */}
-                <div className="flex justify-between items-center border-b pb-4 mb-8">
-                    <Link
-                        href="/about"
-                        className="flex items-center gap-2 text-slate-400 hover:text-[#1e40af] text-xs font-bold transition-colors uppercase tracking-widest"
-                    >
-                        <ArrowLeft className="h-4 w-4" /> НАЗАД
+            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
+
+                {/* МОБИЛЬНАЯ НАВИГАЦИЯ */}
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af] transition-colors">
+                        <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex gap-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af]">
-                            <Printer className="h-3.5 w-3.5" /> Печать
-                        </span>
-                        <span className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af]">
-                            <Mail className="h-3.5 w-3.5" /> E-mail
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                            <Eye className="h-3.5 w-3.5" /> Просмотров: 245
-                        </span>
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                            <Eye className="h-4 w-4" /> 245
+                        </div>
                     </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
-                <h1 className="text-3xl md:text-4xl font-black uppercase text-slate-800 mb-12 tracking-tight">
-                    {title}
-                </h1>
-
-                {/* СПИСОК СКАНОВ — БЕЗ ОГРАНИЧЕНИЙ ПО ВЫСОТЕ */}
-                <div className="flex flex-col gap-8 w-full">
-
-                    {/* СТРАНИЦА 1 */}
-                    <img
-                        src="/images/AdminsFile/1.jpg"
-                        alt="Протокол страница 1"
-                        className="w-full h-auto block shadow-md border border-slate-100 rounded-sm"
-                        loading="lazy"
-                    />
-
-                    {/* СТРАНИЦА 2 */}
-                    <img
-                        src="/images/AdminsFile/2.jpg"
-                        alt="Протокол страница 2"
-                        className="w-full h-auto block shadow-md border border-slate-100 rounded-sm"
-                        loading="lazy"
-                    />
-
-                    {/* СТРАНИЦА 3 (ДЛИННАЯ) — РАСТЯНЕТСЯ ПОД СВОЙ РАЗМЕР */}
-                    <img
-                        src="/images/AdminsFile/3.jpg"
-                        alt="Протокол страница 3 - Длинная"
-                        className="w-full h-auto block shadow-md border border-slate-100 rounded-sm"
-                        loading="lazy"
-                    />
-
+                <div className="mb-8">
+                    <div className="flex items-center gap-2 text-[10px] font-black text-[#1e40af] uppercase tracking-[0.2em] mb-2">
+                        <div className="w-6 h-px bg-[#1e40af]"></div>
+                        Документация
+                    </div>
+                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight">
+                        {title}
+                    </h1>
                 </div>
 
-                {/* ТЕХНИЧЕСКАЯ ПОМЕТКА ВНИЗУ */}
-                <div className="mt-16 pt-8 border-t border-slate-50">
-                    <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.3em]">
-                        Документ обновлен: 2024
+                {/* СПИСОК СКАНОВ */}
+                <div className="flex flex-col gap-6">
+                    {pages.map((page) => (
+                        <div key={page.id} className="space-y-3">
+                            {/* Метка страницы */}
+                            <div className="flex justify-between items-end px-1">
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                    Страница {page.id}
+                                </span>
+                                {page.id === 3 && (
+                                    <span className="text-[9px] font-bold text-amber-500 uppercase border border-amber-200 px-2 py-0.5 rounded-full bg-amber-50">
+                                        Длинный скан
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Изображение с тапом для просмотра */}
+                            <div
+                                className="relative bg-white rounded-xl shadow-lg shadow-slate-200 border border-slate-200 overflow-hidden active:scale-[0.99] transition-transform"
+                                onClick={() => window.open(page.src, '_blank')}
+                            >
+                                <img
+                                    src={page.src}
+                                    alt={page.alt}
+                                    className="w-full h-auto block"
+                                    loading="lazy"
+                                />
+                                <div className="absolute top-3 right-3 bg-white/90 p-2 rounded-full shadow-md">
+                                    <ChevronRight className="h-4 w-4 text-slate-400" />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* ПАНЕЛЬ ДЕЙСТВИЙ */}
+                <div className="mt-10 grid grid-cols-1 gap-3">
+                    <button className="w-full bg-slate-900 text-white py-5 rounded-2xl flex items-center justify-center gap-3 text-xs font-black uppercase tracking-[0.2em] active:bg-[#1e40af] transition-colors shadow-xl shadow-slate-200">
+                        <Download size={18} /> Скачать все (PDF)
+                    </button>
+
+                    <div className="grid grid-cols-2 gap-3">
+                        <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-white">
+                            <Printer size={14} /> Печать
+                        </button>
+                        <button className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-bold text-slate-500 uppercase active:bg-white">
+                            <Mail size={14} /> E-mail
+                        </button>
+                    </div>
+                </div>
+
+                {/* ФУТЕР КОНТЕНТА */}
+                <div className="mt-12 text-center pb-8">
+                    <p className="text-[9px] text-slate-300 font-bold uppercase tracking-[0.3em]">
+                        Обновлено: Март 2026 • ЦПЗ
                     </p>
                 </div>
+
             </main>
 
             <FooterCarousel />

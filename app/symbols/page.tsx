@@ -1,7 +1,7 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Music } from "lucide-react"
+import { ChevronLeft, Music, ArrowRight, Scale } from "lucide-react"
 import Link from "next/link"
 
 export default function SymbolsMenuPage() {
@@ -10,98 +10,110 @@ export default function SymbolsMenuPage() {
             title: "Государственный Флаг",
             href: "/symbols/flag",
             img: "/images/symbols/flag.png",
+            desc: "Небесно-голубое полотнище с золотым солнцем"
         },
         {
             title: "Государственный Герб",
             href: "/symbols/gerb",
             img: "/images/symbols/gerb.png",
+            desc: "Образ шанырака и мифических тулпаров"
         },
         {
             title: "Государственный Гимн",
             href: "/symbols/gimn",
-            icon: <Music className="h-10 w-10 text-slate-400" />,
+            icon: <Music className="h-8 w-8 text-blue-600" />,
+            desc: "Торжественная песня «Менің Қазақстаным»"
         }
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
             <Header />
 
-            <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
-                <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
-                    <ChevronLeft className="h-3 w-3" /> На главную
+            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
+
+                {/* НАВИГАЦИЯ */}
+                <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] font-black tracking-widest mb-6 active:text-blue-600 transition-colors">
+                    <ChevronLeft className="h-4 w-4" /> На главную
                 </Link>
 
-                <div className="border-b-2 border-slate-900 pb-4 mb-6">
-                    <h1 className="text-2xl font-bold text-slate-900 uppercase">
-                        Государственные символы Республики Казахстан
+                {/* ШАПКА РАЗДЕЛА */}
+                <div className="mb-8 px-1">
+                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight mb-3">
+                        Государственные <br /> символы РК
                     </h1>
-                    <p className="text-[12px] font-bold text-slate-500 mt-1">
-                        Конституционный закон Республики Казахстан от 4 июня 2007 года N 258
-                    </p>
+                    <div className="flex items-start gap-2 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                        <Scale className="h-4 w-4 text-blue-600 mt-0.5 shrink-0" />
+                        <p className="text-[10px] font-bold text-slate-500 leading-tight uppercase tracking-tight">
+                            Конституционный закон РК <br /> от 4 июня 2007 года N 258
+                        </p>
+                    </div>
                 </div>
 
-                {/* Карточки */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+                {/* КАРТОЧКИ СИМВОЛОВ */}
+                <div className="grid grid-cols-1 gap-4 mb-12">
                     {symbols.map((symbol) => (
                         <Link
                             key={symbol.href}
                             href={symbol.href}
-                            className="bg-white border border-slate-200 p-6 flex flex-col items-center text-center hover:border-blue-600 transition-colors group"
+                            className="bg-white rounded-2xl border border-slate-200 p-5 flex items-center gap-5 shadow-sm active:scale-[0.98] active:border-blue-600 transition-all group"
                         >
-                            <div className="h-24 flex items-center justify-center mb-4">
+                            <div className="w-20 h-20 flex-shrink-0 bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden p-2">
                                 {symbol.img ? (
-                                    <img src={symbol.img} alt={symbol.title} className="max-h-full w-auto object-contain" />
+                                    <img src={symbol.img} alt={symbol.title} className="max-h-full w-auto object-contain drop-shadow-sm" />
                                 ) : (
-                                    <div className="p-3 bg-slate-50 rounded-full">{symbol.icon}</div>
+                                    <div className="bg-blue-50 p-4 rounded-full">{symbol.icon}</div>
                                 )}
                             </div>
-                            <h2 className="text-[13px] font-bold text-slate-900 uppercase tracking-wider group-hover:text-blue-700">
-                                {symbol.title}
-                            </h2>
+                            <div className="flex-grow">
+                                <h2 className="text-xs font-black text-slate-900 uppercase tracking-wider mb-1 group-hover:text-blue-600">
+                                    {symbol.title}
+                                </h2>
+                                <p className="text-[11px] text-slate-400 leading-tight">
+                                    {symbol.desc}
+                                </p>
+                            </div>
+                            <ArrowRight className="h-4 w-4 text-slate-200 group-hover:text-blue-600 shrink-0" />
                         </Link>
                     ))}
                 </div>
 
-                {/* ТЕКСТ ЗАКОНА */}
-                <div className="space-y-8 text-[14px] leading-relaxed text-slate-800 text-justify border-t border-slate-100 pt-10">
+                {/* ТЕКСТ ЗАКОНА (АККОРДЕОННЫЙ СТИЛЬ / СТРУКТУРИРОВАНО) */}
+                <div className="space-y-10">
 
                     <section className="space-y-4">
-                        {/* Граница слева другого цвета (синий/золотой) */}
-                        <h3 className="font-bold uppercase text-slate-900 border-l-4 border-blue-600 pl-4">
-                            Глава 1. Государственные символы Республики Казахстан
-                        </h3>
+                        <div className="flex items-center gap-3">
+                            <div className="h-8 w-1 bg-blue-600 rounded-full"></div>
+                            <h3 className="font-black text-[11px] uppercase tracking-widest text-slate-400">
+                                Глава 1. Общие положения
+                            </h3>
+                        </div>
 
-                        <div className="space-y-4">
-                            <p><strong>Статья 1. Государственные символы Республики Казахстан</strong></p>
-                            <p>Государственными символами Республики Казахстан являются: Государственный Флаг, Государственный Герб, Государственный Гимн.</p>
-                            <p>Государственный Флаг Республики Казахстан представляет собой прямоугольное полотнище голубого цвета с изображением в центре солнца с лучами, под которым - парящий орел. У древка - национальный орнамент в виде вертикальной полосы. Изображение солнца, его лучей, орла и национального орнамента - цвета золота. Соотношение ширины Флага к его длине - 1:2.</p>
-                            <p>Государственный Герб Республики Казахстан имеет форму круга и представляет собой изображение шанырака (верхняя сводчатая часть юрты) на голубом фоне, от которого во все стороны в виде солнечных лучей расходятся уыки (опоры). Справа и слева от шанырака расположены изображения мифических крылатых коней. В верхней части расположена объемная пятиконечная звезда, а в нижней части - надпись "Қазақстан". Изображение звезды, шанырака, уыков, мифических крылатых коней, а также надписи "Қазақстан" - цвета золота.</p>
-                            <p>Государственный Гимн Республики Казахстан представляет собой музыкально-поэтическое произведение, исполняемое в случаях, предусмотренных настоящим Конституционным законом.</p>
+                        <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4 text-[14px] leading-relaxed text-slate-700">
+                            <p className="font-black text-slate-900 text-xs uppercase tracking-tight">Статья 1</p>
+                            <p>Государственными символами Республики Казахстан являются: <strong>Флаг, Герб и Гимн.</strong></p>
+                            <p className="text-slate-500 text-sm">Все символы имеют четко установленные законодательством пропорции, цвета и правила использования.</p>
                         </div>
                     </section>
 
-                    <section className="space-y-4 pt-4">
-                        <h3 className="font-bold uppercase text-slate-900 border-l-4 border-blue-600 pl-4">
-                            Глава 2. Государственный Флаг Республики Казахстан
-                        </h3>
-                        <p><strong>Статья 4. Порядок использования Государственного Флага Республики Казахстан</strong></p>
-                        <div className="pl-6 space-y-3 text-slate-600">
-                            <p>1. Государственный Флаг Республики Казахстан в обязательном порядке поднимается (устанавливается, размещается):</p>
-                            <p>1) на зданиях Резиденции Президента Республики Казахстан, Парламента, Сената и Мажилиса, Правительства, министерств, центральных исполнительных органов...</p>
-                            <p>2) в кабинетах Президента Республики Казахстан, председателей палат Парламента, Премьер-Министра, Государственного секретаря...</p>
-                        </div>
-                    </section>
+                    {/* ЦИТАТА ОБ ОБЯЗАННОСТЯХ */}
+                    <section className="relative py-10 px-6 overflow-hidden bg-blue-600 rounded-[2.5rem] shadow-xl shadow-blue-200">
+                        {/* Декоративный символ на фоне */}
+                        <Scale className="absolute -right-4 -bottom-4 h-32 w-32 text-white/10 -rotate-12" />
 
-                    {/* Статья 13 — просто другой цвет текста */}
-                    <section className="pt-10 pb-20">
-                        <div className="border-t border-slate-100 pt-8">
-                            <p className="text-blue-700 font-bold uppercase text-xs mb-2 tracking-widest">Статья 13</p>
-                            <p className="text-slate-500 italic text-lg leading-relaxed">
-                                Граждане Республики Казахстан, а также лица, находящиеся на территории Республики, обязаны уважать государственные символы Республики Казахстан.
+                        <div className="relative z-10">
+                            <p className="text-blue-200 font-black uppercase text-[10px] mb-4 tracking-[0.2em]">Статья 13</p>
+                            <p className="text-white text-lg font-bold leading-tight italic">
+                                «Граждане Республики Казахстан обязаны уважать государственные символы Республики.»
                             </p>
                         </div>
                     </section>
+
+                    <div className="text-center py-6">
+                        <p className="text-[9px] text-slate-300 font-black uppercase tracking-[0.4em]">
+                            Законодательство РК • 2026
+                        </p>
+                    </div>
                 </div>
             </main>
 
