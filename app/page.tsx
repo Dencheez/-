@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { AppShell } from "../components/app-shell"
 import { HeroBanner } from "../components/home/hero-banner"
 import { InfoFiles } from "@/components/info-files"
+import { DirectorBlog } from "@/components/DirectorBlog"
 import { CallBanner } from "../components/home/call-banner"
 import { QuickActions } from "../components/home/quick-actions"
 import { ServicesSection } from "../components/home/services-section"
@@ -24,6 +25,7 @@ function HomeContent() {
       <div className="space-y-4 md:hidden">
         <HeroBanner />
         <InfoFiles />
+        <DirectorBlog />
         <CallBanner />
         <QuickActions />
         <ServicesSection searchQuery={searchQuery} />
@@ -35,6 +37,7 @@ function HomeContent() {
         <div className="flex flex-col gap-4">
           <HeroBanner />
           <InfoFiles />
+          <DirectorBlog />
           <QuickActions />
           <ServicesSection searchQuery={searchQuery} />
         </div>
