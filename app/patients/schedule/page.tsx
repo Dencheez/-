@@ -48,15 +48,13 @@ export default function SchedulePage() {
                     </div>
 
                     {/* ТАБЛИЦЫ (КАРТИНКИ) */}
-                    <div className="space-y-6">
-                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-dashed border-slate-200 rounded flex flex-col items-center justify-center group hover:border-blue-300 transition-colors">
-                            <ImageIcon className="h-12 w-12 text-slate-200 mb-2 group-hover:text-blue-200" />
-                            <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">Таблица графика №1 (Картинка)</p>
+                    <div className="">
+                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded flex flex-col items-center justify-center">
+                            <img src="/images/ГрафикРаботы/1.png" alt="" />
                         </div>
 
-                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-dashed border-slate-200 rounded flex flex-col items-center justify-center group hover:border-blue-300 transition-colors">
-                            <ImageIcon className="h-12 w-12 text-slate-200 mb-2 group-hover:text-blue-200" />
-                            <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">Таблица графика №2 (Картинка)</p>
+                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded flex flex-col items-center justify-center">
+                            <img src="/images/ГрафикРаботы/2.jpg" alt="" />
                         </div>
                     </div>
 
