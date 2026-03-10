@@ -1,7 +1,7 @@
 "use client"
 import { Header } from "@/components/header"
 import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail, PlayCircle } from "lucide-react"
+import { ChevronLeft, Printer, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function GobmpPage() {
@@ -26,25 +26,29 @@ export default function GobmpPage() {
                     </div>
                 </div>
 
-                {/* Место под видео */}
+                {/* Контейнер для видео */}
                 <div className="w-full">
-                    <div className="aspect-video w-full bg-slate-50 border-2 border-dashed border-slate-200 rounded-lg flex flex-col items-center justify-center group hover:border-blue-400 transition-colors">
-                        <div className="p-4 bg-white rounded-full shadow-sm mb-4">
-                            <PlayCircle className="h-12 w-12 text-slate-200 group-hover:text-blue-500 transition-colors" />
-                        </div>
-                        <p className="text-[11px] text-slate-400 uppercase font-black tracking-[0.2em]">
-                            Место для видеоматериала
-                        </p>
-                        <p className="text-[10px] text-slate-300 mt-2 italic">
-                            (вставьте iframe или video тег здесь)
-                        </p>
+                    {/* Aspect-video делает блок адаптивным (16:9) */}
+                    <div className="relative aspect-video w-full bg-slate-100 rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/8MCrnYfGSUE?si=R3JpuCR6_phFY64M"
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
 
-                {/* Подпись внизу для баланса */}
-                <div className="mt-8 pt-6 border-t border-slate-50">
-                    <p className="text-[10px] text-slate-300 uppercase font-bold">
+                {/* Подпись внизу */}
+                <div className="mt-12 pt-6 border-t border-slate-100">
+                    <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">
                         Гарантированный объем бесплатной медицинской помощи
+                    </p>
+                    <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-2xl">
+                        В данном видеоматериале подробно разъясняются изменения в системе ГОБМП и права граждан на получение бесплатной медицинской помощи в рамках новой модели.
                     </p>
                 </div>
             </main>
