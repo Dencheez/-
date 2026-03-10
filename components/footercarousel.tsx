@@ -72,18 +72,16 @@ export function FooterCarousel() {
         </button>
       </div>
 
-      {/* НИЖНЯЯ ПАНЕЛЬ: ВЕРНУЛИ ВЫСОТУ */}
-      <div className="bg-[#00B5C4] text-white py-4 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      {/* НИЖНЯЯ ПАНЕЛЬ: ТЕПЕРЬ НА ВСЮ ШИРИНУ */}
+      <div className="bg-[#00B5C4] text-white py-4 px-6 w-full">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
 
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-12">
-            {/* Call-center */}
             <div className="text-center md:text-left">
               <p className="text-[10px] font-medium uppercase opacity-90 tracking-tight">Call center</p>
               <a href="tel:3000103" className="text-lg font-bold">3000-103</a>
             </div>
 
-            {/* Соцсети */}
             <div className="flex flex-col items-center md:items-start gap-1">
               <p className="text-[10px] font-medium opacity-90 uppercase tracking-tight">Мы в соцсетях</p>
               <div className="flex gap-4">
@@ -94,7 +92,6 @@ export function FooterCarousel() {
             </div>
           </div>
 
-          {/* Копирайт */}
           <div className="text-center md:text-right">
             <p className="text-[10px] opacity-90 uppercase font-medium tracking-wider">
               © 2026 ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ

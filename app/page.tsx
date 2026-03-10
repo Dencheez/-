@@ -4,16 +4,10 @@ import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppShell } from "../components/app-shell"
 import { HeroBanner } from "../components/home/hero-banner"
-import { InfoFiles } from "@/components/info-files"
 import { DirectorBlog } from "@/components/DirectorBlog"
-import { CallBanner } from "../components/home/call-banner"
 import { QuickActions } from "../components/home/quick-actions"
 import { ServicesSection } from "../components/home/services-section"
 import { NewsSection } from "../components/home/news-section"
-import { Loader2 } from "lucide-react"
-
-
-
 
 function HomeContent() {
   const searchParams = useSearchParams()
@@ -21,30 +15,25 @@ function HomeContent() {
 
   return (
     <AppShell>
-      {/* Мобильная версия */}
-      <div className="space-y-4 md:hidden">
-        <HeroBanner />
-        <InfoFiles />
-        <DirectorBlog />
-        <CallBanner />
+      <div className="flex flex-col gap-6">
+        {/* Верхний блок: Баннер и Блог директора в ряд на ПК */}
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr,350px] gap-6">
+          <HeroBanner />
+          <div className="hidden xl:block">
+            <DirectorBlog />
+          </div>
+        </div>
+
+        {/* На мобилках блог директора под баннером */}
+        <div className="xl:hidden">
+          <DirectorBlog />
+        </div>
+
+
+
         <QuickActions />
         <ServicesSection searchQuery={searchQuery} />
         <NewsSection searchQuery={searchQuery} />
-      </div>
-
-      {/* Десктопная версия */}
-      <div className="hidden gap-6 px-4 pb-4 md:grid md:grid-cols-[1.6fr,1.4fr] lg:grid-cols-[1.7fr,1.3fr]">
-        <div className="flex flex-col gap-4">
-          <HeroBanner />
-          <InfoFiles />
-          <DirectorBlog />
-          <QuickActions />
-          <ServicesSection searchQuery={searchQuery} />
-        </div>
-        <div className="flex flex-col gap-4">
-          <CallBanner />
-          <NewsSection searchQuery={searchQuery} />
-        </div>
       </div>
     </AppShell>
   )
@@ -52,13 +41,7 @@ function HomeContent() {
 
 export default function HomePage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-screen items-center justify-center bg-background">
-          <Loader2 className="h-10 w-10 animate-spin text-primary/20" />
-        </div>
-      }
-    >
+    <Suspense fallback={<div className="p-10 text-center">Загрузка...</div>}>
       <HomeContent />
     </Suspense>
   )

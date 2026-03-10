@@ -1,22 +1,14 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import { ArrowLeft, Printer, Mail, Eye, FileDown, ShieldCheck, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default function EthicsPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
-            <main className="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full flex-grow">
-
-                {/* ВЕРХНЯЯ ПАНЕЛЬ (АДАПТИРОВАННАЯ) */}
+        <div className="w-full text-slate-900 font-sans">
+            <main className="max-w-5xl mx-auto w-full">
+                {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 mb-8 gap-4">
-                    <Link
-                        href="/about"
-                        className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest"
-                    >
+                    <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> НАЗАД
                     </Link>
 
@@ -33,10 +25,8 @@ export default function EthicsPage() {
                     </div>
                 </div>
 
-                {/* КОНТЕНТ ЦЕНТРАЛЬНЫЙ */}
+                {/* КОНТЕНТ */}
                 <div className="flex flex-col items-center justify-center min-h-[50vh] text-center px-2">
-
-                    {/* Декоративный элемент для медицины */}
                     <div className="mb-8 p-6 bg-blue-50 rounded-[40px] relative">
                         <ShieldCheck className="h-12 w-12 text-blue-600" />
                         <div className="absolute -top-1 -right-1 h-4 w-4 bg-blue-400 rounded-full animate-ping"></div>
@@ -50,11 +40,8 @@ export default function EthicsPage() {
                         ГКП на ПХВ «Центр психического здоровья» <br /> Управления здравоохранения г. Алматы
                     </p>
 
-                    {/* ГЛАВНАЯ КНОПКА СКАЧИВАНИЯ */}
                     <div className="w-full max-w-[420px] relative group">
-                        {/* Свечение сзади при наведении */}
                         <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[32px] blur opacity-10 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
-
                         <a
                             href="/files/ethics.doc"
                             download="Этический_кодекс_ЦПЗ.doc"
@@ -63,39 +50,26 @@ export default function EthicsPage() {
                             <div className="p-4 bg-slate-900 text-white rounded-2xl group-hover:bg-blue-600 transition-colors duration-300">
                                 <FileDown className="h-6 w-6 md:h-8 md:w-8" />
                             </div>
-
                             <div className="text-left overflow-hidden">
-                                <p className="text-[11px] md:text-xs font-black uppercase tracking-widest text-slate-900 mb-1 italic">
-                                    Нажмите для загрузки
-                                </p>
-                                <p className="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase tracking-tight opacity-70 truncate">
-                                    Microsoft Word • 45.5 KB
-                                </p>
+                                <p className="text-[11px] md:text-xs font-black uppercase tracking-widest text-slate-900 mb-1 italic">Нажмите для загрузки</p>
+                                <p className="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase tracking-tight opacity-70 truncate">Microsoft Word • 45.5 KB</p>
                             </div>
-
                             <ChevronRight className="ml-auto h-5 w-5 text-slate-200 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
                         </a>
                     </div>
 
-                    {/* СНОСКА */}
                     <div className="mt-16 flex items-start gap-4 max-w-md text-left bg-slate-50 p-6 rounded-3xl border border-slate-100">
                         <div className="h-2 w-2 rounded-full bg-blue-600 mt-1.5 shrink-0" />
                         <p className="text-[11px] md:text-xs font-medium text-slate-500 leading-relaxed">
-                            Настоящий кодекс определяет моральную ответственность медицинских работников перед обществом, пациентами и коллегами в соответствии с принципами деонтологии.
+                            Настоящий кодекс определяет моральную ответственность медицинских работников перед обществом, пациентами и коллегами.
                         </p>
                     </div>
                 </div>
 
-                {/* НИЖНЯЯ ЧАСТЬ */}
                 <div className="mt-20 pt-8 border-t border-slate-50 text-center">
-                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.4em]">
-                        Служба внутреннего аудита • 2026
-                    </p>
+                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.4em]">Служба внутреннего аудита • 2026</p>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

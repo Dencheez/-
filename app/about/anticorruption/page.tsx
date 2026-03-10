@@ -1,7 +1,5 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, FileText, Download, ExternalLink, Image as ImageIcon } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, FileText, ExternalLink, Image as ImageIcon } from "lucide-react"
 import Link from "next/link"
 
 export default function AntiCorruptionPage() {
@@ -24,11 +22,8 @@ export default function AntiCorruptionPage() {
     ];
 
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
-            <main className="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full flex-grow">
-
+        <div className="w-full text-slate-900 font-sans">
+            <main className="max-w-5xl mx-auto w-full">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-8 gap-4">
                     <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest">
@@ -95,10 +90,7 @@ export default function AntiCorruptionPage() {
                         </p>
                     </div>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

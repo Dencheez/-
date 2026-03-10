@@ -1,6 +1,4 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
 import Link from "next/link"
 
@@ -8,22 +6,19 @@ export default function AnalyticalReviewPage() {
     const reports = [
         {
             title: '«О СОСТОЯНИИ СЛУЖБЫ ОХРАНЫ ПСИХИЧЕСКОГО ЗДОРОВЬЯ» 2022 ГОД',
-            file: "/files/review_2022.docx", // Ссылка на первый файл
+            file: "/files/review_2022.docx",
             size: "42.5 KB"
         },
         {
             title: '«О СОСТОЯНИИ СЛУЖБЫ ОХРАНЫ ПСИХИЧЕСКОГО ЗДОРОВЬЯ Г. АЛМАТЫ ЗА 2019-2020 ГОД»',
-            file: "/files/review_2020.doc", // Ссылка на второй файл
+            file: "/files/review_2020.doc",
             size: "38.0 KB"
         }
     ];
 
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
-            <main className="max-w-5xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full flex-grow">
-
+        <div className="w-full text-slate-900 font-sans">
+            <main className="max-w-5xl mx-auto w-full">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-8 gap-4">
                     <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-[#1e40af] text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest">
@@ -91,10 +86,7 @@ export default function AnalyticalReviewPage() {
                         ЦПЗ Алматы
                     </p>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

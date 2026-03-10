@@ -1,7 +1,5 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, Maximize2, Download } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, Maximize2 } from "lucide-react"
 import Link from "next/link"
 
 export default function TenderAds() {
@@ -10,10 +8,7 @@ export default function TenderAds() {
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
-
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
-
                 {/* МОБИЛЬНАЯ ПАНЕЛЬ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af] transition-colors">
@@ -85,8 +80,6 @@ export default function TenderAds() {
                     </div>
                 </div>
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

@@ -1,14 +1,11 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, ExternalLink, FileText, Printer, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function FormularyPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
@@ -29,7 +26,6 @@ export default function FormularyPage() {
                         Ниже представлена ссылка на актуальный перечень лекарственных средств и медицинских изделий для бесплатного и (или) льготного амбулаторного обеспечения отдельных категорий граждан Республики Казахстан.
                     </p>
 
-                    {/* Карточка со ссылкой на Adilet */}
                     <a
                         href="https://adilet.zan.kz/rus/docs/V2100023885"
                         target="_blank"
@@ -59,8 +55,6 @@ export default function FormularyPage() {
                     </div>
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

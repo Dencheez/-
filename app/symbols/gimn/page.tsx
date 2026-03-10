@@ -1,14 +1,11 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail, Eye, Music, Quote } from "lucide-react"
+import { AppShell } from "@/components/app-shell"
+import { ChevronLeft, Eye, Music, Quote } from "lucide-react"
 import Link from "next/link"
 
 export default function GimnPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
 
                 {/* НАВИГАЦИЯ */}
@@ -16,10 +13,6 @@ export default function GimnPage() {
                     <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
                         <ChevronLeft className="h-5 w-5" /> Назад
                     </Link>
-                    <div className="flex gap-4 text-slate-300">
-                        <Printer size={18} className="active:text-blue-600" />
-                        <Mail size={18} className="active:text-blue-600" />
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
@@ -32,13 +25,12 @@ export default function GimnPage() {
                     </div>
                 </div>
 
-                {/* ИСТОРИЧЕСКАЯ СПРАВКА (КОМПАКТНО) */}
+                {/* ИСТОРИЧЕСКАЯ СПРАВКА */}
                 <div className="space-y-6 text-[14px] leading-relaxed text-slate-600 mb-10">
                     <p className="relative pl-6 italic">
                         <Quote className="absolute left-0 top-0 text-blue-100 h-5 w-5 -scale-x-100" />
                         Гимн — торжественная песня, выступающая в качестве звуковой символики страны.
                     </p>
-                    <p>В истории независимого Казахстана гимн утверждался дважды: в <span className="font-bold text-slate-800">1992</span> и <span className="font-bold text-slate-800">2006</span> годах.</p>
                 </div>
 
                 {/* КАРТОЧКА АВТОРОВ */}
@@ -62,9 +54,10 @@ export default function GimnPage() {
                     </div>
                 </div>
 
-                {/* ТЕКСТ ГИМНА */}
+                {/* ПОЛНЫЙ ТЕКСТ ГИМНА */}
                 <div className="space-y-10 text-center bg-slate-50/50 py-10 rounded-[40px] border border-slate-50">
 
+                    {/* 1 КУПЛЕТ */}
                     <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
                         <p>Алтын күн аспаны,</p>
                         <p>Алтын дән даласы,</p>
@@ -79,7 +72,7 @@ export default function GimnPage() {
                         <p>Қазағым мықты ғой!</p>
                     </div>
 
-                    {/* ПРИПЕВ (АКЦЕНТ) */}
+                    {/* ПРИПЕВ */}
                     <div className="relative py-6 px-4">
                         <div className="absolute inset-0 bg-blue-50 rounded-2xl -rotate-1"></div>
                         <div className="relative space-y-1 text-lg font-black text-blue-700 leading-tight">
@@ -91,6 +84,7 @@ export default function GimnPage() {
                         </div>
                     </div>
 
+                    {/* 2 КУПЛЕТ */}
                     <div className="space-y-1 text-lg font-medium text-slate-800 leading-snug">
                         <p>Ұрпаққа жол ашқан,</p>
                         <p>Кең байтақ жерім бар.</p>
@@ -104,15 +98,24 @@ export default function GimnPage() {
                         <p>Біздің ел бақытты,</p>
                         <p>Біздің ел осындай!</p>
                     </div>
+
+                    {/* ПРИПЕВ ПОВТОР */}
+                    <div className="relative py-6 px-4">
+                        <div className="absolute inset-0 bg-blue-50 rounded-2xl rotate-1"></div>
+                        <div className="relative space-y-1 text-lg font-black text-blue-700 leading-tight">
+                            <p>Менің елім, менің елім,</p>
+                            <p>Гүлің болып егілемін,</p>
+                            <p>Жырың болып төгілемін, елім!</p>
+                            <p>Туған жерім менің — Қазақстаным!</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="mt-16 text-center pb-10">
+                <div className="mt-16 text-center pb-20">
                     <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.4em]">Мемлекеттік Гимн</p>
                 </div>
 
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

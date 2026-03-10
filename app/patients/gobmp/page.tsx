@@ -1,40 +1,39 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, Printer, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default function GobmpPage() {
-    return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
+    const handleEmailClick = () => {
+        window.location.href = `mailto:?subject=${encodeURIComponent("Информация о ГОБМП")}`;
+    };
 
-            <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
+    return (
+        <AppShell>
+            <main className="max-w-5xl mx-auto px-6 py-8 w-full">
                 {/* Навигация */}
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 hover:text-primary transition-colors font-black">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
                 {/* Заголовок */}
-                <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
-                    <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">
+                <div className="flex justify-between items-end border-b-2 border-slate-900 pb-4 mb-10">
+                    <h1 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tighter">
                         Новая модель ГОБМП
                     </h1>
                     <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
+                        <Printer onClick={() => window.print()} className="h-5 w-5 text-slate-200 cursor-pointer hover:text-primary transition-colors" />
+                        <Mail onClick={handleEmailClick} className="h-5 w-5 text-slate-200 cursor-pointer hover:text-primary transition-colors" />
                     </div>
                 </div>
 
-                {/* Контейнер для видео */}
-                <div className="w-full">
-                    {/* Aspect-video делает блок адаптивным (16:9) */}
-                    <div className="relative aspect-video w-full bg-slate-100 rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                {/* Видео-контейнер */}
+                <div className="w-full group">
+                    <div className="relative aspect-video w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100 transition-transform duration-500 group-hover:scale-[1.01]">
                         <iframe
                             className="absolute top-0 left-0 w-full h-full"
                             src="https://www.youtube.com/embed/8MCrnYfGSUE?si=R3JpuCR6_phFY64M"
                             title="YouTube video player"
-                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen
@@ -42,18 +41,27 @@ export default function GobmpPage() {
                     </div>
                 </div>
 
-                {/* Подпись внизу */}
-                <div className="mt-12 pt-6 border-t border-slate-100">
-                    <p className="text-[10px] text-slate-400 uppercase font-black tracking-widest">
-                        Гарантированный объем бесплатной медицинской помощи
-                    </p>
-                    <p className="mt-4 text-sm text-slate-600 leading-relaxed max-w-2xl">
-                        В данном видеоматериале подробно разъясняются изменения в системе ГОБМП и права граждан на получение бесплатной медицинской помощи в рамках новой модели.
-                    </p>
+                {/* Информация */}
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div className="md:col-span-1">
+                        <p className="text-[10px] text-primary uppercase font-black tracking-[0.2em]">
+                            Статус программы
+                        </p>
+                        <p className="mt-2 text-2xl font-black text-slate-900 leading-none uppercase italic">
+                            Действующая <br /> модель 2024
+                        </p>
+                    </div>
+                    <div className="md:col-span-2 border-l-2 border-slate-50 pl-10">
+                        <p className="text-lg text-slate-600 leading-relaxed font-medium italic">
+                            В данном видеоматериале подробно разъясняются изменения в системе ГОБМП
+                            и права граждан на получение бесплатной медицинской помощи в рамках новой модели.
+                        </p>
+                        <p className="mt-6 text-[10px] text-slate-300 uppercase font-black tracking-widest leading-loose">
+                            Гарантированный объем бесплатной <br /> медицинской помощи Республики Казахстан
+                        </p>
+                    </div>
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

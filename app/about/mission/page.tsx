@@ -1,19 +1,14 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import {
     Target, TrendingUp, ShieldCheck,
-    PhoneCall, Users, Factory, Stethoscope,
-    ArrowLeft, CheckCircle2, ListChecks,
-    Building2
+    Users, Stethoscope, ArrowLeft,
+    CheckCircle2, ListChecks, Building2
 } from "lucide-react"
 import Link from "next/link"
 
 export default function MissionDetailedPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
             {/* ГЛАВНЫЙ БАННЕР */}
             <section className="bg-[#1e40af] text-white py-12 md:py-16 px-4 md:px-6 relative overflow-hidden">
                 <div className="max-w-6xl mx-auto relative z-10">
@@ -36,7 +31,6 @@ export default function MissionDetailedPage() {
             </section>
 
             <main className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16 space-y-16 md:space-y-24">
-
                 {/* 1. МИССИЯ */}
                 <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
                     <div className="lg:col-span-2 space-y-6 md:space-y-8">
@@ -73,7 +67,6 @@ export default function MissionDetailedPage() {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                        {/* Психиатрия */}
                         <div className="space-y-4">
                             <div className="flex justify-between items-end">
                                 <h3 className="font-bold text-sm md:text-lg uppercase text-[#1e40af]">Психиатрия</h3>
@@ -92,7 +85,6 @@ export default function MissionDetailedPage() {
                             </div>
                         </div>
 
-                        {/* Наркология */}
                         <div className="bg-slate-900 text-white p-5 md:p-8 rounded-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <div>
@@ -194,10 +186,7 @@ export default function MissionDetailedPage() {
                         ))}
                     </div>
                 </section>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

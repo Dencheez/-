@@ -1,7 +1,6 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail, MapPin, Clock, Image as ImageIcon } from "lucide-react"
+import { AppShell } from "@/components/app-shell"
+import { ChevronLeft, MapPin, Clock } from "lucide-react"
 import Link from "next/link"
 
 export default function SchedulePage() {
@@ -17,29 +16,19 @@ export default function SchedulePage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
-                {/* Навигация */}
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
-                {/* Заголовок */}
-                <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
+                <div className="border-b-2 border-slate-900 pb-2 mb-8">
                     <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">
                         График работы врачей
                     </h1>
-                    <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                    </div>
                 </div>
 
                 <div className="space-y-12 mb-20">
-
-                    {/* Инфо-блок */}
                     <div className="flex items-center gap-3 text-blue-600 bg-blue-50 p-4 rounded-sm border-l-4 border-blue-600">
                         <Clock className="h-5 w-5" />
                         <p className="text-[13px] font-bold uppercase tracking-wide">
@@ -47,18 +36,15 @@ export default function SchedulePage() {
                         </p>
                     </div>
 
-                    {/* ТАБЛИЦЫ (КАРТИНКИ) */}
-                    <div className="">
-                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded flex flex-col items-center justify-center">
-                            <img src="/images/ГрафикРаботы/1.png" alt="" />
+                    <div className="space-y-4">
+                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded overflow-hidden">
+                            <img src="/images/ГрафикРаботы/1.png" alt="График 1" className="w-full h-full object-contain" />
                         </div>
-
-                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded flex flex-col items-center justify-center">
-                            <img src="/images/ГрафикРаботы/2.jpg" alt="" />
+                        <div className="w-full aspect-[16/9] bg-slate-50 border-2 border-slate-200 rounded overflow-hidden">
+                            <img src="/images/ГрафикРаботы/2.jpg" alt="График 2" className="w-full h-full object-contain" />
                         </div>
                     </div>
 
-                    {/* АДРЕСА ПО РАЙОНАМ */}
                     <section className="space-y-6">
                         <h2 className="text-xl font-bold text-slate-900 uppercase border-b border-slate-100 pb-2">
                             Адреса отделений по районам
@@ -88,11 +74,8 @@ export default function SchedulePage() {
                             Для уточнения времени приема конкретного специалиста рекомендуем обращаться в регистратуру.
                         </p>
                     </div>
-
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

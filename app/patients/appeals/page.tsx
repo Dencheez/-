@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, Printer, Mail, Quote, X } from "lucide-react"
 import Link from "next/link"
 
@@ -29,9 +28,7 @@ export default function GratitudePage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
@@ -46,7 +43,6 @@ export default function GratitudePage() {
                 </div>
 
                 <div className="space-y-12 mb-20">
-                    {/* 1. Неупокоева */}
                     <section className="relative p-8 bg-slate-50 border-l-4 border-blue-600 rounded-r-xl">
                         <Quote className="absolute top-4 right-4 h-12 w-12 text-slate-100" />
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6">
@@ -62,15 +58,22 @@ export default function GratitudePage() {
                                 <br />
                                 В течениинекоторого времени, наша соседка не давала возможности нам нормально жить, пугала наших детей, нарушала общественное спокойствие.
                                 <br />
-                                Ей требовалась медицинская помощь, но, к сожалению, в силу своего состояния, она этого не <br />
-                                замечала.  Мы,  соседи, неоднократно обращались за помощью в различные инстанции, но <br />
-                                разрешить ситуацию никак не могли, пока не обратились в Центр Психического Здоровья улице <br />
-                                А. Кекилбайулы 117, где очень оперативно откликнулись на нашу просьбу о помощи, были <br />
-                                корректны, вежливы, и очень профессионально объяснили нашей соседке, что ей необходима <br />
+                                Ей требовалась медицинская помощь, но, к сожалению, в силу своего состояния, она этого не
+                                <br />
+                                замечала.  Мы,  соседи, неоднократно обращались за помощью в различные инстанции, но
+                                <br />
+                                разрешить ситуацию никак не могли, пока не обратились в Центр Психического Здоровья улице
+                                <br />
+                                А. Кекилбайулы 117, где очень оперативно откликнулись на нашу просьбу о помощи, были
+                                <br />
+                                корректны, вежливы, и очень профессионально объяснили нашей соседке, что ей необходима
+                                <br />
                                 медицинская помощь.
                                 <br />
-                                Выражаем Благодарность администрации и врачам ЦПЗ,  в лице Худаир Жанны Рафхатовны и <br />
-                                врача Сергея Владимировича. Спасибо <br />
+                                Выражаем Благодарность администрации и врачам ЦПЗ,  в лице Худаир Жанны Рафхатовны и
+                                <br />
+                                врача Сергея Владимировича. Спасибо
+                                <br />
                                 большое, что отозвались на просьбу о помощи. Спасибо вам за нелегкий труд.
                             </p>
                             <div className="pt-4 border-t border-slate-200 not-italic">
@@ -85,7 +88,6 @@ export default function GratitudePage() {
                         </div>
                     </section>
 
-                    {/* 2. Batyr Seventy */}
                     <section className="p-8 border border-slate-100 rounded-xl shadow-sm bg-white">
                         <p className="font-black text-slate-900 uppercase tracking-tighter text-lg mb-1">Batyr Seventy</p>
                         <p className="text-[10px] text-slate-400 font-bold uppercase mb-6">07.08.2018</p>
@@ -103,7 +105,6 @@ export default function GratitudePage() {
                         </div>
                     </section>
 
-                    {/* 3. Римма */}
                     <section className="p-8 border-l-4 border-blue-600 bg-white shadow-sm border border-slate-100 rounded-r-xl">
                         <p className="font-black text-slate-900 uppercase tracking-tighter text-lg mb-1">Римма</p>
                         <p className="text-[10px] text-slate-400 font-bold uppercase mb-6">20 июля в 17:14</p>
@@ -125,9 +126,6 @@ export default function GratitudePage() {
                 </div>
             </main>
 
-            <FooterCarousel />
-
-            {/* Модальное окно (Lightbox) */}
             {selectedImage && (
                 <div
                     className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200 cursor-zoom-out"
@@ -145,6 +143,6 @@ export default function GratitudePage() {
                     </div>
                 </div>
             )}
-        </div>
+        </AppShell>
     )
 }

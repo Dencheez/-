@@ -1,29 +1,20 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Printer, Mail, Scale, ShieldCheck, AlertCircle } from "lucide-react"
+import { AppShell } from "@/components/app-shell"
+import { ChevronLeft, Scale, ShieldCheck, AlertCircle } from "lucide-react"
 import Link from "next/link"
 
 export default function RightsPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
-                {/* Навигация */}
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
-                {/* Заголовок */}
-                <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
+                <div className="border-b-2 border-slate-900 pb-2 mb-8">
                     <h1 className="text-2xl font-bold uppercase tracking-tight">
                         Права и обязанности пациентов
                     </h1>
-                    <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                    </div>
                 </div>
 
                 <div className="mb-10 text-[10px] font-bold text-slate-300 uppercase tracking-widest">
@@ -31,8 +22,6 @@ export default function RightsPage() {
                 </div>
 
                 <div className="space-y-16 mb-24 text-slate-700">
-
-                    {/* СТАТЬЯ 134. ПРАВА */}
                     <section>
                         <div className="flex items-center gap-3 mb-6 pb-2 border-b border-blue-100">
                             <ShieldCheck className="h-6 w-6 text-blue-600" />
@@ -58,7 +47,6 @@ export default function RightsPage() {
                         </div>
                     </section>
 
-                    {/* СТАТЬЯ 135. ОБЯЗАННОСТИ */}
                     <section>
                         <div className="flex items-center gap-3 mb-6 pb-2 border-b border-red-100">
                             <AlertCircle className="h-6 w-6 text-red-600" />
@@ -82,7 +70,6 @@ export default function RightsPage() {
                         </div>
                     </section>
 
-                    {/* СТАТЬЯ 163. ПСИХИЧЕСКОЕ ЗДОРОВЬЕ - ТЕПЕРЬ СВЕТЛАЯ */}
                     <section className="bg-white p-8 border-2 border-slate-100 rounded-lg shadow-sm">
                         <div className="flex items-center gap-3 mb-8 pb-4 border-b border-slate-100">
                             <Scale className="h-8 w-8 text-blue-600" />
@@ -118,11 +105,8 @@ export default function RightsPage() {
                             </div>
                         </div>
                     </section>
-
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

@@ -1,7 +1,5 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, Download, ChevronUp, Maximize2 } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, ChevronUp, Maximize2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -10,7 +8,6 @@ export default function TenderResults() {
     const pages = Array.from({ length: 11 }, (_, i) => i + 1);
     const [showTopBtn, setShowTopBtn] = useState(false);
 
-    // Следим за скроллом для кнопки "Вверх"
     useEffect(() => {
         const handleScroll = () => setShowTopBtn(window.scrollY > 1000);
         window.addEventListener("scroll", handleScroll);
@@ -19,7 +16,6 @@ export default function TenderResults() {
 
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Функция печати
     const handlePrint = () => {
         if (typeof window !== 'undefined') {
             window.print();
@@ -28,13 +24,7 @@ export default function TenderResults() {
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            {/* Скрываем хедер при печати через CSS класс или стандартные стили */}
-            <div className="print:hidden">
-                <Header />
-            </div>
-
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
-
                 {/* ПАНЕЛЬ НАВИГАЦИИ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6 print:hidden">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af]">
@@ -87,7 +77,7 @@ export default function TenderResults() {
                     ))}
                 </div>
 
-                {/* ФИНАЛЬНЫЕ ДЕЙСТВИЯ (АКТИВНЫЕ) */}
+                {/* ФИНАЛЬНЫЕ ДЕЙСТВИЯ */}
                 <div className="mt-12 mb-8 print:hidden">
                     <div className="flex justify-center gap-10 py-6 border-t border-slate-200">
                         <button
@@ -112,15 +102,10 @@ export default function TenderResults() {
             {/* КНОПКА "ВВЕРХ" */}
             <button
                 onClick={scrollToTop}
-                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full shadow-2xl transition-all duration-300 z-50 print:hidden ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
-                    }`}
+                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full shadow-2xl transition-all duration-300 z-50 print:hidden ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
             >
                 <ChevronUp className="h-6 w-6 text-[#1e40af]" />
             </button>
-
-            <div className="print:hidden">
-                <FooterCarousel />
-            </div>
         </div>
     )
 }

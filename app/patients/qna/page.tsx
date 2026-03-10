@@ -1,14 +1,11 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, Printer, Mail, Send } from "lucide-react"
 import Link from "next/link"
 
 export default function QnaPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900">
-            <Header />
-
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
                 {/* Навигация */}
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
@@ -31,7 +28,6 @@ export default function QnaPage() {
                 </div>
 
                 <div className="space-y-12 mb-20">
-
                     {/* Информационный блок */}
                     <section className="text-[15px] leading-relaxed space-y-6">
                         <p className="font-bold uppercase text-slate-700">
@@ -118,11 +114,8 @@ export default function QnaPage() {
                             </div>
                         </form>
                     </section>
-
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

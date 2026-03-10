@@ -1,24 +1,20 @@
 "use client"
-
 import { Header } from "@/components/header"
-import { BottomNav } from "@/components/bottom-nav"
-import { FooterCarousel } from "@/components/footercarousel" // Не забудь импорт!
+import { FooterCarousel } from "@/components/footercarousel"
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
-    // Внешний контейнер на весь экран
-    <div className="flex min-h-screen flex-col bg-slate-50">
-      {/* Контент с ограничением ширины */}
-      <div className="mx-auto w-full max-w-md bg-background md:max-w-5xl lg:max-w-6xl flex-1 flex flex-col">
-        <Header />
-        <main className="flex-1 pb-20 md:pb-10">
-          {children}
-        </main>
-        <BottomNav />
-      </div>
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* 1. ХЕДЕР */}
 
-      {/* Футер ВНЕ ограничения ширины, чтобы баннеры летели по всему экрану */}
-      <FooterCarousel />
+      {/* 2. КОНТЕНТ: Растягивается и выталкивает футер вниз */}
+      <main className="flex-grow w-full max-w-[1440px] mx-auto px-4 py-8">
+        {children}
+      </main>
+
+      {/* 3. ФУТЕР: Никаких max-w и отступов, строго внизу и на всю ширину */}
+      <footer className="w-full bg-[#00b2bd] mt-auto">
+      </footer>
     </div>
   )
 }

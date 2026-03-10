@@ -1,17 +1,5 @@
 "use client"
-
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import {
-    MapPin,
-    Phone,
-    Mail,
-    Clock,
-    ChevronRight,
-    Instagram,
-    Facebook,
-    Send
-} from "lucide-react"
+import { MapPin, Phone, Mail, Clock, ChevronRight, Instagram, Facebook, Send } from "lucide-react"
 import Link from "next/link"
 
 export default function ContactsPage() {
@@ -25,20 +13,15 @@ export default function ContactsPage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
-
-            <main className="flex-grow max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10 w-full">
+        <div className="w-full bg-white">
+            <main className="max-w-6xl mx-auto w-full">
                 <h1 className="text-3xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter mb-8 md:mb-12">
                     Контакты
                 </h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-
-                    {/* Левая колонка: Карта и Телефоны */}
+                    {/* Левая колонка */}
                     <div className="lg:col-span-2 space-y-6">
-
-                        {/* Кнопка навигации (Адаптивная) */}
                         <Link
                             href="https://2gis.kz/almaty/geo/9429940000795430"
                             target="_blank"
@@ -56,7 +39,6 @@ export default function ContactsPage() {
                             <ChevronRight className="h-5 w-5 md:h-6 md:w-6 opacity-40 group-hover:translate-x-1 transition-transform" />
                         </Link>
 
-                        {/* Сетка контактов (1 колонка на мобиле, 2 на планшете/ПК) */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                             {contacts.map((contact, idx) => (
                                 <a
@@ -75,7 +57,7 @@ export default function ContactsPage() {
                         </div>
                     </div>
 
-                    {/* Правая колонка: Режим и Соцсети */}
+                    {/* Правая колонка */}
                     <div className="space-y-6">
                         <div className="p-6 md:p-8 border-2 border-slate-900 rounded-3xl bg-white">
                             <div className="flex items-center gap-3 mb-6">
@@ -93,33 +75,23 @@ export default function ContactsPage() {
                                 </div>
                                 <div className="pt-4 border-t border-slate-100 mt-4">
                                     <p className="text-[10px] md:text-[11px] text-slate-400 leading-snug italic font-medium">
-                                        * Приемный покой и стационар работают круглосуточно 24/7 без выходных.
+                                        * Приемный покой и стационар работают круглосуточно 24/7.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Соцсети */}
                         <div className="p-6 md:p-8 bg-slate-900 text-white rounded-3xl shadow-2xl shadow-slate-200">
                             <h3 className="font-black uppercase text-xs mb-6 tracking-widest text-slate-400">Мы в соцсетях</h3>
                             <div className="flex gap-4">
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10">
-                                    <Instagram className="h-6 w-6" />
-                                </Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10">
-                                    <Facebook className="h-6 w-6" />
-                                </Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10">
-                                    <Send className="h-6 w-6" />
-                                </Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Instagram className="h-6 w-6" /></Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Facebook className="h-6 w-6" /></Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Send className="h-6 w-6" /></Link>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

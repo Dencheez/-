@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, Printer, Mail, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
 
@@ -27,8 +26,7 @@ const AccordionItem = ({ question, answer }: { question: string, answer: React.R
 
 export default function FAQPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
+        <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
@@ -47,7 +45,6 @@ export default function FAQPage() {
                 </div>
 
                 <div className="border-t border-slate-100 mb-12">
-                    {/* Блок 1: Основные вопросы по справкам и услугам */}
                     <AccordionItem
                         question="Как получить справки от психиатра и нарколога?"
                         answer="Справку о состоянии / не состоянии на диспансерном учете можно получить бесплатно через:\nа) некоммерческое акционерное общество «Государственная корпорация «Правительство для граждан» - ЦОНы.\nб) мобильное приложение eGov mobile\nв) веб – портал «электронного правительства» www.egov.kz"
@@ -89,7 +86,6 @@ export default function FAQPage() {
                         answer="Кабинет экспертизы и приемный покой работают КРУГЛОСУТОЧНО.\nТел: 382-36-21 (наркология, ул. Макатаева, 10)\nТел: 229-11-06, 229-12-44 (психиатрия, ул. А. Кекилбайулы, 117а)"
                     />
 
-                    {/* Блок 2: Статистика и законодательство */}
                     <div className="mt-10 mb-4 px-4 py-2 bg-slate-50 border-l-4 border-blue-600">
                         <h3 className="text-sm font-bold uppercase text-slate-900 tracking-widest">Статистика и Нормативная база</h3>
                     </div>
@@ -108,7 +104,6 @@ export default function FAQPage() {
                     />
                 </div>
 
-                {/* Секция Контакты руководства (ФИНАЛ) */}
                 <div className="mb-20 space-y-8 border-t border-slate-100 pt-10">
                     <h3 className="font-bold text-slate-900 uppercase text-lg tracking-tight">Руководство Центра</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
@@ -135,7 +130,6 @@ export default function FAQPage() {
                     </div>
                 </div>
             </main>
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

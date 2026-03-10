@@ -1,7 +1,6 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ChevronLeft, Music, ArrowRight, Scale, ExternalLink } from "lucide-react"
+import { AppShell } from "@/components/app-shell"
+import { ChevronLeft, Music, Scale, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 export default function SymbolsMenuPage() {
@@ -27,10 +26,7 @@ export default function SymbolsMenuPage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
-
-            {/* Основной контейнер: max-w-6xl дает простор на ПК, px-4 защищает края на мобильном */}
+        <AppShell>
             <main className="flex-grow w-full max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12">
 
                 {/* НАВИГАЦИЯ */}
@@ -38,7 +34,7 @@ export default function SymbolsMenuPage() {
                     <ChevronLeft className="h-4 w-4" /> На главную
                 </Link>
 
-                {/* ШАПКА РАЗДЕЛА: На ПК в две колонки через justify-between */}
+                {/* ШАПКА РАЗДЕЛА */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div className="max-w-2xl">
                         <h1 className="text-3xl md:text-5xl font-black uppercase text-slate-800 tracking-tighter leading-tight mb-4">
@@ -57,18 +53,17 @@ export default function SymbolsMenuPage() {
                     </div>
                 </div>
 
-                {/* КАРТОЧКИ СИМВОЛОВ: На ПК — 3 колонки, на мобильном — 1 */}
+                {/* КАРТОЧКИ СИМВОЛОВ */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                     {symbols.map((symbol) => (
                         <Link
                             key={symbol.href}
                             href={symbol.href}
-                            className="bg-white rounded-3xl border border-slate-200 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative overflow-hidden"
+                            className="group bg-white rounded-3xl border border-slate-200 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden"
                         >
-                            {/* Декоративный фон при ховере */}
                             <div className="absolute inset-0 bg-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                            <div className="relative z-10">
+                            <div className="relative z-10 w-full">
                                 <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 bg-slate-50 rounded-2xl flex items-center justify-center p-4 group-hover:bg-white transition-colors">
                                     {symbol.img ? (
                                         <img src={symbol.img} alt={symbol.title} className="max-h-full w-auto object-contain drop-shadow-md" />
@@ -92,9 +87,8 @@ export default function SymbolsMenuPage() {
                     ))}
                 </div>
 
-                {/* ТЕКСТ ЗАКОНА: На ПК разносим по сетке 2 колонки */}
+                {/* ТЕКСТ ЗАКОНА */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 border-t border-slate-200 pt-16 mb-20">
-
                     <div className="space-y-8">
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-1.5 bg-blue-600 rounded-full"></div>
@@ -132,22 +126,12 @@ export default function SymbolsMenuPage() {
                             </div>
                         </section>
                     </div>
-
-                </div>
-
-                <div className="text-center pb-12">
-                    <p className="text-[10px] text-slate-300 font-black uppercase tracking-[0.5em]">
-                        Официальный портал • 2026
-                    </p>
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }
 
-// Вспомогательный компонент иконки кавычки
 function QuoteIcon({ className }: { className?: string }) {
     return (
         <svg className={className} fill="currentColor" viewBox="0 0 24 24">

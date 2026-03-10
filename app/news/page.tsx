@@ -6,6 +6,7 @@ import { FooterCarousel } from "@/components/footercarousel"
 import { ChevronLeft, ChevronRight, Newspaper, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/hooks/use-language"
+import { AppShell } from "@/components/app-shell"
 
 // Объект с данными по страницам
 const newsCollections: Record<number, string[]> = {
@@ -667,10 +668,9 @@ export default function NewsPage() {
     }
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
-            <Header />
-
-            <main className="flex-grow max-w-[1400px] mx-auto px-4 md:px-6 py-6 w-full">
+        <AppShell>
+            <main className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 w-full">
+                {/* Заголовок и хлебные крошки */}
                 <div className="mb-6">
                     <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-1 mb-2 transition-colors">
                         <ChevronLeft className="h-3 w-3" /> На главную
@@ -681,6 +681,7 @@ export default function NewsPage() {
                     </h1>
                 </div>
 
+                {/* Контент страниц (Скролл) */}
                 <div
                     ref={scrollRef}
                     className="flex overflow-hidden snap-x snap-mandatory no-scrollbar border-t border-slate-100"
@@ -712,6 +713,7 @@ export default function NewsPage() {
                     ))}
                 </div>
 
+                {/* Навигация (Пагинация) */}
                 <div className="mt-12 pt-8 border-t border-slate-100 flex flex-col items-center gap-4">
                     <div className="flex flex-wrap justify-center gap-2">
                         <button
@@ -736,20 +738,18 @@ export default function NewsPage() {
                         ))}
 
                         <button
-                            onClick={() => currentPage < 19 && goToPage(currentPage + 1)}
+                            onClick={() => currentPage < pages.length && goToPage(currentPage + 1)}
                             className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-primary hover:text-white transition-all disabled:opacity-20"
-                            disabled={currentPage === 19}
+                            disabled={currentPage === pages.length}
                         >
                             <ChevronRight className="h-5 w-5" />
                         </button>
                     </div>
                     <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
-                        Страница {currentPage} из 19
+                        Страница {currentPage} из {pages.length}
                     </p>
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }

@@ -1,46 +1,31 @@
-import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import ClientLayout from '@/components/client-layout'
 import { ClerkProvider } from '@clerk/nextjs'
 import { LanguageProvider } from '@/hooks/use-language'
-import { Suspense } from 'react' // Добавлен критический импорт
+// Проверь этот путь! Он должен вести к твоему провайдеру записей
+import { AppointmentProvider } from '@/components/appointment-context'
+import { Header } from "@/components/header"
+import { FooterCarousel } from "@/components/footercarousel"
+import MainLayoutWrapper from "@/components/MainLayoutWrapper"
 import './globals.css'
 
-const inter = Inter({ subsets: ["latin", "cyrillic", "cyrillic-ext"], variable: "--font-inter" });
-
-export const metadata: Metadata = {
-  title: 'Центр Психического Здоровья - Алматы',
-  description: 'Центр Психического Здоровья города Алматы. Запись на прием, личный кабинет, услуги центра.',
-}
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  themeColor: '#1565C0',
-}
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="ru">
-        <body className={`${inter.variable} font-sans antialiased`}>
+        <body className="antialiased flex flex-col min-h-screen">
           <LanguageProvider>
-            <ClientLayout>
-              {/* ВАЖНО: Suspense здесь "лечит" ошибку useSearchParams, 
-                  которая рушила твой билд и не давала кнопке появиться 
-              */}
-              <Suspense fallback={null}>
+            {/* Оборачиваем в провайдер записей, чтобы useAppointments заработал */}
+            <AppointmentProvider>
+
+              <Header />
+
+              <MainLayoutWrapper>
                 {children}
-              </Suspense>
-            </ClientLayout>
+              </MainLayoutWrapper>
+
+              <FooterCarousel />
+
+            </AppointmentProvider>
           </LanguageProvider>
-          <Analytics />
         </body>
       </html>
     </ClerkProvider>

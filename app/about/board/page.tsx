@@ -1,6 +1,4 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -22,19 +20,16 @@ export default function ObservationBoardPage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
-            <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full space-y-12 md:space-y-16">
-
+        <div className="w-full text-slate-900 font-sans">
+            <main className="max-w-6xl mx-auto space-y-12 md:space-y-16">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex justify-between items-center border-b pb-4">
                     <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-xs font-bold transition-colors uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex gap-4 items-center">
-                        <Printer className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" />
-                        <Mail className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" />
+                        <Printer onClick={() => window.print()} className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" />
+                        <a href="mailto:cpz.sekr@gmail.com"><Mail className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" /></a>
                         <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-300 ml-2 uppercase">
                             <Eye className="h-3.5 w-3.5" /> 9905
                         </div>
@@ -57,7 +52,6 @@ export default function ObservationBoardPage() {
                     {members.map((member, index) => (
                         <div key={index} className="flex flex-col items-center group">
                             <div className="relative aspect-[3/4] w-full max-w-[280px] bg-slate-100 rounded-lg overflow-hidden shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300">
-                                {/* Заглушка */}
                                 <div className="absolute inset-0 flex items-center justify-center text-slate-200 bg-slate-50">
                                     <span className="text-6xl font-black">?</span>
                                 </div>
@@ -104,10 +98,7 @@ export default function ObservationBoardPage() {
                         ))}
                     </div>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

@@ -1,16 +1,11 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
-import { ArrowLeft, Printer, Mail, Eye, FileText, Download, Share2 } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
 import Link from "next/link"
 
 export default function CharterPage() {
     return (
         <div className="flex flex-col min-h-screen bg-white text-slate-900 font-sans">
-            <Header />
-
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
-
                 {/* МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ */}
                 <div className="flex items-center justify-between border-b pb-4 mb-8">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
@@ -31,7 +26,6 @@ export default function CharterPage() {
 
                 {/* КАРТОЧКА ДОКУМЕНТА */}
                 <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100 flex flex-col items-center shadow-sm">
-
                     {/* Иконка документа */}
                     <div className="w-20 h-20 bg-slate-900 text-white flex items-center justify-center rounded-[24px] shadow-2xl shadow-slate-200 mb-6">
                         <FileText size={36} />
@@ -54,7 +48,7 @@ export default function CharterPage() {
 
                     {/* ГЛАВНАЯ КНОПКА */}
                     <a
-                        href="/files/ustav.pdf" // УБЕДИСЬ ЧТО ФАЙЛ ТАК НАЗЫВАЕТСЯ В public/files/
+                        href="/files/ustav.pdf"
                         download="Устав_ЦПЗ_Алматы.pdf"
                         className="w-full flex items-center justify-center gap-3 bg-blue-600 active:bg-slate-900 text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all shadow-lg shadow-blue-100 active:scale-[0.96]"
                     >
@@ -86,10 +80,7 @@ export default function CharterPage() {
                         v.2023 • 2.4 MB • PDF
                     </div>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

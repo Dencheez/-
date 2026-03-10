@@ -1,6 +1,4 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import { ArrowLeft, Printer, Mail, Eye, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -12,7 +10,6 @@ export default function OpeningProtocol() {
         { id: 3, src: "/images/AdminsFile/3.jpg", alt: "Страница 3 - Длинная" },
     ];
 
-    // Функция для печати
     const handlePrint = () => {
         if (typeof window !== 'undefined') {
             window.print();
@@ -21,10 +18,7 @@ export default function OpeningProtocol() {
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
-
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
-
                 {/* МОБИЛЬНАЯ НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af] transition-colors">
@@ -81,7 +75,7 @@ export default function OpeningProtocol() {
                     ))}
                 </div>
 
-                {/* ПАНЕЛЬ ДЕЙСТВИЙ (КЛИКАБЕЛЬНАЯ) */}
+                {/* ПАНЕЛЬ ДЕЙСТВИЙ */}
                 <div className="mt-10 grid grid-cols-2 gap-3">
                     <button
                         onClick={handlePrint}
@@ -100,16 +94,12 @@ export default function OpeningProtocol() {
                     </a>
                 </div>
 
-                {/* ФУТЕР КОНТЕНТА */}
                 <div className="mt-12 text-center pb-8">
                     <p className="text-[9px] text-slate-300 font-bold uppercase tracking-[0.3em]">
                         Обновлено: Март 2026 • ЦПЗ
                     </p>
                 </div>
-
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

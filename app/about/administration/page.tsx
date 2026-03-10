@@ -1,6 +1,4 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import { ArrowLeft, Maximize2, FileImage } from "lucide-react"
 import Link from "next/link"
 
@@ -12,11 +10,8 @@ export default function AdministrationPage() {
     ];
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
-
-            <main className="max-w-4xl mx-auto px-4 md:px-6 py-8 md:py-16 w-full flex-grow">
-
+        <div className="w-full text-slate-900 font-sans">
+            <main className="max-w-4xl mx-auto w-full">
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-8 md:mb-12">
                     <Link
@@ -57,7 +52,6 @@ export default function AdministrationPage() {
                             </div>
 
                             <div className="relative group bg-white shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-200 rounded-sm overflow-hidden transition-all hover:shadow-2xl">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={img.src}
                                     alt={img.alt}
@@ -67,7 +61,6 @@ export default function AdministrationPage() {
                                         e.currentTarget.src = `https://placehold.co/800x1100/f8fafc/64748b?text=Page+${index + 1}+Not+Found`;
                                     }}
                                 />
-                                {/* Overlay при наведении (только для десктопа) */}
                                 <div className="absolute inset-0 bg-[#1e40af]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                             </div>
                         </div>
@@ -81,8 +74,6 @@ export default function AdministrationPage() {
                     </p>
                 </div>
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

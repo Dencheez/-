@@ -1,12 +1,8 @@
 "use client"
-
 import { useState } from "react"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
 import {
     ArrowLeft, ChevronDown, ChevronUp, Target, Users,
-    Activity, Phone, FileText, Shield, Briefcase,
-    BarChart3, HeartPulse, GraduationCap, ChevronRight
+    FileText, BarChart3, GraduationCap
 } from "lucide-react"
 import Link from "next/link"
 
@@ -16,10 +12,7 @@ export default function StrategicPlanPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
-            <Header />
-
             <main className="max-w-5xl mx-auto px-4 py-6 md:py-12 w-full flex-grow">
-
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">
                     <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
@@ -50,7 +43,6 @@ export default function StrategicPlanPage() {
 
                 {/* КОНТЕНТ ПО РАЗДЕЛАМ */}
                 <div className="space-y-4">
-
                     {/* РАЗДЕЛ 1: МИССИЯ */}
                     <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm transition-all">
                         <button onClick={() => toggle(1)} className="w-full flex items-center justify-between p-6 text-left active:bg-slate-50">
@@ -129,15 +121,6 @@ export default function StrategicPlanPage() {
                                         <p className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Мест дневной ст.</p>
                                     </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <p className="text-xs text-slate-500 font-bold uppercase bg-slate-100 py-1 px-3 rounded-full inline-block">Отделения МСК:</p>
-                                    <div className="grid md:grid-cols-2 gap-2 text-[11px] font-medium text-slate-600">
-                                        <div className="flex gap-2"><span>•</span> 10 специализированных отделений</div>
-                                        <div className="flex gap-2"><span>•</span> Наркологическая служба на 282 койки</div>
-                                        <div className="flex gap-2"><span>•</span> Центр временной адаптации</div>
-                                        <div className="flex gap-2"><span>•</span> Соматическое отделение сопутствующих патологий</div>
-                                    </div>
-                                </div>
                             </div>
                         )}
                     </div>
@@ -165,36 +148,12 @@ export default function StrategicPlanPage() {
                                         <p className="text-3xl font-[1000] text-slate-900 leading-none">170</p>
                                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Врачей</p>
                                     </div>
-                                    <div className="bg-white border-2 border-slate-50 p-6 rounded-[24px] flex flex-col items-center shadow-sm">
-                                        <div className="bg-blue-50 text-blue-600 p-3 rounded-full mb-3"><HeartPulse size={24} /></div>
-                                        <p className="text-3xl font-[1000] text-slate-900 leading-none">319</p>
-                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Медперсонал</p>
-                                    </div>
-                                    <div className="bg-white border-2 border-slate-50 p-6 rounded-[24px] flex flex-col items-center shadow-sm">
-                                        <div className="bg-blue-50 text-blue-600 p-3 rounded-full mb-3"><Shield size={24} /></div>
-                                        <p className="text-3xl font-[1000] text-slate-900 leading-none">63</p>
-                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">Высшая категория</p>
-                                    </div>
-                                </div>
-                                <div className="mt-6 p-5 bg-blue-600 rounded-[24px] text-white flex items-center gap-4">
-                                    <div className="h-10 w-10 bg-white/20 rounded-full flex items-center justify-center shrink-0">
-                                        <Activity size={20} />
-                                    </div>
-                                    <p className="text-xs font-bold leading-tight uppercase tracking-tight">
-                                        Политика направлена на 100% охват обучением средних медработников к 2026 году.
-                                    </p>
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-
-                {/* БЛОК СКАЧИВАНИЯ (АДАПТИВНЫЙ) */}
-                <div className="mt-12 space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
-                </div>
             </main>
-
-            <FooterCarousel />
         </div>
     )
 }

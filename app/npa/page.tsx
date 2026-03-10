@@ -2,10 +2,16 @@
 
 import React from "react"
 import { Printer, Mail } from "lucide-react"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+import { AppShell } from "@/components/app-shell"
 
 export default function NpaPage() {
+    // Функция для отправки почты
+    const handleEmailClick = () => {
+        const subject = encodeURIComponent("Нормативно-правовые акты (НПА)");
+        const body = encodeURIComponent("Здравствуйте! Хочу поделиться списком действующих НПА на 2023 год.");
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    };
+
     const npaList = [
         { title: "1. Конституция Республики Казахстан", desc: "Конституция принята на республиканском референдуме 30 августа 1995 года." },
         { title: "2. О ЗДОРОВЬЕ НАРОДА И СИСТЕМЕ ЗДРАВООХРАНЕНИЯ", desc: "Кодекс Республики Казахстан от 7 июля 2020 года № 360-VI ЗРК." },
@@ -48,38 +54,46 @@ export default function NpaPage() {
     ]
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <Header />
-
-            <main className="flex-grow bg-white">
+        <AppShell>
+            <main className="bg-white">
                 <div className="max-w-6xl mx-auto px-6 py-12">
                     {/* Заголовок и утилиты */}
-                    <div className="flex justify-between items-end border-b-2 border-slate-100 pb-8 mb-10">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-slate-100 pb-8 mb-10 gap-6">
                         <div>
-                            <h1 className="text-5xl font-black text-slate-900 tracking-tighter uppercase">НПА</h1>
-                            <p className="text-slate-400 text-xs mt-3 font-bold tracking-widest uppercase">Просмотров: 14448</p>
+                            <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase leading-none">
+                                НПА
+                            </h1>
+                            <p className="text-slate-400 text-[10px] mt-4 font-black tracking-[0.2em] uppercase">
+                                Просмотров: <span className="text-primary">14448</span>
+                            </p>
                         </div>
                         <div className="flex gap-6">
-                            <button className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all">
+                            <button
+                                onClick={() => window.print()}
+                                className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
+                            >
                                 <Printer className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                                <span className="text-[10px] font-black uppercase">Печать</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest">Печать</span>
                             </button>
-                            <button className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all">
+                            <button
+                                onClick={handleEmailClick}
+                                className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
+                            >
                                 <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                                <span className="text-[10px] font-black uppercase">E-mail</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest">E-mail</span>
                             </button>
                         </div>
                     </div>
 
-                    <h2 className="text-2xl font-black text-primary mb-12 uppercase tracking-tight">
+                    <h2 className="text-2xl font-black text-primary mb-12 uppercase tracking-tight italic">
                         Действующие НПА на 2023 год
                     </h2>
 
                     {/* Список документов */}
-                    <div className="grid gap-12">
+                    <div className="grid gap-10">
                         {npaList.map((npa, index) => (
-                            <article key={index} className="border-l-4 border-slate-100 pl-6 hover:border-primary transition-colors">
-                                <h3 className="text-xl font-black text-slate-800 leading-tight">
+                            <article key={index} className="border-l-4 border-slate-100 pl-6 hover:border-primary transition-all group cursor-default">
+                                <h3 className="text-xl font-black text-slate-800 leading-tight group-hover:text-primary transition-colors">
                                     {npa.title}
                                 </h3>
                                 <p className="mt-3 text-slate-500 text-lg leading-relaxed font-medium">
@@ -90,8 +104,6 @@ export default function NpaPage() {
                     </div>
                 </div>
             </main>
-
-            <FooterCarousel />
-        </div>
+        </AppShell>
     )
 }
