@@ -22,20 +22,12 @@ export default function AcademyJournalPage() {
                     </div>
                 </div>
 
-                <div className="max-w-5xl w-full mx-auto px-6 py-12">
-                    <div className="bg-white p-12 rounded-[3rem] border border-slate-100 shadow-sm text-center">
-                        <div className="bg-orange-50 w-20 h-20 rounded-[2rem] flex items-center justify-center text-orange-600 mx-auto mb-8">
-                            <Sparkles className="w-10 h-10" />
-                        </div>
-                        <h2 className="text-2xl font-black text-slate-800 uppercase tracking-tighter mb-4">Скоро в доступе</h2>
-                        <p className="text-slate-400 text-sm font-medium max-w-md mx-auto leading-relaxed mb-10">
-                            Популярное издание о здоровом образе жизни скоро будет доступно для онлайн-чтения.
-                        </p>
-                        <div className="flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-widest text-slate-300">
-                            <Calendar className="w-4 h-4" />
-                            <span>Обновление в процессе</span>
-                        </div>
-                    </div>
+                <div className="max-w-4xl w-full mx-auto px-4 md:px-6 py-8 md:py-12 flex items-center justify-center">
+                    <img
+                        src="/images/Jurnal.jpg"
+                        alt="Журнал Академия здоровья"
+                        className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-orange-900/10 border border-orange-100"
+                    />
                 </div>
             </div>
         </AppShell>

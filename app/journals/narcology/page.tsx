@@ -5,14 +5,32 @@ import Link from "next/link"
 import { Download, ChevronLeft, Archive, FileDigit, Calendar } from "lucide-react"
 
 const issues = [
-    { year: "2012", title: "Выпуск №1-4 2012", date: "2012" },
-    { year: "2011", title: "Выпуск №1-4 2011", date: "2011" },
-    { year: "2010", title: "Выпуск №1-4 2010", date: "2010" },
-    { year: "2009", title: "Выпуск №1-4 2009", date: "2009" },
-    { year: "2008", title: "Выпуск №1-4 2008", date: "2008" },
-    { year: "2007", title: "Выпуск №1-4 2007", date: "2007" },
-    { year: "2006", title: "Выпуск №1-4 2006", date: "2006" },
-    { year: "2005", title: "Выпуск №1-4 2005", date: "2005" },
+    { year: "2012", title: "Том 12 выпуск № 1-4 Вопросы наркологии Казахстана", date: "2012", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    { year: "2011", title: "Том 11 выпуск № 1-4 Вопросы наркологии Казахстана", date: "2011", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    {
+        year: "2010",
+        title: "Том 10 выпуск № 1-4 Вопросы наркологии Казахстана, Специальный выпуск посвященный Республиканской научно- практической конференции.",
+        date: "2010",
+        href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip"
+    },
+    {
+        year: "2009",
+        title: "Том 9 выпуск № 1-4   Вопросы наркологии Казахстана, Специальный выпуск посвященный третьему съезду психиатров и др.специалистов в РК",
+        date: "2009",
+        href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip"
+    },
+    { year: "2008", title: "Выпуск №1-4 2008", date: "2008", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    { year: "2007", title: "Выпуск №1-4 2007", date: "2007", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    { year: "2006", title: "Выпуск №1-4 2006", date: "2006", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    { year: "2005", title: "Выпуск №1-4 2005", date: "2005", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    {
+        year: "2004",
+        title: "Выпуск №1-4 2004, Специальный выпуск Посвященный второму съезду психиатров и др. специалистов в РК",
+        date: "2004",
+        href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip"
+    },
+    { year: "2003", title: "Выпуск №1-4 2003", date: "2003", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
+    { year: "2002", title: "Выпуск №1-4 2002", date: "2002", href: "http://www.rnpc.kz/images/narkaz/nk_2002.zip" },
 ]
 
 export default function NarcologyJournalPage() {
@@ -35,26 +53,28 @@ export default function NarcologyJournalPage() {
                 </div>
 
                 {/* Content */}
-                <div className="max-w-5xl w-full mx-auto px-6 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="max-w-5xl w-full mx-auto px-4 md:px-6 py-8 md:py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         {issues.map((i, idx) => (
-                            <div key={idx} className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between">
-                                <div className="flex items-center gap-5">
-                                    <div className="bg-blue-50 p-4 rounded-2xl text-blue-600">
-                                        <FileDigit className="w-6 h-6" />
+                            <div key={idx} className="bg-white p-5 md:p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:shadow-md">
+                                <div className="flex items-center gap-4 md:gap-5">
+                                    <div className="bg-blue-50 p-3 md:p-4 rounded-2xl text-blue-600 shrink-0">
+                                        <FileDigit className="w-5 h-5 md:w-6 md:h-6" />
                                     </div>
                                     <div>
-                                        <h3 className="text-sm font-black text-slate-800 uppercase leading-tight">{i.title}</h3>
-                                        <div className="flex items-center gap-2 mt-1">
+                                        <h3 className="text-sm font-black text-slate-800 uppercase leading-snug">{i.title}</h3>
+                                        <div className="flex items-center gap-2 mt-1.5">
                                             <Calendar className="w-3 h-3 text-slate-300" />
                                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{i.year} год</span>
                                         </div>
                                     </div>
                                 </div>
-                                <button className="flex items-center gap-2 px-6 py-3 bg-slate-50 rounded-2xl text-slate-400 font-black uppercase text-[10px] tracking-widest">
-                                    <Download className="w-4 h-4" />
-                                    <span>ZIP</span>
-                                </button>
+                                <a href={i.href} download className="w-full sm:w-auto">
+                                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-50 text-slate-400 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-600 hover:text-white transition-all">
+                                        <Download className="w-4 h-4" />
+                                        <span>ZIP</span>
+                                    </button>
+                                </a>
                             </div>
                         ))}
                     </div>

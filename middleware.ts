@@ -8,8 +8,24 @@ const isPublicRoute = createRouteMatcher([
   '/appointment(.*)',
   '/contacts(.*)',
   '/services(.*)',
+  '/goszakup(.*)',
+  '/finance(.*)',
+  '/vacancies(.*)',
+  '/zozh(.*)',
+  '/patients(.*)',
+  '/gallery(.*)',
+  '/director-blog(.*)',
+  '/about(.*)',
+  '/news(.*)',
+  '/info(.*)',
+  '/journals(.*)',
+  '/paid-services(.*)',
+  '/ads(.*)',
+  '/npa(.*)',
+  '/free-help(.*)',
   '/api(.*)'
 ]);
+
 
 // ВОТ ЗДЕСЬ (6-я строка) добавлено слово async
 export default clerkMiddleware(async (auth, request) => {
