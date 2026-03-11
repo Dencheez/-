@@ -35,7 +35,7 @@ export function QuickActions() {
   ]
 
   return (
-    <div className="mx-2 md:mx-4 mt-4 grid grid-cols-3 gap-2 md:gap-3">
+    <div className=" md:mx-4 mt-[-25px] grid grid-cols-3 gap-2 md:gap-3">
       {quickActions.map((action) => {
         const Icon = action.icon
         return (

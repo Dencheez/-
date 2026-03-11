@@ -19,7 +19,7 @@ function HomeContent() {
         <HeroBanner />
 
         {/* Контентная часть */}
-        <div className="flex flex-col gap-8 p-4 md:p-8">
+        <div className="flex flex-col gap-4 p-4 md:p-8">
           <QuickActions />
           <ServicesSection searchQuery={searchQuery} />
           <NewsSection searchQuery={searchQuery} />

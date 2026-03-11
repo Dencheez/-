@@ -47,11 +47,11 @@ export function InfoFiles() {
     }
 
     return (
-        <div className="mx-4 mt-8 relative group/container">
+        <div className="mx-4 relative group/container">
             {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute left-[-40px] top-[20%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Назад"
             >
                 <ChevronLeft className="h-5 w-5 text-gray-500" />
@@ -60,7 +60,7 @@ export function InfoFiles() {
             {/* Правая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute right-[-40px] top-[20%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Вперед"
             >
                 <ChevronRight className="h-5 w-5 text-gray-500" />
@@ -78,7 +78,7 @@ export function InfoFiles() {
                         <Link
                             key={index}
                             href={card.link}
-                            className="group flex flex-col space-y-2 shrink-0 snap-start w-[140px] md:w-full"
+                            className="group flex flex-col space-y-2 shrink-0 snap-start w-[calc((100%-14px)/3)] md:w-full"
                         >
                             {/* Контейнер с твоим фиксом для 4-й картинки */}
                             <div className={`relative w-full aspect-[16/9] md:aspect-[4/3] overflow-hidden rounded-sm border border-gray-100 shadow-sm bg-white flex items-center justify-center ${isFourth ? "p-3" : "p-0"}`}>

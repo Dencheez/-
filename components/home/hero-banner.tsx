@@ -27,7 +27,6 @@ export function HeroBanner() {
 
   return (
     <div className="flex flex-col w-full bg-white">
-      {/* Высота 450px — золотая середина, чтобы не было гигантизма */}
       <div className="relative w-full h-[250px] md:h-[450px] bg-[#f8fafd] overflow-hidden group">
 
         <Link href={defaultSlides[current].link} className="relative block h-full w-full">
