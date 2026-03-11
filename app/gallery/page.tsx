@@ -5,12 +5,9 @@ import Link from "next/link"
 import { Image as ImageIcon, ChevronLeft, Maximize2, Camera } from "lucide-react"
 
 const images = [
-    { id: 1, title: "Главный корпус", category: "Экстерьер" },
-    { id: 2, title: "Приемное отделение", category: "Интерьер" },
-    { id: 3, title: "Отделение реабилитации", category: "Палаты" },
-    { id: 4, title: "Конференц-зал", category: "Залы" },
-    { id: 5, title: "Территория центра", category: "Парк" },
-    { id: 6, title: "Медицинское оборудование", category: "Оснащение" },
+    { id: 1, category: "спереди" },
+    { id: 2, category: "сбоку" },
+    { id: 3, category: "зади" },
 ]
 
 export default function GalleryPage() {
@@ -46,7 +43,7 @@ export default function GalleryPage() {
 
                                 <div className="absolute inset-0 bg-slate-900/80 flex flex-col justify-end p-8">
                                     <span className="text-[10px] font-black text-[#00B5C4] uppercase tracking-widest mb-1">{img.category}</span>
-                                    <h3 className="text-white text-lg font-black uppercase tracking-tight">{img.title}</h3>
+                                    <h3 className="text-white text-lg font-black uppercase tracking-tight"></h3>
                                 </div>
 
                                 <button className="absolute top-6 right-6 w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white">

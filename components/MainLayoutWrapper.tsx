@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import RightSidebar from './RightSidebar'
-import { DirectorBlog } from '@/components/DirectorBlog' // 1. Импортируем блог
+import { DirectorBlog } from '@/components/DirectorBlog'
 import { SidebarExtraBlocks } from '@/components/SidebarExtraBlocks'
 
 export default function MainLayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -31,9 +31,9 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
                                 <>
                                     <img src="/images/med_medal.jpg" className="w-[220px] h-auto" alt="Награда" />
 
-                                    <div className="w-[220px]">
+                                    <Link href="https://kaz.inform.kz/tags/" className="w-[220px]">
                                         <img src="/images/kz_symbol.jpg" className="w-full h-auto" alt="Символика" />
-                                    </div>
+                                    </Link>
 
                                     <img src="/images/doc-img.jpg" className="w-[220px] h-auto" alt="Документ" />
 

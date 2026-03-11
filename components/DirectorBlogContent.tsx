@@ -7,19 +7,6 @@ export function DirectorBlogContent() {
             {/* Hero Section */}
             <div className="relative mb-12 rounded-3xl overflow-hidden bg-gradient-to-br from-[#00B5C4] to-[#008A96] text-white shadow-2xl">
                 <div className="flex flex-col md:flex-row items-center">
-                    {/* Image */}
-                    <div className="w-full md:w-1/3 h-80 md:h-[450px] relative">
-                        <img
-                            src="/images/директор.jpg"
-                            alt="Рахменшеев Сапар Куанышбекович"
-                            className="w-full h-full object-cover object-top"
-                            onError={(e) => {
-                                e.currentTarget.src = "https://placehold.co/600x800/00B5C4/white?text=Директор";
-                            }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#00B5C4] via-transparent to-transparent md:bg-gradient-to-r" />
-                    </div>
-
                     {/* Content */}
                     <div className="w-full md:w-2/3 p-8 md:p-12">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-xs font-bold uppercase tracking-widest mb-6">

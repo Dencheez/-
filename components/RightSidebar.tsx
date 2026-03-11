@@ -7,8 +7,6 @@ import Link from "next/link"
 // 1. Конфигурация меню (все данные здесь)
 const menuConfig = [
     { name: "call центр 3000-103", href: "tel:3000103", isHeader: true },
-    { name: "Психиатрическая служба", href: "/services/psychiatry" },
-    { name: "Наркологическая служба", href: "/services/narkology" },
     {
         name: "Государственные закупки",
         subLinks: [
@@ -41,18 +39,17 @@ const menuConfig = [
     {
         name: "Обязательное социальное медицинское страхование",
         subLinks: [
-            { name: "ОСМС (Информация)", href: "/patients/osms" },
-            { name: "Фонд социального медицинского страхования", href: "/patients/osms" },
+            { name: "Фонд социального медицинского страхования", href: "https://msqory.kz/ru/" },
         ]
     },
     {
         name: "Финансовый отчет",
         subLinks: [
-            { name: "Отчет по НС", href: "/finance" },
+            { name: "Отчет по НС", href: "/about/board" },
             { name: "Отчет о доходах и расходах", href: "/finance" },
         ]
     },
-    { name: "Бесплатная помощь", href: "/patients/gobmp" },
+    { name: "Бесплатная помощь", href: "/" },
 ]
 
 export default function RightSidebar() {
