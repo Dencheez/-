@@ -68,7 +68,7 @@ export default function ContactsPage() {
             <ShieldAlert className="h-5 w-5" />
             <h3 className="font-bold text-sm uppercase">Круглосуточная помощь</h3>
           </div>
-          <p className="text-xs text-red-700 mb-4 italic">Специализированная неотложная скорая помощь</p>
+          <p className="text-xs text-red-700 mb-4">Специализированная неотложная скорая помощь</p>
           <div className="space-y-2">
             <a href="tel:77273765596" className="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm">
               <span className="text-xs font-bold text-gray-700">+7 (727) 376-55-96</span>

@@ -11,7 +11,7 @@ export default function TenderAds() {
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 {/* МОБИЛЬНАЯ ПАНЕЛЬ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
-                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af] transition-colors">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
                     <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-300 uppercase tracking-widest">
@@ -33,14 +33,14 @@ export default function TenderAds() {
                         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Документ JPG</span>
                         <button
                             onClick={() => window.open(imagePath, '_blank')}
-                            className="flex items-center gap-1 text-[10px] font-black text-[#1e40af] uppercase active:opacity-60 transition-opacity"
+                            className="flex items-center gap-1 text-[10px] font-black text-[#1e40af] uppercase"
                         >
                             <Maximize2 size={12} /> Весь экран
                         </button>
                     </div>
 
                     {/* САМ СКАН */}
-                    <div className="relative bg-white rounded-xl shadow-xl shadow-blue-900/5 border border-slate-200 overflow-hidden group active:scale-[0.99] transition-transform">
+                    <div className="relative bg-white rounded-xl border border-slate-200 overflow-hidden group">
                         <img
                             src={imagePath}
                             alt="Объявление по госзакупкам"
@@ -57,7 +57,7 @@ export default function TenderAds() {
                 <div className="flex justify-center gap-10 mt-10">
                     <button
                         onClick={() => window.print()}
-                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 hover:text-[#1e40af] active:scale-95 transition-all"
+                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500"
                     >
                         <Printer size={14} />
                         <span className="border-b border-slate-200">Печать</span>
@@ -65,7 +65,7 @@ export default function TenderAds() {
 
                     <a
                         href={`mailto:?subject=${encodeURIComponent(title)}&body=Объявление доступно по ссылке: ${typeof window !== 'undefined' ? window.location.href : ''}`}
-                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500 hover:text-[#1e40af] active:scale-95 transition-all"
+                        className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.15em] text-slate-500"
                     >
                         <Mail size={14} />
                         <span className="border-b border-slate-200">E-mail</span>

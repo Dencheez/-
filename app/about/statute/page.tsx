@@ -8,7 +8,7 @@ export default function CharterPage() {
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 {/* МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ */}
                 <div className="flex items-center justify-between border-b pb-4 mb-8">
-                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
                     <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-300 uppercase tracking-widest">
@@ -25,9 +25,9 @@ export default function CharterPage() {
                 </div>
 
                 {/* КАРТОЧКА ДОКУМЕНТА */}
-                <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100 flex flex-col items-center shadow-sm">
+                <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100 flex flex-col items-center">
                     {/* Иконка документа */}
-                    <div className="w-20 h-20 bg-slate-900 text-white flex items-center justify-center rounded-[24px] shadow-2xl shadow-slate-200 mb-6">
+                    <div className="w-20 h-20 bg-slate-900 text-white flex items-center justify-center rounded-[24px] mb-6">
                         <FileText size={36} />
                     </div>
 
@@ -50,7 +50,7 @@ export default function CharterPage() {
                     <a
                         href="/files/ustav.pdf"
                         download="Устав_ЦПЗ_Алматы.pdf"
-                        className="w-full flex items-center justify-center gap-3 bg-blue-600 active:bg-slate-900 text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all shadow-lg shadow-blue-100 active:scale-[0.96]"
+                        className="w-full flex items-center justify-center gap-3 bg-blue-600 text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em]"
                     >
                         <Download size={18} />
                         Скачать PDF
@@ -61,13 +61,13 @@ export default function CharterPage() {
                 <div className="mt-4 grid grid-cols-2 gap-3">
                     <button
                         onClick={() => window.print()}
-                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest active:bg-slate-50 active:scale-[0.96] transition-all"
+                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest"
                     >
                         <Printer size={14} /> Печать
                     </button>
                     <a
                         href="mailto:cpz_almaty@med.mail.kz"
-                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest active:bg-slate-50 active:scale-[0.96] transition-all"
+                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest"
                     >
                         <Mail size={14} /> E-mail
                     </a>
@@ -76,7 +76,7 @@ export default function CharterPage() {
                 {/* ИНФО */}
                 <div className="mt-10 text-center pb-8">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-[9px] text-slate-400 font-black uppercase tracking-widest">
-                        <span className="w-1 h-1 bg-blue-600 rounded-full animate-pulse"></span>
+                        <span className="w-1 h-1 bg-blue-600 rounded-full"></span>
                         v.2023 • 2.4 MB • PDF
                     </div>
                 </div>

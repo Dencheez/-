@@ -21,7 +21,7 @@ export default function PatientsPage() {
             <main className="max-w-6xl mx-auto px-6 py-6 w-full">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
-                        <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-2 hover:text-blue-600 transition-colors">
+                        <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-2">
                             <ChevronLeft className="h-3 w-3" /> На главную
                         </Link>
                         <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">
@@ -43,12 +43,12 @@ export default function PatientsPage() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="group bg-white border border-slate-100 p-5 rounded-2xl flex items-center gap-4 shadow-sm hover:shadow-md hover:border-blue-200 transition-all"
+                            className="group bg-white border border-slate-100 p-5 rounded-2xl flex items-center gap-4 shadow-sm"
                         >
-                            <div className="flex-shrink-0 w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <div className="flex-shrink-0 w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
                                 {item.icon}
                             </div>
-                            <span className="text-[13px] font-bold text-slate-700 uppercase leading-tight group-hover:text-blue-600">
+                            <span className="text-[13px] font-bold text-slate-700 uppercase leading-tight">
                                 {item.title}
                             </span>
                         </Link>
@@ -63,7 +63,7 @@ export default function PatientsPage() {
                             Мы рады приветствовать вас на страницах официального сайта Центра психического здоровья.
                         </p>
                         <div className="pt-8 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                            <p className="text-2xl font-serif italic text-slate-900">Желаю всем здоровья!</p>
+                            <p className="text-2xl text-slate-900">Желаю всем здоровья!</p>
                             <div className="text-right">
                                 <p className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] mb-1">Директор центра</p>
                                 <p className="text-xl font-black text-slate-900 uppercase">Рахменшеев С.К.</p>

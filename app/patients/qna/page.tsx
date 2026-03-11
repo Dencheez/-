@@ -8,7 +8,7 @@ export default function QnaPage() {
         <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
                 {/* Навигация */}
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
@@ -18,8 +18,8 @@ export default function QnaPage() {
                         Вопрос-ответ
                     </h1>
                     <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
+                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer" />
+                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer" />
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@ export default function QnaPage() {
                                 <label className="text-[10px] font-bold uppercase text-slate-400">ФИО полностью *</label>
                                 <input
                                     type="text"
-                                    className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none transition-colors"
+                                    className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none"
                                     placeholder="Иванов Иван Иванович"
                                 />
                             </div>
@@ -78,7 +78,7 @@ export default function QnaPage() {
                                     <label className="text-[10px] font-bold uppercase text-slate-400">Ваш телефон *</label>
                                     <input
                                         type="tel"
-                                        className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none transition-colors"
+                                        className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none"
                                         placeholder="+7 (___) ___-__-__"
                                     />
                                 </div>
@@ -86,7 +86,7 @@ export default function QnaPage() {
                                     <label className="text-[10px] font-bold uppercase text-slate-400">E-mail</label>
                                     <input
                                         type="email"
-                                        className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none transition-colors"
+                                        className="w-full border-b-2 border-slate-100 py-2 focus:border-[#1e40af] focus:outline-none"
                                         placeholder="example@mail.com"
                                     />
                                 </div>
@@ -96,18 +96,18 @@ export default function QnaPage() {
                                 <label className="text-[10px] font-bold uppercase text-slate-400">Текст обращения *</label>
                                 <textarea
                                     rows={4}
-                                    className="w-full border-2 border-slate-50 p-4 bg-slate-50 focus:bg-white focus:border-[#1e40af] focus:outline-none transition-all resize-none"
+                                    className="w-full border-2 border-slate-50 p-4 bg-slate-50 focus:bg-white focus:border-[#1e40af] focus:outline-none resize-none"
                                     placeholder="Опишите суть вашего вопроса или претензии..."
                                 ></textarea>
                             </div>
 
                             <div className="flex flex-col gap-4">
-                                <p className="text-[11px] text-slate-400 leading-relaxed italic">
+                                <p className="text-[11px] text-slate-400 leading-relaxed">
                                     * Срок рассмотрения жалоб и получения ответа согласно ст.99 АППК РК — 20 дней.
                                 </p>
                                 <button
                                     type="submit"
-                                    className="flex items-center justify-center gap-2 bg-[#1e40af] text-white font-bold uppercase text-[12px] tracking-widest py-4 px-8 hover:bg-slate-900 transition-colors w-full md:w-max"
+                                    className="flex items-center justify-center gap-2 bg-[#1e40af] text-white font-bold uppercase text-[12px] tracking-widest py-4 px-8 w-full md:w-max"
                                 >
                                     Отправить заявление <Send className="h-4 w-4" />
                                 </button>

@@ -9,7 +9,7 @@ export default function FlagPage() {
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">
-                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
                         <ChevronLeft className="h-5 w-5" /> Назад
                     </Link>
                 </div>
@@ -25,9 +25,8 @@ export default function FlagPage() {
                 </div>
 
                 {/* ИЗОБРАЖЕНИЕ */}
-                <div className="relative mb-10 group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-xl blur opacity-10"></div>
-                    <div className="relative bg-white border border-slate-100 rounded-xl overflow-hidden shadow-xl shadow-blue-900/5">
+                <div className="relative mb-10">
+                    <div className="relative bg-white border border-slate-100 rounded-xl overflow-hidden">
                         <img
                             src="/images/symbols/flag.png"
                             alt="Флаг РК"

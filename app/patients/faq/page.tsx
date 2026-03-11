@@ -10,13 +10,13 @@ const AccordionItem = ({ question, answer }: { question: string, answer: React.R
         <div className="border-b border-slate-100">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-5 flex justify-between items-center text-left hover:text-blue-600 transition-colors group"
+                className="w-full py-5 flex justify-between items-center text-left"
             >
                 <span className="text-[14px] font-bold uppercase tracking-tight pr-4">{question}</span>
-                {isOpen ? <ChevronUp className="h-5 w-5 text-blue-600 flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-slate-300 group-hover:text-blue-600 flex-shrink-0" />}
+                {isOpen ? <ChevronUp className="h-5 w-5 text-blue-600 flex-shrink-0" /> : <ChevronDown className="h-5 w-5 text-slate-300 flex-shrink-0" />}
             </button>
             {isOpen && (
-                <div className="pb-6 text-[15px] leading-relaxed text-slate-600 whitespace-pre-wrap animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="pb-6 text-[15px] leading-relaxed text-slate-600 whitespace-pre-wrap">
                     {answer}
                 </div>
             )}
@@ -28,15 +28,15 @@ export default function FAQPage() {
     return (
         <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
                 <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
                     <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">Часто задаваемые вопросы</h1>
                     <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
+                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer" />
+                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer" />
                     </div>
                 </div>
 

@@ -36,7 +36,7 @@ export function HeroBanner() {
             alt={defaultSlides[current].title}
             fill
             priority
-            className={`transition-opacity duration-500 ${
+            className={`${
               // Только для 2-й картинки используем contain, для остальных — cover
               defaultSlides[current].img.includes('hero-banner--2.jpg')
                 ? "object-contain p-4 md:p-8"
@@ -57,12 +57,12 @@ export function HeroBanner() {
         {/* Индикаторы */}
         <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-1 z-30">
           {defaultSlides.map((_, idx) => (
-            <div key={idx} className={`h-1.5 rounded-full transition-all ${current === idx ? "w-6 bg-blue-600" : "w-1.5 bg-blue-200"}`} />
+            <div key={idx} className={`h-1.5 rounded-full ${current === idx ? "w-6 bg-blue-600" : "w-1.5 bg-blue-200"}`} />
           ))}
         </div>
 
         {/* Кнопка "Вперед" */}
-        <button onClick={(e) => { e.preventDefault(); nextSlide(); }} className="absolute bottom-4 right-4 h-10 w-10 md:h-12 md:w-12 flex items-center justify-center rounded-full bg-white shadow-md z-30 hover:bg-slate-50 transition-transform active:scale-90">
+        <button onClick={(e) => { e.preventDefault(); nextSlide(); }} className="absolute bottom-4 right-4 h-10 w-10 md:h-12 md:w-12 flex items-center justify-center rounded-full bg-white shadow-md z-30 hover:bg-slate-50">
           <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-slate-700" />
         </button>
       </div>

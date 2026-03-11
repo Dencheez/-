@@ -30,15 +30,15 @@ export default function GratitudePage() {
     return (
         <AppShell>
             <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
                 <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
                     <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">Благодарности</h1>
                     <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
+                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer" />
+                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer" />
                     </div>
                 </div>
 
@@ -48,11 +48,11 @@ export default function GratitudePage() {
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6">
                             {neuImages.map((src, i) => (
                                 <div key={i} onClick={() => setSelectedImage(src)} className="relative aspect-[3/4] overflow-hidden rounded shadow-sm border border-slate-200 bg-white cursor-zoom-in">
-                                    <img src={src} alt="Благодарность" className="object-cover w-full h-full hover:scale-105 transition-transform" />
+                                    <img src={src} alt="Благодарность" className="object-cover w-full h-full" />
                                 </div>
                             ))}
                         </div>
-                        <div className="space-y-4 text-slate-700 leading-relaxed italic">
+                        <div className="space-y-4 text-slate-700 leading-relaxed">
                             <p className="font-bold text-slate-900 not-italic uppercase text-sm mb-4">Благодарность!!!</p>
                             <p>Мы жители города Алматы проживаем по адресу  - улица Тлендиева, дома №141,143,146,147
                                 <br />
@@ -99,7 +99,7 @@ export default function GratitudePage() {
                         <div className="grid grid-cols-2 gap-4 max-w-2xl">
                             {batyrImages.map((src, i) => (
                                 <div key={i} onClick={() => setSelectedImage(src)} className="aspect-video bg-slate-50 rounded-lg overflow-hidden border border-slate-200 cursor-zoom-in">
-                                    <img src={src} alt="Batyr Seventy" className="object-cover w-full h-full hover:scale-105 transition-transform" />
+                                    <img src={src} alt="Batyr Seventy" className="object-cover w-full h-full" />
                                 </div>
                             ))}
                         </div>
@@ -118,7 +118,7 @@ export default function GratitudePage() {
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
                             {rimmaImages.map((src, i) => (
                                 <div key={i} onClick={() => setSelectedImage(src)} className="aspect-[3/4] bg-white border border-slate-200 rounded overflow-hidden shadow-sm cursor-zoom-in">
-                                    <img src={src} alt="Римма" className="object-cover w-full h-full hover:scale-105 transition-transform" />
+                                    <img src={src} alt="Римма" className="object-cover w-full h-full" />
                                 </div>
                             ))}
                         </div>
@@ -128,10 +128,10 @@ export default function GratitudePage() {
 
             {selectedImage && (
                 <div
-                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 animate-in fade-in duration-200 cursor-zoom-out"
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 cursor-zoom-out"
                     onClick={() => setSelectedImage(null)}
                 >
-                    <button className="absolute top-6 right-6 text-white hover:rotate-90 transition-transform">
+                    <button className="absolute top-6 right-6 text-white">
                         <X className="h-8 w-8" />
                     </button>
                     <div className="relative max-w-4xl max-h-[90vh] w-full h-full flex items-center justify-center">

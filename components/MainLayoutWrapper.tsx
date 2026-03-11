@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import RightSidebar from './RightSidebar'
 import { DirectorBlog } from '@/components/DirectorBlog' // 1. Импортируем блог
+import { SidebarExtraBlocks } from '@/components/SidebarExtraBlocks'
 
 export default function MainLayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
@@ -28,25 +29,20 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
                         <div className="sticky top-24 p-4 flex flex-col items-center gap-6">
                             {isHome || isBlog ? (
                                 <>
-
                                     <img src="/images/med_medal.jpg" className="w-[220px] h-auto" alt="Награда" />
 
-
-                                    <Link href="https://kaz.inform.kz/tags/" target="_blank" className="w-[220px]">
-                                        <img src="/images/kz_symbol.jpg" className="w-full h-auto hover:opacity-80 transition-opacity" alt="Символика" />
-                                    </Link>
-
+                                    <div className="w-[220px]">
+                                        <img src="/images/kz_symbol.jpg" className="w-full h-auto" alt="Символика" />
+                                    </div>
 
                                     <img src="/images/doc-img.jpg" className="w-[220px] h-auto" alt="Документ" />
 
-
-                                    <Link href="https://alfasat.kz/" target="_blank" className="w-[220px]">
-                                        <img src="/images/apple.jpg" className="w-full h-auto hover:opacity-80 transition-opacity" alt="Яблоко" />
-                                    </Link>
-
+                                    <div className="w-[220px]">
+                                        <img src="/images/apple.jpg" className="w-full h-auto" alt="Яблоко" />
+                                    </div>
 
                                     <Link href="/contacts" className="w-[220px]">
-                                        <img src="/images/call-center.png" className="w-full h-auto hover:opacity-80 transition-opacity" alt="Калл центр" />
+                                        <img src="/images/call-center.png" className="w-full h-auto" alt="Калл центр" />
                                     </Link>
                                 </>
                             ) : (
@@ -58,25 +54,18 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
 
                 {/* ЦЕНТРАЛЬНЫЙ КОНТЕНТ */}
                 <main className={`flex-1 min-w-0 bg-white ${isFullWidth ? 'w-full' : ''}`}>
-                    {/* Убрал лишние паддинги md:p-8, чтобы баннер прилипал к краям, если нужно */}
                     <div className={`${isFullWidth ? 'p-4 md:p-8' : ''}`}>
                         {children}
                     </div>
                 </main>
 
-                {/* ПРАВАЯ ПАНЕЛЬ (Sticky) - Блог директора теперь ВСЕГДА ТУТ СВЕРХУ */}
+                {/* ПРАВАЯ ПАНЕЛЬ (Sticky) */}
                 {(isHome || isBlog) && !isFullWidth && (
                     <aside className="hidden lg:block w-[350px] border-l border-slate-100 bg-slate-50/50">
                         <div className="sticky top-24 p-4 flex flex-col gap-6">
-
-                            {/* 2. Блог директора встал намертво в начало правой колонки (скрываем если уже на странице блога) */}
                             {!isBlog && <DirectorBlog />}
-
                             <RightSidebar />
-                            <div className="flex flex-col gap-4">
-                                <img src="/images/right/health_banner.jpg" className="w-full rounded shadow-sm" alt="ЗОЖ" />
-                                <img src="/images/right/damumed_logo.png" className="w-full px-4" alt="Damumed" />
-                            </div>
+                            <SidebarExtraBlocks />
                         </div>
                     </aside>
                 )}

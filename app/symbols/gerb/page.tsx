@@ -8,7 +8,7 @@ export default function GerbPage() {
         <AppShell>
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 <div className="flex items-center justify-between mb-6">
-                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
                         <ChevronLeft className="h-5 w-5" /> Назад
                     </Link>
                 </div>
@@ -23,12 +23,11 @@ export default function GerbPage() {
                 </div>
 
                 <div className="flex justify-center py-10 relative">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle,_rgba(234,179,8,0.1)_0%,_transparent_70%)]"></div>
-                    <img src="/images/symbols/gerb.png" alt="Герб РК" className="h-56 w-56 object-contain relative z-10 drop-shadow-2xl" />
+                    <img src="/images/symbols/gerb.png" alt="Герб РК" className="h-56 w-56 object-contain relative z-10" />
                 </div>
 
                 <div className="space-y-8 text-[15px] text-slate-700 pb-10">
-                    <div className="bg-slate-900 text-white p-6 rounded-2xl shadow-xl">
+                    <div className="bg-slate-900 text-white p-6 rounded-2xl">
                         <div className="flex items-start gap-3">
                             <Award className="text-yellow-400 shrink-0" size={20} />
                             <div>

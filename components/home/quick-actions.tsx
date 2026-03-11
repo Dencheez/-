@@ -42,7 +42,7 @@ export function QuickActions() {
           <Link
             key={action.href}
             href={action.href}
-            className="flex flex-col items-center gap-1 md:gap-2 rounded-xl md:rounded-2xl border border-border bg-card p-2 md:p-4 text-center shadow-sm transition-all hover:shadow-md active:scale-[0.97]"
+            className="flex flex-col items-center gap-1 md:gap-2 rounded-xl md:rounded-2xl border border-border bg-card p-2 md:p-4 text-center shadow-sm"
           >
             {/* Иконка: h-9 на мобилке, h-12 на десктопе */}
             <div className={`flex h-9 w-9 md:h-12 md:w-12 items-center justify-center rounded-lg md:rounded-xl ${action.bg}`}>

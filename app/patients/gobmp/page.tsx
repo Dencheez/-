@@ -12,7 +12,7 @@ export default function GobmpPage() {
         <AppShell>
             <main className="max-w-5xl mx-auto px-6 py-8 w-full">
                 {/* Навигация */}
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 hover:text-primary transition-colors font-black">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 font-black">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
@@ -22,14 +22,14 @@ export default function GobmpPage() {
                         Новая модель ГОБМП
                     </h1>
                     <div className="flex gap-4 mb-1">
-                        <Printer onClick={() => window.print()} className="h-5 w-5 text-slate-200 cursor-pointer hover:text-primary transition-colors" />
-                        <Mail onClick={handleEmailClick} className="h-5 w-5 text-slate-200 cursor-pointer hover:text-primary transition-colors" />
+                        <Printer onClick={() => window.print()} className="h-5 w-5 text-slate-200 cursor-pointer" />
+                        <Mail onClick={handleEmailClick} className="h-5 w-5 text-slate-200 cursor-pointer" />
                     </div>
                 </div>
 
                 {/* Видео-контейнер */}
                 <div className="w-full group">
-                    <div className="relative aspect-video w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-100 transition-transform duration-500 group-hover:scale-[1.01]">
+                    <div className="relative aspect-video w-full bg-slate-900 rounded-2xl overflow-hidden border-4 border-white ring-1 ring-slate-100">
                         <iframe
                             className="absolute top-0 left-0 w-full h-full"
                             src="https://www.youtube.com/embed/8MCrnYfGSUE?si=R3JpuCR6_phFY64M"
@@ -47,12 +47,12 @@ export default function GobmpPage() {
                         <p className="text-[10px] text-primary uppercase font-black tracking-[0.2em]">
                             Статус программы
                         </p>
-                        <p className="mt-2 text-2xl font-black text-slate-900 leading-none uppercase italic">
+                        <p className="mt-2 text-2xl font-black text-slate-900 leading-none uppercase">
                             Действующая <br /> модель 2024
                         </p>
                     </div>
                     <div className="md:col-span-2 border-l-2 border-slate-50 pl-10">
-                        <p className="text-lg text-slate-600 leading-relaxed font-medium italic">
+                        <p className="text-lg text-slate-600 leading-relaxed font-medium">
                             В данном видеоматериале подробно разъясняются изменения в системе ГОБМП
                             и права граждан на получение бесплатной медицинской помощи в рамках новой модели.
                         </p>

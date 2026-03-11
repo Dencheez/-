@@ -40,7 +40,7 @@ export function DoctorSelect({ onSelect }: DoctorSelectProps) {
           <button
             key={s}
             onClick={() => setSelectedSpecialty(s)}
-            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-medium transition-colors ${selectedSpecialty === s
+            className={`shrink-0 rounded-xl px-4 py-2 text-xs font-medium ${selectedSpecialty === s
               ? "bg-primary text-primary-foreground"
               : "bg-card text-foreground border border-border"
               }`}
@@ -56,7 +56,7 @@ export function DoctorSelect({ onSelect }: DoctorSelectProps) {
           <button
             key={doctor.id}
             onClick={() => onSelect(doctor)}
-            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 text-left shadow-sm transition-all hover:shadow-md active:scale-[0.98]"
+            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 text-left"
           >
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
               {doctor.avatar}

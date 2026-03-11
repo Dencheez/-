@@ -7,12 +7,14 @@ import Link from "next/link"
 // 1. Конфигурация меню (все данные здесь)
 const menuConfig = [
     { name: "call центр 3000-103", href: "tel:3000103", isHeader: true },
+    { name: "Психиатрическая служба", href: "/services/psychiatry" },
+    { name: "Наркологическая служба", href: "/services/narkology" },
     {
         name: "Государственные закупки",
         subLinks: [
-            { name: "Протоколы", href: "/gos-zakupki/protocols" },
-            { name: "Объявление", href: "/gos-zakupki/ads" },
-            { name: "План госзакупок", href: "/gos-zakupki/plan" },
+            { name: "Протоколы", href: "/goszakup/protocols" },
+            { name: "Объявление", href: "/goszakup/ads" },
+            { name: "План госзакупок", href: "/goszakup/plan" },
         ]
     },
     { name: "Новости", href: "/news" },
@@ -29,7 +31,7 @@ const menuConfig = [
     {
         name: "Журналы",
         subLinks: [
-            { name: 'Журнал "Вопросы наркологии Казахстана"', href: "/journals/narcology" },
+            { name: 'Журнал "Вопросы наркологи Казахстана"', href: "/journals/narcology" },
             { name: 'Журнал "Вопросы ментальной медицины и экологии"', href: "/journals/mental" },
             { name: "Академия здоровья", href: "/journals/academy" },
             { name: "Наши статьи из журналов", href: "/journals/articles" },
@@ -39,17 +41,18 @@ const menuConfig = [
     {
         name: "Обязательное социальное медицинское страхование",
         subLinks: [
-            { name: "Фонд социального медицинского страхования", href: "/osms/fond" },
+            { name: "ОСМС (Информация)", href: "/patients/osms" },
+            { name: "Фонд социального медицинского страхования", href: "/patients/osms" },
         ]
     },
     {
         name: "Финансовый отчет",
         subLinks: [
-            { name: "Отчет по НС", href: "/finance/ns" },
-            { name: "Отчет о доходах и расходах", href: "/finance/report" },
+            { name: "Отчет по НС", href: "/finance" },
+            { name: "Отчет о доходах и расходах", href: "/finance" },
         ]
     },
-    { name: "Бесплатная помощь", href: "/free-help" },
+    { name: "Бесплатная помощь", href: "/patients/gobmp" },
 ]
 
 export default function RightSidebar() {
@@ -96,7 +99,7 @@ export default function RightSidebar() {
                         {/* Выпадающая часть */}
                         {hasSubLinks && isOpen && (
                             <div
-                                className="bg-[#00A7B5] flex flex-col animate-in fade-in slide-in-from-top-1 duration-200"
+                                className="bg-[#00A7B5] flex flex-col duration-200"
                                 onMouseLeave={() => setOpenIndex(null)}
                             >
                                 {item.subLinks?.map((sub, sIdx) => (

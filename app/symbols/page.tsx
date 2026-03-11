@@ -30,7 +30,7 @@ export default function SymbolsMenuPage() {
             <main className="flex-grow w-full max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12">
 
                 {/* НАВИГАЦИЯ */}
-                <Link href="/" className="inline-flex items-center gap-2 text-slate-400 uppercase text-[10px] font-black tracking-widest mb-8 hover:text-blue-600 transition-colors">
+                <Link href="/" className="inline-flex items-center gap-2 text-slate-400 uppercase text-[10px] font-black tracking-widest mb-8">
                     <ChevronLeft className="h-4 w-4" /> На главную
                 </Link>
 
@@ -59,27 +59,27 @@ export default function SymbolsMenuPage() {
                         <Link
                             key={symbol.href}
                             href={symbol.href}
-                            className="group bg-white rounded-3xl border border-slate-200 p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden"
+                            className="group bg-white rounded-3xl border border-slate-200 p-8 flex flex-col items-center text-center shadow-sm relative overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-blue-50/50 opacity-0" />
 
                             <div className="relative z-10 w-full">
-                                <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 bg-slate-50 rounded-2xl flex items-center justify-center p-4 group-hover:bg-white transition-colors">
+                                <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-6 bg-slate-50 rounded-2xl flex items-center justify-center p-4">
                                     {symbol.img ? (
                                         <img src={symbol.img} alt={symbol.title} className="max-h-full w-auto object-contain drop-shadow-md" />
                                     ) : (
-                                        <div className="bg-blue-50 p-6 rounded-full group-hover:scale-110 transition-transform">{symbol.icon}</div>
+                                        <div className="bg-blue-50 p-6 rounded-full">{symbol.icon}</div>
                                     )}
                                 </div>
 
-                                <h2 className="text-lg font-black text-slate-900 uppercase tracking-wider mb-3 group-hover:text-blue-600">
+                                <h2 className="text-lg font-black text-slate-900 uppercase tracking-wider mb-3">
                                     {symbol.title}
                                 </h2>
                                 <p className="text-sm text-slate-400 leading-relaxed px-4">
                                     {symbol.desc}
                                 </p>
 
-                                <div className="mt-6 inline-flex items-center gap-2 text-[10px] font-black uppercase text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="mt-6 inline-flex items-center gap-2 text-[10px] font-black uppercase text-blue-600 opacity-0">
                                     Подробнее <ExternalLink size={12} />
                                 </div>
                             </div>
@@ -119,7 +119,7 @@ export default function SymbolsMenuPage() {
                                     Статья 13
                                 </div>
                                 <QuoteIcon className="h-12 w-12 text-blue-400/50 mb-6" />
-                                <p className="text-2xl md:text-3xl font-black leading-tight italic tracking-tight">
+                                <p className="text-2xl md:text-3xl font-black leading-tight tracking-tight">
                                     «Граждане Республики Казахстан обязаны уважать государственные символы Республики.»
                                 </p>
                                 <div className="mt-10 h-1 w-20 bg-blue-400"></div>

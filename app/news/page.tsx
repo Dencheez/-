@@ -672,7 +672,7 @@ export default function NewsPage() {
             <main className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 w-full">
                 {/* Заголовок и хлебные крошки */}
                 <div className="mb-6">
-                    <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-1 mb-2 transition-colors">
+                    <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-1 mb-2">
                         <ChevronLeft className="h-3 w-3" /> На главную
                     </Link>
                     <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter flex items-center gap-3">
@@ -694,13 +694,13 @@ export default function NewsPage() {
                                         <Link
                                             href={link.url}
                                             target="_blank"
-                                            className="group flex items-start justify-between py-3 px-3 rounded-xl hover:bg-slate-50 transition-all border-b border-transparent hover:border-slate-100"
+                                            className="group flex items-start justify-between py-3 px-3 rounded-xl hover:bg-slate-50 border-b border-transparent hover:border-slate-100"
                                         >
                                             <div className="flex items-start gap-4 overflow-hidden">
                                                 <span className="text-[10px] font-black text-primary/30 tabular-nums w-6 mt-1 shrink-0">
                                                     {link.id.toString().padStart(3, '0')}
                                                 </span>
-                                                <span className="text-sm font-bold text-slate-700 group-hover:text-primary transition-colors leading-snug">
+                                                <span className="text-sm font-bold text-slate-700 group-hover:text-primary leading-snug">
                                                     {link.title}
                                                 </span>
                                             </div>
@@ -718,7 +718,7 @@ export default function NewsPage() {
                     <div className="flex flex-wrap justify-center gap-2">
                         <button
                             onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-primary hover:text-white transition-all disabled:opacity-20"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-primary hover:text-white disabled:opacity-20"
                             disabled={currentPage === 1}
                         >
                             <ChevronLeft className="h-5 w-5" />
@@ -728,8 +728,8 @@ export default function NewsPage() {
                             <button
                                 key={page.id}
                                 onClick={() => goToPage(page.id)}
-                                className={`w-9 h-9 md:w-11 md:h-11 rounded-xl font-black text-[11px] transition-all ${currentPage === page.id
-                                    ? "bg-primary text-white shadow-lg shadow-primary/30 scale-110 z-10"
+                                className={`w-9 h-9 md:w-11 md:h-11 rounded-xl font-black text-[11px] ${currentPage === page.id
+                                    ? "bg-primary text-white z-10"
                                     : "bg-white border border-slate-100 text-slate-400 hover:border-primary hover:text-primary"
                                     }`}
                             >
@@ -739,7 +739,7 @@ export default function NewsPage() {
 
                         <button
                             onClick={() => currentPage < pages.length && goToPage(currentPage + 1)}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-primary hover:text-white transition-all disabled:opacity-20"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:bg-primary hover:text-white disabled:opacity-20"
                             disabled={currentPage === pages.length}
                         >
                             <ChevronRight className="h-5 w-5" />

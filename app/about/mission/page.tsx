@@ -36,12 +36,12 @@ export default function MissionDetailedPage() {
                     <div className="lg:col-span-2 space-y-6 md:space-y-8">
                         <div className="bg-slate-50 border-l-[6px] md:border-l-8 border-[#1e40af] p-6 md:p-10">
                             <h2 className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-[#1e40af] mb-4 md:mb-6">Наша Миссия</h2>
-                            <p className="text-lg md:text-2xl text-slate-800 leading-tight font-medium italic">
+                            <p className="text-lg md:text-2xl text-slate-800 leading-tight font-medium">
                                 «Обеспечение доступности и высокого качества специализированной психиатрической и наркологической помощи через интеграцию в ПМСП и масштабную социальную реабилитацию».
                             </p>
                         </div>
                         <div className="prose prose-slate text-xs md:text-sm leading-relaxed text-slate-600">
-                            <h3 className="text-slate-900 font-bold uppercase italic border-b pb-2">Историческая справка службы:</h3>
+                            <h3 className="text-slate-900 font-bold uppercase border-b pb-2">Историческая справка службы:</h3>
                             <p>Психиатрическая служба города Алматы была организована в <strong>1939 году</strong>.</p>
                             <p>В настоящее время Центр располагает базой более <strong>3 гектаров</strong> и коечной мощностью <strong>632 койки</strong>.</p>
                         </div>
@@ -89,7 +89,7 @@ export default function MissionDetailedPage() {
                             <div className="flex justify-between items-center">
                                 <div>
                                     <p className="text-[9px] uppercase text-blue-400 font-bold tracking-widest">Всего на учете</p>
-                                    <p className="text-3xl md:text-5xl font-black italic">4 579 <span className="text-xs font-normal opacity-40">чел.</span></p>
+                                    <p className="text-3xl md:text-5xl font-black">4 579 <span className="text-xs font-normal opacity-40">чел.</span></p>
                                 </div>
                                 <ShieldCheck className="h-8 w-8 md:h-12 md:w-12 text-blue-600 opacity-50" />
                             </div>
@@ -180,7 +180,7 @@ export default function MissionDetailedPage() {
                             "Развитие трудовой реабилитации (цеха)."
                         ].map((task, i) => (
                             <div key={i} className="flex gap-4 md:gap-6 items-start border-l border-slate-700 pl-4 md:pl-6">
-                                <span className="text-blue-500 font-black text-xl md:text-2xl italic">0{i + 1}</span>
+                                <span className="text-blue-500 font-black text-xl md:text-2xl">0{i + 1}</span>
                                 <p className="text-xs md:text-sm text-slate-300 leading-snug">{task}</p>
                             </div>
                         ))}

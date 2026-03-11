@@ -160,7 +160,7 @@ function HeaderContent() {
 
 export function Header() {
   return (
-    <Suspense fallback={<div className="h-20 bg-card animate-pulse" />}>
+    <Suspense fallback={<div className="h-20 bg-card" />}>
       <HeaderContent />
     </Suspense>
   )

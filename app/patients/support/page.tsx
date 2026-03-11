@@ -33,7 +33,7 @@ export default function SupportServicePage() {
                                 <User className="h-5 w-5 text-blue-600 flex-shrink-0" />
                                 <div>
                                     <p className="font-bold">Худаир Жанна Рафхатовна</p>
-                                    <p className="text-xs text-slate-500 italic">Заместитель директора по контролю качества, врач высшей категории</p>
+                                    <p className="text-xs text-slate-500">Заместитель директора по контролю качества, врач высшей категории</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ export default function SupportServicePage() {
                             </div>
                             <div className="p-4 border border-slate-100 rounded space-y-2">
                                 <p className="font-bold text-xs uppercase">Блог директора</p>
-                                <p className="text-slate-500">На сайте cpzalmaty.kz</p>
+                                <p className="text-slate-500">Доступен на главной странице</p>
                                 <p className="font-bold text-xs uppercase pt-2 text-[#1e40af]">Facebook: cpzalmaty</p>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ export default function SupportServicePage() {
                     </section>
 
                     <div className="text-center pt-10 border-t border-slate-100">
-                        <p className="text-blue-600 font-bold italic">
+                        <p className="text-blue-600 font-bold">
                             Мы благодарны Вам за Ваши обращения!
                         </p>
                     </div>

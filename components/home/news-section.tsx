@@ -45,7 +45,7 @@ export function NewsSection({ searchQuery = "" }: NewsSectionProps) {
         </h2>
         <Link
           href="/news"
-          className="flex items-center gap-1 text-sm font-medium text-primary hover:opacity-70 transition-opacity"
+          className="flex items-center gap-1 text-sm font-medium text-primary"
         >
           {t("read_more")}
           <ArrowRight className="h-4 w-4" />
@@ -57,7 +57,7 @@ export function NewsSection({ searchQuery = "" }: NewsSectionProps) {
           filteredNews.map((item) => (
             <Link key={item.id} href={`/news/${item.id}`}>
               <article
-                className="rounded-2xl border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md hover:border-primary/20 active:scale-[0.98]"
+                className="rounded-2xl border border-border bg-card p-4 shadow-sm"
               >
                 <h3 className="text-sm font-bold text-foreground leading-tight">{item.title}</h3>
                 <p className="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">{item.description}</p>
@@ -91,7 +91,7 @@ export function NewsSection({ searchQuery = "" }: NewsSectionProps) {
         <Link
           href="https://2gis.kz/almaty/geo/9429940000795430"
           target="_blank"
-          className="rounded-2xl border border-border bg-card p-4 shadow-sm hover:border-primary/30 transition-colors"
+          className="rounded-2xl border border-border bg-card p-4 shadow-sm"
         >
           <div className="flex items-center gap-2">
             <MapPin className="h-5 w-5 text-primary" />

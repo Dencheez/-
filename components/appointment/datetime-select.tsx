@@ -51,11 +51,10 @@ export function DateTimeSelect({ doctor, onBack, onSelect }: DateTimeSelectProps
                 setSelectedDate(d.label)
                 setSelectedTime(null)
               }}
-              className={`flex shrink-0 flex-col items-center rounded-xl px-4 py-2.5 text-xs transition-colors ${
-                selectedDate === d.label
+              className={`flex shrink-0 flex-col items-center rounded-xl px-4 py-2.5 text-xs ${selectedDate === d.label
                   ? "bg-primary text-primary-foreground"
                   : "bg-card border border-border text-foreground"
-              }`}
+                }`}
             >
               <span className="font-medium">{d.dayName}</span>
               <span className="mt-0.5 font-bold">{d.label}</span>
@@ -77,13 +76,12 @@ export function DateTimeSelect({ doctor, onBack, onSelect }: DateTimeSelectProps
                 key={slot.time}
                 disabled={!slot.available}
                 onClick={() => setSelectedTime(slot.time)}
-                className={`rounded-xl py-2.5 text-xs font-medium transition-colors ${
-                  !slot.available
+                className={`rounded-xl py-2.5 text-xs font-medium transition-colors ${!slot.available
                     ? "bg-muted text-muted-foreground/40 cursor-not-allowed line-through"
                     : selectedTime === slot.time
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card border border-border text-foreground hover:border-primary"
-                }`}
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card border border-border text-foreground"
+                  }`}
               >
                 {slot.time}
               </button>
@@ -96,7 +94,7 @@ export function DateTimeSelect({ doctor, onBack, onSelect }: DateTimeSelectProps
       {selectedDate && selectedTime && (
         <button
           onClick={() => onSelect(selectedDate, selectedTime)}
-          className="mt-6 w-full rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition-transform active:scale-[0.98]"
+          className="mt-6 w-full rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-foreground shadow-lg"
         >
           Продолжить
         </button>

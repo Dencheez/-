@@ -43,7 +43,7 @@ export function FooterCarousel() {
                 <img
                   src={`/images/footer/${partner.img}`}
                   alt={`Partner ${index + 1}`}
-                  className="h-full w-full object-cover object-top p-0 transition-all duration-500 group-hover/item:scale-105"
+                  className="h-full w-full object-cover object-top p-0 transition-all duration-500"
                   onError={(e) => (e.currentTarget.style.display = 'none')}
                 />
               );

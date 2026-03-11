@@ -28,7 +28,7 @@ export function DirectorBlogContent() {
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-4 leading-tight">
                             Рахменшеев Сапар Куанышбекович
                         </h1>
-                        <p className="text-lg md:text-xl text-white/90 font-medium italic border-l-4 border-white/30 pl-4">
+                        <p className="text-lg md:text-xl text-white/90 font-medium border-l-4 border-white/30 pl-4">
                             Директор КГП на ПХВ «Центр психического здоровья» Управления общественного здравоохранения г. Алматы
                         </p>
                     </div>
@@ -51,7 +51,7 @@ export function DirectorBlogContent() {
                             Надеемся с помощью нашего сайта стать ближе к вам, найти с вами взаимопонимание в вопросах оказания медицинских услуг и наладить обратную связь.
                         </p>
 
-                        <p className="bg-slate-50 p-6 rounded-2xl border-l-4 border-[#00B5C4] font-medium italic">
+                        <p className="bg-slate-50 p-6 rounded-2xl border-l-4 border-[#00B5C4] font-medium">
                             «Любое ваше обращение не останется без внимания, ваши предложения, замечания будут приняты к сведению и помогут нам совершенствовать организацию медицинской помощи.»
                         </p>
 

@@ -37,17 +37,17 @@ export default function AboutPage() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="group flex items-center justify-between p-5 bg-white hover:bg-blue-600 transition-all duration-300 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1"
+                            className="group flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-200 shadow-sm"
                         >
                             <div className="flex items-center gap-4">
-                                <div className="p-3 bg-blue-50 rounded-xl group-hover:bg-white/20 transition-colors">
-                                    <link.icon className="h-6 w-6 text-blue-600 group-hover:text-white" />
+                                <div className="p-3 bg-blue-50 rounded-xl">
+                                    <link.icon className="h-6 w-6 text-blue-600" />
                                 </div>
-                                <span className="font-black uppercase text-[11px] tracking-wider text-slate-700 group-hover:text-white transition-colors">
+                                <span className="font-black uppercase text-[11px] tracking-wider text-slate-700">
                                     {link.title}
                                 </span>
                             </div>
-                            <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                            <ChevronRight className="h-5 w-5 text-slate-300" />
                         </Link>
                     ))}
                 </div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                             <p className="first-letter:text-5xl first-letter:font-black first-letter:text-blue-600 first-letter:mr-3 first-letter:float-left">
                                 Первые психиатрические больницы были открыты в городе Уральске в 1896 году. В городе Верном (Алматы) 14 декабря 1896 года за счет земских средств было развернуто 10 кроватей для лечения душевно больных.
                             </p>
-                            <p className="font-medium italic border-l-4 border-slate-100 pl-6">
+                            <p className="font-medium border-l-4 border-slate-100 pl-6">
                                 Психиатрическая служба города Алматы была организована в 1939 году. Первыми участковыми психиатрами в городе были врачи Шаталова З.В., Смирнова...
                             </p>
                         </div>

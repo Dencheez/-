@@ -26,7 +26,7 @@ export default function ContactsPage() {
                             href="https://2gis.kz/almaty/geo/9429940000795430"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center p-5 md:p-8 bg-blue-600 text-white rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-700 transition-all active:scale-[0.97]"
+                            className="group flex items-center p-5 md:p-8 bg-blue-600 text-white rounded-2xl"
                         >
                             <div className="mr-4 md:mr-6 bg-white/20 p-3 md:p-4 rounded-full shrink-0">
                                 <MapPin className="h-6 w-6 md:h-8 md:w-8 text-white" />
@@ -34,9 +34,9 @@ export default function ContactsPage() {
                             <div className="flex-grow">
                                 <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest opacity-80 mb-1">Центр психического здоровья</p>
                                 <p className="text-lg md:text-2xl font-bold leading-tight">ул. А. Кекилбайулы, 117</p>
-                                <p className="text-xs md:text-sm font-medium opacity-90 mt-1 italic underline underline-offset-4 decoration-white/30">Открыть маршрут в 2ГИС</p>
+                                <p className="text-xs md:text-sm font-medium opacity-90 mt-1 underline underline-offset-4 decoration-white/30">Открыть маршрут в 2ГИС</p>
                             </div>
-                            <ChevronRight className="h-5 w-5 md:h-6 md:w-6 opacity-40 group-hover:translate-x-1 transition-transform" />
+                            <ChevronRight className="h-5 w-5 md:h-6 md:w-6 opacity-40" />
                         </Link>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
@@ -44,9 +44,9 @@ export default function ContactsPage() {
                                 <a
                                     key={idx}
                                     href={contact.link}
-                                    className="p-4 md:p-6 border border-slate-100 bg-slate-50/50 rounded-2xl hover:bg-white hover:shadow-lg hover:border-blue-100 transition-all flex flex-col group"
+                                    className="p-4 md:p-6 border border-slate-100 bg-slate-50/50 rounded-2xl flex flex-col group"
                                 >
-                                    <span className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 mb-1 group-hover:text-blue-500 transition-colors">
+                                    <span className="text-[9px] md:text-[10px] font-black uppercase text-slate-400 mb-1">
                                         {contact.title}
                                     </span>
                                     <span className="text-base md:text-xl font-bold text-slate-900 leading-none">
@@ -74,19 +74,19 @@ export default function ContactsPage() {
                                     <span className="text-right">Выходной</span>
                                 </div>
                                 <div className="pt-4 border-t border-slate-100 mt-4">
-                                    <p className="text-[10px] md:text-[11px] text-slate-400 leading-snug italic font-medium">
+                                    <p className="text-[10px] md:text-[11px] text-slate-400 leading-snug font-medium">
                                         * Приемный покой и стационар работают круглосуточно 24/7.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-6 md:p-8 bg-slate-900 text-white rounded-3xl shadow-2xl shadow-slate-200">
+                        <div className="p-6 md:p-8 bg-slate-900 text-white rounded-3xl">
                             <h3 className="font-black uppercase text-xs mb-6 tracking-widest text-slate-400">Мы в соцсетях</h3>
                             <div className="flex gap-4">
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Instagram className="h-6 w-6" /></Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Facebook className="h-6 w-6" /></Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-white/10"><Send className="h-6 w-6" /></Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Instagram className="h-6 w-6" /></Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Facebook className="h-6 w-6" /></Link>
+                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Send className="h-6 w-6" /></Link>
                             </div>
                         </div>
                     </div>

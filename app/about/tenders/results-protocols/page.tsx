@@ -14,7 +14,7 @@ export default function TenderResults() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    const scrollToTop = () => window.scrollTo({ top: 0 });
 
     const handlePrint = () => {
         if (typeof window !== 'undefined') {
@@ -27,7 +27,7 @@ export default function TenderResults() {
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 {/* ПАНЕЛЬ НАВИГАЦИИ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6 print:hidden">
-                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af]">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
                     <div className="flex items-center gap-1 text-[10px] font-black text-slate-300 uppercase tracking-widest">
@@ -56,13 +56,13 @@ export default function TenderResults() {
                                 </span>
                                 <button
                                     onClick={() => window.open(`/images/GZ/itog-${num}.jpg`, '_blank')}
-                                    className="p-1 text-[#1e40af] active:scale-90 transition-transform"
+                                    className="p-1 text-[#1e40af]"
                                 >
                                     <Maximize2 size={16} />
                                 </button>
                             </div>
 
-                            <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden print:shadow-none print:border-none">
+                            <div className="bg-white rounded-xl border border-slate-200 overflow-hidden print:border-none">
                                 <img
                                     src={`/images/GZ/itog-${num}.jpg`}
                                     alt={`Страница ${num}`}
@@ -82,7 +82,7 @@ export default function TenderResults() {
                     <div className="flex justify-center gap-10 py-6 border-t border-slate-200">
                         <button
                             onClick={handlePrint}
-                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-[#1e40af] transition-colors"
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500"
                         >
                             <Printer size={16} className="text-[#1e40af]" />
                             <span>Печать итогов</span>
@@ -90,7 +90,7 @@ export default function TenderResults() {
 
                         <a
                             href={`mailto:?subject=${encodeURIComponent(title)}&body=Результаты тендера (11 страниц) доступны в архиве ЦПЗ.`}
-                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-[#1e40af] transition-colors"
+                            className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500"
                         >
                             <Mail size={16} className="text-[#1e40af]" />
                             <span>Отправить e-mail</span>
@@ -102,7 +102,7 @@ export default function TenderResults() {
             {/* КНОПКА "ВВЕРХ" */}
             <button
                 onClick={scrollToTop}
-                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full shadow-2xl transition-all duration-300 z-50 print:hidden ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+                className={`fixed bottom-8 right-6 p-4 bg-white border border-slate-200 rounded-full z-50 print:hidden ${showTopBtn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
             >
                 <ChevronUp className="h-6 w-6 text-[#1e40af]" />
             </button>

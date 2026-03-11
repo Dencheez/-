@@ -46,7 +46,7 @@ export function ServicesSection({ searchQuery = "" }: ServicesSectionProps) {
                 key={service.label}
                 href="/appointment"
                 // w-full, чтобы карточки занимали всю ширину своей колонки
-                className="flex min-h-[85px] w-full flex-col items-start gap-2 rounded-2xl border border-border bg-card p-3 shadow-sm transition-all hover:shadow-md active:scale-[0.97] md:min-h-[70px] md:flex-row md:items-center"
+                className="flex min-h-[85px] w-full flex-col items-start gap-2 rounded-2xl border border-border bg-card p-3 shadow-sm md:min-h-[70px] md:flex-row md:items-center"
               >
                 <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${service.bg}`}>
                   <Icon className={`h-4.5 w-4.5 ${service.color}`} />

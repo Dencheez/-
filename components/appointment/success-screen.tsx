@@ -52,13 +52,13 @@ export function SuccessScreen({
       <div className="mt-6 flex w-full flex-col gap-3">
         <Link
           href="/profile"
-          className="w-full rounded-2xl bg-primary py-3.5 text-center text-sm font-bold text-primary-foreground shadow-lg transition-transform active:scale-[0.98]"
+          className="w-full rounded-2xl bg-primary py-3.5 text-center text-sm font-bold text-primary-foreground shadow-lg"
         >
           Мои записи
         </Link>
         <button
           onClick={onNewAppointment}
-          className="w-full rounded-2xl border border-primary py-3.5 text-sm font-bold text-primary transition-transform active:scale-[0.98]"
+          className="w-full rounded-2xl border border-primary py-3.5 text-sm font-bold text-primary"
         >
           Записаться ещё
         </button>

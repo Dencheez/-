@@ -24,12 +24,12 @@ export default function ObservationBoardPage() {
             <main className="max-w-6xl mx-auto space-y-12 md:space-y-16">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex justify-between items-center border-b pb-4">
-                    <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-xs font-bold transition-colors uppercase tracking-widest">
+                    <Link href="/about" className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex gap-4 items-center">
-                        <Printer onClick={() => window.print()} className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" />
-                        <a href="mailto:cpz.sekr@gmail.com"><Mail className="h-4 w-4 text-slate-300 hover:text-blue-500 cursor-pointer transition-colors" /></a>
+                        <Printer onClick={() => window.print()} className="h-4 w-4 text-slate-300 cursor-pointer" />
+                        <a href="mailto:cpz.sekr@gmail.com"><Mail className="h-4 w-4 text-slate-300 cursor-pointer" /></a>
                         <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-300 ml-2 uppercase">
                             <Eye className="h-3.5 w-3.5" /> 9905
                         </div>
@@ -50,8 +50,8 @@ export default function ObservationBoardPage() {
                 {/* СЕТКА УЧАСТНИКОВ */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {members.map((member, index) => (
-                        <div key={index} className="flex flex-col items-center group">
-                            <div className="relative aspect-[3/4] w-full max-w-[280px] bg-slate-100 rounded-lg overflow-hidden shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300">
+                        <div key={index} className="flex flex-col items-center">
+                            <div className="relative aspect-[3/4] w-full max-w-[280px] bg-slate-100 rounded-lg overflow-hidden shadow-sm">
                                 <div className="absolute inset-0 flex items-center justify-center text-slate-200 bg-slate-50">
                                     <span className="text-6xl font-black">?</span>
                                 </div>
@@ -59,11 +59,11 @@ export default function ObservationBoardPage() {
                                     src={member.photo}
                                     alt={member.name}
                                     fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    className="object-cover"
                                 />
                             </div>
                             <div className="mt-4 text-center px-2">
-                                <p className="text-sm md:text-base font-extrabold text-blue-900 leading-snug uppercase tracking-tight group-hover:text-blue-600 transition-colors">
+                                <p className="text-sm md:text-base font-extrabold text-blue-900 leading-snug uppercase tracking-tight">
                                     {member.name}
                                 </p>
                             </div>
@@ -85,15 +85,15 @@ export default function ObservationBoardPage() {
                             <a
                                 key={i}
                                 href="#"
-                                className="flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50/50 border border-slate-100 hover:border-blue-200 rounded-xl transition-all group"
+                                className="flex items-center justify-between p-4 bg-slate-50 border border-slate-100 rounded-xl"
                             >
                                 <div className="flex items-center gap-3 overflow-hidden">
-                                    <div className="p-2 bg-white rounded-lg shadow-sm group-hover:text-blue-600 transition-colors">
-                                        <FileText className="h-5 w-5 text-slate-400 group-hover:text-blue-600" />
+                                    <div className="p-2 bg-white rounded-lg shadow-sm">
+                                        <FileText className="h-5 w-5 text-slate-400" />
                                     </div>
                                     <span className="text-sm font-bold text-slate-700 truncate">{doc}</span>
                                 </div>
-                                <Download className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all shrink-0" />
+                                <Download className="h-4 w-4 text-blue-500 shrink-0" />
                             </a>
                         ))}
                     </div>

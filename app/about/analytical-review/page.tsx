@@ -21,14 +21,14 @@ export default function AnalyticalReviewPage() {
             <main className="max-w-5xl mx-auto w-full">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-8 gap-4">
-                    <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-[#1e40af] text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest">
+                    <Link href="/about" className="flex items-center gap-2 text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex flex-wrap gap-4 md:gap-6 text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors">
+                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer">
                             <Printer className="h-3.5 w-3.5" /> Печать
                         </span>
-                        <a href="mailto:cpz.sekr@gmail.com" className="flex items-center gap-1.5 cursor-pointer hover:text-[#1e40af] transition-colors">
+                        <a href="mailto:cpz.sekr@gmail.com" className="flex items-center gap-1.5 cursor-pointer">
                             <Mail className="h-3.5 w-3.5" /> E-mail
                         </a>
                         <span className="flex items-center gap-1.5 text-slate-300">
@@ -52,14 +52,14 @@ export default function AnalyticalReviewPage() {
                             key={index}
                             href={report.file}
                             download
-                            className="group flex flex-col md:flex-row items-start md:items-center justify-between p-5 md:p-6 border border-slate-100 rounded-xl hover:border-[#1e40af] hover:bg-blue-50/40 transition-all shadow-sm hover:shadow-md"
+                            className="flex flex-col md:flex-row items-start md:items-center justify-between p-5 md:p-6 border border-slate-100 rounded-xl shadow-sm"
                         >
                             <div className="flex items-start gap-5">
-                                <div className="p-3.5 bg-slate-50 text-slate-400 group-hover:bg-[#1e40af] group-hover:text-white transition-all rounded-lg shrink-0">
+                                <div className="p-3.5 bg-slate-50 text-slate-400 rounded-lg shrink-0">
                                     <FileText className="h-6 w-6 md:h-7 md:w-7" />
                                 </div>
                                 <div className="flex flex-col gap-1">
-                                    <span className="text-xs md:text-[13px] font-extrabold uppercase leading-snug text-slate-700 group-hover:text-[#1e40af] transition-colors max-w-2xl">
+                                    <span className="text-xs md:text-[13px] font-extrabold uppercase leading-snug text-slate-700 max-w-2xl">
                                         {report.title}
                                     </span>
                                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">
@@ -68,7 +68,7 @@ export default function AnalyticalReviewPage() {
                                 </div>
                             </div>
 
-                            <div className="mt-4 md:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#1e40af] md:opacity-0 group-hover:opacity-100 transition-all self-end md:self-center">
+                            <div className="mt-4 md:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#1e40af] self-end md:self-center">
                                 <Download className="h-4 w-4" />
                                 <span className="border-b-2 border-[#1e40af]/20">Скачать обзор</span>
                             </div>

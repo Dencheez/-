@@ -70,30 +70,30 @@ export default function NpaPage() {
                         <div className="flex gap-6">
                             <button
                                 onClick={() => window.print()}
-                                className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
+                                className="flex items-center gap-2 text-slate-400 bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
                             >
-                                <Printer className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                                <Printer className="h-5 w-5" />
                                 <span className="text-[10px] font-black uppercase tracking-widest">Печать</span>
                             </button>
                             <button
                                 onClick={handleEmailClick}
-                                className="group flex items-center gap-2 text-slate-400 hover:text-primary transition-all bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
+                                className="flex items-center gap-2 text-slate-400 bg-slate-50 md:bg-transparent px-3 py-2 rounded-lg md:p-0"
                             >
-                                <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                                <Mail className="h-5 w-5" />
                                 <span className="text-[10px] font-black uppercase tracking-widest">E-mail</span>
                             </button>
                         </div>
                     </div>
 
-                    <h2 className="text-2xl font-black text-primary mb-12 uppercase tracking-tight italic">
+                    <h2 className="text-2xl font-black text-primary mb-12 uppercase tracking-tight">
                         Действующие НПА на 2023 год
                     </h2>
 
                     {/* Список документов */}
                     <div className="grid gap-10">
                         {npaList.map((npa, index) => (
-                            <article key={index} className="border-l-4 border-slate-100 pl-6 hover:border-primary transition-all group cursor-default">
-                                <h3 className="text-xl font-black text-slate-800 leading-tight group-hover:text-primary transition-colors">
+                            <article key={index} className="border-l-4 border-slate-100 pl-6 cursor-default">
+                                <h3 className="text-xl font-black text-slate-800 leading-tight">
                                     {npa.title}
                                 </h3>
                                 <p className="mt-3 text-slate-500 text-lg leading-relaxed font-medium">

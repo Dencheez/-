@@ -15,7 +15,7 @@ export default function StrategicPlanPage() {
             <main className="max-w-5xl mx-auto px-4 py-6 md:py-12 w-full flex-grow">
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">
-                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
                     <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">
@@ -32,7 +32,7 @@ export default function StrategicPlanPage() {
                 </div>
 
                 {/* БАННЕР */}
-                <div className="w-full aspect-video md:aspect-[21/9] rounded-[32px] overflow-hidden mb-12 shadow-2xl border-4 border-white">
+                <div className="w-full aspect-video md:aspect-[21/9] rounded-[32px] overflow-hidden mb-12 border-4 border-white">
                     <img
                         src="/images/strateg_plan.jpg"
                         alt="Стратегический план"
@@ -44,10 +44,10 @@ export default function StrategicPlanPage() {
                 {/* КОНТЕНТ ПО РАЗДЕЛАМ */}
                 <div className="space-y-4">
                     {/* РАЗДЕЛ 1: МИССИЯ */}
-                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm transition-all">
-                        <button onClick={() => toggle(1)} className="w-full flex items-center justify-between p-6 text-left active:bg-slate-50">
+                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden">
+                        <button onClick={() => toggle(1)} className="w-full flex items-center justify-between p-6 text-left">
                             <div className="flex items-center gap-4">
-                                <div className={`p-3 rounded-2xl ${openSection === 1 ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' : 'bg-blue-50 text-blue-600'}`}>
+                                <div className={`p-3 rounded-2xl ${openSection === 1 ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'}`}>
                                     <Target size={24} />
                                 </div>
                                 <div>
@@ -58,7 +58,7 @@ export default function StrategicPlanPage() {
                             {openSection === 1 ? <ChevronUp size={22} className="text-blue-600" /> : <ChevronDown size={22} className="text-slate-300" />}
                         </button>
                         {openSection === 1 && (
-                            <div className="px-6 pb-8 animate-in slide-in-from-top-2 duration-300">
+                            <div className="px-6 pb-8">
                                 <div className="space-y-6">
                                     <div className="bg-blue-50 p-6 rounded-[24px] border-l-4 border-blue-600">
                                         <h4 className="font-black uppercase text-[11px] text-blue-600 mb-2 tracking-widest">Миссия ГКП на ПХВ "ЦПЗ"</h4>
@@ -88,10 +88,10 @@ export default function StrategicPlanPage() {
                     </div>
 
                     {/* РАЗДЕЛ 2: АНАЛИЗ И СТРУКТУРА */}
-                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm transition-all">
-                        <button onClick={() => toggle(2)} className="w-full flex items-center justify-between p-6 text-left active:bg-slate-50">
+                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden">
+                        <button onClick={() => toggle(2)} className="w-full flex items-center justify-between p-6 text-left">
                             <div className="flex items-center gap-4">
-                                <div className={`p-3 rounded-2xl ${openSection === 2 ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' : 'bg-blue-50 text-blue-600'}`}>
+                                <div className={`p-3 rounded-2xl ${openSection === 2 ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'}`}>
                                     <BarChart3 size={24} />
                                 </div>
                                 <div>
@@ -102,7 +102,7 @@ export default function StrategicPlanPage() {
                             {openSection === 2 ? <ChevronUp size={22} className="text-blue-600" /> : <ChevronDown size={22} className="text-slate-300" />}
                         </button>
                         {openSection === 2 && (
-                            <div className="px-6 pb-8 animate-in slide-in-from-top-2">
+                            <div className="px-6 pb-8">
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                                     <div className="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                         <p className="text-2xl font-black text-blue-600">632</p>
@@ -126,10 +126,10 @@ export default function StrategicPlanPage() {
                     </div>
 
                     {/* РАЗДЕЛ 3: КАДРЫ */}
-                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden shadow-sm transition-all">
-                        <button onClick={() => toggle(3)} className="w-full flex items-center justify-between p-6 text-left active:bg-slate-50">
+                    <div className="bg-white rounded-[28px] border border-slate-200 overflow-hidden">
+                        <button onClick={() => toggle(3)} className="w-full flex items-center justify-between p-6 text-left">
                             <div className="flex items-center gap-4">
-                                <div className={`p-3 rounded-2xl ${openSection === 3 ? 'bg-blue-600 text-white shadow-lg shadow-blue-100' : 'bg-blue-50 text-blue-600'}`}>
+                                <div className={`p-3 rounded-2xl ${openSection === 3 ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'}`}>
                                     <Users size={24} />
                                 </div>
                                 <div>

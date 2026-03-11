@@ -21,7 +21,7 @@ export default function OpeningProtocol() {
             <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
                 {/* МОБИЛЬНАЯ НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
-                    <Link href="/about" className="p-2 -ml-2 text-slate-400 active:text-[#1e40af] transition-colors">
+                    <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
                     <div className="flex items-center gap-3">
@@ -58,7 +58,7 @@ export default function OpeningProtocol() {
                             </div>
 
                             <div
-                                className="relative bg-white rounded-xl shadow-lg shadow-slate-200 border border-slate-200 overflow-hidden active:scale-[0.99] transition-transform cursor-pointer"
+                                className="relative bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer"
                                 onClick={() => window.open(page.src, '_blank')}
                             >
                                 <img
@@ -67,7 +67,7 @@ export default function OpeningProtocol() {
                                     className="w-full h-auto block"
                                     loading="lazy"
                                 />
-                                <div className="absolute top-3 right-3 bg-white/90 p-2 rounded-full shadow-md">
+                                <div className="absolute top-3 right-3 bg-white/90 p-2 rounded-full">
                                     <ChevronRight className="h-4 w-4 text-slate-400" />
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ export default function OpeningProtocol() {
                 <div className="mt-10 grid grid-cols-2 gap-3">
                     <button
                         onClick={handlePrint}
-                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase hover:bg-white hover:text-[#1e40af] hover:border-blue-200 active:scale-95 transition-all shadow-sm"
+                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase"
                     >
                         <Printer size={16} className="text-blue-600" />
                         Печать
@@ -87,7 +87,7 @@ export default function OpeningProtocol() {
 
                     <a
                         href={`mailto:?subject=${encodeURIComponent(title)}&body=Документ доступен для ознакомления в системе ЦПЗ.`}
-                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase hover:bg-white hover:text-[#1e40af] hover:border-blue-200 active:scale-95 transition-all shadow-sm"
+                        className="flex items-center justify-center gap-2 py-4 border border-slate-200 rounded-xl text-[10px] font-extrabold text-slate-600 uppercase"
                     >
                         <Mail size={16} className="text-blue-600" />
                         E-mail

@@ -10,7 +10,7 @@ export default function GimnPage() {
 
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">
-                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 active:text-blue-600 transition-colors flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
                         <ChevronLeft className="h-5 w-5" /> Назад
                     </Link>
                 </div>
@@ -27,7 +27,7 @@ export default function GimnPage() {
 
                 {/* ИСТОРИЧЕСКАЯ СПРАВКА */}
                 <div className="space-y-6 text-[14px] leading-relaxed text-slate-600 mb-10">
-                    <p className="relative pl-6 italic">
+                    <p className="relative pl-6">
                         <Quote className="absolute left-0 top-0 text-blue-100 h-5 w-5 -scale-x-100" />
                         Гимн — торжественная песня, выступающая в качестве звуковой символики страны.
                     </p>

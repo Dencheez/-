@@ -51,7 +51,7 @@ export function InfoFiles() {
             {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden active:scale-90 transition-transform"
+                className="absolute left-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Назад"
             >
                 <ChevronLeft className="h-5 w-5 text-gray-500" />
@@ -60,7 +60,7 @@ export function InfoFiles() {
             {/* Правая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden active:scale-90 transition-transform"
+                className="absolute right-0 top-[30%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Вперед"
             >
                 <ChevronRight className="h-5 w-5 text-gray-500" />
@@ -81,7 +81,7 @@ export function InfoFiles() {
                             className="group flex flex-col space-y-2 shrink-0 snap-start w-[140px] md:w-full"
                         >
                             {/* Контейнер с твоим фиксом для 4-й картинки */}
-                            <div className={`relative w-full aspect-[16/9] md:aspect-[4/3] overflow-hidden rounded-sm border border-gray-100 shadow-sm transition-transform group-hover:brightness-110 bg-white flex items-center justify-center ${isFourth ? "p-3" : "p-0"}`}>
+                            <div className={`relative w-full aspect-[16/9] md:aspect-[4/3] overflow-hidden rounded-sm border border-gray-100 shadow-sm bg-white flex items-center justify-center ${isFourth ? "p-3" : "p-0"}`}>
                                 <Image
                                     src={card.img}
                                     alt={card.title || "banner"}
@@ -90,7 +90,7 @@ export function InfoFiles() {
                                 />
                             </div>
 
-                            <h3 className="text-[10px] md:text-[11px] font-medium text-gray-600 leading-tight text-center px-1 group-hover:text-blue-600 transition-colors uppercase">
+                            <h3 className="text-[10px] md:text-[11px] font-medium text-gray-600 leading-tight text-center px-1 uppercase">
                                 {card.title}
                             </h3>
                         </Link>

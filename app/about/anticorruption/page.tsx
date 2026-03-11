@@ -26,14 +26,14 @@ export default function AntiCorruptionPage() {
             <main className="max-w-5xl mx-auto w-full">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-8 gap-4">
-                    <Link href="/about" className="flex items-center gap-2 text-slate-400 hover:text-blue-600 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-widest">
+                    <Link href="/about" className="flex items-center gap-2 text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
                     <div className="flex flex-wrap gap-4 md:gap-6 text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
+                        <span onClick={() => window.print()} className="flex items-center gap-1.5 cursor-pointer">
                             <Printer className="h-3.5 w-3.5" /> Печать
                         </span>
-                        <a href="mailto:cpz_almaty@med.mail.kz" className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors">
+                        <a href="mailto:cpz_almaty@med.mail.kz" className="flex items-center gap-1.5 cursor-pointer">
                             <Mail className="h-3.5 w-3.5" /> E-mail
                         </a>
                         <span className="flex items-center gap-1.5 text-slate-300">
@@ -58,18 +58,18 @@ export default function AntiCorruptionPage() {
                             href={doc.file}
                             target={doc.type === 'link' ? "_blank" : "_self"}
                             rel="noopener noreferrer"
-                            className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 border border-slate-100 rounded-xl hover:border-blue-200 hover:bg-blue-50/40 transition-all shadow-sm hover:shadow-md"
+                            className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 md:p-5 border border-slate-100 rounded-xl shadow-sm"
                         >
                             <div className="flex items-start md:items-center gap-4 w-full">
-                                <div className="p-3 bg-slate-50 text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all rounded-lg shrink-0">
+                                <div className="p-3 bg-slate-50 text-slate-400 rounded-lg shrink-0">
                                     {doc.type === 'image' ? <ImageIcon className="h-5 w-5 md:h-6 md:w-6" /> : <FileText className="h-5 w-5 md:h-6 md:w-6" />}
                                 </div>
-                                <span className="text-sm md:text-base font-bold text-slate-700 group-hover:text-blue-900 transition-colors leading-snug">
+                                <span className="text-sm md:text-base font-bold text-slate-700 leading-snug">
                                     {doc.title}
                                 </span>
                             </div>
 
-                            <div className="mt-4 sm:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 sm:opacity-0 group-hover:opacity-100 transition-all self-end sm:self-center bg-blue-50 sm:bg-transparent px-3 py-1 sm:p-0 rounded-full">
+                            <div className="mt-4 sm:mt-0 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-blue-600 self-end sm:self-center bg-blue-50 sm:bg-transparent px-3 py-1 sm:p-0 rounded-full">
                                 {doc.type === 'image' ? <ImageIcon className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
                                 <span>{doc.type === 'image' ? 'Смотреть' : 'Перейти'}</span>
                             </div>

@@ -101,7 +101,7 @@ export function ConfirmationStep({
       <button
         // 5. САМОЕ ВАЖНОЕ: передаем реальные переменные в функцию
         onClick={() => onConfirm(patientName, phone)}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition-transform active:scale-[0.98]"
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3.5 text-sm font-bold text-primary-foreground shadow-lg"
       >
         <CheckCircle2 className="h-4 w-4" />
         Подтвердить запись

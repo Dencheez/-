@@ -16,9 +16,9 @@ export default function AdministrationPage() {
                 <div className="flex items-center justify-between mb-8 md:mb-12">
                     <Link
                         href="/about"
-                        className="flex items-center gap-2 text-slate-400 hover:text-[#1e40af] text-[10px] md:text-xs font-black uppercase tracking-widest transition-all group"
+                        className="flex items-center gap-2 text-slate-400 text-[10px] md:text-xs font-black uppercase tracking-widest"
                     >
-                        <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
+                        <ArrowLeft className="h-4 w-4" />
                         Назад
                     </Link>
                     <div className="flex items-center gap-2 text-slate-300">
@@ -45,13 +45,13 @@ export default function AdministrationPage() {
                                 </span>
                                 <button
                                     onClick={() => window.open(img.src, '_blank')}
-                                    className="flex items-center gap-1.5 text-[9px] font-bold text-blue-600 hover:text-blue-800 transition-colors uppercase tracking-widest"
+                                    className="flex items-center gap-1.5 text-[9px] font-bold text-blue-600 uppercase tracking-widest"
                                 >
                                     <Maximize2 className="h-3 w-3" /> Увеличить
                                 </button>
                             </div>
 
-                            <div className="relative group bg-white shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-200 rounded-sm overflow-hidden transition-all hover:shadow-2xl">
+                            <div className="relative bg-white shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-200 rounded-sm overflow-hidden">
                                 <img
                                     src={img.src}
                                     alt={img.alt}
@@ -61,7 +61,7 @@ export default function AdministrationPage() {
                                         e.currentTarget.src = `https://placehold.co/800x1100/f8fafc/64748b?text=Page+${index + 1}+Not+Found`;
                                     }}
                                 />
-                                <div className="absolute inset-0 bg-[#1e40af]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                                <div className="absolute inset-0 bg-[#1e40af]/5 pointer-events-none" />
                             </div>
                         </div>
                     ))}

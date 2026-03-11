@@ -78,7 +78,7 @@ function ClientProfile() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex flex-1 items-center justify-center gap-1 md:gap-1.5 rounded-lg py-2 md:py-2.5 text-[10px] md:text-xs font-semibold transition-all ${activeTab === tab.key ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
+            className={`flex flex-1 items-center justify-center gap-1 md:gap-1.5 rounded-lg py-2 md:py-2.5 text-[10px] md:text-xs font-semibold ${activeTab === tab.key ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
               }`}
           >
             <tab.icon className="h-3.5 w-3.5" />
@@ -91,7 +91,7 @@ function ClientProfile() {
       <div className="mt-4">
         {activeTab === "appointments" && (
           <div className="space-y-3 md:space-y-4">
-            <Link href="/appointment" className="flex items-center justify-between rounded-xl md:rounded-2xl bg-primary p-3 md:p-4 text-primary-foreground shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+            <Link href="/appointment" className="flex items-center justify-between rounded-xl md:rounded-2xl bg-primary p-3 md:p-4 text-primary-foreground shadow-lg shadow-primary/20">
               <div className="flex items-center gap-3">
                 <CalendarDays className="h-5 w-5" />
                 <span className="text-xs md:text-sm font-bold">Записаться на приём</span>
@@ -145,7 +145,7 @@ function ClientProfile() {
 
         {activeTab === "settings" && (
           <div className="flex flex-col gap-2">
-            <Link href="/profile/settings" className="flex items-center justify-between rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 hover:bg-secondary transition-colors active:scale-[0.99]">
+            <Link href="/profile/settings" className="flex items-center justify-between rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 hover:bg-secondary">
               <div className="flex items-center gap-3">
                 <User className="h-5 w-5 text-primary" />
                 <span className="text-xs md:text-sm font-medium">Редактировать профиль</span>
@@ -209,13 +209,13 @@ function AdminDashboard() {
       <div className="flex rounded-xl bg-secondary p-1">
         <button
           onClick={() => setActiveTab("appointments")}
-          className={`flex-1 py-2 text-[10px] md:text-xs font-semibold rounded-lg transition-all ${activeTab === "appointments" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
+          className={`flex-1 py-2 text-[10px] md:text-xs font-semibold rounded-lg ${activeTab === "appointments" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
         >
           Все записи
         </button>
         <button
           onClick={() => setActiveTab("content")}
-          className={`flex-1 py-2 text-[10px] md:text-xs font-semibold rounded-lg transition-all ${activeTab === "content" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
+          className={`flex-1 py-2 text-[10px] md:text-xs font-semibold rounded-lg ${activeTab === "content" ? "bg-card text-primary shadow-sm" : "text-muted-foreground"}`}
         >
           Контент
         </button>
@@ -264,7 +264,7 @@ function AdminDashboard() {
 
                     <div className="mt-2 pt-2 border-t border-border">
                       <p className="text-[8px] text-muted-foreground uppercase font-bold mb-1">Причина обращения:</p>
-                      <p className="text-[11px] text-foreground leading-snug italic">
+                      <p className="text-[11px] text-foreground leading-snug">
                         {appt.reason || "Не указана"}
                       </p>
                     </div>
@@ -278,7 +278,7 @@ function AdminDashboard() {
             <div key={row.id} className="p-3 border rounded-xl bg-card space-y-2 shadow-sm">
               <div className="flex justify-between items-center">
                 <span className="text-[9px] font-bold text-primary uppercase">{row.section_name}</span>
-                <button onClick={() => handleSaveContent(row)} className="p-1.5 bg-primary text-white rounded-lg active:scale-90 transition-transform">
+                <button onClick={() => handleSaveContent(row)} className="p-1.5 bg-primary text-white rounded-lg">
                   {savingId === row.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
                 </button>
               </div>
@@ -311,7 +311,7 @@ export default function ProfilePage() {
           <div className="flex flex-col items-center justify-center min-h-[50vh] p-4 text-center">
             <p className="text-xs md:text-sm text-muted-foreground mb-4">Войдите, чтобы увидеть профиль</p>
             <SignInButton mode="modal">
-              <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold transition-transform active:scale-95">
+              <button className="bg-primary text-white px-8 py-2.5 rounded-xl font-bold">
                 Войти
               </button>
             </SignInButton>
