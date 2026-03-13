@@ -8,43 +8,10 @@ import { getProcurement } from "@/app/lib/api"
 import { deleteProcurement, addProcurement } from "@/app/admin/actions"
 import { toast } from "sonner"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { supabase } from "@/lib/supabase"
+
 
 const staticAnnouncements = [
-    {
-        id: "st-1",
-        created_at: "2021-04-28",
-        title: "Объявление №09 от 28.04.2021 года — о проведении закупа товаров способом запроса ценовых предложений",
-        section: "Запрос ценовых предложений",
-        content: `Организатор закупок: КГП на ПХВ «Центр психического здоровья» УОЗ города Алматы.
-
-Местонахождение организатора: г. Алматы, ул. Абиша Кекилбайулы 117а
-
-Наименование:
-
-№ лота | Наименование закупаемых товаров | Ед. изм. | Кол-во | Цена
-1 | Карипразин (Реагила), капсулы, 6 мг, №28 | уп. | 12 | 44 404,92
-2 | Карипразин (Реагила), капсулы, 4.5 мг, №28 | уп. | 3 | 44 168,32
-3 | Карипразин (Реагила), капсулы, 3 мг, №28 | уп. | 12 | 41 360,76
-
-Место поставки товаров: г. Алматы ул. Абиша Кекилбайулы 117А.
-
-Требуемые сроки поставки товаров: по Заявке Заказчика.
-
-Условия платежа: оплата в размере 100% производится Заказчиком путем перечисления денежных средств на расчетный счет Поставщика, после фактического получения Заказчиком объема товаров указанного в каждой Заявке на поставку.
-
-Каждый потенциальный поставщик до истечения окончательного срока представления ценовых предложений представляет только одно ценовое предложение в запечатанном виде. Конверт содержит ценовое предложение по форме, утвержденной уполномоченным органом в области здравоохранения, разрешение, подтверждающее права физического или юридического лица на осуществление деятельности или действий (операций), осуществляемое разрешительными органами посредством лицензирования или разрешительной процедуры, в сроки, установленные Заказчиком, а также документы, подтверждающие соответствие предлагаемых товаров требованиям, установленными Постановлением Правительства Республики Казахстан от 30 октября 2009 года № 1729.
-
-Представление потенциальным поставщиком ценового предложения является формой выражения его согласия осуществить поставку товара с соблюдением условий запроса и типового договора закупа по форме, утвержденной уполномоченным органом в области здравоохранения.
-
-Конверты принимаются с представителем поставщика при наличии доверенности и удостоверения личности.
-
-В случае принятия решения об участии в закупках способом запроса ценовых предложений, просим предоставить ценовые предложения в срок не позднее 10:00, 6 мая 2021 года по адресу: г. Алматы, ул. Абиша Кекилбайулы 117а, бухгалтерия-отдел закупок.
-
-Дата, время и место вскрытия конвертов с ценовыми предложениями:
-06 мая 2021 года 11:00, г. Алматы, ул. Абиша Кекилбайулы 117а, актовый зал.
-
-Представители потенциальных поставщиков допускаются к участию на вскрытии конвертов при наличии распечатанного результата ПЦР-теста сделанного не ранее чем за 72 часа до момента вскрытия конвертов, а также при наличии доверенности и удостоверения личности.`,
-    },
     {
         id: "st-2",
         created_at: "2018-04-23",
@@ -90,14 +57,14 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
                     <div className="flex items-center gap-3 mb-1">
                         <span className="text-[10px] font-black text-[#00B5C4] uppercase tracking-widest">{item.section || "Объявление"}</span>
                         <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            {new Date(item.created_at).toLocaleDateString("ru-RU")}
+                            {item.created_at ? new Date(item.created_at).toLocaleDateString("ru-RU") : ""}
                         </span>
                     </div>
                     <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight leading-snug">{item.title}</h3>
                 </div>
                 <div className="flex items-center gap-2">
                     {isAdmin && !isStatic && (
-                        <div onClick={handleDelete} className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all">
+                        <div onClick={handleDelete} className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-400 hover:bg-red-500 hover:text-white transition-all cursor-pointer">
                             {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                         </div>
                     )}
@@ -106,9 +73,29 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
                     </div>
                 </div>
             </button>
+
             {isOpen && (
-                <div className="px-8 pb-8 border-t border-slate-50 pt-6 text-[13px] text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
-                    {item.content}
+                <div className="px-8 pb-8 border-t border-slate-50 pt-6">
+                    <div className="text-[13px] text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
+                        {item.content}
+                    </div>
+
+                    {/* --- КНОПКА СКАЧИВАНИЯ --- */}
+                    {item.file_url && (
+                        <div className="mt-6">
+                            <a
+                                href={item.file_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()} // Чтобы не закрывался аккордеон
+                                className="inline-flex items-center gap-3 bg-slate-900 text-white px-6 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#00B5C4] transition-all shadow-lg"
+                            >
+                                <Download className="w-4 h-4" />
+                                Скачать прикрепленный файл
+                            </a>
+                        </div>
+                    )}
+                    {/* ------------------------- */}
                 </div>
             )}
         </div>
@@ -139,17 +126,46 @@ export default function AdsPage() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
+
+        // Достаем файл из инпута (убедись, что у инпута name="file")
+        const file = formData.get("file") as File
+        let publicUrl = ""
+
         try {
+            // 1. ЗАГРУЗКА ФАЙЛА (если он выбран)
+            if (file && file.size > 0) {
+                // Создаем уникальное имя файла, чтобы не перезаписать старые
+                const fileExt = file.name.split('.').pop()
+                const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+
+                const { data: uploadData, error: uploadError } = await supabase.storage
+                    .from('procurement') // ТУТ ДОЛЖНО БЫТЬ ИМЯ ТВОЕГО БАКЕТА
+                    .upload(fileName, file)
+
+                if (uploadError) throw uploadError
+
+                // Получаем прямую ссылку на файл
+                const { data } = supabase.storage
+                    .from('procurement')
+                    .getPublicUrl(fileName)
+
+                publicUrl = data.publicUrl
+            }
+
+            // 2. ОТПРАВКА В БАЗУ
             await addProcurement({
                 title: formData.get("title") as string,
-                section: formData.get("section") as string,
+                type: formData.get("section") as string,
                 content: formData.get("content") as string,
+                file_url: publicUrl,
             })
-            toast.success("Опубликовано")
+
+            toast.success(file && file.size > 0 ? "Опубликовано с файлом" : "Опубликовано (без файла)")
             setIsModalOpen(false)
             loadData()
-        } catch {
-            toast.error("Ошибка")
+        } catch (error) {
+            console.error("Ошибка:", error)
+            toast.error("Ошибка при сохранении")
         }
     }
 
@@ -167,15 +183,16 @@ export default function AdsPage() {
                             <DialogTrigger asChild>
                                 <button className="bg-[#00B5C4] text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-[#00B5C4]/20 shrink-0">
                                     <Plus className="w-4 h-4 inline-block mr-2" />
-                                    Создать
+                                    Добавить
                                 </button>
                             </DialogTrigger>
                             <DialogContent className="rounded-[2.5rem] p-8 border-none">
                                 <DialogHeader><DialogTitle className="font-black uppercase tracking-tighter text-2xl">Новое объявление</DialogTitle></DialogHeader>
                                 <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-                                    <input name="section" required placeholder="Тип (напр. Тендер)" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
+                                    <input name="section" required placeholder="Тип объявления" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
                                     <input name="title" required placeholder="Заголовок" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
                                     <textarea name="content" required rows={5} placeholder="Текст объявления" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] resize-none" />
+                                    <input type="file" name="file" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
                                     <button type="submit" className="w-full bg-[#00B5C4] text-white py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-lg shadow-[#00B5C4]/20">Добавить объявление</button>
                                 </form>
                             </DialogContent>

@@ -595,3 +595,5 @@ const newsCollections: Record<number, string[]> = {
         "Итоговые новости Центра психического здоровья"
     ]
 }
+
+
