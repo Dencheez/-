@@ -55,8 +55,12 @@ const menuConfig = [
     { name: "Бесплатная помощь", href: "/free-help" },
 ]
 
-export default function RightSidebar() {
+export default function RightSidebar({ onClose }: { onClose?: () => void }) {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+    const handleLinkClick = () => {
+        if (onClose) onClose();
+    };
 
     return (
         <aside className="w-full flex flex-col shadow-lg rounded-lg overflow-hidden border border-[#00B5C4]/20">
@@ -73,6 +77,7 @@ export default function RightSidebar() {
                                 {item.href ? (
                                     <Link
                                         href={item.href}
+                                        onClick={handleLinkClick}
                                         className="flex-1 p-4 text-[11px] font-extrabold uppercase tracking-tight leading-tight text-white pr-1"
                                     >
                                         {item.name}
@@ -98,6 +103,7 @@ export default function RightSidebar() {
                             // Обычная прямая ссылка
                             <Link
                                 href={item.href || "#"}
+                                onClick={handleLinkClick}
                                 className={`flex justify-between items-center p-4 w-full transition-colors text-white uppercase font-extrabold text-[11px] tracking-tight
                   ${item.isHeader ? 'bg-[#009da8] border-b-2 border-white/10' : 'bg-[#00B5C4] hover:bg-[#009da8]'}`}
                             >
@@ -113,6 +119,7 @@ export default function RightSidebar() {
                                     <Link
                                         key={sIdx}
                                         href={sub.href}
+                                        onClick={handleLinkClick}
                                         className="p-3.5 pl-8 text-[10px] text-white/95 font-bold hover:bg-white/10 border-b border-white/5 last:border-0 transition-colors"
                                     >
                                         {sub.name}

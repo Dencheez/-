@@ -91,8 +91,8 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
                     `}>
                             {/* На мобилке тоже добавим его в начало сайдбара */}
                             <div className="flex flex-col gap-6">
-                                <DirectorBlog />
-                                <RightSidebar />
+                                <DirectorBlog onClose={() => setShowMobileSidebar(false)} />
+                                <RightSidebar onClose={() => setShowMobileSidebar(false)} />
                             </div>
                         </aside>
                         {showMobileSidebar && (

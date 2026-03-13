@@ -102,7 +102,7 @@ export default function SettingsPage() {
                             <div>
                                 <p className="text-[10px] md:text-xs font-bold text-foreground">Статус аккаунта</p>
                                 <p className="text-[9px] md:text-[11px] text-muted-foreground">
-                                    Верифицирован через Clerk
+                                    Верифицирован на ЦПЗ
                                 </p>
                             </div>
                         </div>

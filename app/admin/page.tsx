@@ -3,27 +3,30 @@
 import { useState, useMemo, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { supabase } from "@/app/lib/supabase"
+import Link from "next/link"
 import { AppShell } from "@/components/app-shell"
 import {
-    User,
+    Users,
+    Loader2,
     Calendar,
     Phone,
-    FileText,
-    Loader2,
-    XCircle,
-    Users,
-    Clock,
+    Check,
     RotateCcw,
-    Check
+    Newspaper,
+    Megaphone,
+    HeartPulse,
+    Info,
+    Briefcase,
+    ShoppingBag
 } from "lucide-react"
 
 function AdminDashboard() {
     const searchParams = useSearchParams()
     const [appointments, setAppointments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
-
     const searchQuery = searchParams.get("search")?.toLowerCase() || ""
 
+    // 1. Загружаем только записи (контент теперь по ссылкам)
     useEffect(() => {
         async function fetchAppointments() {
             setLoading(true)
@@ -38,121 +41,127 @@ function AdminDashboard() {
         fetchAppointments()
     }, [])
 
+    // 2. Логика переключения статуса записи
     const toggleStatus = async (id: number, currentStatus: string) => {
-        // Логика под твои статусы: upcoming <-> completed
-        const newStatus = currentStatus === 'completed' ? 'upcoming' : 'completed';
+        const newStatus = currentStatus === 'completed' ? 'upcoming' : 'completed'
 
         setAppointments(prev => prev.map(appt =>
             appt.id === id ? { ...appt, status: newStatus } : appt
-        ));
+        ))
 
         const { error } = await supabase
             .from("appointments")
             .update({ status: newStatus })
-            .eq("id", id);
+            .eq("id", id)
 
         if (error) {
             setAppointments(prev => prev.map(appt =>
                 appt.id === id ? { ...appt, status: currentStatus } : appt
-            ));
+            ))
         }
-    };
+    }
 
-
-    const filteredClients = useMemo(() => {
-        if (!searchQuery) return appointments;
-        return appointments.filter((client) =>
-            client.patient_name?.toLowerCase().includes(searchQuery) ||
-            client.doctor_name?.toLowerCase().includes(searchQuery) ||
-            client.phone?.includes(searchQuery)
+    const filteredAppointments = useMemo(() => {
+        if (!searchQuery) return appointments
+        return appointments.filter((appt) =>
+            appt.patient_name?.toLowerCase().includes(searchQuery) ||
+            appt.phone?.includes(searchQuery)
         )
     }, [appointments, searchQuery])
 
     if (loading) return (
         <div className="flex h-[60vh] items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-primary/30" />
+            <Loader2 className="h-8 w-8 animate-spin text-[#00B5C4]/30" />
         </div>
     )
 
     return (
-        <div className="p-4 max-w-5xl mx-auto space-y-6">
-            <div className="flex items-center justify-between bg-card border border-border p-6 rounded-[2.5rem] shadow-sm">
-                <h1 className="text-2xl font-black text-foreground flex items-center gap-2">
-                    <Users className="h-6 w-6 text-primary" />
+        <div className="p-4 max-w-6xl mx-auto space-y-10">
+            {/* ШАПКА ПАНЕЛИ */}
+            <div className="bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <h1 className="text-3xl font-black text-slate-800 flex items-center gap-3 uppercase tracking-tighter">
+                    <Users className="h-8 w-8 text-[#00B5C4]" />
                     Панель управления
                 </h1>
-                <div className="bg-primary/5 px-6 py-2 rounded-2xl border border-primary/10">
-                    <p className="text-xl font-black text-primary">{appointments.length}</p>
+                <div className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 bg-slate-50 px-4 py-2 rounded-full">
+                    Режим Администратора
                 </div>
             </div>
 
-            <div className="grid gap-4">
-                {filteredClients.map((client) => {
-                    // Теперь проверяем статус 'completed' из твоей базы
-                    const isDone = client.status === 'completed';
+            {/* СЕКЦИЯ 1: УПРАВЛЕНИЕ КОНТЕНТОМ (КНОПКИ) */}
+            <div className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm">
+                <div className="mb-8">
+                    <h2 className="text-2xl font-black uppercase tracking-tighter text-slate-800">Публикации</h2>
+                    <p className="text-slate-500 text-sm">Управление новостями, статьями и вакансиями</p>
+                </div>
 
-                    return (
-                        <div
-                            key={client.id}
-                            className={`relative bg-card border border-border rounded-[2.5rem] p-6 transition-all shadow-sm ${isDone ? 'bg-zinc-50 opacity-80' : 'hover:border-primary/40'
-                                }`}
-                        >
-                            {/* КНОПКА: Переключения статуса */}
-                            <div className="absolute top-6 right-6 flex flex-col items-end gap-2 z-[100]">
-                                <div className={`px-3 py-1 text-[10px] font-black rounded-full border uppercase ${isDone ? 'bg-zinc-200 text-zinc-600' : 'bg-green-100 text-green-700 border-green-200'
-                                    }`}>
-                                    {isDone ? 'Завершена' : 'Активна'}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <AdminLink href="/news" icon={<Newspaper />} label="Новости" />
+                    <AdminLink href="/announcement" icon={<Megaphone />} label="Объявления" />
+                    <AdminLink href="/zozh" icon={<HeartPulse />} label="ЗОЖ" />
+                    <AdminLink href="/info" icon={<Info />} label="Инфо-блок" />
+                    <AdminLink href="/vacancies" icon={<Briefcase />} label="Вакансии" />
+                    <AdminLink href="/goszakup" icon={<ShoppingBag />} label="Закупки" />
+                </div>
+            </div>
+
+            {/* СЕКЦИЯ 2: ЗАПИСИ ПАЦИЕНТОВ */}
+            <div className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-sm">
+                <div className="mb-8">
+                    <h2 className="text-2xl font-black uppercase tracking-tighter text-slate-800">Записи на прием</h2>
+                    <p className="text-slate-500 text-sm font-medium">Всего заявок: {filteredAppointments.length}</p>
+                </div>
+
+                <div className="space-y-4">
+                    {filteredAppointments.map((appt) => (
+                        <div key={appt.id} className="flex flex-col md:flex-row items-center justify-between p-6 bg-slate-50 rounded-2xl border border-slate-100 gap-4">
+                            <div className="flex items-center gap-4 w-full md:w-auto">
+                                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${appt.status === 'completed' ? 'bg-green-100 text-green-600' : 'bg-[#00B5C4]/10 text-[#00B5C4]'}`}>
+                                    <Calendar className="w-5 h-5" />
                                 </div>
-
-                                <button
-                                    type="button"
-                                    onClick={() => toggleStatus(client.id, client.status)}
-                                    className="fixed top-10 right-10 z-[999] bg-red-600 text-white px-10 py-4 rounded-full font-black shadow-2xl hover:scale-105 transition-all"
-                                >
-                                    ТЕСТОВАЯ КНОПКА
-                                </button>
-                            </div>
-
-                            <div className="flex flex-col gap-6">
-                                <div className="flex items-center gap-4 pr-[180px]">
-                                    <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-                                        <User className="h-7 w-7 text-primary" />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <h3 className="font-bold text-xl text-foreground truncate">
-                                            {client.patient_name || "Без имени"}
-                                        </h3>
-                                        <p className="text-xs font-bold text-primary uppercase mt-1">
-                                            {client.service_type || "Психотерапевт"}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                    <div className="flex items-center gap-3 bg-white px-4 py-3 rounded-2xl text-sm border border-border shadow-sm">
-                                        <Calendar className="h-4 w-4 text-primary" />
-                                        <span className="font-bold">{client.date}</span>
-                                        <Clock className="h-4 w-4 text-primary ml-2" />
-                                        <span className="font-bold">{client.time || "12:00"}</span>
-                                    </div>
-                                    <div className="flex items-center gap-3 bg-white px-4 py-3 rounded-2xl text-sm border border-border shadow-sm">
-                                        <Phone className="h-4 w-4 text-primary" />
-                                        <span className="font-mono font-black">{client.phone || "+7 (777) 000-00-00"}</span>
+                                <div>
+                                    <h4 className="font-black uppercase text-slate-800 tracking-tight">{appt.patient_name}</h4>
+                                    <div className="flex items-center gap-3 text-slate-500 text-xs mt-1">
+                                        <span className="flex items-center gap-1 font-bold uppercase tracking-widest"><Phone className="w-3 h-3" /> {appt.phone}</span>
                                     </div>
                                 </div>
                             </div>
+
+                            <button
+                                onClick={() => toggleStatus(appt.id, appt.status)}
+                                className={`w-full md:w-auto px-6 py-3 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 ${appt.status === 'completed'
+                                        ? 'bg-green-500 text-white shadow-lg shadow-green-500/20'
+                                        : 'bg-white border-2 border-slate-200 text-slate-400 hover:border-[#00B5C4] hover:text-[#00B5C4]'
+                                    }`}
+                            >
+                                {appt.status === 'completed' ? <Check className="w-4 h-4" /> : <RotateCcw className="w-4 h-4" />}
+                                {appt.status === 'completed' ? 'Завершено' : 'В ожидании'}
+                            </button>
                         </div>
-                    );
-                })}
+                    ))}
+                </div>
             </div>
         </div>
+    )
+}
+
+// Мини-компонент для кнопок навигации
+function AdminLink({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) {
+    return (
+        <Link href={href} className="group p-6 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-[#00B5C4] hover:border-[#00B5C4] transition-all duration-300">
+            <div className="text-slate-400 group-hover:text-white/80 mb-4 transition-colors">
+                {icon}
+            </div>
+            <h3 className="font-black uppercase tracking-widest text-[10px] text-slate-400 group-hover:text-white/70 mb-1">Раздел</h3>
+            <div className="text-lg font-black uppercase tracking-tighter text-slate-800 group-hover:text-white">{label}</div>
+        </Link>
     )
 }
 
 export default function AdminPage() {
     return (
         <AppShell>
-            <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin text-primary" /></div>}>
+            <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin text-[#00B5C4] w-10 h-10" /></div>}>
                 <AdminDashboard />
             </Suspense>
         </AppShell>

@@ -2,9 +2,13 @@
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 
-export function DirectorBlog() {
+export function DirectorBlog({ onClose }: { onClose?: () => void }) {
     return (
-        <Link href="/director-blog" className="block w-full group overflow-hidden rounded-lg shadow-lg border border-[#00B5C4]/20 transition-all">
+        <Link 
+            href="/director-blog" 
+            onClick={() => onClose?.()}
+            className="block w-full group overflow-hidden rounded-lg shadow-lg border border-[#00B5C4]/20 transition-all"
+        >
             <div className="flex flex-col">
                 {/* Фото директора */}
                 <div className="relative h-48 w-full overflow-hidden bg-slate-100">
