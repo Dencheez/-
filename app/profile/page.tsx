@@ -31,7 +31,7 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useUser, SignInButton } from "@clerk/nextjs"
 
-type Tab = "appointments" | "info" | "settings"
+type Tab = "appointments" | "content" | "users" | "qna" | "info" | "settings";
 
 type SiteContentRow = {
   id: number
@@ -41,7 +41,7 @@ type SiteContentRow = {
 
 // --- ПРОФИЛЬ КЛИЕНТА ---
 function ClientProfile() {
-  const [activeTab, setActiveTab] = useState<Tab>("appointments")
+  const [activeTab, setActiveTab] = useState<Tab>("appointments");
   const [myAppointments, setMyAppointments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const { user } = useUser()
