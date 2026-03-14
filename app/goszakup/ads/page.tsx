@@ -2,28 +2,18 @@
 
 import { useState, useEffect } from "react"
 import { AppShell } from "@/components/app-shell"
-import { Megaphone, Calendar, ChevronDown, ChevronUp, Download, Plus, Trash2, Loader2 } from "lucide-react"
+import { Megaphone, ChevronDown, ChevronUp, Download, Plus, Trash2, Loader2, ChevronLeft, ChevronRight } from "lucide-react"
 import { useUser } from "@clerk/nextjs"
-import { getProcurement } from "@/app/lib/api"
+import { getProcurement } from "@/app/admin/actions"
 import { deleteProcurement, addProcurement } from "@/app/admin/actions"
 import { toast } from "sonner"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { supabase } from "@/lib/supabase"
 
-
-const staticAnnouncements = [
-    {
-        id: "st-2",
-        created_at: "2018-04-23",
-        title: "Объявление на участие способом запроса ценовых предложений",
-        section: "Запрос ценовых предложений",
-        content: `ГКП на ПХВ «Городской наркологический центр...`,
-    },
-]
-
 function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: boolean, onRefresh: () => void }) {
     const [isOpen, setIsOpen] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
+
 
     // Проверяем, статичное ли это объявление (их нельзя удалить из базы)
     const isStatic = String(item.id).startsWith('st-')
@@ -108,18 +98,32 @@ export default function AdsPage() {
     const [dbItems, setDbItems] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalCount, setTotalCount] = useState(0)
+    const itemsPerPage = 6
 
-    const loadData = async () => {
+    const loadData = async (page: number = 1) => {
         setLoading(true)
-        const data = await getProcurement()
-        setDbItems(data || [])
-        setLoading(false)
+        try {
+            const result = (await getProcurement(page, itemsPerPage)) as any;
+
+            if (result && result.data) {
+                setDbItems(result.data);
+                setTotalCount(result.count || 0);
+            }
+        } catch (err) {
+            console.error(err)
+            toast.error("Ошибка загрузки")
+        } finally {
+            setLoading(false)
+        }
     }
 
-    useEffect(() => { loadData() }, [])
-
+    useEffect(() => {
+        loadData(currentPage)
+    }, [currentPage])
     // Объединяем старые объявления и новые из базы, сортируем по дате
-    const allAnnouncements = [...dbItems, ...staticAnnouncements].sort((a, b) =>
+    const allAnnouncements = [...dbItems].sort((a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     )
 
@@ -181,7 +185,7 @@ export default function AdsPage() {
                     {isAdmin && (
                         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                             <DialogTrigger asChild>
-                                <button className="bg-[#00B5C4] text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-lg shadow-[#00B5C4]/20 shrink-0">
+                                <button className="bg-[#00B5C4] text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shrink-0">
                                     <Plus className="w-4 h-4 inline-block mr-2" />
                                     Добавить
                                 </button>
@@ -193,7 +197,7 @@ export default function AdsPage() {
                                     <input name="title" required placeholder="Заголовок" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
                                     <textarea name="content" required rows={5} placeholder="Текст объявления" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] resize-none" />
                                     <input type="file" name="file" className="w-full bg-slate-50 border-none rounded-xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4]" />
-                                    <button type="submit" className="w-full bg-[#00B5C4] text-white py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest shadow-lg shadow-[#00B5C4]/20">Добавить объявление</button>
+                                    <button type="submit" className="w-full bg-[#00B5C4] text-white py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest">Добавить объявление</button>
                                 </form>
                             </DialogContent>
                         </Dialog>
@@ -210,6 +214,44 @@ export default function AdsPage() {
                     </div>
                 )}
             </div>
+            {/* Пагинация */}
+            {totalCount > itemsPerPage && (
+                <div className="flex justify-center mt-8">
+                    <button
+                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 mx-1 rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 disabled:opacity-50"
+                    >
+                        <ChevronLeft className="w-4 h-4 text-slate-600" />
+
+                    </button>
+
+                    {/* Показываем кнопки от 1 до totalPages */}
+                    {Array.from({ length: Math.ceil(totalCount / itemsPerPage) }, (_, i) => {
+                        const pageNum = i + 1
+                        return (
+                            <button
+                                key={pageNum}
+                                onClick={() => setCurrentPage(pageNum)}
+                                className={`px-4 py-2 mx-1 rounded-xl ${currentPage === pageNum
+                                    ? "bg-[#00B5C4] text-white"
+                                    : "bg-slate-50 text-slate-500 hover:bg-slate-100"
+                                    }`}
+                            >
+                                {pageNum}
+                            </button>
+                        )
+                    })}
+
+                    <button
+                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(totalCount / itemsPerPage)))}
+                        disabled={currentPage === Math.ceil(totalCount / itemsPerPage)}
+                        className="px-4 py-2 mx-1 rounded-xl bg-slate-50 text-slate-500 hover:bg-slate-100 disabled:opacity-50"
+                    >
+                        <ChevronRight className="w-4 h-4 text-slate-600" />
+                    </button>
+                </div>
+            )}
         </AppShell>
     )
 }

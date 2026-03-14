@@ -7,11 +7,37 @@ import { ChevronRight } from "lucide-react"
 import { InfoFiles } from "../info-files"
 
 const defaultSlides = [
-  { img: "/images/hero-banners/hero-banner--1.jpg", link: "/", title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ" },
-  { img: "/images/hero-banners/hero-banner--2.jpg", link: "/", title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ" },
-  { img: "/images/hero-banners/hero-banner--3.jpg", link: "/", title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ" },
-  { img: "/images/hero-banners/hero-banner--4.jpg", link: "/", title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ" },
-  { img: "/images/hero-banners/hero-banner--5.jpg", link: "/", title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ" },
+  {
+    img: "/images/hero-banners/hero-banner--1.jpg",
+    link: "/",
+    title: "Профессиональная помощь рядом",
+    subtitle: "Центр психического здоровья оказывает государственную услугу  с вниманием, опытом и ответственностью."
+
+  },
+  {
+    img: "/images/hero-banners/hero-banner--2.jpg",
+    link: "/",
+    title: "Забота, которой доверяют",
+    subtitle: "Государственная услуга центра психического здоровья. Квалифицированная помощь, консультация и сопровождение."
+  },
+  {
+    img: "/images/hero-banners/hero-banner--3.jpg",
+    link: "/",
+    title: "Рядом, когда нужна опора",
+    subtitle: "Государственная помощь центра психического здоровья. Поддержка специалистов для детей, взрослых и семей."
+  },
+  {
+    img: "/images/hero-banners/hero-banner--4.jpg",
+    link: "/",
+    title: "Когда важна помощь, мы рядом",
+    subtitle: "Центр психического здоровья оказывает государственную услугу с уважением, вниманием и профессионализмом."
+  },
+  {
+    img: "/images/hero-banners/hero-banner--5.jpg",
+    link: "/",
+    title: "ЦЕНТР ПСИХИЧЕСКОГО ЗДОРОВЬЯ",
+    subtitle: "Центр психического здоровья оказывает государственную услугу с уважением, вниманием и профессионализмом."
+  },
 ]
 
 export function HeroBanner() {
@@ -45,9 +71,17 @@ export function HeroBanner() {
 
           {/* Плашка текста */}
           <div className="absolute top-4 left-4 z-20">
-            <div className="bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-blue-100">
-              <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-blue-600">
+            <div className="bg-[#00B5C4] backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm">
+              <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white">
                 {defaultSlides[current].title}
+              </span>
+            </div>
+          </div>
+          {/*Нижняя плажка текста*/}
+          <div className="absolute bottom-0 left-0 z-20 w-full md:w-full">
+            <div className="bg-[#00B5C4] px-4 py-1.5  h-[150px]">
+              <span className="text-sm md:text-sm font-black tracking-wider text-white">
+                {defaultSlides[current].subtitle}
               </span>
             </div>
           </div>
@@ -56,7 +90,7 @@ export function HeroBanner() {
         {/* Индикаторы */}
         <div className="absolute left-1/2 -translate-x-1/2 bottom-4 flex gap-1 z-30">
           {defaultSlides.map((_, idx) => (
-            <div key={idx} className={`h-1.5 rounded-full ${current === idx ? "w-6 bg-blue-600" : "w-1.5 bg-blue-200"}`} />
+            <div key={idx} className={`h-1.5 rounded-full ${current === idx ? "w-6 bg-white" : "w-1.5 bg-white"}`} />
           ))}
         </div>
 

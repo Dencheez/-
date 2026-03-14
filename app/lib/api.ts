@@ -44,10 +44,22 @@ export async function getPostById(id: string) {
 }
 
 // --- PROCUREMENT ---
-export async function getProcurement() {
-  const { data, error } = await supabase.from('procurement').select('*').order('created_at', { ascending: false })
-  if (error) console.error("Error fetching procurement:", error)
-  return data || []
+export async function getProcurement(page: number = 1, pageSize: number = 6) {
+  const from = (page - 1) * pageSize
+  const to = from + pageSize - 1
+
+  const { data, error, count } = await supabase
+    .from('procurement')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to)
+
+  if (error) {
+    console.error("Error fetching procurement:", error)
+    throw error
+  }
+
+  return { data: data || [], count: count || 0 }
 }
 
 export async function getProcurementById(id: string) {

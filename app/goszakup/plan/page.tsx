@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { AppShell } from "@/components/app-shell"
-import { LayoutList, Download, FileSpreadsheet, ExternalLink } from "lucide-react"
+import { Download, FileSpreadsheet, ExternalLink } from "lucide-react"
 
 const plans = [
     { year: "2018", title: "План государственных закупок 2018", href: "/files/plans/План_закупок_2018.xlsx" },

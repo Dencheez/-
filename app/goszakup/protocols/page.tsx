@@ -1,7 +1,7 @@
 "use client"
 
 import { AppShell } from "@/components/app-shell"
-import { Download, FileText, ChevronRight } from "lucide-react"
+import { Download, FileText, } from "lucide-react"
 
 const protocols = [
     { id: "7", title: "Протокол №16 2017 г", type: "Протокол", href: "/files/protocols/Itogovy.pdf" },

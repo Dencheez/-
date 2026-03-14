@@ -6,12 +6,61 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation" // Добавили импорт
 
 async function checkAdmin() {
-    return; // ВРЕМЕННО: пропускаем всех без проверки
     const { sessionClaims } = await auth()
     const role = (sessionClaims?.metadata as { role?: string })?.role
     if (role !== "admin" && role !== "doctor") {
         throw new Error("Unauthorized: requires admin privileges")
     }
+}
+
+// Универсальная функция для получения любых постов (новости, статьи и т.д.)
+export async function getPostsAction(category: string = 'news', page: number = 1, pageSize: number = 30) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, error, count } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact' })
+        .eq('category', category)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+    if (error) {
+        console.error("Supabase error:", error);
+        return { data: [], count: 0 };
+    }
+
+    return { data: data || [], count: count || 0 };
+}
+//новости
+export async function createPostAction(formData: FormData) {
+    await checkAdmin(); // Проверка прав перед записью
+
+    const title = formData.get('title') as string;
+    const content = formData.get('content') as string;
+    const category = formData.get('category') as string;
+    const image_url = formData.get('image_url') as string;
+
+    const { error } = await supabase
+        .from('posts')
+        .insert([{ title, content, category, image_url }]);
+
+    if (error) {
+        console.error("Ошибка вставки:", error.message);
+        return { success: false, error: error.message };
+    }
+
+    revalidatePath('/news');
+    revalidatePath('/admin');
+    // Добавляем ревалидацию для всех страниц, где может быть этот контент
+    revalidatePath(`/${category}`);
+
+    return { success: true };
+}
+
+// Экшен для получения (то что мы делали для списка)
+export async function getNewsAction(page: number = 1, pageSize: number = 30) {
+    return getPostsAction('news', page, pageSize);
 }
 
 // --- Vacancies ---
@@ -52,11 +101,27 @@ export async function deletePost(id: string, category: string) {
     redirect(`/${category}`) // Редирект после удаления
 }
 
+export async function getProcurement(page: number = 1, pageSize: number = 6) {
+    const from = (page - 1) * pageSize
+    const to = from + pageSize - 1
+
+    const { data, error, count } = await supabase
+        .from('procurement')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false })
+        .range(from, to)
+
+    if (error) throw error
+
+    // МЫ ВОЗВРАЩАЕМ ОБЪЕКТ
+    return {
+        data: (data as any[]) || [],
+        count: count || 0
+    }
+}
+
 // --- Procurement ---
 export async function addProcurement(data: { title: string, type: string, content: string, file_url?: string }) {
-    // Временно отключи checkAdmin() если всё еще пишет Unauthorized
-    // await checkAdmin() 
-
     const { error } = await supabase
         .from('procurement')
         .insert([
@@ -83,6 +148,9 @@ export async function deleteProcurement(id: string | number) {
     if (error) throw error
     revalidatePath('/goszakup/ads')
 }
+
+
+
 // --- QnA ---
 export async function replyQna(id: string, answer: string) {
     await checkAdmin()
