@@ -2,8 +2,27 @@
 
 import { auth } from "@clerk/nextjs/server"
 import { supabase } from "@/app/lib/supabase"
+import { createClient } from '@supabase/supabase-js'
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation" // Добавили импорт
+
+
+const supabaseAdmin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY! // Тот самый ключ из .env
+)
+
+export async function deleteVacancy(id: string) {
+    await checkAdmin() // Твоя проверка Clerk остается для защиты
+
+    const { error } = await supabaseAdmin
+        .from('vacancies')
+        .delete()
+        .eq('id', id)
+
+    if (error) throw error
+    return { success: true }
+}
 
 async function checkAdmin() {
     const { sessionClaims } = await auth()
@@ -71,15 +90,6 @@ export async function addVacancy(data: { title: string; salary?: string; experie
     revalidatePath('/admin')
     revalidatePath('/vacancies')
     redirect('/vacancies') // Редирект после добавления
-}
-
-export async function deleteVacancy(id: string) {
-    await checkAdmin()
-    const { error } = await supabase.from('vacancies').delete().eq('id', id)
-    if (error) throw error
-    revalidatePath('/admin')
-    revalidatePath('/vacancies')
-    redirect('/vacancies') // Редирект после удаления
 }
 
 // --- Posts ---

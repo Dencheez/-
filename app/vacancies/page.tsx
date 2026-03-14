@@ -142,8 +142,21 @@ export default function VacanciesPage() {
                                             </div>
                                             {isAdmin && (
                                                 <button
-                                                    onClick={() => confirm("Удалить вакансию?") && deleteVacancy(v.id).then(load)}
-                                                    className="p-3 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"
+                                                    onClick={async (e) => {
+                                                        e.preventDefault();
+                                                        if (confirm("Вы точно хотите удалить вакансию?")) {
+                                                            try {
+                                                                console.log("Удаляем ID:", v.id);
+                                                                await deleteVacancy(v.id);
+                                                                console.log("Удалено, обновляем список...");
+                                                                await load();
+                                                            } catch (error) {
+                                                                console.error("Ошибка при удалении:", error);
+                                                                alert("Не удалось удалить. Проверь консоль.");
+                                                            }
+                                                        }
+                                                    }}
+                                                    className="p-3 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-2xl transition-colors"
                                                 >
                                                     <Trash2 className="w-5 h-5" />
                                                 </button>
