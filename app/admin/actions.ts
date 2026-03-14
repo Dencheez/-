@@ -9,7 +9,7 @@ async function checkAdmin() {
     const { sessionClaims } = await auth()
     const role = (sessionClaims?.metadata as { role?: string })?.role
     if (role !== "admin" && role !== "doctor") {
-        throw new Error("Unauthorized: requires admin privileges")
+        throw new Error("Unauthorized: ты не админ")
     }
 }
 
