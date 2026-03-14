@@ -23,9 +23,8 @@ import {
   Plus,
   Trash2,
 } from "lucide-react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { getVacancies, getPosts, getProcurement, getQna } from "@/app/lib/api"
-import { addVacancy, deleteVacancy, addPost, deletePost, addProcurement, deleteProcurement, deleteQna, replyQna } from "@/app/admin/actions"
+import { deleteQna, replyQna } from "@/app/admin/actions"
 import { toast } from "sonner"
 import { useEffect, useState, useMemo, Suspense } from "react"
 import Link from "next/link"
@@ -327,7 +326,7 @@ function AdminDashboard() {
           }
 
           {(activeTab as string) === "qna" && (
-            <div className="bg-white p-6 rounded-[32px] ...">
+            <div className="bg-white p-6 rounded-[32px]">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-sm md:text-xl font-black text-slate-800 uppercase">Вопросы и ответы</h2>
               </div>
