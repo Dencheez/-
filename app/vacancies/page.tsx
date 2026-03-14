@@ -5,6 +5,7 @@ import { Briefcase, ChevronDown, Plus, Trash2, Clock } from "lucide-react"
 import { getVacancies } from "@/app/lib/api"
 import { addVacancy, deleteVacancy } from "@/app/admin/actions"
 import { useUser } from "@clerk/nextjs"
+import { useRouter } from "next/navigation"
 
 import Link from "next/link";
 import {
@@ -28,6 +29,7 @@ export default function VacanciesPage() {
     const role = (user?.publicMetadata as any)?.role;
     const isAdmin = role === "admin" || role === "doctor";
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const router = useRouter()
 
     async function load() {
         try {
@@ -44,19 +46,38 @@ export default function VacanciesPage() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        try {
-            await addVacancy({
-                title: formData.get("title") as string,
-                salary: formData.get("salary") as string,
-                experience: formData.get("experience") as string,
-                description: formData.get("description") as string,
-            });
-            setIsModalOpen(false);
-            load();
-        } catch (error) { console.error(error); }
-    };
+        const form = e.currentTarget;
+        const formData = new FormData(form);
 
+        const data = {
+            title: formData.get("title") as string,
+            salary: formData.get("salary") as string,
+            experience: formData.get("experience") as string,
+            description: formData.get("description") as string,
+        };
+
+        try {
+            // Отправляем ВЕСЬ объект data (со всеми полями)
+            await addVacancy(data);
+
+            // Если дошли сюда — всё кайф
+            await load();          // Обновит карточки на экране
+            setIsModalOpen(false); // Закроет модалку
+            form.reset();
+            router.refresh();
+
+        } catch (error: any) {
+            // Если это ошибка редиректа от Next.js — просто закрываем окно, это не ошибка
+            if (error.message === "NEXT_REDIRECT") {
+                await load();
+                setIsModalOpen(false);
+                return;
+            }
+
+            console.error("ПОЛНАЯ ОШИБКА:", error);
+            alert("Ошибка: " + (error.message || "Неизвестная ошибка"));
+        }
+    };
     return (
         <AppShell>
             <div className="flex flex-col w-full p-4 md:p-8 max-w-6xl mx-auto">
@@ -82,6 +103,7 @@ export default function VacanciesPage() {
                                         <input name="salary" placeholder="Зарплата (напр. 250к)" className="bg-slate-50 rounded-2xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] border-none" />
                                         <input name="experience" placeholder="Опыт работы" className="bg-slate-50 rounded-2xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] border-none" />
                                     </div>
+
                                     <textarea name="description" required rows={6} placeholder="Подробное описание, требования и контакты" className="w-full bg-slate-50 rounded-2xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] border-none" />
                                     <button type="submit" className="w-full bg-[#00B5C4] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-slate-900 transition-colors mt-2">Опубликовать вакансию</button>
                                 </form>

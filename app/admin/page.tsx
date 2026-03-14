@@ -1,5 +1,5 @@
 "use client"
-
+import { useRouter } from "next/navigation" // Импортируй это
 import React, { useState, useEffect, useMemo, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
@@ -12,6 +12,8 @@ import { supabase } from "@/lib/supabase" // Проверь путь к supabase
 import { AppShell } from "@/components/app-shell"
 
 function AdminDashboard() {
+    const router = useRouter()
+    const [open, setOpen] = useState(false)
     const searchParams = useSearchParams()
     const [appointments, setAppointments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)

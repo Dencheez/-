@@ -84,12 +84,12 @@ export async function getNewsAction(page: number = 1, pageSize: number = 30) {
 
 // --- Vacancies ---
 export async function addVacancy(data: { title: string; salary?: string; experience?: string; description: string }) {
+
     await checkAdmin()
-    const { error } = await supabase.from('vacancies').insert([data])
+    const { error } = await supabaseAdmin.from('vacancies').insert([data])
     if (error) throw error
     revalidatePath('/admin')
     revalidatePath('/vacancies')
-    redirect('/vacancies') // Редирект после добавления
 }
 
 // --- Posts ---
