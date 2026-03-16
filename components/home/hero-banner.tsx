@@ -59,20 +59,13 @@ export function HeroBanner() {
               : "object-cover rounded-lg"
               }`}
           />
-
-          {/* Верхняя плашка текста */}
-          <div className="absolute top-4 left-4 z-20 pr-4">
-            <div className="bg-[#00B5C4] px-4 py-1.5 rounded-full shadow-sm inline-block">
-              <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white whitespace-nowrap">
-                {defaultSlides[current].title}
-              </span>
-            </div>
-          </div>
-
-          {/* Нижняя плашка текста (Адаптированная) */}
-          <div className="absolute bottom-0 left-0 z-20 w-full">
-            <div className="bg-[#00B5C4]/90 backdrop-blur-sm px-4 py-4 md:px-8 md:py-6 min-h-[70px] md:min-h-[100px] flex items-center rounded-lg">
+          {/* Текст (Адаптированная) */}
+          <div className="absolute bottom-0 left-0 z-20 w-full ">
+            <div className="bg-[#00B5C4]/90 backdrop-blur-none px-4 py-4 md:px-8 md:py-6 min-h-[70px] md:min-h-[100px] flex items-center rounded-b-lg ">
               <div className="max-w-[85%] md:max-w-[70%]">
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white whitespace-nowrap">
+                  {defaultSlides[current].title}
+                </span>
                 <span className="text-xs md:text-lg font-black tracking-tight md:tracking-wider text-white leading-tight block">
                   {defaultSlides[current].subtitle}
                 </span>
@@ -80,20 +73,12 @@ export function HeroBanner() {
             </div>
           </div>
         </Link>
-
-        {/* Индикаторы */}
-        <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 bottom-[85px] md:bottom-4 flex gap-1 z-30">
-          {defaultSlides.map((_, idx) => (
-            <div key={idx} className={`h-1.5 rounded-full transition-all ${current === idx ? "w-6 bg-white" : "w-1.5 bg-white/50"}`} />
-          ))}
-        </div>
-
         {/* Кнопка "Вперед" */}
         <button
           onClick={(e) => { e.preventDefault(); nextSlide(); }}
-          className="absolute bottom-[80px] right-4 h-10 w-10 md:bottom-4 md:h-12 md:w-12 flex items-center justify-center rounded-full bg-white shadow-md z-30 hover:bg-slate-50 transition-colors"
+          className="absolute right-4 top-1/2 h-10 w-10 md:bottom-4 md:h-12 md:w-12 flex items-center justify-center -translate-y-1/2 rounded-full bg-[#00B5C4]/90 z-30"
         >
-          <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-slate-700" />
+          <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-white cursor-pointer" />
         </button>
       </div>
 

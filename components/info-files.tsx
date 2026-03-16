@@ -51,7 +51,7 @@ export function InfoFiles() {
             {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-[-40px] top-[20%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute left-[-40px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Назад"
             >
                 <ChevronLeft className="h-5 w-5 text-gray-500" />
@@ -60,7 +60,7 @@ export function InfoFiles() {
             {/* Правая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-[-40px] top-[20%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute right-[-40px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Вперед"
             >
                 <ChevronRight className="h-5 w-5 text-gray-500" />
@@ -90,7 +90,7 @@ export function InfoFiles() {
                                 />
                             </div>
 
-                            <h3 className="text-[10px] md:text-[11px] font-medium text-gray-600 leading-tight text-center px-1 uppercase">
+                            <h3 className="text-[10px] md:text-[11px]  text-gray-600 leading-tight text-center uppercase">
                                 {card.title}
                             </h3>
                         </Link>
