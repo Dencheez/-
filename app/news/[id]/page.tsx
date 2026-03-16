@@ -17,7 +17,9 @@ export default async function NewsItemPage({ params }: { params: any }) {
     const title = contentData.title;
     const date = new Date(contentData.created_at).toLocaleDateString("ru-RU");
     const rawContent = contentData.content;
-    const imageUrl = contentData.image_url;
+    const imageUrls = contentData.image_url
+        ? contentData.image_url.split(',').map((url: string) => url.trim())
+        : [];
 
     return (
         <AppShell>
@@ -45,13 +47,26 @@ export default async function NewsItemPage({ params }: { params: any }) {
                             {title}
                         </h1>
 
-                        {imageUrl && (
-                            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
-                                <img
-                                    src={imageUrl}
-                                    alt={title}
-                                    className="w-full h-auto max-h-[600px] object-cover"
-                                />
+
+
+                        {imageUrls.length > 0 && (
+                            <div className={`grid gap-4 mb-8 ${imageUrls.length === 1 ? 'grid-cols-1' :
+                                imageUrls.length === 2 ? 'grid-cols-2' :
+                                    'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                                }`}>
+                                {imageUrls.map((url: string, index: number) => (
+                                    <div
+                                        key={index}
+                                        className="group relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50"
+                                    >
+                                        <img
+                                            src={url}
+                                            alt={`${title} - фото ${index + 1}`}
+                                            className="w-full h-64 md:h-80 object-cover"
+                                        />
+
+                                    </div>
+                                ))}
                             </div>
                         )}
 

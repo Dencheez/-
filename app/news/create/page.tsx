@@ -57,7 +57,7 @@ export default function CreateNewsPage() {
                 />
                 <input
                     type="text"
-                    placeholder="Вставьте ссылку на картинку (image URL)..."
+                    placeholder="Вставьте ссылку на картинки через запятую"
                     className="w-full mb-8 text-sm text-slate-400 outline-none bg-transparent border-b border-transparent focus:border-slate-100 transition-all"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
