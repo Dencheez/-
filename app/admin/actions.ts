@@ -53,15 +53,15 @@ export async function getPostsAction(category: string = 'news', page: number = 1
 }
 //новости
 export async function createPostAction(formData: FormData) {
-    await checkAdmin(); // Проверка прав перед записью
+    await checkAdmin();
 
     const title = formData.get('title') as string;
     const content = formData.get('content') as string;
-    const category = formData.get('category') as string;
+    const category = formData.get('category') as string || 'news'; // по дефолту новости
     const image_url = formData.get('image_url') as string;
 
-    const { error } = await supabase
-        .from('posts')
+    const { error } = await supabaseAdmin // МЕНЯЕМ НА ADMIN
+        .from('news')
         .insert([{ title, content, category, image_url }]);
 
     if (error) {
@@ -71,15 +71,25 @@ export async function createPostAction(formData: FormData) {
 
     revalidatePath('/news');
     revalidatePath('/admin');
-    // Добавляем ревалидацию для всех страниц, где может быть этот контент
-    revalidatePath(`/${category}`);
-
     return { success: true };
 }
 
-// Экшен для получения (то что мы делали для списка)
 export async function getNewsAction(page: number = 1, pageSize: number = 30) {
-    return getPostsAction('news', page, pageSize);
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, error, count } = await supabase
+        .from('news')
+        .select('*', { count: 'exact' })
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+    if (error) {
+        console.error("Supabase error:", error);
+        return { data: [], count: 0 };
+    }
+
+    return { data: data || [], count: count || 0 };
 }
 
 // --- Vacancies ---

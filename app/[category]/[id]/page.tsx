@@ -20,6 +20,7 @@ export default async function CategoryContentPage({
     let rawContent = ""
     const { sessionClaims } = await auth()
     const isAdmin = (sessionClaims?.metadata as any)?.role === "admin"
+
     // 1. Fetch data based on category
     switch (category) {
         case "vacancies":
@@ -64,13 +65,14 @@ export default async function CategoryContentPage({
     if (!contentData) {
         notFound()
     }
+    const imageUrl = contentData?.image_url || "";
 
     return (
         <AppShell>
             <div className="flex flex-col w-full p-4 md:p-8 max-w-5xl mx-auto">
                 {/* Кнопка "Назад" */}
                 <Link
-                    href={`/${category === 'announcement' || category === 'zozh' || category === 'info' || category === 'news' ? category : category}`}
+                    href={`/${category}`}
                     className="flex w-fit items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#00B5C4] hover:text-[#009da8] transition-colors mb-8"
                 >
                     <div className="w-8 h-8 rounded-full bg-[#00B5C4]/10 flex items-center justify-center">
@@ -80,9 +82,11 @@ export default async function CategoryContentPage({
                 </Link>
 
                 <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 md:p-10 relative overflow-hidden">
+                    {/* Декоративный фон */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-[#00B5C4]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
                     <div className="relative">
+                        {/* Мета-информация: Дата и Категория */}
                         <div className="flex items-center gap-2 mb-6 text-slate-400">
                             <Calendar className="w-4 h-4" />
                             <span className="text-xs font-black uppercase tracking-widest">{date}</span>
@@ -97,20 +101,36 @@ export default async function CategoryContentPage({
                             </span>
                         </div>
 
+                        {/* Заголовок */}
                         <h1 className="text-2xl md:text-4xl font-black text-slate-800 uppercase tracking-tight leading-tight mb-8">
                             {title}
                         </h1>
+
+                        {/* Кнопка удаления для админа */}
                         {isAdmin && (
-                            <form action={deletePost.bind(null, id, category)} className="absolute top-6 right-6">
+                            <form action={deletePost.bind(null, id, category)} className="absolute top-0 right-0">
                                 <button
                                     type="submit"
-                                    className="text-red-500 hover:text-red-700 transition-colors"
+                                    className="text-red-500 hover:text-red-700 transition-colors p-2"
                                     title="Удалить запись"
                                 >
                                     <Trash2 className="w-5 h-5" />
                                 </button>
                             </form>
                         )}
+
+                        {/* КАРТИНКА: теперь она внутри контента и перед текстом */}
+                        {imageUrl && (
+                            <div className="mb-8 rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                                <img
+                                    src={imageUrl}
+                                    alt={title}
+                                    className="w-full h-auto max-h-[500px] object-cover"
+                                />
+                            </div>
+                        )}
+
+                        {/* Основной текст */}
                         <div className="prose max-w-none text-slate-600">
                             {parseContentToHtml(rawContent)}
                         </div>

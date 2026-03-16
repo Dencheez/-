@@ -1,20 +1,22 @@
 import React from "react";
 import Link from "next/link";
-import { Newspaper, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Newspaper, ChevronLeft, ChevronRight, ArrowRight, Plus } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
-import { getPostsAction } from "@/app/admin/actions";
-
+import { getNewsAction } from "@/app/admin/actions";
 export const dynamic = "force-dynamic";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function NewsPage(props: {
     searchParams: Promise<{ page?: string }>
 }) {
+    const { sessionClaims } = await auth();
+    const isAdmin = (sessionClaims?.metadata as any)?.role === "admin";
     const searchParams = await props.searchParams;
-    const itemsPerPage = 30; // 30 новостей на страницу
+    const itemsPerPage = 10;
     const currentPage = Number(searchParams.page) || 1;
 
     // Важно: в экшене должен быть фильтр .eq('category', 'news')
-    const { data: posts, count: totalCount } = await getPostsAction('news', currentPage, itemsPerPage);
+    const { data: posts, count: totalCount } = await getNewsAction(currentPage, itemsPerPage);
     const totalPages = Math.ceil(totalCount / itemsPerPage);
 
     return (
@@ -25,16 +27,28 @@ export default async function NewsPage(props: {
                     <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-1 mb-4 transition-colors">
                         <ChevronLeft className="h-3 w-3" /> На главную
                     </Link>
-                    <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter flex items-center gap-3">
-                        <Newspaper className="h-8 w-8 text-primary shrink-0" />
-                        Новости компании
-                    </h1>
+                    <div className="flex justify-between">
+                        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter flex items-center gap-3">
+                            <Newspaper className="h-8 w-8 text-primary shrink-0" />
+                            Новости компании
+                        </h1>
+                        {isAdmin && (
+                            <Link
+                                href="/news/create"
+                                className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 w-fit"
+                            >
+                                <Plus className="h-4 w-4" /> Написать новость
+                            </Link>
+                        )}
+                    </div>
                 </div>
+
+
 
                 {/* Список из 30 ссылок */}
                 <div className="flex flex-col border-t border-slate-100">
                     {posts.length === 0 ? (
-                        <div className="py-20 text-center text-slate-400 italic font-medium">
+                        <div className="py-20 text-center text-slate-400 font-medium">
                             Новостей пока нет
                         </div>
                     ) : (

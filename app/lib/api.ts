@@ -37,9 +37,19 @@ export async function getPosts(category?: string) {
   return data || []
 }
 
-export async function getPostById(id: string) {
-  const { data, error } = await supabase.from('posts').select('*').eq('id', id).single()
-  if (error) console.error("Error fetching post:", error)
+// app/lib/api.ts
+
+export async function getPostById(id: string, table: string = 'posts') {
+  const { data, error } = await supabase
+    .from(table) // Используем переменную table вместо жесткой строки
+    .select('*')
+    .eq('id', id)
+    .single()
+
+  if (error) {
+    console.error(`Error fetching from ${table}:`, error)
+    return null
+  }
   return data
 }
 

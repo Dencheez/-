@@ -55,8 +55,8 @@ export function HeroBanner() {
             fill
             priority
             className={`${defaultSlides[current].img.includes('hero-banner--2.jpg')
-                ? "object-contain p-4 md:p-8"
-                : "object-cover"
+              ? "object-contain p-4 md:p-8"
+              : "object-cover rounded-lg"
               }`}
           />
 
@@ -71,7 +71,7 @@ export function HeroBanner() {
 
           {/* Нижняя плашка текста (Адаптированная) */}
           <div className="absolute bottom-0 left-0 z-20 w-full">
-            <div className="bg-[#00B5C4]/90 backdrop-blur-sm px-4 py-4 md:px-8 md:py-6 min-h-[70px] md:min-h-[100px] flex items-center">
+            <div className="bg-[#00B5C4]/90 backdrop-blur-sm px-4 py-4 md:px-8 md:py-6 min-h-[70px] md:min-h-[100px] flex items-center rounded-lg">
               <div className="max-w-[85%] md:max-w-[70%]">
                 <span className="text-xs md:text-lg font-black tracking-tight md:tracking-wider text-white leading-tight block">
                   {defaultSlides[current].subtitle}
