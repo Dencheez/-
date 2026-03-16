@@ -75,7 +75,7 @@ export default function CreateNewsPage() {
                 <button
                     onClick={handleSave}
                     disabled={isLoading}
-                    className={`fixed bottom-10 right-10 bg-[#00B5C4] text-white px-10 py-4 rounded-full font-bold shadow-2xl hover:scale-105 active:scale-95 transition-all ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`static bottom-10 right-10 bg-[#00B5C4] text-white px-10 py-4 rounded-full font-bold shadow-2xl hover:scale-105 active:scale-95 transition-all ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     {isLoading ? "Публикуем..." : "Опубликовать статью"}
                 </button>

@@ -22,20 +22,26 @@ export default async function NewsPage(props: {
     return (
         <AppShell>
             <main className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 w-full flex flex-col min-h-screen">
-                {/* Хедер */}
-                <div className="mb-8">
-                    <Link href="/" className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-primary flex items-center gap-1 mb-4 transition-colors">
-                        <ChevronLeft className="h-3 w-3" /> На главную
-                    </Link>
-                    <div className="flex justify-between">
+                {/* Хедер с адаптивной кнопкой */}
+                <div className="mb-10">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter flex items-center gap-3">
                             <Newspaper className="h-8 w-8 text-primary shrink-0" />
                             Новости компании
                         </h1>
+
                         {isAdmin && (
                             <Link
                                 href="/news/create"
-                                className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 w-fit"
+                                className="
+                            flex items-center justify-center gap-2 
+                            bg-primary text-white px-8 py-4 md:py-3 
+                            rounded-2xl md:rounded-full 
+                            text-xs font-black uppercase tracking-widest 
+                            hover:bg-primary/90 transition-all 
+                            shadow-lg shadow-primary/20 
+                            w-full md:w-fit
+                        "
                             >
                                 <Plus className="h-4 w-4" /> Написать новость
                             </Link>
