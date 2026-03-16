@@ -2,68 +2,258 @@
 
 import { AppShell } from "@/components/app-shell"
 import Link from "next/link"
-import { Wallet, ChevronLeft, CreditCard, ChevronRight, FileText, Download } from "lucide-react"
+import { ChevronLeft, Search, Users, FileSpreadsheet, } from "lucide-react"
+import { useState, useMemo } from "react"
 
 export default function PaidServicesPage() {
+    const [search, setSearch] = useState("");
+
+    const allServices = useMemo(() => [
+        { id: 1, name: "ППР, вызванные употреблением каннабиноидов. Синдром зависимости.", price: "17 000", unit: "1 койко-день" },
+        { id: 2, name: "ППР, вызванные употреблением алкоголя. Синдром зависимости.", price: "12 000", unit: "1 койко-день" },
+        { id: 3, name: "ППР, вызванные употреблением алкоголя. Синдром зависимости. (VIP палата).", price: "25 000", unit: "1 койко-день" },
+        { id: 4, name: "ППР, вызванные употреблением нескольких наркотических средств и использование других ПАВ. Синдром зависимости.", price: "17 000", unit: "1 койко-день" },
+        { id: 5, name: "ППР, вызванные употреблением седативных и снотворных средств. Синдром зависимости.", price: "17 000", unit: "1 койко-день" },
+        { id: 6, name: "ППР, вызванные употреблением опиоидов. Синдром зависимости.", price: "17 000", unit: "1 койко-день" },
+        { id: 7, name: "ППР, вызванные употреблением алкоголя. Психотическое расстройство, синдром зависимости.", price: "14 000", unit: "1 койко-день" },
+        { id: 8, name: "Лечение в отделении психосоматических расстройств.", price: "15 000", unit: "1 койко-день" },
+        { id: 9, name: "Лечение в отделении психических расстройств у лиц пожилого и старческого возраста.", price: "15 000", unit: "1 койко-день" },
+        { id: 10, name: "Блокирование (кодирование) медикаментозное", price: "35 000", unit: "услуга" },
+        { id: 11, name: "ППР, вызванные употреблением нескольких наркотических средств и использование других ПАВ. Синдром зависимости.", price: "15 000", unit: "посещение" },
+        { id: 12, name: "ППР, вызванные употреблением алкоголя. Абстинентное состояние.", price: "12 000", unit: "посещение" },
+        { id: 13, name: "ППР, вызванные употреблением седативных и снотворных средств. Синдром зависимости.", price: "15 000", unit: "посещение" },
+        { id: 14, name: "ППР, вызванные употреблением каннабиноидов. Абстинентное состояние.", price: "15 000", unit: "посещение" },
+        { id: 15, name: "ППР, вызванные употреблением опиоидов. Абстинентное состояние.", price: "15 000", unit: "посещение" },
+        { id: 16, name: "Консультация врача-психиатра (нарколога) - первичный прием.", price: "9 800", unit: "услуга" },
+        { id: 17, name: "Консультация врача-психиатра (нарколога) - повторный прием.", price: "6 000", unit: "услуга" },
+        { id: 18, name: "Мед. осмотр врача-психиатра (нарколога) с выдачей заключения для лиц, получающих допуск к гос. секретам.", price: "3 300", unit: "услуга" },
+        { id: 19, name: "Мед. осмотр врача-психиатра (нарколога) с выдачей заключения для лиц, проходящих МСЭ в других мед. организациях.", price: "4 500", unit: "услуга" },
+        { id: 20, name: "Консультация врача-психиатра (нарколога) по заявлению пациента (родственников) с осмотром на дому (первичный).", price: "12 000", unit: "услуга" },
+        { id: 21, name: "Консультация врача-психиатра (нарколога) по заявлению пациента (родственников) с осмотром на дому для лиц, проходящих МСЭ.", price: "8 200", unit: "услуга" },
+        { id: 22, name: "Мед. осмотр врача-психиатра (нарколога) с выдачей справки формы 027/у по месту требования.", price: "5 500", unit: "услуга" },
+        { id: 23, name: "Психотерапия индивидуальная", price: "12 000", unit: "1 сеанс" },
+        { id: 24, name: "Психотерапия семейная", price: "15 000", unit: "1 сеанс" },
+        { id: 25, name: "Прием врача невропатолога-эпилептолога.", price: "5 500", unit: "услуга" },
+        { id: 26, name: "Проверка информации по базе псих/нарк учета без осмотра врача (для допуска к секретным документам и др.).", price: "500", unit: "услуга" },
+        { id: 27, name: "Экспериментально-психологическое обследование (ЭПО).", price: "8 500", unit: "услуга" },
+        { id: 28, name: "Паравертебральная блокада (без стоимости лекарственных средств).", price: "4 000", unit: "услуга" },
+        { id: 29, name: "Медицинский осмотр на получение справки - форма № 073/у (шоферская комиссия).", price: "9 300", unit: "услуга" },
+        { id: 29.1, name: "Прием врача - психиатра(нарколога)", price: "2 300", unit: "услуга" },
+        { id: 29.2, name: "Прием врача - терапевта.", price: "1 000", unit: "услуга" },
+        { id: 29.3, name: "Прием врача - офтальмолога.", price: "1 000", unit: "услуга" },
+        { id: 29.4, name: "Прием врача - оториноларинголога.", price: "1 000", unit: "услуга" },
+        { id: 29.5, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "4 000", unit: "исследование" },
+
+        { id: 30, name: "Медицинский осмотр на получение справки - форма №075/у (для поступления в учебные заведения, для трудоустройства).", price: "11 700", unit: "услуга" },
+        { id: 30.1, name: "Прием врача - терапевта.", price: "1 000", unit: "услуга" },
+        { id: 30.2, name: "Прием врача - психиатра(нарколога)", price: "2 300", unit: "услуга" },
+        { id: 30.3, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "4 000", unit: "анализ" },
+        { id: 30.4, name: "Психологическое тестирование", price: "800", unit: "услуга" },
+        { id: 30.5, name: "Флюорография грудной клетки.", price: "3 000", unit: "обследование" },
+        { id: 30.6, name: "Анализ крови на микрореакцию.", price: "600", unit: "анализ" },
+
+        { id: 31, name: "Медицинский осмотр на получение справки - форма № 076/у (для получения разрешения на оружие).", price: "11 100", unit: "услуга" },
+        { id: 31.1, name: "Прием врача - терапевта.", price: "1 000", unit: "услуга" },
+        { id: 31.2, name: "Прием врача - психиатра(нарколога)", price: "2 300", unit: "услуга" },
+        { id: 31.3, name: "Прием врача - офтальмолога.", price: "1 000", unit: "услуга" },
+        { id: 31.4, name: "Прием врача - отоларинголога", price: "1 000", unit: "услуга" },
+        { id: 31.5, name: "Прием врача -невропатолога.", price: "1 000", unit: "услуга" },
+        { id: 31.6, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "4 000", unit: "анализ" },
+        { id: 31.7, name: "Психологическое тестирование", price: "800", unit: "услуга" },
+
+        // --- УСЛУГИ ДЛЯ ИНОСТРАННЫХ ГРАЖДАН ---
+        { id: 32, name: "Медицинский осмотр на получение справки - форма №002В/у (заключение о состоянии здоровья иностранца).", price: "14 800", unit: "услуга" },
+        { id: 32.1, name: "Прием врача - психиатра(нарколога)", price: "3 400", unit: "услуга" },
+        { id: 32.2, name: "Прием врача - терапевта.", price: "1 500", unit: "услуга" },
+        { id: 32.3, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "5 000", unit: "исследование" },
+        { id: 32.4, name: "Флюорография грудной клетки.", price: "4 000", unit: "обследование" },
+        { id: 32.5, name: "Фотографирование 3,5 х 4,5 - 5 штук.", price: "900", unit: "услуга" },
+
+        { id: 33, name: "Медицинский осмотр на получение справки - форма №075/у (для поступления в учебные заведения, для трудоустройства). (Иностранец)", price: "15 500", unit: "услуга" },
+        { id: 33.1, name: "Прием врача - терапевта.", price: "1 500", unit: "услуга" },
+        { id: 33.2, name: "Прием врача - психиатра(нарколога)", price: "3 400", unit: "услуга" },
+        { id: 33.3, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "5 000", unit: "анализ" },
+        { id: 33.4, name: "Психологическое тестирование", price: "900", unit: "услуга" },
+        { id: 33.5, name: "Флюорография грудной клетки.", price: "4 000", unit: "обследование" },
+        { id: 33.6, name: "Анализ крови на микрореакцию.", price: "700", unit: "анализ" },
+
+        // --- ОСТАЛЬНЫЕ УСЛУГИ (34-98) ---
+        { id: 34, name: "Медицинский осмотр врача - психиатра (нарколога) с выдачей справки формы 027/у по месту требования.", price: "8 000", unit: "услуга" },
+        { id: 35, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "5 000", unit: "анализ" },
+        { id: 36, name: "Консультация врача-психиатра (нарколога) - первичный прием", price: "12 000", unit: "услуга" },
+        { id: 37, name: "Консультация врача-психиатра (нарколога) - повторный прием", price: "8 000", unit: "услуга" },
+        { id: 38, name: "Психотерапия индивидуальная", price: "17 000", unit: "1 сеанс" },
+        { id: 39, name: "Электрокардиограмма (ЭКГ).", price: "1 500", unit: "обследование" },
+        { id: 40, name: "Электроэнцефалография с компьютерной обработкой.", price: "6 500", unit: "обследование" },
+        { id: 41, name: "Диагностическая флюорография (1 проекция)", price: "3 000", unit: "исследование" },
+        { id: 42, name: "Рентгенография костей носа", price: "3 000", unit: "исследование" },
+        { id: 43, name: "Рентгенография шейного отдела позвоночника", price: "4 000", unit: "исследование" },
+        { id: 44, name: "Рентгенография шейного отдела позвоночника с функциональными пробами", price: "4 000", unit: "исследование" },
+        { id: 45, name: "Рентгенография грудного отдела позвоночника", price: "4 000", unit: "исследование" },
+        { id: 46, name: "Рентгенография обзорная органов грудной клетки (1 проекция)", price: "3 500", unit: "исследование" },
+        { id: 47, name: "Обзорная рентгенография органов брюшной полости", price: "3 500", unit: "исследование" },
+        { id: 48, name: "Рентгенография костей плеча", price: "4 000", unit: "исследование" },
+        { id: 49, name: "Рентгенография костей предплечья", price: "4 000", unit: "исследование" },
+        { id: 50, name: "Рентгенография локтевого сустава", price: "4 000", unit: "исследование" },
+        { id: 51, name: "Рентгенография плечевого сустава", price: "4 000", unit: "исследование" },
+        { id: 52, name: "Рентгенография кисти с захватом лучезапястного сустава", price: "4 000", unit: "исследование" },
+        { id: 53, name: "Рентгенография кисти", price: "4 000", unit: "исследование" },
+        { id: 54, name: "Рентгенография пояснично-крестцового отдела позвоночника", price: "4 000", unit: "исследование" },
+        { id: 55, name: "Рентгенография пояснично-крестцового отдела позвоночника с функциональными пробами", price: "4 000", unit: "исследование" },
+        { id: 56, name: "Рентгенография костей таза и тазобедренных суставов", price: "4 000", unit: "исследование" },
+        { id: 57, name: "Рентгенография крестцово-подвздошных сочленений", price: "4 000", unit: "исследование" },
+        { id: 58, name: "Рентгенография крестцово-копчикового отдела", price: "4 000", unit: "исследование" },
+        { id: 59, name: "Рентгенография тазобедренного сустава", price: "4 000", unit: "исследование" },
+        { id: 60, name: "Рентгенография бедренной кости", price: "4 000", unit: "исследование" },
+        { id: 61, name: "Рентгенография коленного сустава (1 проекция)", price: "3 500", unit: "исследование" },
+        { id: 62, name: "Рентгенография коленного сустава (2 проекции)", price: "4 000", unit: "исследование" },
+        { id: 63, name: "Рентгенография голеностопного сустава (1 проекция)", price: "3 500", unit: "исследование" },
+        { id: 64, name: "Рентгенография голеностопного сустава (2 проекции)", price: "4 000", unit: "исследование" },
+        { id: 65, name: "Рентгенография костей голени", price: "4 000", unit: "исследование" },
+        { id: 66, name: "Рентгенография пальцев кисти/стопы", price: "4 000", unit: "исследование" },
+        { id: 67, name: "Рентгенография стопы", price: "4 000", unit: "исследование" },
+        { id: 68, name: "Рентгенография стоп в боковой проекции", price: "4 000", unit: "исследование" },
+        { id: 69, name: "Рентгенография пазух носа", price: "3 500", unit: "исследование" },
+        { id: 70, name: "Компьютерная томография головного мозга", price: "13 000", unit: "исследование" },
+        { id: 71, name: "Компьютерная томография шеи", price: "13 500", unit: "исследование" },
+        { id: 72, name: "Компьютерная томография органов грудной клетки и средостения", price: "14 000", unit: "исследование" },
+        { id: 73, name: "Компьютерная томография органов брюшной полости и забрюшинного пространства", price: "15 500", unit: "исследование" },
+        { id: 74, name: "Компьютерная томография органов малого таза", price: "13 000", unit: "исследование" },
+        { id: 75, name: "Компьютерная томография костно-суставной системы (1 анатомическая зона)", price: "14 000", unit: "исследование" },
+        { id: 76, name: "Компьютерная томография придаточных пазух носа", price: "13 000", unit: "исследование" },
+        { id: 77, name: "Компьютерная томография пирамид височных костей", price: "13 000", unit: "исследование" },
+        { id: 78, name: "Компьютерная томография прочих органов", price: "12 000", unit: "исследование" },
+        { id: 79, name: "КТ (пленка)", price: "1 000", unit: "услуга" },
+
+        // --- ЛАБОРАТОРНО-КЛИНИЧЕСКИЕ УСЛУГИ ---
+        { id: 80, name: "Экспертиза алкогольного опьянения", price: "3 000", unit: "экспертиза" },
+        { id: 81, name: "Оказание услуг по качественному определению наркотических и психотропных веществ в моче", price: "4 000", unit: "анализ" },
+        { id: 82, name: "Определение этилового спирта в биологических средах (кровь, моча) на газовом хроматографе", price: "5 500", unit: "анализ" },
+        { id: 83, name: "Забор крови из вены", price: "800", unit: "анализ" },
+        { id: 84, name: "Анализ крови на микрореакцию", price: "1 000", unit: "анализ" },
+        { id: 85, name: "Общий анализ крови на анализаторе", price: "1 000", unit: "анализ" },
+        { id: 86, name: "Определение СОЭ", price: "1 000", unit: "анализ" },
+        { id: 87, name: "Общий анализ мочи", price: "1 000", unit: "анализ" },
+        { id: 88, name: "Определение С-реактивного белка", price: "2 500", unit: "анализ" },
+        { id: 89, name: "Определение альфа амилазы", price: "1 200", unit: "анализ" },
+        { id: 90, name: "Определение прямого билирубина", price: "1 300", unit: "анализ" },
+        { id: 91, name: "Определение общего билирубина", price: "1 400", unit: "анализ" },
+        { id: 92, name: "Определение АЛТ", price: "1 400", unit: "анализ" },
+        { id: 93, name: "Определение АСТ", price: "1 400", unit: "анализ" },
+        { id: 94, name: "Анализ крови на сахар", price: "1 400", unit: "анализ" },
+        { id: 95, name: "Анализ на общий белок в крови", price: "1 200", unit: "анализ" },
+        { id: 96, name: "Анализ крови на мочевину", price: "1 400", unit: "анализ" },
+        { id: 97, name: "Определение холестерина в крови", price: "1 300", unit: "анализ" },
+        { id: 98, name: "Определение креатинина", price: "1 400", unit: "анализ" },
+
+    ], []);
+
+    const filteredServices = allServices.filter(s =>
+        s.name.toLowerCase().includes(search.toLowerCase())
+    );
+
     return (
         <AppShell>
-            <div className="flex flex-col w-full bg-[#f8fafd] min-h-screen">
-                <div className="bg-[#00B5C4] py-16 px-6 md:px-12 text-white overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2" />
-                    <div className="max-w-5xl mx-auto relative z-10">
-                        <Link href="/" className="inline-flex items-center gap-2 text-white/40 uppercase text-[10px] font-black mb-8">
-                            <ChevronLeft className="w-3 h-3" /> Назад
-                        </Link>
-                        <div className="flex items-center gap-3 mb-4">
-                            <Wallet className="w-6 h-6 text-white" />
-                            <span className="text-white/60 font-black uppercase tracking-widest text-[10px]">Услуги Центра</span>
-                        </div>
-                        <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-4">Платные услуги</h1>
-                        <p className="text-white/80 text-sm font-medium max-w-2xl leading-relaxed">
-                            Предоставление медицинской помощи на платной основе согласно утвержденному прейскуранту. Качественные услуги специалистов без направления.
+            <div className="flex flex-col w-full min-h-screen">
+                {/* Шапка */}
+                <div className=" py-16 px-6 md:px-12 text-black relative overflow-hidden">
+                    <div className="max-w-7xl mx-auto relative z-10">
+                        <h1 className="text-2xl md:text-5xl font-black leading-none mb-6">Прейскурант цен на платные государственные и медицинские услуги</h1>
+                        <p className="text-black/80 text-sm font-medium max-w-2xl leading-relaxed border-l-2 border-black/20 pl-4">
+                            Полный перечень платных медицинских услуг Центра психического здоровья. Используйте поиск для быстрого нахождения нужной позиции.
                         </p>
                     </div>
                 </div>
 
-                <div className="max-w-5xl w-full mx-auto px-6 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                        <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center italic">
-                            <div className="bg-teal-50 p-5 rounded-3xl text-teal-600 mb-6">
-                                <CreditCard className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-lg font-black uppercase text-slate-900 mb-2">Прозрачность</h3>
-                            <p className="text-xs text-slate-400 font-medium">Фиксированные цены на все виды обследований.</p>
+                <div className="max-w-7xl w-full mx-auto">
+
+                    {/* Панель управления таблицей */}
+                    <div className="flex flex-col md:flex-row gap-4 mb-8 sticky top-4 z-30">
+                        <div className="relative flex-grow">
+                            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
+                            <input
+                                type="text"
+                                placeholder="Поиск услуги или категории"
+                                className="w-full bg-white border-2 border-slate-100 rounded-2xl py-5 pl-14 pr-6 text-sm font-bold outline-none focus:border-[#00B5C4] transition-all"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
                         </div>
-                        <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center italic">
-                            <div className="bg-teal-50 p-5 rounded-3xl text-teal-600 mb-6">
-                                <FileText className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-lg font-black uppercase text-slate-900 mb-2">Официально</h3>
-                            <p className="text-xs text-slate-400 font-medium">Заключение договора и предоставление чеков.</p>
+
+                    </div>
+
+                    {/* Таблица в обертке для скролла */}
+                    {/* Контейнер с фиксированной высотой и внутренним скроллом */}
+                    <div className="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden flex flex-col h-[700px]">
+
+                        {/* Шапка таблицы */}
+                        <div className="bg-slate-50 border-b border-slate-100 shrink-0">
+                            <table className="w-full text-left border-collapse min-w-[800px]">
+                                <thead>
+                                    <tr>
+                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[55%]">Наименование медицинской услуги</th>
+                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[10%]">Ед. изм.</th>
+                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right w-[15%]">Цена (₸)</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center italic">
-                            <div className="bg-teal-50 p-5 rounded-3xl text-teal-600 mb-6">
-                                <ChevronRight className="w-8 h-8" />
-                            </div>
-                            <h3 className="text-lg font-black uppercase text-slate-900 mb-2">Скорость</h3>
-                            <p className="text-xs text-slate-400 font-medium">Запись в день обращения к любому врачу.</p>
+
+                        {/* Тело таблицы с прокруткой */}
+                        <div className="overflow-y-auto flex-grow scrollbar-thin scrollbar-thumb-[#00B5C4] scrollbar-track-slate-50">
+                            <table className="w-full text-left border-collapse min-w-[800px]">
+                                <tbody className="divide-y divide-slate-50">
+                                    {filteredServices.length > 0 ? (
+                                        filteredServices.map((service) => (
+                                            <tr key={service.id} className="hover:bg-[#00B5C4]/5 transition-colors group">
+                                                <td className="p-6 w-[55%]">
+                                                    <span className="text-sm md:text-base font-bold text-slate-700 group-hover:text-slate-900 transition-colors leading-tight block">
+                                                        {service.name}
+                                                    </span>
+                                                </td>
+                                                <td className="p-6 w-[10%]">
+                                                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                                                        {service.unit}
+                                                    </span>
+                                                </td>
+                                                <td className="p-6 text-right w-[15%]">
+                                                    <span className="text-lg font-black text-slate-800 group-hover:text-[#00B5C4] transition-colors tabular-nums">
+                                                        {service.price}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan={4} className="p-20 text-center text-slate-300 font-bold uppercase tracking-widest">
+                                                Ничего не найдено
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
-                    <div className="bg-slate-900 p-10 rounded-[3rem] text-white flex flex-col md:flex-row items-center justify-between gap-10">
-                        <div className="space-y-4">
-                            <h2 className="text-2xl font-black uppercase tracking-tighter">Прейскурант цен на 2024 год</h2>
-                            <p className="text-white/40 text-sm font-medium max-w-lg leading-relaxed">
-                                Скачайте полный перечень услуг и цен для ознакомления. Файл содержит стоимость консультаций, лабораторных исследований и пребывания в стационаре.
-                            </p>
+                    {/* Инфо-плашка про скидки*/}
+                    <div className="mt-10  gap-6">
+                        <div className="bg-[#00B5C4]/5 border-2 border-[#00B5C4]/20 p-8 rounded-[2.5rem] flex items-start gap-5">
+                            <Users className="w-10 h-10 text-[#00B5C4] shrink-0" />
+                            <div>
+                                <h4 className="text-lg font-black uppercase tracking-tighter mb-2">Льготы 30%</h4>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам Великой Отечественной войны</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам боевых действий на территории других государств</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам, приравненным по льготам к ветеранам Великой Отечественной войны</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам труда</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Другим лицам, определённым статьей 8 Закона Республики Казахстан «О ветеранах» от 6 мая 2020 года №322VI-ЗРК, на которых распространяется действие настоящего Закона</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Инвалидам первой и второй группы, инвалидам детства</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Родителям, имеющим четверых и более несовершеннолетних детей</p>
+                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Женщинам, награжденным подвесками "Алтын алқа", "Күміс алқа" или получившим ранее звание "Мать-героиня", награжденным орденами "Материнская слава" первой и второй степени</p>
+                            </div>
                         </div>
-                        <button className="flex items-center gap-4 px-10 py-5 bg-[#00B5C4] rounded-2xl font-black uppercase text-xs tracking-widest">
-                            <Download className="w-5 h-5" />
-                            <span>Скачать Прейскурант (PDF)</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </AppShell>
-    )
+    );
 }

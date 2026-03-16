@@ -12,9 +12,10 @@ import Link from "next/link"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useLanguage } from "@/hooks/use-language"
 
-function HeaderContent() {
+function HeaderContent({ onClose }: { onClose?: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
+  if (onClose) onClose();
+
 
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -101,7 +102,7 @@ function HeaderContent() {
         </div>
       </div>
 
-      {/* Search Bar (Дизайн восстановлен) */}
+      {/* Search Bar */}
       <div className="flex items-center gap-2 px-4 pb-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -138,6 +139,8 @@ function HeaderContent() {
               { href: "/about", label: "О центре" },
               { href: "/patients", label: "Пациентам" },
               { href: "/symbols", label: "Государственные символы" },
+              { href: "/gosuslugi", label: "Государственные услуги" },
+              { href: "/UsefulLinks", label: "Полезные ссылки" },
               { href: "/contacts", label: "Контакты и адреса" },
               { href: "/npa", label: "НПА" },
               { href: "/profile", label: "Личный кабинет" },

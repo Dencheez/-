@@ -1,6 +1,5 @@
 "use client"
-import { Header } from "@/components/header"
-import { FooterCarousel } from "@/components/footercarousel"
+
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
