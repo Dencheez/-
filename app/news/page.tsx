@@ -15,7 +15,6 @@ export default async function NewsPage(props: {
     const itemsPerPage = 10;
     const currentPage = Number(searchParams.page) || 1;
 
-    // Важно: в экшене должен быть фильтр .eq('category', 'news')
     const { data: posts, count: totalCount } = await getNewsAction(currentPage, itemsPerPage);
     const totalPages = Math.ceil(totalCount / itemsPerPage);
 
@@ -65,7 +64,6 @@ export default async function NewsPage(props: {
                                 className="group flex items-center justify-between py-4 border-b border-slate-50 hover:bg-slate-50 transition-all px-2 md:px-4"
                             >
                                 <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-8 overflow-hidden">
-                                    {/* Дата в строгом стиле */}
                                     <span className="text-[11px] font-black text-slate-300 tabular-nums shrink-0 group-hover:text-primary transition-colors">
                                         {post.created_at ? new Date(post.created_at).toLocaleDateString('ru-RU') : '--.--.----'}
                                     </span>

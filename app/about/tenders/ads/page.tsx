@@ -14,14 +14,11 @@ export default function TenderAds() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                        <Eye className="h-4 w-4" /> 128
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
                 <div className="mb-8">
-                    <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-[1.1]">
+                    <h1 className="text-2xl font-black uppercase text-slate-800 leading-[1.1]">
                         Объявления <br /> госзакупок
                     </h1>
                     <div className="h-1.5 w-12 bg-[#1e40af] mt-4"></div>

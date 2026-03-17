@@ -33,8 +33,8 @@ export default function GosuslugiPage() {
 
                 {/* Хедер в твоем стиле */}
                 <div className="mb-10">
-                    <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter flex items-center gap-3">
-                        Госуслуги
+                    <h1 className="text-3xl md:text-5xl font-black uppercase flex items-center gap-3">
+                        Государственные услуги
                     </h1>
                 </div>
 

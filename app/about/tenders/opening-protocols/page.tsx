@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, ChevronRight } from "lucide-react"
+import { ArrowLeft, Printer, Mail, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default function OpeningProtocol() {
@@ -24,11 +24,6 @@ export default function OpeningProtocol() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-1 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                            <Eye className="h-4 w-4" /> 245
-                        </div>
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
@@ -92,12 +87,6 @@ export default function OpeningProtocol() {
                         <Mail size={16} className="text-blue-600" />
                         E-mail
                     </a>
-                </div>
-
-                <div className="mt-12 text-center pb-8">
-                    <p className="text-[9px] text-slate-300 font-bold uppercase tracking-[0.3em]">
-                        Обновлено: Март 2026 • ЦПЗ
-                    </p>
                 </div>
             </main>
         </div>

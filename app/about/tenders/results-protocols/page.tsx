@@ -30,9 +30,6 @@ export default function TenderResults() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex items-center gap-1 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                        <Eye className="h-4 w-4" /> 128
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}

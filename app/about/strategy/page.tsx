@@ -2,7 +2,7 @@
 import { useState } from "react"
 import {
     ArrowLeft, ChevronDown, ChevronUp, Target, Users,
-    FileText, BarChart3, GraduationCap
+    BarChart3, GraduationCap
 } from "lucide-react"
 import Link from "next/link"
 
@@ -18,17 +18,13 @@ export default function StrategicPlanPage() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">
-                        Просмотров: 6609 • 2026
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}
                 <div className="mb-8">
-                    <h1 className="text-3xl md:text-5xl font-[1000] uppercase text-slate-900 tracking-tighter leading-[0.9]">
+                    <h1 className="text-3xl md:text-5xl font-[1000] uppercase text-slate-900 leading-[0.9]">
                         Стратегический <br /> <span className="text-blue-600">план развития</span>
                     </h1>
-                    <div className="h-2 w-20 bg-blue-600 mt-6 rounded-full"></div>
                 </div>
 
                 {/* БАННЕР */}

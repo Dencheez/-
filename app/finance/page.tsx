@@ -97,7 +97,7 @@ export default function FinancePage() {
             <div className="flex flex-col w-full p-4 sm:p-6 md:p-8 max-w-5xl mx-auto gap-8 sm:gap-10">
                 {/* Header */}
                 <div className="border-b border-slate-100 pb-6 sm:pb-8">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-800 uppercase tracking-tight leading-tight">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-800 uppercase leading-tight">
                         Отчеты о доходах и расходах
                     </h1>
                     <div className="h-1 sm:h-1.5 w-16 sm:w-20 bg-[#00B5C4] mt-3 sm:mt-4 mb-4 sm:mb-6" />
