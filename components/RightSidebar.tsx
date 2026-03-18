@@ -30,6 +30,7 @@ const menuConfig = [
     { name: "Пропаганда ЗОЖ", href: "/zozh" },
     {
         name: "Журналы",
+        href: "/journals/narcology",
         subLinks: [
             { name: 'Журнал "Вопросы наркологи Казахстана"', href: "/journals/narcology" },
             { name: 'Журнал "Вопросы ментальной медицины и экологии"', href: "/journals/mental" },
@@ -47,9 +48,10 @@ const menuConfig = [
     },
     {
         name: "Финансовый отчет",
+        href: "/finance",
         subLinks: [
             { name: "Отчет по НС", href: "/about/board" },
-            { name: "Отчет о доходах и расходах", href: "/finance" },
+            { name: "Отчет о доходах и расходах", href: "/finance/IncomeandExpenseStatement" },
         ]
     },
     { name: "Бесплатная помощь", href: "/free-help" },
@@ -71,8 +73,6 @@ export default function RightSidebar({ onClose }: { onClose?: () => void }) {
                 return (
                     <div key={idx} className="flex flex-col border-b border-white/20 last:border-0">
                         {hasSubLinks ? (
-                            // Если у дропдауна есть собственная страница — рендерим две колонки:
-                            // ссылку и кнопку-стрелку отдельно
                             <div className={`flex items-stretch w-full ${isOpen ? 'bg-[#009da8]' : 'bg-[#00B5C4]'} hover:bg-[#009da8] transition-colors`}>
                                 {item.href ? (
                                     <Link

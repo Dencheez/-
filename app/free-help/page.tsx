@@ -2,18 +2,19 @@
 
 import { AppShell } from "@/components/app-shell"
 import { HeartHandshake, Download, FileText, Eye } from "lucide-react"
+import Link from "next/link"
 
 const documents = [
     {
         name: "Объявление о закупе изделий мед.назначения #5",
         file: "Объявление о закупе изделий мед.назначения #5.docx",
-        href: "/files/free-help/Объявление_о_закупе_изделий_мед.назначения_5.docx",
+        link: "/not-foundx",
         ext: "DOCX",
     },
     {
         name: "Постановление РК от 15.12.2009 №2136",
         file: "Постановление РК от 15.12.2009 №2136.doc",
-        href: "/files/free-help/Постановление_РК_от_15.12.2009_№2136.doc",
+        link: "/not-found",
         ext: "DOC",
     },
 ]
@@ -72,12 +73,12 @@ export default function FreeHelpPage() {
                                 </div>
 
                                 {/* Download button */}
-                                <a href={doc.href} download className="shrink-0 w-full sm:w-auto">
+                                <Link href={doc.link}>
                                     <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-[#00B5C4] transition-all">
                                         <Download className="w-4 h-4" />
                                         Скачать
                                     </button>
-                                </a>
+                                </Link>
                             </div>
                         ))}
                     </div>

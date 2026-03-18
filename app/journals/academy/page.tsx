@@ -2,7 +2,7 @@
 
 import { AppShell } from "@/components/app-shell"
 import Link from "next/link"
-import { Download, ChevronLeft, Archive, Sparkles, Calendar } from "lucide-react"
+import { ChevronLeft, Archive } from "lucide-react"
 
 export default function AcademyJournalPage() {
     return (
@@ -23,11 +23,13 @@ export default function AcademyJournalPage() {
                 </div>
 
                 <div className="max-w-4xl w-full mx-auto px-4 md:px-6 py-8 md:py-12 flex items-center justify-center">
-                    <img
-                        src="/images/Jurnal.jpg"
-                        alt="Журнал Академия здоровья"
-                        className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-orange-900/10 border border-orange-100"
-                    />
+                    <Link href="not-found.tsx">
+                        <img
+                            src="/images/Jurnal.jpg"
+                            alt="Журнал Академия здоровья"
+                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-orange-900/10 border border-orange-100"
+                        />
+                    </Link>
                 </div>
             </div>
         </AppShell>
