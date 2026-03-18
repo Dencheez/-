@@ -274,7 +274,7 @@ export default function AdsPage() {
                                             {item.title}
                                         </h3>
 
-                                        <p className="text-sm text-slate-500 leading-relaxed font-medium mb-8 line-clamp-4 italic">
+                                        <p className="text-sm text-slate-500 leading-relaxed font-medium mb-8 line-clamp-4 ">
                                             {item.content}
                                         </p>
                                     </div>

@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation" // Добавили импорт
 
 
+
 const supabaseAdmin = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY! // Тот самый ключ из .env
@@ -178,6 +179,7 @@ export async function replyQna(id: string, answer: string) {
     if (error) throw error
     revalidatePath('/admin')
     revalidatePath('/qna')
+
 }
 
 export async function deleteQna(id: string) {
@@ -187,4 +189,32 @@ export async function deleteQna(id: string) {
     revalidatePath('/admin')
     revalidatePath('/qna')
     redirect('/qna')
+}
+export async function createQuestion(author_name: string, question: string) {
+    // ЭТИ ЛОГИ ТЫ ДОЛЖЕН УВИДЕТЬ В ЧЕРНОМ ТЕРМИНАЛЕ VS CODE
+    console.log("ПРИШЛО НА СЕРВЕР:", { author_name, question });
+
+    try {
+        const { data, error } = await supabaseAdmin
+            .from('qna')
+            .insert([
+                {
+                    author_name,
+                    question,
+                    status: 'pending'
+                }
+            ])
+            .select();
+
+        if (error) {
+            console.error("ОШИБКА БАЗЫ:", error.message);
+            return { success: false, error: error.message };
+        }
+
+        console.log("ЗАПИСАНО В БАЗУ:", data);
+        return { success: true };
+    } catch (err: any) {
+        console.error("КРИТИЧЕСКИЙ СБОЙ ЭКШЕНА:", err.message);
+        return { success: false, error: err.message };
+    }
 }

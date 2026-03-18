@@ -10,18 +10,15 @@ import {
   Settings,
   ChevronRight,
   Mail,
-  Shield,
   Phone,
   XCircle,
-  Save,
   Loader2,
   Newspaper,
   Briefcase,
   MessageSquare,
   ShoppingBag,
-  Image,
-  Plus,
   Trash2,
+  ChevronLeft,
 } from "lucide-react"
 import { getVacancies, getPosts, getProcurement, getQna } from "@/app/lib/api"
 import { deleteQna, replyQna } from "@/app/admin/actions"
@@ -30,9 +27,9 @@ import { useEffect, useState, useMemo, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useUser, SignInButton } from "@clerk/nextjs"
+import MyQnaContent from "@/components/my-qna";
 
-type Tab = "appointments" | "content" | "users" | "qna" | "info" | "settings";
-
+type Tab = "appointments" | "content" | "users" | "qna" | "info" | "settings" | "my-qna";
 type SiteContentRow = {
   id: number
   section_name: string
@@ -74,7 +71,7 @@ function ClientProfile() {
         <div className="flex-1 min-w-0">
           <h1 className="text-sm md:text-base font-bold text-foreground truncate">{fullName || "Профиль"}</h1>
           <p className="text-[10px] md:text-xs text-muted-foreground truncate">{user?.primaryEmailAddress?.emailAddress}</p>
-          <p className="mt-1 text-[10px] md:text-xs text-primary font-medium">ОСМС статус: уточняется</p>
+          <p className="mt-1 text-[10px] md:text-xs text-primary font-medium">Статус: уточняется</p>
         </div>
       </div>
 
@@ -152,16 +149,49 @@ function ClientProfile() {
             </div>
           </div>
         )}
-
         {activeTab === "settings" && (
-          <div className="flex flex-col gap-2">
-            <Link href="/profile/settings" className="flex items-center justify-between rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 hover:bg-secondary">
+          <div className="flex flex-col gap-3"> {/* Увеличил gap до 3 для красоты */}
+
+            {/* Кнопка 1: Редактировать профиль */}
+            <Link href="/profile/settings" className="flex items-center justify-between rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 hover:bg-secondary transition-colors">
               <div className="flex items-center gap-3">
-                <User className="h-5 w-5 text-primary" />
+                <User className="h-4 w-4 md:h-5 md:w-5 text-primary" />
                 <span className="text-xs md:text-sm font-medium">Редактировать профиль</span>
               </div>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </Link>
+
+            {/* Кнопка 2: Мои обращения (НОВАЯ) */}
+            <button
+              onClick={() => setActiveTab("my-qna")} // Переключаем на новую вкладку
+              className="flex items-center justify-between rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 hover:bg-secondary transition-colors text-left"
+            >
+              <div className="flex items-center gap-3">
+                <MessageSquare className="h-4 w-4 md:h-5 md:w-5 text-[#00B5C4]" />
+                <span className="text-xs md:text-sm font-medium">Мои обращения и ответы</span>
+              </div>
+              <div className="flex items-center gap-2">
+                {/* Можно добавить маленькую плашку "New", если есть ответы */}
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+              </div>
+            </button>
+
+          </div>
+        )}
+        {activeTab === "my-qna" && (
+          <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            {/* Кнопка назад в стиле твоих настроек */}
+            <button
+              onClick={() => setActiveTab("settings")}
+              className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase hover:text-primary transition-colors mb-2 w-fit"
+            >
+              <ChevronLeft className="w-3 h-3" /> Назад к настройкам
+            </button>
+
+            {/* Обертка для контента, если её нет внутри MyQnaContent */}
+            <div className="bg-card border border-border rounded-xl md:rounded-[32px] p-4 md:p-8 shadow-sm">
+              <MyQnaContent />
+            </div>
           </div>
         )}
       </div>
@@ -185,7 +215,7 @@ function AdminLink({ href, icon, label }: { href: string; icon: React.ReactNode;
 // --- АДМИН-ПАНЕЛЬ ---
 function AdminDashboard() {
   const searchParams = useSearchParams()
-  const [activeTab, setActiveTab] = useState<"appointments" | "content" | "users" | "qna">("appointments");
+  const [activeTab, setActiveTab] = useState<Tab>("appointments");
   const [allAppointments, setAllAppointments] = useState<any[]>([])
   const [vacancies, setVacancies] = useState<any[]>([])
   const [posts, setPosts] = useState<any[]>([])
@@ -193,6 +223,7 @@ function AdminDashboard() {
   const [qna, setQna] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const searchQuery = searchParams.get("search")?.toLowerCase() || ""
+
 
   useEffect(() => {
     async function loadAdminData() {
@@ -307,7 +338,7 @@ function AdminDashboard() {
 
           {(activeTab as string) === "content" && (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-              <AdminLink href="/news" icon={<Newspaper className="w-5 h-5" />} label="Публикации" />
+              <AdminLink href="/news" icon={<Newspaper className="w-5 h-5" />} label="Новости" />
               <AdminLink href="/vacancies" icon={<Briefcase className="w-5 h-5" />} label="Вакансии" />
               <button
                 onClick={() => setActiveTab("qna")}
@@ -324,27 +355,38 @@ function AdminDashboard() {
             </div>
           )
           }
-
+          {/* --- БЛОК АДМИН-ПАНЕЛИ (Вопросы для админа) --- */}
           {(activeTab as string) === "qna" && (
-            <div className="bg-white p-6 rounded-[32px]">
+            <div className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-sm md:text-xl font-black text-slate-800 uppercase">Вопросы и ответы</h2>
+                <h2 className="text-sm md:text-xl font-black text-slate-800 uppercase">Панель модерации (Вопросы)</h2>
+                <button
+                  onClick={() => setActiveTab("content")}
+                  className="text-[10px] font-bold text-slate-400 uppercase hover:text-[#00B5C4]"
+                >
+                  Назад к контенту
+                </button>
               </div>
+
               <div className="grid gap-4">
-                {qna.length === 0 && <p className="text-slate-500 font-medium text-xs">Нет вопросов.</p>}
+                {qna.length === 0 && <p className="text-slate-500 font-medium text-xs">Нет новых вопросов.</p>}
+
                 {qna.map((q) => (
-                  <div key={q.id} className="bg-white border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 shadow-sm flex flex-col gap-4">
+                  <div key={q.id} className="bg-white border border-slate-100 rounded-[2rem] p-4 md:p-6 shadow-sm flex flex-col gap-4 text-left">
                     <div className="flex justify-between items-start gap-4">
                       <div>
                         <h3 className="text-xs md:text-md font-bold text-slate-800">
                           <MessageSquare className="w-3 h-3 md:w-4 md:h-4 inline-block mr-2 text-[#00B5C4]" />
                           {q.question}
                         </h3>
-                        <p className="text-[10px] md:text-xs font-bold text-slate-400 mt-2">Автор: {q.author_name || 'Аноним'} | {new Date(q.created_at).toLocaleDateString('ru-RU')}</p>
-                        <span className={`inline-block mt-2 md:mt-3 px-2 md:px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest ${q.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                        <p className="text-[10px] md:text-xs font-bold text-slate-400 mt-2">
+                          Автор: {q.author_name || 'Аноним'} | {new Date(q.created_at).toLocaleDateString('ru-RU')}
+                        </p>
+                        <span className={`inline-block mt-2 px-2 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest ${q.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
                           {q.status === 'published' ? 'Опубликован' : 'Ожидает ответа'}
                         </span>
                       </div>
+
                       <button
                         onClick={async () => {
                           if (confirm('Удалить вопрос?')) {
@@ -355,16 +397,16 @@ function AdminDashboard() {
                             } catch (e) { toast.error("Ошибка при удалении") }
                           }
                         }}
-                        className="shrink-0 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
+                        className="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
 
-                    <div className="bg-slate-50 rounded-xl md:rounded-2xl p-3 md:p-4 mt-2 border border-slate-100">
+                    <div className="bg-slate-50 rounded-2xl p-3 md:p-4 border border-slate-100">
                       {q.answer ? (
                         <div>
-                          <p className="text-xs font-bold text-slate-500 mb-1 md:mb-2 uppercase tracking-widest text-[8px] md:text-[10px]">Ваш ответ:</p>
+                          <p className="text-[8px] md:text-[10px] font-bold text-slate-500 mb-1 uppercase tracking-widest">Ваш ответ:</p>
                           <p className="text-xs md:text-sm text-slate-700">{q.answer}</p>
                         </div>
                       ) : (
@@ -375,24 +417,47 @@ function AdminDashboard() {
                           try {
                             await replyQna(q.id, reply);
                             setQna(prev => prev.map(item => item.id === q.id ? { ...item, answer: reply, status: 'published' } : item));
-                            toast.success("Ответ отправлен и опубликован");
-                          } catch (err) { toast.error("Ошибка при отправке") }
-                        }} className="flex flex-col gap-2 md:gap-3">
-                          <textarea name="reply" required placeholder="Напишите ответ..." className="w-full text-[10px] md:text-sm rounded-lg md:rounded-xl border border-slate-200 p-2 md:p-3 min-h-[60px] md:min-h-[80px] focus:outline-none focus:ring-2 focus:ring-[#00B5C4]/50" />
-                          <button type="submit" className="self-end bg-slate-900 text-white px-4 md:px-5 py-2 md:py-2.5 rounded-lg md:rounded-xl font-bold uppercase text-[8px] md:text-[10px] tracking-widest hover:bg-[#00B5C4] transition-colors">
-                            Ответить и опубликовать
+                            toast.success("Ответ опубликован");
+                          } catch (err) { toast.error("Ошибка") }
+                        }} className="flex flex-col gap-2">
+                          <textarea
+                            name="reply"
+                            required
+                            placeholder="Напишите ответ..."
+                            className="w-full text-xs md:text-sm rounded-xl border border-slate-200 p-3 min-h-[80px] focus:outline-none focus:ring-2 focus:ring-[#00B5C4]/50"
+                          />
+                          <button type="submit" className="self-end bg-slate-900 text-white px-4 py-2 rounded-xl font-bold uppercase text-[9px] tracking-widest hover:bg-[#00B5C4] transition-colors">
+                            Ответить
                           </button>
                         </form>
                       )}
                     </div>
                   </div>
                 ))}
-              </div>    </div>
+              </div>
+            </div>
+          )}
+
+          {/* --- БЛОК ПОЛЬЗОВАТЕЛЯ (Мои обращения) --- */}
+          {(activeTab as string) === "my-qna" && (
+            <div className="animate-in fade-in slide-in-from-bottom-2">
+              <button
+                onClick={() => setActiveTab("settings")}
+                className="mb-4 flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase hover:text-[#00B5C4]"
+              >
+                <ChevronLeft className="w-3 h-3" /> Назад к настройкам
+              </button>
+
+              <div className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm">
+                <h2 className="text-xl font-black uppercase mb-6 text-[#00B5C4]">Мои ответы</h2>
+                <MyQnaContent />
+              </div>
+            </div>
           )}
         </div>
       )
       }
-    </div >
+    </div>
   )
 }
 

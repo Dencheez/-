@@ -8,12 +8,11 @@ import {
     Briefcase, HeartPulse, Info, Calendar,
     Phone, Check, RotateCcw, Loader2, PlusCircle
 } from "lucide-react"
-import { supabase } from "@/lib/supabase" // Проверь путь к supabase
+import { supabase } from "@/lib/supabase"
 import { AppShell } from "@/components/app-shell"
 
 function AdminDashboard() {
     const router = useRouter()
-    const [open, setOpen] = useState(false)
     const searchParams = useSearchParams()
     const [appointments, setAppointments] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
