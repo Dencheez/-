@@ -20,12 +20,12 @@ const linksData = [
         icon: MessageSquareText
     },
     {
-        href: "/UsefulLinks/FreePharmasy",
+        href: "https://adilet.zan.kz/rus/docs/V1700015724",
         title: "Бесплатные лекарства",
         icon: Pill
     },
     {
-        href: "/UsefulLinks/Guaranteed",
+        href: "https://adilet.zan.kz/rus/docs/P090002136_",
         title: "Гарантированные объемы",
         icon: ShieldCheck
     },

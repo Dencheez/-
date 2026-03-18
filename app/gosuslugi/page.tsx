@@ -10,7 +10,7 @@ const gosuslugiLinks = [
         icon: ClipboardList
     },
     {
-        href: "/gosuslugi/StandardGosuslug",
+        href: "/app/not-found",
         title: "Стандарт Государственных услуг",
         icon: BookOpen
     },
