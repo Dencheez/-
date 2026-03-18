@@ -8,13 +8,13 @@ const documents = [
     {
         name: "Объявление о закупе изделий мед.назначения #5",
         file: "Объявление о закупе изделий мед.назначения #5.docx",
-        link: "/not-foundx",
+        link: "/files/protocols/5_протокол_ЗЦП.docx",
         ext: "DOCX",
     },
     {
         name: "Постановление РК от 15.12.2009 №2136",
         file: "Постановление РК от 15.12.2009 №2136.doc",
-        link: "/not-found",
+        link: "https://adilet.zan.kz/rus/docs/P090002136_",
         ext: "DOC",
     },
 ]

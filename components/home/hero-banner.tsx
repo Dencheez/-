@@ -46,7 +46,9 @@ export function HeroBanner() {
 
   return (
     <div className="flex flex-col w-full bg-white">
-      <div className="relative w-full h-[300px] md:h-[450px] bg-[#f8fafd] overflow-hidden group">
+      {/* Контейнер баннера */}
+      <div className={`relative w-full h-[300px] md:h-[450px] overflow-hidden group rounded-lg ${defaultSlides[current].img.includes('hero-banner--2.jpg')
+        }`}>
 
         <Link href={defaultSlides[current].link} className="relative block h-full w-full">
           <Image
@@ -56,29 +58,35 @@ export function HeroBanner() {
             priority
             className={`${defaultSlides[current].img.includes('hero-banner--2.jpg')
               ? "object-contain p-4 md:p-8"
-              : "object-cover rounded-lg"
+              : "object-cover"
               }`}
           />
-          {/* Текст (Адаптированная) */}
-          <div className="absolute bottom-0 left-0 z-20 w-full ">
-            <div className="bg-[#00B5C4]/90 backdrop-blur-none px-4 py-4 md:px-8 md:py-6 min-h-[70px] md:min-h-[100px] flex items-center rounded-b-lg ">
-              <div className="max-w-[85%] md:max-w-[70%]">
-                <span className="text-[10px] md:text-xs font-black uppercase tracking-wider text-white whitespace-nowrap">
+          <div className="absolute bottom-0 md:bottom-0 z-20">
+            <div className={`
+      px-3 py-3 md:px-10 md:py-8 rounded-b-lg md:rounded-b-lg transition-all
+      ${defaultSlides[current].img.includes('hero-banner--2.jpg')
+                ? "bg-[#00B5C4]/90"
+                : "bg-white/20 backdrop-blur-md border border-white/30 "
+              }
+    `}>
+              <div className="space-y-2">
+                <span className="text-[18px] md:text-2xl font-black text-white block">
                   {defaultSlides[current].title}
                 </span>
-                <span className="text-xs md:text-lg font-black tracking-tight md:tracking-wider text-white leading-tight block">
+                <h2 className="text-xs md:text-base font-black text-white leading-tight">
                   {defaultSlides[current].subtitle}
-                </span>
+                </h2>
               </div>
             </div>
           </div>
         </Link>
+
         {/* Кнопка "Вперед" */}
         <button
           onClick={(e) => { e.preventDefault(); nextSlide(); }}
-          className="absolute right-4 top-1/2 h-10 w-10 md:bottom-4 md:h-12 md:w-12 flex items-center justify-center -translate-y-1/2 rounded-full bg-[#00B5C4]/90 z-30"
+          className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 md:h-12 md:w-12 flex items-center justify-center rounded-full bg-[#00B5C4]/90 z-30 transition-transform active:scale-90"
         >
-          <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-white cursor-pointer" />
+          <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-white" />
         </button>
       </div>
 

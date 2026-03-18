@@ -23,7 +23,7 @@ export default function AcademyJournalPage() {
                 </div>
 
                 <div className="max-w-4xl w-full mx-auto px-4 md:px-6 py-8 md:py-12 flex items-center justify-center">
-                    <Link href="not-found.tsx">
+                    <Link href="/not-found">
                         <img
                             src="/images/Jurnal.jpg"
                             alt="Журнал Академия здоровья"
