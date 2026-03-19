@@ -41,7 +41,7 @@ export default function JournalsPage() {
                         <Link
                             key={journal.id}
                             href={journal.href}
-                            className="group relative bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-8"
+                            className="group relative bg-white rounded-[2.5rem] border border-slate-100 p-8 transition-all duration-500 overflow-hidden flex flex-col md:flex-row items-center gap-8"
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-[#00B5C4]/5 rounded-full translate-x-1/2 -translate-y-1/2 transition-transform duration-700" />
 

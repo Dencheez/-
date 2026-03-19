@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
+import { ArrowLeft, FileText, Download } from "lucide-react"
 import Link from "next/link"
 
 export default function CharterPage() {
@@ -11,9 +11,7 @@ export default function CharterPage() {
                     <Link href="/about" className="p-2 -ml-2 text-slate-400">
                         <ArrowLeft className="h-6 w-6" />
                     </Link>
-                    <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                        <Eye size={14} /> 2840
-                    </div>
+
                 </div>
 
                 {/* ЗАГОЛОВОК */}
@@ -27,7 +25,7 @@ export default function CharterPage() {
                 {/* КАРТОЧКА ДОКУМЕНТА */}
                 <div className="bg-slate-50 rounded-[32px] p-8 border border-slate-100 flex flex-col items-center">
                     {/* Иконка документа */}
-                    <div className="w-20 h-20 bg-slate-900 text-white flex items-center justify-center rounded-[24px] mb-6">
+                    <div className="w-20 h-20 bg-blue-600 text-white flex items-center justify-center rounded-[24px] mb-6">
                         <FileText size={36} />
                     </div>
 
@@ -55,30 +53,6 @@ export default function CharterPage() {
                         <Download size={18} />
                         Скачать PDF
                     </a>
-                </div>
-
-                {/* ДОПОЛНИТЕЛЬНЫЕ ДЕЙСТВИЯ */}
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                    <button
-                        onClick={() => window.print()}
-                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest"
-                    >
-                        <Printer size={14} /> Печать
-                    </button>
-                    <a
-                        href="mailto:cpz_almaty@med.mail.kz"
-                        className="flex items-center justify-center gap-2 py-4 bg-white border border-slate-200 rounded-2xl text-[10px] font-black text-slate-400 uppercase tracking-widest"
-                    >
-                        <Mail size={14} /> E-mail
-                    </a>
-                </div>
-
-                {/* ИНФО */}
-                <div className="mt-10 text-center pb-8">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-[9px] text-slate-400 font-black uppercase tracking-widest">
-                        <span className="w-1 h-1 bg-blue-600 rounded-full"></span>
-                        v.2023 • 2.4 MB • PDF
-                    </div>
                 </div>
             </main>
         </div>

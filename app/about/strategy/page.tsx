@@ -47,7 +47,7 @@ export default function StrategicPlanPage() {
                                     <Target size={24} />
                                 </div>
                                 <div>
-                                    <span className="font-black text-[10px] uppercase tracking-widest text-slate-400 block mb-1">Раздел 1</span>
+                                    <span className="font-black text-[10px] uppercase tracking-widest text-blue-600 block mb-1">Раздел 1</span>
                                     <span className="font-bold text-lg leading-tight uppercase tracking-tighter">Миссия и Видение</span>
                                 </div>
                             </div>
@@ -71,9 +71,9 @@ export default function StrategicPlanPage() {
                                                 <li className="flex gap-2"><span>•</span> Академичность и развитие</li>
                                             </ul>
                                         </div>
-                                        <div className="bg-slate-900 p-5 rounded-2xl text-white">
-                                            <h5 className="font-bold text-xs uppercase mb-3 tracking-widest text-blue-400">Видение:</h5>
-                                            <p className="text-xs leading-relaxed opacity-90 font-medium">
+                                        <div className="bg-blue-600 p-5 rounded-2xl text-white">
+                                            <h5 className="font-bold text-xs uppercase mb-3 tracking-widest text-white">Видение:</h5>
+                                            <p className="text-xs leading-relaxed opacity-95 font-medium">
                                                 Стать современным медицинским предприятием, соответствующим спросу населения, с применением современных методов коррекции и реабилитации.
                                             </p>
                                         </div>

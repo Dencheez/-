@@ -27,7 +27,7 @@ export default function AcademyJournalPage() {
                         <img
                             src="/images/Jurnal.jpg"
                             alt="Журнал Академия здоровья"
-                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-2xl shadow-orange-900/10 border border-orange-100"
+                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] border border-orange-100"
                         />
                     </Link>
                 </div>

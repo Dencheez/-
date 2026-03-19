@@ -1,7 +1,7 @@
 "use client"
 
 import { AppShell } from "@/components/app-shell"
-import { HeartHandshake, Download, FileText, Eye } from "lucide-react"
+import { HeartHandshake, Download, FileText } from "lucide-react"
 import Link from "next/link"
 
 const documents = [
@@ -33,10 +33,6 @@ export default function FreeHelpPage() {
                     <h1 className="text-2xl md:text-3xl font-bold text-slate-800 uppercase tracking-tight leading-tight">
                         Гарантированный объём медицинской помощи
                     </h1>
-                    <div className="flex items-center gap-1.5 mt-2 text-slate-400">
-                        <Eye className="w-3.5 h-3.5" />
-                        <p className="text-xs uppercase tracking-widest font-bold">Просмотров: 14 598</p>
-                    </div>
                 </div>
 
                 {/* Description */}
@@ -55,11 +51,11 @@ export default function FreeHelpPage() {
                         {documents.map((doc, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5"
+                                className="bg-white rounded-2xl border border-slate-100 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5"
                             >
                                 {/* Icon */}
-                                <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center shrink-0">
-                                    <FileText className="w-6 h-6 text-slate-500" />
+                                <div className="w-12 h-12 bg-[#00B5C4]/10 rounded-xl flex items-center justify-center shrink-0">
+                                    <FileText className="w-6 h-6 text-[#00B5C4]" />
                                 </div>
 
                                 {/* Name */}
@@ -74,7 +70,7 @@ export default function FreeHelpPage() {
 
                                 {/* Download button */}
                                 <Link href={doc.link}>
-                                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-[#00B5C4] transition-all">
+                                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-[#00B5C4] text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-slate-900 transition-all">
                                         <Download className="w-4 h-4" />
                                         Скачать
                                     </button>

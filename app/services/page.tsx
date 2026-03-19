@@ -77,7 +77,7 @@ export default function ServicesPage() {
               <Link
                 key={service.title}
                 href="/appointment"
-                className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md active:scale-[0.98]"
+                className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition-all active:scale-[0.98]"
               >
                 <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${service.bg}`}>
                   <Icon className={`h-6 w-6 ${service.color}`} />

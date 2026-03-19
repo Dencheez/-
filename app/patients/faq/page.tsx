@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import { AppShell } from "@/components/app-shell"
-import { ChevronLeft, Printer, Mail, ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronLeft, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
 
 const AccordionItem = ({ question, answer }: { question: string, answer: React.ReactNode }) => {
@@ -27,21 +27,13 @@ const AccordionItem = ({ question, answer }: { question: string, answer: React.R
 export default function FAQPage() {
     return (
         <AppShell>
-            <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
+            <main className="flex-grow max-w-5xl mx-auto w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
                 <div className="flex justify-between items-end border-b-2 border-slate-900 pb-2 mb-8">
                     <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">Часто задаваемые вопросы</h1>
-                    <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer" />
-                    </div>
-                </div>
-
-                <div className="mb-4">
-                    <span className="text-[10px] font-bold text-slate-300 uppercase">Просмотров: 21962</span>
                 </div>
 
                 <div className="border-t border-slate-100 mb-12">

@@ -1,15 +1,15 @@
 "use client"
 import { AppShell } from "@/components/app-shell"
-import { ChevronLeft, Eye, Info } from "lucide-react"
+import { ChevronLeft, Info } from "lucide-react"
 import Link from "next/link"
 
 export default function FlagPage() {
     return (
         <AppShell>
-            <main className="flex-grow px-4 py-6 w-full max-w-lg mx-auto">
+            <main className="flex-grow w-full max-w-lg mx-auto">
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">
-                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] font-black uppercase tracking-widest">
+                    <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] uppercase">
                         <ChevronLeft className="h-5 w-5" /> Назад
                     </Link>
                 </div>
@@ -19,9 +19,6 @@ export default function FlagPage() {
                     <h1 className="text-2xl font-black uppercase text-slate-800 tracking-tighter leading-tight">
                         Государственный Флаг <br /> Республики Казахстан
                     </h1>
-                    <div className="flex items-center gap-2 mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                        <Eye size={12} /> Просмотров: 5476
-                    </div>
                 </div>
 
                 {/* ИЗОБРАЖЕНИЕ */}

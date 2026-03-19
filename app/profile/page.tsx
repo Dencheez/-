@@ -62,16 +62,15 @@ function ClientProfile() {
   }, [user?.id])
 
   return (
-    <div className="p-3 md:p-6 max-w-2xl mx-auto">
+    <div className=" max-w-2xl mx-auto">
       {/* Шапка профиля */}
-      <div className="flex items-center gap-3 md:gap-4 rounded-2xl bg-card border border-border p-4 md:p-5 shadow-sm">
+      <div className="flex items-center gap-3 md:gap-4 rounded-2xl bg-card border border-border p-4 md:p-5">
         <div className="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full bg-primary text-lg md:text-xl font-bold text-primary-foreground text-center">
           {fullName ? fullName[0] : "П"}
         </div>
         <div className="flex-1 min-w-0">
           <h1 className="text-sm md:text-base font-bold text-foreground truncate">{fullName || "Профиль"}</h1>
           <p className="text-[10px] md:text-xs text-muted-foreground truncate">{user?.primaryEmailAddress?.emailAddress}</p>
-          <p className="mt-1 text-[10px] md:text-xs text-primary font-medium">Статус: уточняется</p>
         </div>
       </div>
 
@@ -85,20 +84,21 @@ function ClientProfile() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex flex-1 items-center justify-center gap-1 md:gap-1.5 rounded-lg py-2 md:py-2.5 text-[10px] md:text-xs font-semibold ${activeTab === tab.key ? "bg-card text-primary shadow-sm" : "text-muted-foreground"
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold transition-all ${activeTab === tab.key
+              ? "bg-card text-primary"
+              : "text-muted-foreground hover:text-primary"
               }`}
           >
-            <tab.icon className="h-3.5 w-3.5" />
-            <span className="hidden xs:inline">{tab.label}</span>
-            <span className="xs:hidden">{tab.label.slice(0, 4)}.</span>
+            <tab.icon className="h-4 w-4" />
+            {/* Скрываем текст на совсем мелких экранах, показываем от 400px (sm или custom bp) */}
+            <span className="hidden sm:inline">{tab.label}</span>
           </button>
         ))}
       </div>
-
       <div className="mt-4">
         {activeTab === "appointments" && (
           <div className="space-y-3 md:space-y-4">
-            <Link href="/appointment" className="flex items-center justify-between rounded-xl md:rounded-2xl bg-primary p-3 md:p-4 text-primary-foreground shadow-lg shadow-primary/20">
+            <Link href="/appointment" className="flex items-center justify-between rounded-xl md:rounded-2xl bg-primary p-3 md:p-4 text-primary-foreground">
               <div className="flex items-center gap-3">
                 <CalendarDays className="h-5 w-5" />
                 <span className="text-xs md:text-sm font-bold">Записаться на приём</span>
@@ -114,7 +114,7 @@ function ClientProfile() {
               </div>
             ) : (
               myAppointments.map((appt) => (
-                <div key={appt.id} className="rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 shadow-sm">
+                <div key={appt.id} className="rounded-xl md:rounded-2xl border border-border bg-card p-3 md:p-4 ">
                   <div className="flex justify-between items-start">
                     <div className="min-w-0 pr-2">
                       <p className="text-xs md:text-sm font-bold truncate">{appt.service_type || "Консультация"}</p>
@@ -183,13 +183,13 @@ function ClientProfile() {
             {/* Кнопка назад в стиле твоих настроек */}
             <button
               onClick={() => setActiveTab("settings")}
-              className="flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase hover:text-primary transition-colors mb-2 w-fit"
+              className="flex items-center gap-2 text-[10px] text-muted-foreground uppercase smb-2 w-fit"
             >
               <ChevronLeft className="w-3 h-3" /> Назад к настройкам
             </button>
 
             {/* Обертка для контента, если её нет внутри MyQnaContent */}
-            <div className="bg-card border border-border rounded-xl md:rounded-[32px] p-4 md:p-8 shadow-sm">
+            <div className="bg-card border border-border rounded-xl md:rounded-[32px] p-4 md:p-8">
               <MyQnaContent />
             </div>
           </div>
@@ -262,8 +262,8 @@ function AdminDashboard() {
   }, [allAppointments, searchQuery])
 
   return (
-    <div className="p-3 md:p-6 max-w-3xl mx-auto space-y-4">
-      <div className="rounded-xl md:rounded-2xl border border-border bg-card p-4 md:p-5 shadow-sm">
+    <div className=" max-w-3xl mx-auto space-y-4">
+      <div className="rounded-xl md:rounded-2xl border border-border bg-card p-4 md:p-5">
         <h1 className="text-sm md:text-base font-bold text-foreground">Панель управления</h1>
         <p className="text-[9px] md:text-[10px] text-primary font-medium uppercase tracking-wider">Режим администратора</p>
       </div>

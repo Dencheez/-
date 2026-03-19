@@ -27,16 +27,15 @@ export default function GoszakupProtocolsPage() {
                             <thead>
                                 <tr className="bg-slate-50 border-b border-slate-100">
                                     <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Наименование протокола</th>
-                                    <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest hidden md:table-cell">Тип закупки</th>
                                     <th className="p-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Действие</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {protocols.map((p) => (
-                                    <tr key={p.id} className="border-b border-slate-50 last:border-0 hover:bg-slate-50/30 transition-colors">
+                                    <tr key={p.id} className="border-b border-slate-50 hover:bg-slate-50/30 transition-colors">
                                         <td className="p-6">
                                             <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
+                                                <div className="w-auto h-auto bg-slate-100 rounded-xl flex items-center justify-center text-slate-400">
                                                     <FileText className="w-5 h-5" />
                                                 </div>
                                                 <div>
@@ -49,7 +48,7 @@ export default function GoszakupProtocolsPage() {
                                         </td>
                                         <td className="p-6">
                                             <a href={p.href} download>
-                                                <button className="flex items-center gap-2 px-5 py-2.5 bg-slate-900 text-white rounded-lg font-black uppercase text-[9px] tracking-widest hover:bg-[#00B5C4] transition-all">
+                                                <button className="flex items-center gap-2 px-5 py-2.5 bg-[#00B5C4] text-white rounded-lg font-black uppercase text-[9px] tracking-widest hover:bg-[#00B5C4] transition-all">
                                                     <Download className="w-3.5 h-3.5" />
                                                     <span>Скачать</span>
                                                 </button>

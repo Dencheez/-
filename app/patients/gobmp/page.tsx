@@ -1,6 +1,6 @@
 "use client"
 import { AppShell } from "@/components/app-shell"
-import { ChevronLeft, Printer, Mail } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function GobmpPage() {
@@ -10,9 +10,9 @@ export default function GobmpPage() {
 
     return (
         <AppShell>
-            <main className="max-w-5xl mx-auto px-6 py-8 w-full">
+            <main className="max-w-5xl mx-auto  w-full">
                 {/* Навигация */}
-                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 font-black">
+                <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 ">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
 
@@ -21,10 +21,6 @@ export default function GobmpPage() {
                     <h1 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tighter">
                         Новая модель ГОБМП
                     </h1>
-                    <div className="flex gap-4 mb-1">
-                        <Printer onClick={() => window.print()} className="h-5 w-5 text-slate-200 cursor-pointer" />
-                        <Mail onClick={handleEmailClick} className="h-5 w-5 text-slate-200 cursor-pointer" />
-                    </div>
                 </div>
 
                 {/* Видео-контейнер */}
@@ -55,9 +51,6 @@ export default function GobmpPage() {
                         <p className="text-lg text-slate-600 leading-relaxed font-medium">
                             В данном видеоматериале подробно разъясняются изменения в системе ГОБМП
                             и права граждан на получение бесплатной медицинской помощи в рамках новой модели.
-                        </p>
-                        <p className="mt-6 text-[10px] text-slate-300 uppercase font-black tracking-widest leading-loose">
-                            Гарантированный объем бесплатной <br /> медицинской помощи Республики Казахстан
                         </p>
                     </div>
                 </div>

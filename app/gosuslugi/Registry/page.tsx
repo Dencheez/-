@@ -16,7 +16,7 @@ export default function RegistryPage() {
                 {/* Кнопка назад - жестко прописал текст на случай ошибки хука */}
                 <Link
                     href="/gosuslugi"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 uppercase tracking-widest hover:text-[#00B5C4] transition-colors mb-8"
+                    className="inline-flex items-center gap-2 text-[10px] text-slate-400 uppercase mb-8"
                 >
                     <ChevronLeft className="w-4 h-4" />
                     Назад

@@ -71,7 +71,7 @@ export default function InfoPage() {
                     {isAdmin && (
                         <Link
                             href="/info/create"
-                            className="flex items-center justify-center gap-3 bg-[#00B5C4] text-white px-6 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-[#00B5C4]/20 group active:scale-95"
+                            className="flex items-center justify-center gap-3 bg-[#00B5C4] text-white px-6 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all group active:scale-95"
                         >
                             <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" />
                             <span>Добавить материал</span>
@@ -90,7 +90,7 @@ export default function InfoPage() {
                             <Link
                                 key={article.id}
                                 href={`/info/${article.id}`}
-                                className="group bg-white rounded-2xl border border-slate-100 shadow-sm p-4 md:p-5 flex items-center gap-4 md:gap-5 hover:shadow-md hover:border-[#00B5C4]/30 transition-all"
+                                className="group bg-white rounded-2xl border border-slate-100 p-4 md:p-5 flex items-center gap-4 md:gap-5 hover:border-[#00B5C4]/30 transition-all"
                             >
                                 <div className="w-10 h-10 bg-[#00B5C4]/10 rounded-xl flex items-center justify-center text-[#00B5C4] shrink-0 group-hover:bg-[#00B5C4] group-hover:text-white transition-all">
                                     <BookOpen className="w-5 h-5" />

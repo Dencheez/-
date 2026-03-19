@@ -64,10 +64,10 @@ export function FooterCarousel() {
           </div>
         </div>
 
-        <button onClick={scrollPrev} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden group-hover:flex bg-white/90 p-1 rounded-full shadow-sm border border-slate-100">
+        <button onClick={scrollPrev} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden group-hover:flex bg-white/90 p-1 rounded-full border border-slate-100">
           <ChevronLeft className="h-4 w-4 text-[#00B5C4]" />
         </button>
-        <button onClick={scrollNext} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden group-hover:flex bg-white/90 p-1 rounded-full shadow-sm border border-slate-100">
+        <button onClick={scrollNext} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden group-hover:flex bg-white/90 p-1 rounded-full border border-slate-100">
           <ChevronRight className="h-4 w-4 text-[#00B5C4]" />
         </button>
       </div>

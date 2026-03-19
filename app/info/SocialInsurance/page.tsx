@@ -29,7 +29,7 @@ function SocialImageCard({ src, alt, index }: { src: string; alt: string; index:
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <div className="group bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden cursor-zoom-in active:scale-95 transition-transform">
+                <div className="group bg-white rounded-2xl border border-slate-100 overflow-hidden cursor-zoom-in active:scale-95 transition-transform">
                     <div className="aspect-[4/3] relative overflow-hidden bg-slate-50">
                         <img
                             src={src}
@@ -39,13 +39,13 @@ function SocialImageCard({ src, alt, index }: { src: string; alt: string; index:
                     </div>
                 </div>
             </DialogTrigger>
-            <DialogContent className="max-w-[95vw] sm:max-w-4xl p-1 bg-white border-none shadow-2xl overflow-hidden">
+            <DialogContent className="max-w-[95vw] sm:max-w-4xl p-1 bg-white border-none overflow-hidden">
                 <DialogTitle className="sr-only">{alt}</DialogTitle>
                 <div className="relative w-full aspect-auto">
                     <img
                         src={src}
                         alt={alt}
-                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-inner"
+                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg "
                     />
                 </div>
             </DialogContent>
@@ -73,7 +73,7 @@ export default function SocialInsurancePage() {
                                 <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3 p-2">
                                     <Dialog>
                                         <DialogTrigger asChild>
-                                            <div className="rounded-2xl overflow-hidden border border-slate-100 shadow-md aspect-[4/3] bg-slate-50 cursor-zoom-in active:scale-95 transition-transform group">
+                                            <div className="rounded-2xl overflow-hidden border border-slate-100 aspect-[4/3] bg-slate-50 cursor-zoom-in active:scale-95 transition-transform group">
                                                 <img
                                                     src={img.src}
                                                     alt={img.alt}
@@ -81,13 +81,13 @@ export default function SocialInsurancePage() {
                                                 />
                                             </div>
                                         </DialogTrigger>
-                                        <DialogContent className="max-w-[95vw] sm:max-w-4xl p-1 bg-white border-none shadow-2xl overflow-hidden">
+                                        <DialogContent className="max-w-[95vw] sm:max-w-4xl p-1 bg-white border-none overflow-hidden">
                                             <DialogTitle className="sr-only">{img.alt}</DialogTitle>
                                             <div className="relative w-full aspect-auto">
                                                 <img
                                                     src={img.src}
                                                     alt={img.alt}
-                                                    className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-inner"
+                                                    className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                                                 />
                                             </div>
                                         </DialogContent>
@@ -95,8 +95,8 @@ export default function SocialInsurancePage() {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="-left-10 h-10 w-10 border-[#00B5C4] text-[#00B5C4] hover:bg-[#00B5C4] hover:text-white transition-all shadow-lg" />
-                        <CarouselNext className="-right-10 h-10 w-10 border-[#00B5C4] text-[#00B5C4] hover:bg-[#00B5C4] hover:text-white transition-all shadow-lg" />
+                        <CarouselPrevious className="-left-10 h-10 w-10 border-[#00B5C4] text-[#00B5C4] hover:bg-[#00B5C4] hover:text-white transition-all" />
+                        <CarouselNext className="-right-10 h-10 w-10 border-[#00B5C4] text-[#00B5C4] hover:bg-[#00B5C4] hover:text-white transition-all" />
                     </Carousel>
                 </section>
 
@@ -116,7 +116,7 @@ export default function SocialInsurancePage() {
                 <section className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 text-white flex flex-col md:flex-row items-center gap-10 overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-[#00B5C4]/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
 
-                    <div className="w-20 h-20 bg-[#00B5C4] rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-[#00B5C4]/20 ">
+                    <div className="w-20 h-20 bg-[#00B5C4] rounded-2xl flex items-center justify-center shrink-0 ">
                         <Shield className="w-10 h-10 text-white" />
                     </div>
                     <div className="flex-1 text-center md:text-left relative z-10">
@@ -130,7 +130,7 @@ export default function SocialInsurancePage() {
                             href="https://fms.kz/ru"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-[#00B5C4] text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#009da8] hover:scale-105 transition-all shadow-xl active:scale-95"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-[#00B5C4] text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-[#009da8] hover:scale-105 transition-all active:scale-95"
                         >
                             <ExternalLink className="w-4 h-4" />
                             Перейти на fms.kz
@@ -151,7 +151,7 @@ export default function SocialInsurancePage() {
                 </section>
 
                 {/* Q&A Downloads */}
-                <section className="bg-white rounded-[2rem] border border-slate-100 p-8 shadow-sm">
+                <section className="bg-white rounded-[2rem] border border-slate-100 p-8">
                     <h2 className="text-xs font-black text-slate-800 uppercase tracking-widest mb-6 flex items-center gap-2">
                         <Download className="w-4 h-4 text-[#00B5C4]" />
                         Документы: Вопросы и ответы
@@ -166,7 +166,7 @@ export default function SocialInsurancePage() {
                                     <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Файл .DOC</span>
                                     <p className="text-[13px] font-bold text-slate-700 uppercase tracking-tight">95 вопросов по ОСМС</p>
                                 </div>
-                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#00B5C4] group-hover:bg-white shadow-sm transition-colors">
+                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#00B5C4] group-hover:bg-white transition-colors">
                                     <Download className="w-5 h-5" />
                                 </div>
                             </button>
@@ -180,7 +180,7 @@ export default function SocialInsurancePage() {
                                     <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Файл .PDF</span>
                                     <p className="text-[13px] font-bold text-slate-700 uppercase tracking-tight">Новые вопросы — ответы</p>
                                 </div>
-                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#00B5C4] group-hover:bg-white shadow-sm transition-colors">
+                                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#00B5C4] group-hover:bg-white transition-colors">
                                     <Download className="w-5 h-5" />
                                 </div>
                             </button>

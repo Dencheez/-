@@ -91,7 +91,7 @@ export default function CreateInfoPage() {
                             <button
                                 type="button"
                                 onClick={() => { setImage(null); setPreview(null); }}
-                                className="absolute top-4 right-4 bg-white/80 backdrop-blur-md p-2 rounded-xl text-red-500 shadow-lg hover:bg-red-500 hover:text-white transition-all"
+                                className="absolute top-4 right-4 bg-white/80 backdrop-blur-md p-2 rounded-xl text-red-500 hover:bg-red-500 hover:text-white transition-all"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -101,7 +101,7 @@ export default function CreateInfoPage() {
                     {/* Текст статьи */}
                     <textarea
                         placeholder="Начните писать здесь..."
-                        className="w-full min-h-[400px] p-6 rounded-3xl border border-slate-100 shadow-sm outline-none focus:border-[#00B5C4]/30 resize-none text-slate-600 font-medium"
+                        className="w-full min-h-[400px] p-6 rounded-3xl border border-slate-100 outline-none focus:border-[#00B5C4]/30 resize-none text-slate-600 font-medium"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
@@ -110,7 +110,7 @@ export default function CreateInfoPage() {
                     {/* Кнопка публикации */}
                     <button
                         disabled={loading}
-                        className="w-full bg-[#00B5C4] text-white p-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 transition-all shadow-xl shadow-[#00B5C4]/20 disabled:opacity-50 active:scale-95"
+                        className="w-full bg-[#00B5C4] text-white p-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 transition-all disabled:opacity-50 active:scale-95"
                     >
                         {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Save className="w-6 h-6" />}
                         {loading ? "Публикация..." : "Опубликовать материал"}

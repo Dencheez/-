@@ -8,12 +8,12 @@ export default function BiographyPage() {
     return (
         <div className="min-h-screen bg-slate-50">
             {/* ШИРОКИЙ КОНТЕЙНЕР ДЛЯ ПК (max-w-7xl) */}
-            <main className="container mx-auto px-4 py-8 md:py-16 max-w-7xl">
+            <main className="container mx-auto px-2 py-4 md:py-16 max-w-7xl">
 
                 {/* Навигация */}
                 <Link
                     href="/UsefulLinks"
-                    className="inline-flex items-center gap-2 text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-[0.2em] hover:text-[#00B5C4] transition-colors mb-12"
+                    className="inline-flex items-center gap-2 text-[10px] md:text-xs text-slate-400 uppercase mb-12"
                 >
                     <ChevronLeft className="w-4 h-4" /> Назад
                 </Link>
@@ -21,7 +21,7 @@ export default function BiographyPage() {
                 <div className="space-y-12">
 
                     {/* Заголовок и основная информация */}
-                    <div className="bg-white rounded-[32px] md:rounded-[48px] border border-slate-100 shadow-sm p-8 md:p-12">
+                    <div className="bg-white rounded-[32px] md:rounded-[48px] border border-slate-100 p-8 md:p-12">
                         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
                             <div className="text-center md:text-left space-y-4">
                                 <h1 className="text-3xl md:text-5xl font-black text-slate-800 uppercase leading-tight tracking-tight">
@@ -42,7 +42,7 @@ export default function BiographyPage() {
                         {/* ЛЕВАЯ КОЛОНКА: ОБРАЗОВАНИЕ И НАВЫКИ */}
                         <div className="lg:col-span-1 space-y-8">
                             {/* Блок Образование */}
-                            <div className="bg-white rounded-[32px] border border-slate-100 shadow-sm p-8">
+                            <div className="bg-white rounded-[32px] border border-slate-100 p-8">
                                 <div className="flex items-center gap-3 mb-6">
                                     <GraduationCap className="w-6 h-6 text-[#00B5C4]" />
                                     <h3 className="font-black text-slate-800 uppercase text-xs tracking-widest">Образование</h3>
@@ -64,7 +64,7 @@ export default function BiographyPage() {
                             </div>
 
                             {/* Блок Дополнительно */}
-                            <div className="bg-[#00B5C4] rounded-[32px] shadow-lg shadow-cyan-500/20 p-8 text-white">
+                            <div className="bg-[#00B5C4] rounded-[32px] p-8 text-white">
                                 <div className="flex items-center gap-3 mb-6">
                                     <Languages className="w-6 h-6 text-white" />
                                     <h3 className="font-black uppercase text-xs tracking-widest text-white/90">Языки</h3>
@@ -85,7 +85,7 @@ export default function BiographyPage() {
 
                         {/* ПРАВАЯ КОЛОНКА: ОПЫТ РАБОТЫ (TIMELINE) */}
                         <div className="lg:col-span-2">
-                            <div className="bg-white rounded-[32px] md:rounded-[40px] border border-slate-100 shadow-sm p-8 md:p-12">
+                            <div className="bg-white rounded-[32px] md:rounded-[40px] border border-slate-100 p-8 md:p-12">
                                 <div className="flex items-center gap-3 mb-10">
                                     <Briefcase className="w-6 h-6 text-[#00B5C4]" />
                                     <h3 className="font-black text-slate-800 uppercase text-xs tracking-widest">Профессиональный опыт</h3>
@@ -104,7 +104,7 @@ export default function BiographyPage() {
                                         { date: "2018 (Январь)", text: "Директор ГКП на ПХВ \"Центр психического здоровья\" Управления здравоохранения города Алматы.", highlight: true },
                                     ].map((item, idx) => (
                                         <div key={idx} className="relative pl-10 group">
-                                            <div className={`absolute left-0 top-1 w-[24px] h-[24px] rounded-full border-4 border-white shadow-sm transition-colors ${item.highlight ? 'bg-[#00B5C4]' : 'bg-slate-200 group-hover:bg-[#00B5C4]'}`}></div>
+                                            <div className={`absolute left-0 top-1 w-[24px] h-[24px] rounded-full border-4 border-white transition-colors ${item.highlight ? 'bg-[#00B5C4]' : 'bg-slate-200 group-hover:bg-[#00B5C4]'}`}></div>
                                             <div className="space-y-1">
                                                 <span className={`text-[10px] font-black uppercase tracking-wider ${item.highlight ? 'text-[#00B5C4]' : 'text-slate-400'}`}>
                                                     {item.date}

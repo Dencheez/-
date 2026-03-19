@@ -55,7 +55,7 @@ export default function MentalJournalPage() {
                 <div className="max-w-5xl w-full mx-auto px-4 md:px-6 py-8 md:py-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         {issues.map((i, idx) => (
-                            <div key={idx} className="bg-white p-5 md:p-6 rounded-3xl border border-slate-100 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all hover:shadow-md">
+                            <div key={idx} className="bg-white p-5 md:p-6 rounded-3xl border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 transition-all">
                                 <div className="flex items-center gap-4 md:gap-5">
                                     <div className="bg-blue-50 p-3 md:p-4 rounded-2xl text-blue-600 shrink-0">
                                         <FileDigit className="w-5 h-5 md:w-6 md:h-6" />

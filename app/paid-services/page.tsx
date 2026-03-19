@@ -1,8 +1,7 @@
 "use client"
 
 import { AppShell } from "@/components/app-shell"
-import Link from "next/link"
-import { ChevronLeft, Search, Users, FileSpreadsheet, } from "lucide-react"
+import { Search, Users } from "lucide-react"
 import { useState, useMemo } from "react"
 
 export default function PaidServicesPage() {
@@ -156,68 +155,68 @@ export default function PaidServicesPage() {
         <AppShell>
             <div className="flex flex-col w-full min-h-screen">
                 {/* Шапка */}
-                <div className=" py-16 px-6 md:px-12 text-black relative overflow-hidden">
+                <div className="py-5 px-6 md:px-5 text-black relative overflow-hidden">
                     <div className="max-w-7xl mx-auto relative z-10">
-                        <h1 className="text-2xl md:text-5xl font-black leading-none mb-6">Прейскурант цен на платные государственные и медицинские услуги</h1>
+                        <h1 className="text-2xl md:text-5xl font-black leading-none mb-6 uppercase tracking-tighter">
+                            Прейскурант цен на платные государственные и медицинские услуги
+                        </h1>
                         <p className="text-black/80 text-sm font-medium max-w-2xl leading-relaxed border-l-2 border-black/20 pl-4">
                             Полный перечень платных медицинских услуг Центра психического здоровья. Используйте поиск для быстрого нахождения нужной позиции.
                         </p>
                     </div>
                 </div>
 
-                <div className="max-w-7xl w-full mx-auto">
+                <div className="max-w-7xl w-full mx-auto px-4 md:px-6">
 
-                    {/* Панель управления таблицей */}
+                    {/* Панель управления */}
                     <div className="flex flex-col md:flex-row gap-4 mb-8 sticky top-4 z-30">
                         <div className="relative flex-grow">
                             <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300" />
                             <input
                                 type="text"
                                 placeholder="Поиск услуги или категории"
-                                className="w-full bg-white border-2 border-slate-100 rounded-2xl py-5 pl-14 pr-6 text-sm font-bold outline-none focus:border-[#00B5C4] transition-all"
+                                className="w-full bg-white border-2 border-slate-100 rounded-2xl py-4 md:py-5 pl-14 pr-6 text-sm font-bold outline-none focus:border-[#00B5C4] transition-all"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
-
                     </div>
 
-                    {/* Таблица в обертке для скролла */}
-                    {/* Контейнер с фиксированной высотой и внутренним скроллом */}
-                    <div className="bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden flex flex-col h-[700px]">
+                    {/* Таблица */}
+                    <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 overflow-hidden flex flex-col h-[600px] md:h-[700px]">
 
-                        {/* Шапка таблицы */}
-                        <div className="bg-slate-50 border-b border-slate-100 shrink-0">
-                            <table className="w-full text-left border-collapse min-w-[800px]">
+                        {/* Обертка для горизонтального скролла на мобилках */}
+                        <div className="overflow-x-auto overflow-y-hidden shrink-0 bg-slate-50 border-b border-slate-100">
+                            <table className="w-full text-left border-collapse min-w-[600px] md:min-w-[800px]">
                                 <thead>
                                     <tr>
-                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[55%]">Наименование медицинской услуги</th>
-                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[10%]">Ед. изм.</th>
-                                        <th className="p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right w-[15%]">Цена (₸)</th>
+                                        <th className="p-4 md:p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[55%] md:w-[60%]">Наименование медицинской услуги</th>
+                                        <th className="p-4 md:p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 w-[20%] md:w-[15%]">Ед. изм.</th>
+                                        <th className="p-4 md:p-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-right w-[25%] md:w-[25%]">Цена (₸)</th>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
 
-                        {/* Тело таблицы с прокруткой */}
-                        <div className="overflow-y-auto flex-grow scrollbar-thin scrollbar-thumb-[#00B5C4] scrollbar-track-slate-50">
-                            <table className="w-full text-left border-collapse min-w-[800px]">
+                        {/* Тело таблицы со скроллом */}
+                        <div className="overflow-y-auto overflow-x-auto flex-grow scrollbar-thin scrollbar-thumb-[#00B5C4]">
+                            <table className="w-full text-left border-collapse min-w-[600px] md:min-w-[800px]">
                                 <tbody className="divide-y divide-slate-50">
                                     {filteredServices.length > 0 ? (
                                         filteredServices.map((service) => (
                                             <tr key={service.id} className="hover:bg-[#00B5C4]/5 transition-colors group">
-                                                <td className="p-6 w-[55%]">
-                                                    <span className="text-sm md:text-base font-bold text-slate-700 group-hover:text-slate-900 transition-colors leading-tight block">
+                                                <td className="p-4 md:p-6 w-[55%] md:w-[60%]">
+                                                    <span className="text-xs md:text-base font-bold text-slate-700 group-hover:text-slate-900 transition-colors leading-tight block whitespace-normal">
                                                         {service.name}
                                                     </span>
                                                 </td>
-                                                <td className="p-6 w-[10%]">
-                                                    <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                                                <td className="p-4 md:p-6 w-[20%] md:w-[15%]">
+                                                    <span className="text-[9px] md:text-[10px] font-black text-slate-300 uppercase tracking-widest whitespace-nowrap">
                                                         {service.unit}
                                                     </span>
                                                 </td>
-                                                <td className="p-6 text-right w-[15%]">
-                                                    <span className="text-lg font-black text-slate-800 group-hover:text-[#00B5C4] transition-colors tabular-nums">
+                                                <td className="p-4 md:p-6 text-right w-[25%] md:w-[25%]">
+                                                    <span className="text-base md:text-lg font-black text-slate-800 group-hover:text-[#00B5C4] transition-colors tabular-nums">
                                                         {service.price}
                                                     </span>
                                                 </td>
@@ -225,7 +224,7 @@ export default function PaidServicesPage() {
                                         ))
                                     ) : (
                                         <tr>
-                                            <td colSpan={4} className="p-20 text-center text-slate-300 font-bold uppercase tracking-widest">
+                                            <td colSpan={3} className="p-20 text-center text-slate-300 font-bold uppercase tracking-widest text-xs">
                                                 Ничего не найдено
                                             </td>
                                         </tr>
@@ -235,20 +234,19 @@ export default function PaidServicesPage() {
                         </div>
                     </div>
 
-                    {/* Инфо-плашка про скидки*/}
-                    <div className="mt-10  gap-6">
-                        <div className="bg-[#00B5C4]/5 border-2 border-[#00B5C4]/20 p-8 rounded-[2.5rem] flex items-start gap-5">
-                            <Users className="w-10 h-10 text-[#00B5C4] shrink-0" />
+                    {/* Льготы */}
+                    <div className="mt-10 mb-20">
+                        <div className="bg-[#00B5C4]/5 border-2 border-[#00B5C4]/20 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col md:flex-row items-start gap-5">
+                            <Users className="w-8 h-8 md:w-10 md:h-10 text-[#00B5C4] shrink-0" />
                             <div>
-                                <h4 className="text-lg font-black uppercase tracking-tighter mb-2">Льготы 30%</h4>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам Великой Отечественной войны</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам боевых действий на территории других государств</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам, приравненным по льготам к ветеранам Великой Отечественной войны</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Ветеранам труда</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Другим лицам, определённым статьей 8 Закона Республики Казахстан «О ветеранах» от 6 мая 2020 года №322VI-ЗРК, на которых распространяется действие настоящего Закона</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Инвалидам первой и второй группы, инвалидам детства</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Родителям, имеющим четверых и более несовершеннолетних детей</p>
-                                <p className="text-sm text-slate-500 leading-relaxed font-medium">Женщинам, награжденным подвесками "Алтын алқа", "Күміс алқа" или получившим ранее звание "Мать-героиня", награжденным орденами "Материнская слава" первой и второй степени</p>
+                                <h4 className="text-lg font-black uppercase tracking-tighter mb-4">Льготы 30%</h4>
+                                <div className="space-y-1.5">
+                                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">Ветеранам Великой Отечественной войны</p>
+                                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">Ветеранам боевых действий на территории других государств</p>
+                                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">Ветеранам, приравненным к ним</p>
+                                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">Инвалидам первой и второй группы, инвалидам детства</p>
+                                    <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">Многодетным матерям и родителям (4+ детей)</p>
+                                </div>
                             </div>
                         </div>
                     </div>

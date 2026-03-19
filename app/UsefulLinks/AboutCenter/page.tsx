@@ -8,12 +8,12 @@ export default function AboutCenterPage() {
     return (
         <div className="min-h-screen bg-slate-50">
             {/* РАСШИРЕННЫЙ КОНТЕЙНЕР ДЛЯ ПК */}
-            <main className="container mx-auto px-4 py-8 md:py-16 max-w-7xl">
+            <main className="container mx-auto px-2 py-4 md:py-16 max-w-7xl">
 
                 {/* Навигация */}
                 <Link
                     href="/UsefulLinks"
-                    className="inline-flex items-center gap-2 text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-[0.2em] hover:text-[#00B5C4] transition-colors mb-12"
+                    className="inline-flex items-center gap-2 text-[10px] md:text-xs text-slate-400 uppercase mb-12"
                 >
                     <ChevronLeft className="w-4 h-4" /> Назад
                 </Link>
@@ -22,7 +22,7 @@ export default function AboutCenterPage() {
 
                     {/* Заголовок */}
                     <div className="flex items-center gap-6">
-                        <div className="bg-white p-5 rounded-3xl shadow-sm border border-slate-100 shrink-0">
+                        <div className="bg-white p-5 rounded-3xl border border-slate-100 shrink-0">
                             <History className="w-8 h-8 md:w-10 md:h-10 text-[#00B5C4]" />
                         </div>
                         <h1 className="text-3xl md:text-5xl font-black text-slate-800 uppercase leading-tight tracking-tight">
@@ -31,7 +31,7 @@ export default function AboutCenterPage() {
                     </div>
 
                     {/* Текстовый блок */}
-                    <div className="bg-white rounded-[32px] md:rounded-[48px] border border-slate-100 shadow-sm p-8 md:p-16">
+                    <div className="bg-white rounded-[32px] md:rounded-[48px] border border-slate-100 p-8 md:p-16">
                         <div className="prose prose-slate max-w-none space-y-6 text-slate-700 text-sm md:text-lg leading-relaxed font-medium">
                             <p>
                                 В Казахстане первые психиатрические больницы были открыты в городе Уральске в 1861 году на 10 коек и в том же году в Джамбейтинском районе на 6 коек при русских военных госпиталях. В городе Верном (Алма-Ата) 14 декабря 1896 года за счет земских денежных сборов было развернуто 10 кроватей для лечения душевно больных.

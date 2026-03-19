@@ -2,8 +2,6 @@
 import { AppShell } from "@/components/app-shell"
 import { ChevronLeft, Send, Loader2 } from "lucide-react"
 import { useState } from "react"
-import { createQuestion } from "@/app/admin/actions"
-import { toast } from "sonner"
 import { supabase } from "@/lib/supabase"
 import Link from "next/link"
 import { useUser } from "@clerk/nextjs";
@@ -25,7 +23,6 @@ export default function QnaPage() {
         e.preventDefault();
         setLoading(true);
 
-        // Просто проверяем, что данные заполнены
         if (!text) {
             alert("Введите текст обращения!");
             setLoading(false);
@@ -55,7 +52,7 @@ export default function QnaPage() {
 
     return (
         <AppShell>
-            <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
+            <main className="flex-grow max-w-5xl mx-auto w-full">
                 {/* Навигация */}
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-[#1e40af] transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад

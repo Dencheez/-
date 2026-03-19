@@ -1,12 +1,12 @@
 "use client"
 import { AppShell } from "@/components/app-shell"
-import { ChevronLeft, ExternalLink, FileText, Printer, Mail } from "lucide-react"
+import { ChevronLeft, ExternalLink, FileText, } from "lucide-react"
 import Link from "next/link"
 
 export default function FormularyPage() {
     return (
         <AppShell>
-            <main className="flex-grow max-w-5xl mx-auto px-6 py-4 w-full">
+            <main className="flex-grow max-w-5xl mx-auto w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4 hover:text-slate-900 transition-colors">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>
@@ -15,10 +15,6 @@ export default function FormularyPage() {
                     <h1 className="text-2xl font-bold text-slate-900 uppercase tracking-tight">
                         Лекарственный формуляр
                     </h1>
-                    <div className="flex gap-4 mb-1">
-                        <Printer className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                        <Mail className="h-4 w-4 text-slate-300 cursor-pointer hover:text-slate-900" />
-                    </div>
                 </div>
 
                 <div className="space-y-8 mb-20">

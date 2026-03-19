@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, Maximize2 } from "lucide-react"
+import { ArrowLeft, Printer, Mail, Maximize2 } from "lucide-react"
 import Link from "next/link"
 
 export default function TenderAds() {

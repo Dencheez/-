@@ -96,13 +96,6 @@ export default function FinancialReportPage() {
                             </div>
                         ))}
                     </div>
-
-                    {/* Инфо-плашка внизу */}
-                    <div className="mt-20 p-10 bg-white rounded-[32px] md:rounded-[48px] border border-slate-100 shadow-inner text-center">
-                        <p className="text-xs md:text-base text-slate-500 max-w-3xl mx-auto leading-relaxed">
-                            Финансовая отчетность публикуется в соответствии с законодательством РК. Все документы заверены и актуальны на текущий отчетный период.
-                        </p>
-                    </div>
                 </div>
             </main>
         </div>

@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, ChevronUp, Maximize2 } from "lucide-react"
+import { ArrowLeft, Printer, Mail, ChevronUp, Maximize2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 

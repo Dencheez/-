@@ -27,10 +27,10 @@ export default function SymbolsMenuPage() {
 
     return (
         <AppShell>
-            <main className="flex-grow w-full max-w-6xl mx-auto px-4 md:px-8 py-8 md:py-12">
+            <main className="flex-grow w-full max-w-6xl mx-auto">
 
                 {/* НАВИГАЦИЯ */}
-                <Link href="/" className="inline-flex items-center gap-2 text-slate-400 uppercase text-[10px] font-black tracking-widest mb-8">
+                <Link href="/" className="inline-flex items-center gap-2 text-slate-400 uppercase text-[10px] tracking-widest mb-8">
                     <ChevronLeft className="h-4 w-4" /> На главную
                 </Link>
 

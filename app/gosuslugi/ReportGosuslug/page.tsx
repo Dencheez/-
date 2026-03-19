@@ -5,7 +5,6 @@ import Link from "next/link"
 import { ChevronLeft, FileDown, FileText, CalendarDays } from "lucide-react"
 
 export default function ReportGosuslugPage() {
-    // Данные отчетов (взяты со скриншота image_5.png)
     const reports = [
         { title: "Информация по государственным услугам за 2020 год", year: "2020", size: "1.2 MB", href: "/files/gos-report/2020 (1).docx" },
         { title: "Информация по государственным услугам за 2021 год", year: "2021", size: "1.5 MB", href: "/files/gos-report/2021 (1).docx" },
@@ -15,71 +14,64 @@ export default function ReportGosuslugPage() {
 
     return (
         <div className="min-h-screen bg-slate-50">
-            {/* РАСШИРЕННЫЙ КОНТЕЙНЕР ДЛЯ ПК: max-w-7xl вместо max-w-5xl */}
             <main className="container mx-auto px-4 py-8 md:py-16 max-w-7xl">
 
-                {/* Навигация (Назад) */}
+                {/* Навигация */}
                 <Link
                     href="/gosuslugi"
-                    className="inline-flex items-center gap-2 text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-[0.2em] hover:text-[#00B5C4] transition-colors mb-12 px-2"
+                    className="inline-flex items-center gap-2 text-[10px] md:text-xs text-slate-400 uppercase mb-8 md:mb-12"
                 >
                     <ChevronLeft className="w-4 h-4" /> Назад
                 </Link>
 
-                <div className="space-y-12">
+                <div className="space-y-8 md:space-y-12">
 
                     {/* Заголовок страницы */}
-                    <div className="flex items-center gap-2 px-2">
-                        <div className="bg-white p-5 rounded-3xl shadow-sm border border-slate-100 shrink-0">
-                            <FileText className="w-8 h-8 md:w-10 md:h-10 text-[#00B5C4]" />
+                    <div className="flex md:flex-row items-start md:items-center gap-4 md:gap-6">
+                        <div className="bg-white p-4 md:p-5 rounded-2xl md:rounded-3xl border border-slate-100 shrink-0">
+                            <FileText className="w-6 h-6 md:w-10 md:h-10 text-[#00B5C4]" />
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-black text-slate-800 uppercase leading-tight tracking-tight">
+                        <h1 className="text-2xl md:text-5xl font-black text-slate-800 uppercase leading-tight tracking-tight max-w-3xl">
                             Отчеты по государственным услугам
                         </h1>
                     </div>
 
-                    {/* Сетка длинных горизонтальных коробок для скачивания */}
-                    <div className="grid gap-2 md:gap-8">
+                    {/* Сетка отчетов */}
+                    <div className="grid gap-4 md:gap-6">
                         {reports.map((report, index) => (
                             <div
                                 key={index}
-                                className="group bg-white border border-slate-100 rounded-[24px] md:rounded-[40px] p-6 md:p-10 transition-all duration-300"
+                                className="group bg-white border border-slate-100 rounded-[24px] md:rounded-[40px] p-5 md:p-8 lg:p-10  hover:border-[#00B5C4]/20 transition-all duration-300"
                             >
-                                {/* Сетка: иконка | текст | мета-данные | кнопка. На ПК flex-row */}
-                                <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+                                <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
 
-                                    {/* Иконка файла (более крупная на ПК) */}
-                                    <div className="bg-slate-100 group-hover:bg-[#00B5C4]/10 p-5 rounded-2xl md:rounded-3xl shrink-0 self-start md:self-center transition-colors">
-                                        <FileDown className="w-8 h-8 text-slate-400 group-hover:text-[#00B5C4] transition-colors" />
+                                    {/* Иконка */}
+                                    <div className="hidden sm:flex bg-slate-100 group-hover:bg-[#00B5C4]/10 p-4 md:p-6 rounded-2xl md:rounded-[30px] shrink-0 self-start lg:self-center transition-colors">
+                                        <FileDown className="w-6 h-6 md:w-8 md:h-8 text-slate-400 group-hover:text-[#00B5C4] transition-colors" />
                                     </div>
 
-                                    {/* Основной текст и мета-данные */}
-                                    <div className="flex-grow space-y-4">
-                                        <h3 className="text-lg md:text-xl font-bold text-slate-800 leading-snug group-hover:text-[#00B5C4] transition-colors">
+                                    {/* Контент */}
+                                    <div className="flex-grow space-y-3 md:space-y-4">
+                                        <h3 className="text-base md:text-xl lg:text-2xl font-bold text-slate-800 leading-snug ">
                                             {report.title}
                                         </h3>
 
-                                        {/* Мета-данные (Год и размер) */}
-                                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1">
+                                        <div className="flex flex-wrap items-center gap-x-4 md:gap-x-8 gap-y-2">
                                             <div className="flex items-center gap-2 text-slate-400">
-                                                <CalendarDays className="w-4 h-4" />
-                                                <span className="text-xs md:text-sm font-medium">{report.year} год</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 text-slate-400">
-                                                <FileText className="w-4 h-4" />
-                                                <span className="text-xs md:text-sm font-medium">PDF, {report.size}</span>
+                                                <CalendarDays className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                                <span className="text-[11px] md:text-sm font-bold uppercase tracking-wider">{report.year} год</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* Кнопка скачивания. На ПК компактная, w-auto */}
+                                    {/* Кнопка */}
                                     <a
-                                        href={report.href} // Замени на реальную ссылку на файл
+                                        href={report.href}
                                         download
-                                        className="inline-flex items-center justify-center gap-3 bg-white group-hover:bg-[#00B5C4] border border-slate-200 group-hover:border-[#00B5C4] text-slate-600 group-hover:text-white px-8 py-5 rounded-xl md:rounded-3xl font-bold text-sm md:text-base transition-all shadow-sm group-hover:shadow-cyan-500/20 shrink-0 w-full md:w-auto active:scale-95 whitespace-nowrap"
+                                        className="inline-flex items-center justify-center gap-3 bg-[#00B5C4] text-white px-6 md:px-10 py-4 md:py-6 rounded-xl group-hover:bg-white group-hover:text-[#00B5C4] transition-colors duration-300 md:rounded-[24px] font-black text-xs md:text-sm uppercase shrink-0 w-full lg:w-auto active:scale-95"
                                     >
-                                        <FileDown className="w-5 h-5" />
-                                        <button>Скачать документ</button>
+                                        <FileDown className="w-4 h-4 md:w-5 md:h-5" />
+                                        Скачать
                                     </a>
                                 </div>
                             </div>

@@ -77,7 +77,7 @@ export default function SettingsPage() {
     return (
         <AppShell>
             {/* На мобилках px-4, на десктопе auto */}
-            <div className="p-4 md:py-8 space-y-5 md:space-y-6 max-w-2xl mx-auto">
+            <div className="space-y-5 md:space-y-6 mt-[-20px] max-w-2xl mx-auto">
                 <Link
                     href="/profile"
                     className="inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -93,7 +93,7 @@ export default function SettingsPage() {
                     </p>
                 </div>
 
-                <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+                <div className="rounded-2xl border border-border bg-card  overflow-hidden">
                     <div className="p-4 md:p-6 space-y-4 md:space-y-5">
                         <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border">
                             <div className="flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-primary/10 shrink-0">
@@ -109,7 +109,7 @@ export default function SettingsPage() {
 
                         <div className="space-y-1.5">
                             <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider px-1">
-                                E-mail (логин)
+                                E-mail
                             </label>
                             <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary/50 px-3 md:px-4 py-2.5 md:py-3 opacity-70">
                                 <Mail className="h-4 w-4 text-muted-foreground shrink-0" />
@@ -147,7 +147,7 @@ export default function SettingsPage() {
                             <button
                                 onClick={handleUpdate}
                                 disabled={isSaving}
-                                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 md:py-4 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-60 disabled:scale-100"
+                                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 md:py-4 text-sm font-bold text-primary-foreground transition-all hover:bg-primary/90 active:scale-[0.98] disabled:opacity-60 disabled:scale-100"
                             >
                                 {isSaving ? (
                                     <>
@@ -176,12 +176,6 @@ export default function SettingsPage() {
                             )}
                         </div>
                     </div>
-                </div>
-
-                <div className="rounded-2xl bg-secondary/30 p-3 md:p-4 border border-border border-dashed">
-                    <p className="text-[10px] md:text-[11px] leading-relaxed text-muted-foreground text-center">
-                        Синхронизация с базой данных и сервисом Clerk.
-                    </p>
                 </div>
             </div>
         </AppShell>

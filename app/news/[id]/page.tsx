@@ -1,7 +1,6 @@
-// app/news/[id]/page.tsx
 import { notFound } from "next/navigation"
 import { AppShell } from "@/components/app-shell"
-import { getPostById } from "@/app/lib/api" // Проверь, что эта функция читает таблицу 'news'
+import { getPostById } from "@/app/lib/api"
 import { Calendar, ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import { NewsContent } from "@/components/news-content"
@@ -34,7 +33,7 @@ export default async function NewsItemPage({ params }: { params: any }) {
                     Назад к новостям
                 </Link>
 
-                <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 md:p-10 relative overflow-hidden">
+                <div className="bg-white rounded-3xl border border-slate-100  p-6 md:p-10 relative overflow-hidden">
                     <div className="relative">
                         <div className="flex items-center gap-2 mb-6 text-slate-400">
                             <Calendar className="w-4 h-4" />
@@ -57,7 +56,7 @@ export default async function NewsItemPage({ params }: { params: any }) {
                                 {imageUrls.map((url: string, index: number) => (
                                     <div
                                         key={index}
-                                        className="group relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-slate-50"
+                                        className="group relative rounded-2xl overflow-hidden border border-slate-100 bg-slate-50"
                                     >
                                         <img
                                             src={url}

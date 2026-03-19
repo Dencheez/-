@@ -9,7 +9,7 @@ export function DirectorBlogContent() {
             <div className="max-w-7xl mx-auto py-10 px-4 md:px-8">
 
                 {/* Hero Section: Полная адаптация */}
-                <div className="relative mb-12 rounded-[32px] md:rounded-[48px] overflow-hidden bg-gradient-to-br from-[#00B5C4] to-[#008A96] text-white shadow-2xl">
+                <div className="relative mb-12 rounded-[32px] md:rounded-[48px] overflow-hidden bg-gradient-to-br from-[#00B5C4] to-[#008A96] text-white">
                     <div className="flex flex-col md:flex-row items-stretch">
 
                         {/* ПРАВАЯ КОЛОНКА: ТЕКСТ И ИМЯ */}
@@ -33,7 +33,7 @@ export function DirectorBlogContent() {
                 </div>
 
                 {/* Blog Post Content (Текст без изменений) */}
-                <div className="bg-white rounded-[32px] p-8 md:p-16 shadow-sm border border-slate-100">
+                <div className="bg-white rounded-[32px] p-8 md:p-16 border border-slate-100">
                     <div className="prose prose-lg prose-slate max-w-none">
                         <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-10 border-b pb-6">
                             Уважаемые посетители нашего сайта!

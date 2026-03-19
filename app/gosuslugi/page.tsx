@@ -29,7 +29,7 @@ const gosuslugiLinks = [
 export default function GosuslugiPage() {
     return (
         <AppShell>
-            <main className="max-w-[1200px] mx-auto px-4 md:px-6 py-10 w-full flex flex-col min-h-screen">
+            <main className="max-w-[1200px] w-full flex flex-col min-h-screen">
 
                 {/* Хедер в твоем стиле */}
                 <div className="mb-10">

@@ -78,7 +78,7 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
                         <div className="fixed lg:hidden bottom-24 right-6 z-50">
                             <button
                                 onClick={() => setShowMobileSidebar(!showMobileSidebar)}
-                                className="bg-[#00B5C4] text-white p-4 rounded-full shadow-2xl"
+                                className="bg-[#00B5C4] text-white p-4 rounded-full"
                             >
                                 {showMobileSidebar ? <ChevronRight /> : <ChevronLeft />}
                             </button>
@@ -87,7 +87,7 @@ export default function MainLayoutWrapper({ children }: { children: React.ReactN
                         fixed top-0 right-0 h-full z-[60] lg:hidden
                         transition-transform duration-300 transform
                         ${showMobileSidebar ? 'translate-x-0' : 'translate-x-full'}
-                        bg-white w-[300px] p-6 shadow-2xl overflow-y-auto
+                        bg-white w-[300px] p-6 overflow-y-auto
                     `}>
                             {/* На мобилке тоже добавим его в начало сайдбара */}
                             <div className="flex flex-col gap-6">

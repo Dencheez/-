@@ -21,7 +21,6 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
     const [isDeleting, setIsDeleting] = useState(false)
 
 
-    // Проверяем, статичное ли это объявление (их нельзя удалить из базы)
     const isStatic = String(item.id).startsWith('st-')
 
     const handleDelete = async (e: React.MouseEvent) => {
@@ -44,19 +43,19 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
     }
 
     return (
-        <div className={`bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden transition-all hover:shadow-md ${isDeleting ? 'opacity-50' : ''}`}>
+        <div className={`bg-white rounded-2xl border border-slate-100 overflow-hidden transition-all  ${isDeleting ? 'opacity-50' : ''}`}>
             <button onClick={() => setIsOpen(!isOpen)} className="w-full p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start md:items-center text-left">
                 <div className="w-12 h-12 bg-[#00B5C4]/10 rounded-xl flex items-center justify-center text-[#00B5C4] shrink-0">
                     <Megaphone className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
-                        <span className="text-[10px] font-black text-[#00B5C4] uppercase tracking-widest">{item.section || "Объявление"}</span>
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                        <span className="text-[10px] text-[#00B5C4] uppercase">{item.section || "Объявление"}</span>
+                        <span className="text-[10px] text-slate-400 uppercase">
                             {item.created_at ? new Date(item.created_at).toLocaleDateString("ru-RU") : ""}
                         </span>
                     </div>
-                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-tight leading-snug">{item.title}</h3>
+                    <h3 className="text-sm  text-slate-800 uppercase leading-snug">{item.title}</h3>
                 </div>
                 <div className="flex items-center gap-2">
                     {isAdmin && !isStatic && (
@@ -71,7 +70,7 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
             </button>
 
             {isOpen && (
-                <div className="px-8 pb-8 border-t border-slate-50 pt-6">
+                <div className="px-8 pb-8 border border-slate-50 pt-6">
                     <div className="text-[13px] text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
                         {item.content}
                     </div>
@@ -84,7 +83,7 @@ function AnnouncementCard({ item, isAdmin, onRefresh }: { item: any, isAdmin: bo
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()} // Чтобы не закрывался аккордеон
-                                className="inline-flex items-center gap-3 bg-slate-900 text-white px-6 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#00B5C4] transition-all shadow-lg"
+                                className="inline-flex items-center gap-3 bg-blue-600 text-white px-6 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#00B5C4] transition-all"
                             >
                                 <Download className="w-4 h-4" />
                                 Скачать прикрепленный файл
@@ -187,7 +186,7 @@ export default function AdsPage() {
                                     <Plus className="w-5 h-5 mr-2" /> Добавить
                                 </button>
                             </DialogTrigger>
-                            <DialogContent className="rounded-[2.5rem] p-8 bg-white border-none shadow-2xl max-w-lg">
+                            <DialogContent className="rounded-[2.5rem] p-8 bg-white border-none max-w-lg">
                                 <DialogHeader><DialogTitle className="font-black uppercase text-2xl tracking-tighter text-slate-800">Новое объявление</DialogTitle></DialogHeader>
                                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                                     <input name="section" required placeholder="Тип (напр. Закупки)" className="w-full bg-slate-50 rounded-2xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] border-none" />
@@ -216,7 +215,7 @@ export default function AdsPage() {
                         <div className="block md:hidden space-y-3">
                             <Accordion type="single" collapsible className="w-full space-y-3">
                                 {allAnnouncements.map((item) => (
-                                    <AccordionItem key={item.id} value={item.id} className="bg-white border border-slate-100 rounded-[2rem] px-6 overflow-hidden shadow-sm">
+                                    <AccordionItem key={item.id} value={item.id} className="bg-white border border-slate-100 rounded-[2rem] px-6 overflow-hidden">
                                         <AccordionTrigger className="hover:no-underline py-6">
                                             <div className="flex flex-col items-start text-left gap-2">
                                                 <span className="text-[9px] font-black text-[#00B5C4] uppercase bg-[#00B5C4]/5 px-2 py-1 rounded-md">{item.type}</span>
@@ -251,7 +250,7 @@ export default function AdsPage() {
                         {/* ПК ВЕРСИЯ: КАРТОЧКИ */}
                         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
                             {allAnnouncements.map((item) => (
-                                <div key={item.id} className="bg-white border border-slate-100 rounded-[3rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 transition-all group flex flex-col justify-between relative overflow-hidden">
+                                <div key={item.id} className="bg-white border border-slate-100 rounded-[3rem] p-8  transition-all group flex flex-col justify-between relative overflow-hidden">
                                     <div className="relative z-10">
                                         <div className="flex justify-between items-start mb-6">
                                             <div className="bg-[#00B5C4]/10 p-4 rounded-2xl text-[#00B5C4]">
@@ -304,7 +303,7 @@ export default function AdsPage() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
-                            className="p-4 rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-[#00B5C4] disabled:opacity-30 transition-all shadow-sm"
+                            className="p-4 rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-[#00B5C4] disabled:opacity-30 transition-all "
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
@@ -314,8 +313,8 @@ export default function AdsPage() {
                                 <button
                                     key={i + 1}
                                     onClick={() => setCurrentPage(i + 1)}
-                                    className={`w-12 h-12 rounded-2xl font-black text-xs transition-all shadow-sm ${currentPage === i + 1
-                                        ? "bg-[#00B5C4] text-white scale-110 shadow-[#00B5C4]/20"
+                                    className={`w-12 h-12 rounded-2xl font-black text-xs transition-all ${currentPage === i + 1
+                                        ? "bg-[#00B5C4] text-white scale-110"
                                         : "bg-white border border-slate-100 text-slate-400 hover:bg-slate-50"
                                         }`}
                                 >
@@ -327,7 +326,7 @@ export default function AdsPage() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(totalCount / itemsPerPage)))}
                             disabled={currentPage === Math.ceil(totalCount / itemsPerPage)}
-                            className="p-4 rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-[#00B5C4] disabled:opacity-30 transition-all shadow-sm"
+                            className="p-4 rounded-2xl bg-white border border-slate-100 text-slate-400 hover:text-[#00B5C4] disabled:opacity-30 transition-all"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>

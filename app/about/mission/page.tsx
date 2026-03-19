@@ -46,12 +46,12 @@ export default function MissionDetailedPage() {
                             <p>В настоящее время Центр располагает базой более <strong>3 гектаров</strong> и коечной мощностью <strong>632 койки</strong>.</p>
                         </div>
                     </div>
-                    <div className="bg-[#1e40af] text-white p-6 md:p-8 rounded-sm shadow-xl flex flex-col justify-center">
-                        <h3 className="text-[10px] md:text-sm font-bold uppercase mb-4 md:mb-6 tracking-widest text-blue-300">Ключевые приоритеты</h3>
-                        <ul className="space-y-3 md:space-y-4 text-xs md:text-sm">
+                    <div className="bg-[#00B5C4] text-white p-6 md:p-8 rounded-sm shadow-xl flex flex-col justify-center">
+                        <h3 className="text-[10px] md:text-sm font-bold uppercase mb-4 md:mb-6 tracking-widest text-white">Ключевые приоритеты</h3>
+                        <ul className="space-y-3 md:space-y-4 text-xs md:text-sm font-bold">
                             {["Интеграция ПЦПЗ в поликлиники", "Цифровизация (МИС) данных", "Снижение стигматизации"].map((text, i) => (
                                 <li key={i} className="flex gap-3">
-                                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-blue-400 shrink-0" />
+                                    <CheckCircle2 className="h-4 w-4 md:h-5 md:w-5 text-white shrink-0" />
                                     <span>{text}</span>
                                 </li>
                             ))}
@@ -70,7 +70,6 @@ export default function MissionDetailedPage() {
                         <div className="space-y-4">
                             <div className="flex justify-between items-end">
                                 <h3 className="font-bold text-sm md:text-lg uppercase text-[#1e40af]">Психиатрия</h3>
-                                <span className="text-[9px] font-bold text-red-500 uppercase">Рост на 26%</span>
                             </div>
                             <div className="overflow-x-auto border border-slate-200">
                                 <table className="w-full text-[11px] md:text-[13px] min-w-[300px]">
@@ -85,21 +84,21 @@ export default function MissionDetailedPage() {
                             </div>
                         </div>
 
-                        <div className="bg-slate-900 text-white p-5 md:p-8 rounded-sm space-y-6">
+                        <div className="bg-[#00B5C4] text-white p-5 md:p-8 rounded-sm space-y-6">
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <p className="text-[9px] uppercase text-blue-400 font-bold tracking-widest">Всего на учете</p>
-                                    <p className="text-3xl md:text-5xl font-black">4 579 <span className="text-xs font-normal opacity-40">чел.</span></p>
+                                    <p className="text-[9px] uppercase text-white font-bold tracking-widest">Всего на учете</p>
+                                    <p className="text-3xl md:text-5xl font-black">4 579 <span className="text-xs font-normal ">чел</span></p>
                                 </div>
-                                <ShieldCheck className="h-8 w-8 md:h-12 md:w-12 text-blue-600 opacity-50" />
+                                <ShieldCheck className="h-8 w-8 md:h-12 md:w-12 text-white opacity-50" />
                             </div>
-                            <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-4">
+                            <div className="grid grid-cols-2 gap-4 border-t border-white pt-4">
                                 <div>
-                                    <p className="text-[9px] uppercase text-slate-500">Алкоголизм</p>
+                                    <p className="text-[9px] uppercase text-white font-bold tracking-widest">Алкоголизм</p>
                                     <p className="text-base md:text-xl font-bold">3 440</p>
                                 </div>
                                 <div>
-                                    <p className="text-[9px] uppercase text-slate-500">Наркомания</p>
+                                    <p className="text-[9px] uppercase text-white font-bold">Наркомания</p>
                                     <p className="text-base md:text-xl font-bold">1 139</p>
                                 </div>
                             </div>
@@ -170,7 +169,7 @@ export default function MissionDetailedPage() {
                 </section>
 
                 {/* 5. ЗАДАЧИ - ФИНАЛЬНЫЙ БЛОК */}
-                <section className="bg-slate-900 text-white p-6 md:p-12 rounded-sm relative overflow-hidden">
+                <section className="bg-[#00B5C4] text-white p-6 md:p-12 rounded-sm relative overflow-hidden">
                     <h2 className="text-2xl md:text-4xl font-black uppercase mb-8 md:mb-12 relative z-10">Задачи на 2023</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 relative z-10">
                         {[
@@ -179,9 +178,9 @@ export default function MissionDetailedPage() {
                             "Усиление контроля качества через Службу СППиВА.",
                             "Развитие трудовой реабилитации (цеха)."
                         ].map((task, i) => (
-                            <div key={i} className="flex gap-4 md:gap-6 items-start border-l border-slate-700 pl-4 md:pl-6">
-                                <span className="text-blue-500 font-black text-xl md:text-2xl">0{i + 1}</span>
-                                <p className="text-xs md:text-sm text-slate-300 leading-snug">{task}</p>
+                            <div key={i} className="flex gap-4 md:gap-6 items-start border-l border-white pl-4 md:pl-6">
+                                <span className="text-white font-black text-xl md:text-2xl">0{i + 1}</span>
+                                <p className="text-xs md:text-sm text-white font-bold leading-snug">{task}</p>
                             </div>
                         ))}
                     </div>

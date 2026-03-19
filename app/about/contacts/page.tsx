@@ -81,12 +81,13 @@ export default function ContactsPage() {
                             </div>
                         </div>
 
-                        <div className="p-6 md:p-8 bg-slate-900 text-white rounded-3xl">
-                            <h3 className="font-black uppercase text-xs mb-6 tracking-widest text-slate-400">Мы в соцсетях</h3>
+                        <div className="p-6 md:p-8 bg-blue-600 text-white rounded-3xl">
+                            <h3 className="font-black uppercase text-xs mb-6 tracking-widest text-white">Мы в соцсетях</h3>
                             <div className="flex gap-4">
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Instagram className="h-6 w-6" /></Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Facebook className="h-6 w-6" /></Link>
-                                <Link href="#" className="flex-1 flex flex-col items-center gap-2 p-3 bg-white/5 rounded-2xl border border-white/10"><Send className="h-6 w-6" /></Link>
+                                <Link href="https://www.instagram.com/cpzalmaty/" className="flex-1 flex flex-col items-center gap-2 p-3 bg-blue-700 rounded-2xl border border-white/10"><Instagram className="h-6 w-6" /></Link>
+                                <Link href="https://www.facebook.com/cpzalmaty" className="flex-1 flex flex-col items-center gap-2 p-3 bg-blue-700 rounded-2xl border border-white/10">
+                                    <button><Facebook className="h-6 w-6" /></button></Link>
+                                <Link href="https://t.me/cpzalmaty" className="flex-1 flex flex-col items-center gap-2 p-3 bg-blue-700 rounded-2xl border border-white/10"><Send className="h-6 w-6" /></Link>
                             </div>
                         </div>
                     </div>

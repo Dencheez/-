@@ -36,7 +36,7 @@ export default function GoszakupPlanPage() {
 
                             <div className="flex items-center gap-3 w-full sm:w-auto mt-2 sm:mt-0">
                                 <a href={plan.href} className="w-full sm:w-auto">
-                                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-[#00B5C4] hover:text-white transition-all">
+                                    <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 bg-[#00B5C4] text-white rounded-xl font-black uppercase text-[10px] tracking-widest hover:bg-[#00B5C4] hover:text-white transition-all">
                                         <Download className="w-4 h-4 font-black" />
                                         <span>XLSX</span>
                                     </button>
@@ -44,9 +44,9 @@ export default function GoszakupPlanPage() {
                             </div>
                         </div>
                     ))}
-                    <Link href="https://www.goszakup.gov.kz/" target="_blank" className="w-auto h-12 rounded-xl flex items-center justify-between bg-black px-6 text-slate-300 hover:bg-[#00B5C4] transition-colors">
+                    <Link href="https://www.goszakup.gov.kz/" target="_blank" className="w-auto h-12 rounded-xl flex items-center justify-between bg-[#00B5C4] px-6 text-slate-300 hover:bg-[#00B5C4] transition-colors">
                         <h2 className="text-sm font-black text-white text-slate-700 uppercase tracking-tight group-hover:text-slate-900">подробная информация</h2>
-                        <ExternalLink className="w-5 h-5" />
+                        <ExternalLink className="w-5 h-5 text-white" />
                     </Link>
                 </div>
             </div>

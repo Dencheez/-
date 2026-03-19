@@ -1,28 +1,16 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, FileDown, ShieldCheck, ChevronRight } from "lucide-react"
+import { ArrowLeft, FileDown, ShieldCheck, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 export default function EthicsPage() {
     return (
         <div className="w-full text-slate-900 font-sans">
-            <main className="max-w-5xl mx-auto w-full">
+            <main className="max-w-5xl mx-auto w-full px-4 py-6 md:py-12">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 mb-8 gap-4">
                     <Link href="/about" className="flex items-center gap-2 text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> НАЗАД
                     </Link>
-
-                    <div className="flex flex-wrap gap-4 md:gap-6 text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest w-full sm:w-auto">
-                        <button onClick={() => window.print()} className="flex items-center gap-1.5">
-                            <Printer className="h-3.5 w-3.5" /> Печать
-                        </button>
-                        <a href="mailto:cpz_almaty@med.mail.kz" className="flex items-center gap-1.5">
-                            <Mail className="h-3.5 w-3.5" /> E-mail
-                        </a>
-                        <span className="flex items-center gap-1.5 ml-auto sm:ml-0 opacity-60">
-                            <Eye className="h-3.5 w-3.5" /> 4024
-                        </span>
-                    </div>
                 </div>
 
                 {/* КОНТЕНТ */}
@@ -55,17 +43,6 @@ export default function EthicsPage() {
                             <ChevronRight className="ml-auto h-5 w-5 text-slate-200" />
                         </a>
                     </div>
-
-                    <div className="mt-16 flex items-start gap-4 max-w-md text-left bg-slate-50 p-6 rounded-3xl border border-slate-100">
-                        <div className="h-2 w-2 rounded-full bg-blue-600 mt-1.5 shrink-0" />
-                        <p className="text-[11px] md:text-xs font-medium text-slate-500 leading-relaxed">
-                            Настоящий кодекс определяет моральную ответственность медицинских работников перед обществом, пациентами и коллегами.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="mt-20 pt-8 border-t border-slate-50 text-center">
-                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.4em]">Служба внутреннего аудита • 2026</p>
                 </div>
             </main>
         </div>

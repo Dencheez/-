@@ -17,7 +17,7 @@ export function SidebarExtraBlocks() {
             <Link
                 href="https://alm.dmed.kz/Authentication/Authentication/SignIn?ReturnUrl=%2FAuthentication%2FHome"
                 target="_blank"
-                className="group block w-full bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                className="group block w-full bg-white rounded-xl border border-slate-100 overflow-hidden"
             >
                 <div className="p-4 flex flex-col items-center gap-3">
                     <img
@@ -38,7 +38,7 @@ export function SidebarExtraBlocks() {
             <Link
                 href="https://www.goszakup.gov.kz/"
                 target="_blank"
-                className="group block w-full bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden transition-shadow"
+                className="group block w-full bg-white rounded-xl border border-slate-100 overflow-hidden"
             >
                 <div className="p-4 flex flex-col items-center gap-3">
                     <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center border border-orange-100 transition-colors">
@@ -58,7 +58,7 @@ export function SidebarExtraBlocks() {
             </Link>
 
             {/* Statistics Block */}
-            <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-6">
+            <div className="bg-white rounded-xl border border-slate-100 p-6">
                 <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 border-b pb-2">
                     Статистика посещений
                 </h3>

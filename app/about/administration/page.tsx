@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Maximize2, FileImage } from "lucide-react"
+import { ArrowLeft, Maximize2 } from "lucide-react"
 import Link from "next/link"
 
 export default function AdministrationPage() {
@@ -11,9 +11,9 @@ export default function AdministrationPage() {
 
     return (
         <div className="w-full text-slate-900 font-sans">
-            <main className="max-w-4xl mx-auto w-full">
+            <main className="max-w-4xl mx-auto w-full px-8">
                 {/* НАВИГАЦИЯ */}
-                <div className="flex items-center justify-between mb-8 md:mb-12">
+                <div className="flex items-center justify-between mb-8 mt-8 md:mb-12 md:mt-8">
                     <Link
                         href="/about"
                         className="flex items-center gap-2 text-slate-400 text-[10px] md:text-xs font-black uppercase tracking-widest"
@@ -21,10 +21,6 @@ export default function AdministrationPage() {
                         <ArrowLeft className="h-4 w-4" />
                         Назад
                     </Link>
-                    <div className="flex items-center gap-2 text-slate-300">
-                        <FileImage className="h-4 w-4" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Документ: JPG</span>
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}

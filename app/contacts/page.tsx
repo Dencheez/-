@@ -1,5 +1,5 @@
 import { AppShell } from "@/components/app-shell"
-import { MapPin, Phone, Clock, Mail, Globe, ChevronRight, ShieldAlert, User, Briefcase } from "lucide-react"
+import { ChevronRight, ShieldAlert, Briefcase } from "lucide-react"
 
 // Группируем данные из той огромной таблицы
 const registryPhones = [
@@ -17,11 +17,11 @@ const specializedDepts = [
 export default function ContactsPage() {
   return (
     <AppShell>
-      <div className="p-4 pb-24">
+      <div className="pb-2">
         <h1 className="text-xl font-bold text-foreground">Контакты</h1>
 
         {/* Блок руководства */}
-        <div className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <div className="mt-4 rounded-2xl border border-border bg-card p-5 ">
           <div className="flex items-center gap-2 mb-4">
             <Briefcase className="h-4 w-4 text-primary" />
             <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Руководство</h2>
@@ -39,7 +39,6 @@ export default function ContactsPage() {
             </div>
           </div>
         </div>
-
         {/* Регистратуры */}
         <h2 className="mt-8 text-sm font-bold text-foreground">Регистратуры</h2>
         <div className="mt-3 grid grid-cols-1 gap-2">
@@ -70,11 +69,11 @@ export default function ContactsPage() {
           </div>
           <p className="text-xs text-red-700 mb-4">Специализированная неотложная скорая помощь</p>
           <div className="space-y-2">
-            <a href="tel:77273765596" className="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm">
+            <a href="tel:77273765596" className="flex justify-between items-center bg-white p-3 rounded-lg">
               <span className="text-xs font-bold text-gray-700">+7 (727) 376-55-96</span>
               <ChevronRight className="h-4 w-4 text-red-400" />
             </a>
-            <a href="tel:77273765594" className="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm">
+            <a href="tel:77273765594" className="flex justify-between items-center bg-white p-3 rounded-lg">
               <span className="text-xs font-bold text-gray-700">+7 (727) 376-55-94</span>
               <ChevronRight className="h-4 w-4 text-red-400" />
             </a>

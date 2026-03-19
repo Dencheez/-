@@ -24,12 +24,12 @@ export default function JournalArticlesPage() {
                         <img
                             src="/images/статья-Академия-здоровья_1.jpg"
                             alt="Статья 1"
-                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-lg shadow-slate-200/50 border border-slate-100"
+                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] border border-slate-100"
                         />
                         <img
                             src="/images/статья-Академия-здоровья_2.jpg"
                             alt="Статья 2"
-                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] shadow-lg shadow-slate-200/50 border border-slate-100"
+                            className="w-full h-auto rounded-2xl md:rounded-[2.5rem] border border-slate-100"
                         />
                     </div>
                 </div>

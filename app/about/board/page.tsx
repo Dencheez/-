@@ -1,5 +1,5 @@
 "use client"
-import { ArrowLeft, Printer, Mail, Eye, FileText, Download } from "lucide-react"
+import { ArrowLeft, FileText, Download } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -21,19 +21,12 @@ export default function ObservationBoardPage() {
 
     return (
         <div className="w-full text-slate-900 font-sans">
-            <main className="max-w-6xl mx-auto space-y-12 md:space-y-16">
+            <main className="max-w-6xl mx-auto space-y-12 md:space-y-16 py-6 px-4">
                 {/* ВЕРХНЯЯ ПАНЕЛЬ */}
                 <div className="flex justify-between items-center border-b pb-4">
                     <Link href="/about" className="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest">
                         <ArrowLeft className="h-4 w-4" /> Назад
                     </Link>
-                    <div className="flex gap-4 items-center">
-                        <Printer onClick={() => window.print()} className="h-4 w-4 text-slate-300 cursor-pointer" />
-                        <a href="mailto:cpz.sekr@gmail.com"><Mail className="h-4 w-4 text-slate-300 cursor-pointer" /></a>
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-300 ml-2 uppercase">
-                            <Eye className="h-3.5 w-3.5" /> 9905
-                        </div>
-                    </div>
                 </div>
 
                 {/* ЗАГОЛОВОК */}

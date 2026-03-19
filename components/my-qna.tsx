@@ -52,7 +52,7 @@ export default function MyQnaContent() {
                     </div>
                 ) : (
                     userQuestions.map((q) => (
-                        <div key={q.id} className="bg-white border-slate-100 rounded-[2rem] p-5 md:p-6 shadow-sm">
+                        <div key={q.id} className="bg-white border-slate-100 rounded-[2rem] p-5 md:p-6 ">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="flex items-center gap-2">
                                     {q.status === 'published' ? (

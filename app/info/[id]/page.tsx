@@ -80,7 +80,7 @@ export default function ArticlePage() {
                     </h1>
 
                     {article.image_url && (
-                        <div className="w-full h-full rounded-[8px] overflow-hidden shadow-2xl shadow-[#00B5C4]/10 mb-12">
+                        <div className="w-full h-full rounded-[8px] overflow-hidden mb-12">
                             <img
                                 src={article.image_url}
                                 alt=""

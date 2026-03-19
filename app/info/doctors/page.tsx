@@ -52,7 +52,7 @@ export default function DoctorsInfoPage() {
                         {documents.map((doc, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 group hover:border-[#00B5C4]/30 hover:shadow-md transition-all"
+                                className="bg-white rounded-2xl border border-slate-100 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 group hover:border-[#00B5C4]/30 transition-all"
                             >
                                 <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#00B5C4]/10 transition-colors">
                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-[#00B5C4] transition-colors">

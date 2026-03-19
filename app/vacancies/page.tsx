@@ -91,11 +91,11 @@ export default function VacanciesPage() {
                     {isAdmin && (
                         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
                             <DialogTrigger asChild>
-                                <button className="bg-[#00B5C4] text-white px-8 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all flex items-center shadow-xl shadow-[#00B5C4]/20">
+                                <button className="bg-[#00B5C4] text-white px-8 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all flex items-center">
                                     <Plus className="w-5 h-5 mr-2" /> Добавить вакансию
                                 </button>
                             </DialogTrigger>
-                            <DialogContent className="rounded-[2.5rem] p-8 bg-white border-none shadow-2xl">
+                            <DialogContent className="rounded-[2.5rem] p-8 bg-white border-none">
                                 <DialogHeader><DialogTitle className="font-black uppercase text-2xl tracking-tighter text-slate-800">Новая вакансия</DialogTitle></DialogHeader>
                                 <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                                     <input name="title" required placeholder="Название должности" className="w-full bg-slate-50 rounded-2xl p-4 text-sm font-bold outline-none focus:ring-2 focus:ring-[#00B5C4] border-none" />
@@ -120,7 +120,7 @@ export default function VacanciesPage() {
                         <div className="block md:hidden space-y-4">
                             <Accordion type="single" collapsible className="w-full space-y-3">
                                 {vacancies.map((v) => (
-                                    <AccordionItem key={v.id} value={v.id} className="bg-white border border-slate-100 rounded-[2rem] px-6 overflow-hidden shadow-sm">
+                                    <AccordionItem key={v.id} value={v.id} className="bg-white border border-slate-100 rounded-[2rem] px-6 overflow-hidden">
                                         <AccordionTrigger className="hover:no-underline py-6">
                                             <div className="flex flex-col items-start text-left gap-2">
                                                 <span className="text-lg font-black text-slate-800 uppercase tracking-tighter leading-tight">{v.title}</span>
@@ -156,7 +156,7 @@ export default function VacanciesPage() {
                         {/* ПК ВЕРСИЯ (СЕТКА КАРТОЧЕК) */}
                         <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
                             {vacancies.map((v) => (
-                                <div key={v.id} className="bg-white border border-slate-100 rounded-[3rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-slate-200/50 transition-all group relative flex flex-col justify-between overflow-hidden">
+                                <div key={v.id} className="bg-white border border-slate-100 rounded-[3rem] p-8 transition-all group relative flex flex-col justify-between overflow-hidden">
                                     <div className="relative z-10">
                                         <div className="flex justify-between items-start mb-8">
                                             <div className="w-14 h-14 bg-[#00B5C4]/10 rounded-2xl flex items-center justify-center text-[#00B5C4]">

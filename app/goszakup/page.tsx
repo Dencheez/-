@@ -24,7 +24,7 @@ export default async function GoszakupPage({
 
     return (
         <AppShell>
-            <div className="flex flex-col w-full p-4 md:p-8 gap-10">
+            <div className="flex flex-col w-full  md:p-8 gap-10">
                 {/* Header */}
                 <div className="border-b border-slate-100 pb-6">
                     <h1 className="text-2xl md:text-3xl font-bold text-slate-800 uppercase tracking-tight leading-tight">
@@ -52,7 +52,7 @@ export default async function GoszakupPage({
                                 return (
                                     <div
                                         key={doc.id}
-                                        className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 transition-all hover:shadow-md"
+                                        className="bg-white rounded-2xl border border-slate-100 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-5 transition-all"
                                     >
                                         <div className="w-12 h-12 bg-[#00B5C4]/10 rounded-xl flex items-center justify-center shrink-0">
                                             <FileArchive className="w-6 h-6 text-[#00B5C4]" />
@@ -103,7 +103,7 @@ export default async function GoszakupPage({
                                     key={p}
                                     href={`/goszakup?page=${p}`}
                                     className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-[10px] transition-all ${currentPage === p
-                                        ? 'bg-[#00B5C4] text-white shadow-lg shadow-[#00B5C4]/20'
+                                        ? 'bg-[#00B5C4] text-white'
                                         : 'bg-white border border-slate-100 text-slate-400 hover:bg-slate-50'
                                         }`}
                                 >

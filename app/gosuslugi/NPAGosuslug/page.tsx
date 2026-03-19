@@ -67,7 +67,7 @@ export default function NPAGosuslugPage() {
             <main className="container mx-auto px-4 py-8 md:py-12 max-w-4xl">
                 <Link
                     href="/gosuslugi"
-                    className="inline-flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-[#00B5C4] mb-8"
+                    className="inline-flex items-center gap-2 text-[10px] text-slate-400 uppercase mb-8"
                 >
                     <ChevronLeft className="w-4 h-4" /> Назад
                 </Link>

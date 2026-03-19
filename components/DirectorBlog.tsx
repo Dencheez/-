@@ -7,7 +7,7 @@ export function DirectorBlog({ onClose }: { onClose?: () => void }) {
         <Link
             href="/director-blog"
             onClick={() => onClose?.()}
-            className="block w-full group overflow-hidden rounded-lg shadow-lg border border-[#00B5C4]/20 transition-all"
+            className="block w-full group overflow-hidden rounded-lg border border-[#00B5C4]/20 transition-all"
         >
             <div className="flex flex-col">
                 {/* Фото директора */}

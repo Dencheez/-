@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function PatientsPage() {
     const patientNav = [
-        { title: "ОСМС", href: "/patients/osms", icon: <ShieldCheck className="h-5 w-5" /> },
+        { title: "ОСМС", href: "https://fms.kz/ru", icon: <ShieldCheck className="h-5 w-5" /> },
         { title: "ГОБМП", href: "/patients/gobmp", icon: <Stethoscope className="h-5 w-5" /> },
         { title: "Часто задаваемые вопросы", href: "/patients/faq", icon: <HelpCircle className="h-5 w-5" /> },
         { title: "Обращения", href: "/patients/appeals", icon: <MessageSquare className="h-5 w-5" /> },
@@ -18,7 +18,7 @@ export default function PatientsPage() {
 
     return (
         <AppShell>
-            <main className="max-w-6xl mx-auto px-6 py-6 w-full">
+            <main className="max-w-6xl mx-auto px-2 py-4 w-full">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
                         <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-2">
@@ -27,14 +27,6 @@ export default function PatientsPage() {
                         <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">
                             Пациентам
                         </h1>
-                    </div>
-
-                    {/* Иконки удалены */}
-                    <div className="bg-white p-3 px-8 rounded-2xl shadow-sm border border-slate-100">
-                        <div className="text-center">
-                            <p className="text-[9px] text-slate-400 uppercase font-bold tracking-widest">Просмотров</p>
-                            <p className="text-sm font-black text-blue-600">1 199 150</p>
-                        </div>
                     </div>
                 </div>
 
