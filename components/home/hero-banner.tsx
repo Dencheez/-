@@ -47,7 +47,7 @@ export function HeroBanner() {
   return (
     <div className="flex flex-col w-full bg-white">
       {/* Контейнер баннера */}
-      <div className={`relative w-full h-[300px] md:h-[450px] overflow-hidden group rounded-lg ${defaultSlides[current].img.includes('hero-banner--2.jpg')
+      <div className={`relative w-full h-[300px] md:h-[450px] overflow-hidden group rounded-b-lg ${defaultSlides[current].img.includes('hero-banner--2.jpg')
         }`}>
 
         <Link href={defaultSlides[current].link} className="relative block h-full w-full">
@@ -63,7 +63,7 @@ export function HeroBanner() {
           />
           <div className="absolute bottom-0 md:bottom-0 z-20">
             <div className={`
-      px-3 py-3 md:px-10 md:py-8 rounded-b-lg md:rounded-b-lg transition-all
+      px-3 py-3 md:px-10 md:py-8 rounded-t-lg md:rounded-t-lg transition-all
       ${defaultSlides[current].img.includes('hero-banner--2.jpg')
                 ? "bg-[#00B5C4]/90"
                 : "bg-white/20 backdrop-blur-md border border-white/30 "

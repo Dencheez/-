@@ -36,9 +36,9 @@ const issues = [
 export default function NarcologyJournalPage() {
     return (
         <AppShell>
-            <div className="flex flex-col w-full bg-[#f8fafd] min-h-screen">
+            <div className="flex flex-col w-full min-h-screen">
                 {/* Header */}
-                <div className="bg-blue-600 py-16 px-6 md:px-12 text-white overflow-hidden relative">
+                <div className="bg-blue-600 py-16 px-6 md:px-12 max-w-6xl mx-auto text-white overflow-hidden relative">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2" />
                     <div className="max-w-5xl mx-auto relative z-10">
                         <Link href="/journals" className="inline-flex items-center gap-2 text-white/40 uppercase text-[10px] font-black mb-8">
