@@ -47,7 +47,7 @@ export function InfoFiles() {
     }
 
     return (
-        <div className="mx-4 relative group/container">
+        <div className="mx-6 relative group/container">
             {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
