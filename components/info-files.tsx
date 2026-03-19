@@ -47,11 +47,11 @@ export function InfoFiles() {
     }
 
     return (
-        <div className="mx-6 relative group/container">
+        <div className="mx-5 relative group/container">
             {/* Левая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("left")}
-                className="absolute left-[-40px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute left-[-35px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Назад"
             >
                 <ChevronLeft className="h-5 w-5 text-gray-500" />
@@ -60,7 +60,7 @@ export function InfoFiles() {
             {/* Правая стрелка: только для мобилок */}
             <button
                 onClick={() => scroll("right")}
-                className="absolute right-[-40px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
+                className="absolute right-[-35px] top-[10%] z-20 bg-white/90 p-1 rounded-full shadow-md border border-gray-100 md:hidden"
                 aria-label="Вперед"
             >
                 <ChevronRight className="h-5 w-5 text-gray-500" />
