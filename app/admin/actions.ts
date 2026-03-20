@@ -131,6 +131,36 @@ export async function getAdByIdAction(id: string) {
     return data;
 }
 
+export async function getGalleryAction() {
+    const { data, error } = await supabase
+        .from('gallery')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    if (error) {
+        console.error("Supabase error (gallery):", error);
+        return [];
+    }
+    return data || [];
+}
+
+export async function createGalleryEntryAction(imageUrls: string[], videoUrls: string[], caption: string) {
+    await checkAdmin();
+
+    const { error } = await supabaseAdmin 
+        .from('gallery')
+        .insert([{ image_url: imageUrls, video_doc: videoUrls, caption }]);
+
+    if (error) {
+        console.error("Ошибка вставки в gallery:", error.message);
+        return { success: false, error: error.message };
+    }
+
+    revalidatePath('/gallery');
+    revalidatePath('/admin');
+    return { success: true };
+}
+
 export async function getNewsAction(page: number = 1, pageSize: number = 30) {
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
