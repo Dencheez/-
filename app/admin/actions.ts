@@ -75,6 +75,62 @@ export async function createPostAction(formData: FormData) {
     return { success: true };
 }
 
+export async function getAdsAction(page: number = 1, pageSize: number = 30) {
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, error, count } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact' })
+        .eq('category', 'ads')
+        .order('created_at', { ascending: false })
+        .range(from, to);
+
+    if (error) {
+        console.error("Supabase error:", error);
+        return { data: [], count: 0 };
+    }
+
+    return { data: data || [], count: count || 0 };
+}
+
+export async function createAdAction(formData: FormData) {
+    await checkAdmin();
+
+    const title = formData.get('title') as string;
+    const content = formData.get('content') as string;
+    const image_url = formData.get('image_url') as string;
+
+    const { error } = await supabaseAdmin
+        .from('posts')
+        .insert([{ title, content, category: 'ads', image_url }]);
+
+    if (error) {
+        console.error("Ошибка вставки:", error.message);
+        return { success: false, error: error.message };
+    }
+
+    revalidatePath('/ads');
+    revalidatePath('/admin');
+    return { success: true };
+}
+
+export async function getAdByIdAction(id: string) {
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('id', id)
+        .eq('category', 'ads')
+        .single();
+
+    if (error) {
+        console.error("Supabase error:", error);
+        return null;
+    }
+
+    return data;
+}
+
 export async function getNewsAction(page: number = 1, pageSize: number = 30) {
     const from = (page - 1) * pageSize;
     const to = from + pageSize - 1;
