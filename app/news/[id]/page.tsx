@@ -25,9 +25,9 @@ export default async function NewsItemPage({ params }: { params: any }) {
             <div className="flex flex-col w-full p-4 md:p-8 max-w-5xl mx-auto">
                 <Link
                     href="/news"
-                    className="flex w-fit items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#00B5C4] hover:text-[#009da8] transition-colors mb-8"
+                    className="flex w-fit items-center text-xs font-bold uppercase text-slate-500 mb-8"
                 >
-                    <div className="w-8 h-8 rounded-full bg-[#00B5C4]/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center">
                         <ChevronLeft className="w-4 h-4" />
                     </div>
                     Назад к новостям

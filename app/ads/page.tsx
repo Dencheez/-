@@ -37,7 +37,7 @@ export default async function AdsPage(props: {
                         {isAdmin && (
                             <Link
                                 href="/ads/create"
-                                className="flex items-center justify-center gap-2 bg-[#00B5C4] text-white px-8 py-3 rounded-sm text-xs font-black uppercase tracking-widest hover:bg-[#009ba8] transition-all w-full md:w-fit"
+                                className="flex items-center justify-center gap-2 bg-[#00B5C4] text-white px-8 py-3 rounded-2xl md:rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#009ba8] transition-all w-full md:w-fit"
                             >
                                 <Plus className="h-4 w-4" /> Добавить пост
                             </Link>
@@ -48,7 +48,7 @@ export default async function AdsPage(props: {
                 {/* Список из таблицы posts */}
                 <div className="flex flex-col border-t border-slate-100">
                     {safePosts.length === 0 ? (
-                        <div className="py-20 text-center text-slate-400 font-medium italic">
+                        <div className="py-20 text-center text-slate-400 font-medium">
                             Записей пока нет
                         </div>
                     ) : (
