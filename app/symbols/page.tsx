@@ -27,7 +27,7 @@ export default function SymbolsMenuPage() {
 
     return (
         <AppShell>
-            <main className="flex-grow w-full max-w-6xl mx-auto">
+            <main className="flex-grow w-full max-w-6xl mx-auto py-4 px-4">
 
                 {/* НАВИГАЦИЯ */}
                 <Link href="/" className="inline-flex items-center gap-2 text-slate-400 uppercase text-[10px] tracking-widest mb-8">

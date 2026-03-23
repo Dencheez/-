@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function GerbPage() {
     return (
         <AppShell>
-            <main className="flex-grow w-full max-w-lg mx-auto">
+            <main className="flex-grow w-full max-w-lg py-4 px-4 mx-auto">
                 <div className="flex items-center justify-between mb-6">
                     <Link href="/symbols" className="p-2 -ml-2 text-slate-400 flex items-center gap-1 text-[10px] uppercase">
                         <ChevronLeft className="h-5 w-5" /> Назад

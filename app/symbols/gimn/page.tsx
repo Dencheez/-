@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function GimnPage() {
     return (
         <AppShell>
-            <main className="flex-grow w-full max-w-lg mx-auto">
+            <main className="flex-grow w-full max-w-lg mx-auto py-4 px-4">
 
                 {/* НАВИГАЦИЯ */}
                 <div className="flex items-center justify-between mb-6">

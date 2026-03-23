@@ -34,7 +34,7 @@ const linksData = [
 export default function UsefulLinksPage() {
     return (
         <AppShell>
-            <main className="max-w-[1200px] w-full flex flex-col min-h-screen">
+            <main className="max-w-[1200px] py-4 px-4 w-full flex flex-col min-h-screen">
 
                 {/* Хедер */}
                 <div className="mb-10">
