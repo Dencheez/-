@@ -10,7 +10,7 @@ export default function GobmpPage() {
 
     return (
         <AppShell>
-            <main className="max-w-5xl mx-auto  w-full">
+            <main className="max-w-5xl mx-auto py-4 px-4  w-full">
                 {/* Навигация */}
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-6 ">
                     <ChevronLeft className="h-3 w-3" /> Назад

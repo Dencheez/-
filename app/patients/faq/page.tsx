@@ -27,7 +27,7 @@ const AccordionItem = ({ question, answer }: { question: string, answer: React.R
 export default function FAQPage() {
     return (
         <AppShell>
-            <main className="flex-grow max-w-5xl mx-auto w-full">
+            <main className="flex-grow max-w-5xl mx-auto px-4 py-4 w-full">
                 <Link href="/patients" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-4">
                     <ChevronLeft className="h-3 w-3" /> Назад
                 </Link>

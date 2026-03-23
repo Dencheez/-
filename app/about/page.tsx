@@ -25,7 +25,7 @@ const aboutLinks = [
 export default function AboutPage() {
     return (
         <AppShell>
-            <main className="max-w-5xl mx-auto w-full">
+            <main className="max-w-5xl px-4 py-4 mx-auto w-full">
                 {/* ЗАГОЛОВОК */}
                 <h1 className="text-3xl md:text-4xl font-black uppercase text-slate-800 mb-10 pb-6 inline-block">
                     О Центре

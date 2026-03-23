@@ -190,7 +190,7 @@ export default function NPAPage() {
     return (
         <AppShell>
             <main className="bg-white">
-                <div className="max-w-6xl mx-auto px-4 md:px-2">
+                <div className="max-w-6xl mx-auto px-4 py-4 md:px-2">
                     {/* Заголовок */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b-2 border-slate-100 pb-8 mb-10 gap-6">
                         <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase leading-none">

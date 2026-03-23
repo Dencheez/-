@@ -24,7 +24,7 @@ export default async function GoszakupPage({
 
     return (
         <AppShell>
-            <div className="flex flex-col w-full  md:p-8 gap-10">
+            <div className="flex flex-col w-full py-4 px-4  md:p-8 gap-10">
                 {/* Header */}
                 <div className="border-b border-slate-100 pb-6">
                     <h1 className="text-2xl md:text-3xl font-bold text-slate-800 uppercase tracking-tight leading-tight">

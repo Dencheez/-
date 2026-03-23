@@ -18,7 +18,7 @@ export default function PatientsPage() {
 
     return (
         <AppShell>
-            <main className="max-w-6xl mx-auto px-2 py-4 w-full">
+            <main className="max-w-6xl mx-auto px-4 py-4 w-full">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
                         <Link href="/" className="flex items-center gap-2 text-slate-400 uppercase text-[10px] mb-2">
